@@ -8,6 +8,9 @@
 *.so
 *.dll
 *.dylib
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 
 # Qt-es
 object_script.*.Release
