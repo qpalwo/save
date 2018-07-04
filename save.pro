@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,4 +37,4 @@ FORMS += \
     UI/open.ui
 
 RESOURCES += \
-    res/op/openpic.qrc
+    openpic.qrc

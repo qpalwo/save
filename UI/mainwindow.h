@@ -6,6 +6,8 @@
 #include <qimage.h>
 #include <qrect.h>
 #include <qpixmap.h>
+#include <qtimer.h>
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +22,22 @@ public:
     ~MainWindow();
 	void paintEvent(QPaintEvent * e);
 
+	
+private slots:
+	void moveMou();
+
 private:
     Ui::MainWindow *ui;
+
+	void initWeather();
+	void initSun();
+	void initTimer();
+
+	int weather;
+	int sunY;
+	int sunX;
+	int forMouLocation;
+	int p;
 };
 
 #endif // MAINWINDOW_H

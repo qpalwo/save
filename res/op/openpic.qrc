@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/openpic">
-        <file alias="back_b">back_moun.png</file>
-        <file alias="back_mid">earth.png</file>
-        <file alias="back_for">for_moun.png</file>
-    </qresource>
-</RCC>
