@@ -25,10 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         UI\main.cpp \
-        UI\mainwindow.cpp
+        UI\mainwindow.cpp \
+    UI/open.cpp
 
 HEADERS += \
-        UI\mainwindow.h
+        UI\mainwindow.h \
+    UI/open.h
 
 FORMS += \
-        UI\mainwindow.ui
+        UI\mainwindow.ui \
+    UI/open.ui
+
+RESOURCES += \
+    res/op/openpic.qrc
