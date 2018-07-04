@@ -22,19 +22,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+CONFIG += resources_big
 
 SOURCES += \
         UI\main.cpp \
         UI\mainwindow.cpp \
-    UI/open.cpp
+        UI\loading.cpp \
+        UI\UiManager.cpp
 
 HEADERS += \
         UI\mainwindow.h \
-    UI/open.h
+        UI\loading.h \
+        UI\UiManager.h
 
 FORMS += \
         UI\mainwindow.ui \
-    UI/open.ui
+    UI\loading.ui
 
 RESOURCES += \
-    openpic.qrc
+    res/op/openres.qrc \
+    res/op/opengif.qrc

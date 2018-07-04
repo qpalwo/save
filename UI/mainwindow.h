@@ -8,6 +8,7 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 #include <QTime>
+#include <QMovie>
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,15 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+	QImage back_mou;
+	QImage for_mou;
+	QImage earth;
+	QImage sun;
+	QImage moon;
+	QMovie *backGif;
+
+
+	void loadImage();
 	void initWeather();
 	void initSun();
 	void initTimer();

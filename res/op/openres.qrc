@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/openRes">
+        <file>back_moun_s.png</file>
+        <file>earth_s.png</file>
+        <file>fro_moun_s.png</file>
+        <file>moon_s.png</file>
+        <file>openres.qrc</file>
+        <file>sun_s.png</file>
+    </qresource>
+</RCC>

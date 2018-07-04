@@ -1,14 +1,18 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "open.h"
+#include "loading.h"
+#include "UiManager.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-	//open open;
-	//open.show();
+	UiManager uiManager;
+
+	//Loading loading;
+	//loading.show();
+
+    //MainWindow w;
+   // w.show();
 
     return a.exec();
 }

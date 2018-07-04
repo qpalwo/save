@@ -6,17 +6,36 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
+	setWindowFlag(Qt::CustomizeWindowHint);
+    //setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
 	initTimer();
 	initSun();
+	loadImage();
+}
+
+void MainWindow::loadImage() {
+	back_mou.load(":/openRes/back_moun_s.png");
+	for_mou.load(":/openRes/fro_moun_s.png");
+	earth.load(":/openRes/earth_s.png");
+	if (sunX != -1) {
+		sun.load(":/openRes/sun_s.png");
+		
+	}
+	else {
+		moon.load(":/openRes/moon_s.png");
+		backGif = new QMovie(":/openGif/background_se.gif");
+	}
+	
 }
 
 void MainWindow::paintEvent(QPaintEvent *e){
-	QImage back_mou(":/openPic/res/op/for_moun.png");
-	QImage for_mou(":/openPic/res/op/back_moun.png");
-	QImage earth("::/openPic/res/op/earth.png");
-
 	QPainter painter(this);
+	if (sunX != -1) {
+		painter.drawImage(sunX, sunY, sun);
+	}
+	else {
+		painter.drawImage(60, 100, moon);
+	}
     painter.drawImage(0, 0, back_mou, forMouLocation, 0);
 	painter.drawImage(0, 0, for_mou, forMouLocation, 0);
 	painter.drawImage(0, 0, earth, forMouLocation, 0);
@@ -25,7 +44,7 @@ void MainWindow::paintEvent(QPaintEvent *e){
 		painter.drawImage(3840 - forMouLocation, 0, back_mou);
 		painter.drawImage(3840 - forMouLocation, 0, for_mou);
 		painter.drawImage(3840 - forMouLocation, 0, earth);
-	}
+    }
 }
 
 void MainWindow::moveMou() {
@@ -33,7 +52,6 @@ void MainWindow::moveMou() {
 		p = 0;
 	p++;
 	forMouLocation = p * 19;
-	//repaint();
 	update();
 }
 
@@ -61,7 +79,7 @@ void MainWindow::initSun() {
 void MainWindow::initTimer() {
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(moveMou()));
-	timer->start(1);
+	timer->start(100);
 }
 
 MainWindow::~MainWindow()
