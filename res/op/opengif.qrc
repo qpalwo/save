@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/openGif">
         <file>background_se.gif</file>
-        <file>background_sn.gif</file>
     </qresource>
 </RCC>

@@ -28,12 +28,16 @@ SOURCES += \
         UI\main.cpp \
         UI\mainwindow.cpp \
         UI\loading.cpp \
-        UI\UiManager.cpp
+        UI\UiManager.cpp \
+    attr/player.cpp \
+    attr/gameworld.cpp
 
 HEADERS += \
         UI\mainwindow.h \
         UI\loading.h \
-        UI\UiManager.h
+        UI\UiManager.h \
+    attr/player.h \
+    attr/gameworld.h
 
 FORMS += \
         UI\mainwindow.ui \

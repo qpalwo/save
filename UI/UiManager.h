@@ -2,18 +2,23 @@
 
 #include "mainwindow.h"
 #include "loading.h"
+
 class UiManager : QObject{
 	Q_OBJECT
 public:
-	UiManager();
+	static UiManager* getInstance();
 	~UiManager();
+
+	void init();
 
 public slots:
 	void showMainWindow();
 
 private:
-	MainWindow mainWindow;
-	Loading loading;
+	static UiManager *Instance;
+	UiManager();
+	MainWindow *mainWindow;
+	Loading *loading;
 
 };
 

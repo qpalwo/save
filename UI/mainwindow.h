@@ -9,6 +9,15 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
+#include <qjsonobject.h>
+#include <qjsondocument.h>
+#include <qjsonarray.h>
+#include <qjsonvalue.h>
+//#include "UI/UiManager.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +32,9 @@ public:
     ~MainWindow();
 	void paintEvent(QPaintEvent * e);
 
-	
+public slots:
+	void handelWeather(QNetworkReply *);
+
 private slots:
 	void moveMou();
 

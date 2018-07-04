@@ -1,15 +1,29 @@
 #include "UiManager.h"
 
 UiManager::UiManager() {
-	loading.show();
-	showMainWindow();
+	//loading.show();
+	//showMainWindow();
 }
 
 void UiManager::showMainWindow() {
-	mainWindow.show();
-	loading.close();
+	mainWindow->show();
+	loading->close();
+}
+
+UiManager*UiManager::Instance = new UiManager();
+
+UiManager* UiManager::getInstance() {
+	return Instance;
+}
+
+void UiManager::init() {
+	mainWindow = new MainWindow();
+	loading = new Loading();
+	loading->show();
+	showMainWindow();
 }
 
 UiManager::~UiManager() {
 
 }
+
