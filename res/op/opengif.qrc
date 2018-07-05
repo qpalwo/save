@@ -2,5 +2,6 @@
     <qresource prefix="/openGif">
         <file>background_se.gif</file>
         <file>background_sn.gif</file>
+        <file>letter_2.gif</file>
     </qresource>
 </RCC>

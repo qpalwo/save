@@ -6,5 +6,7 @@
         <file>moon_s.png</file>
         <file>openres.qrc</file>
         <file>sun_s.png</file>
+        <file>cloud.png</file>
+        <file>rain.gif</file>
     </qresource>
 </RCC>

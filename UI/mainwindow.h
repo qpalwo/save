@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define _ABS(x) ((x) > 0 ? (x) : -(x))
+
 #include <QMainWindow>
 #include <qpainter.h>
 #include <qimage.h>
@@ -17,7 +19,8 @@
 #include <qjsondocument.h>
 #include <qjsonarray.h>
 #include <qjsonvalue.h>
-//#include "UI/UiManager.h"
+#include <QFile>
+#include <QtConcurrent/qtconcurrentrun.h>
 
 namespace Ui {
 class MainWindow;
@@ -49,10 +52,13 @@ private:
 	QImage earth;
 	QImage sun;
 	QImage moon;
+	QImage cloud;
 	QMovie *backGif;
-	QMovie *rightPlayer;
+	QMovie *rightPlayer = NULL;
+	QMovie *rain = NULL;
 
 	void loadImage();
+	void loadWeatherImage();
 	void initWeather();
 	void initSun();
 	void initTimer();

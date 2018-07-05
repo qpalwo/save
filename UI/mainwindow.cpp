@@ -2,14 +2,13 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
+	QMainWindow(parent),
+	ui(new Ui::MainWindow) {
+	ui->setupUi(this);
 	setWindowFlag(Qt::CustomizeWindowHint);
-    //setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
+	//setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
 	initTimer();
-	//initWeather();
+	initWeather();
 	initSun();
 	loadImage();
 	sceneHeight = 0;
@@ -22,7 +21,7 @@ void MainWindow::loadImage() {
 	rightPlayer = new QMovie(":/player/main.gif");
 	if (sunX != -1) {
 		sun.load(":/openRes/sun_s.png");
-	backGif = new QMovie(":/openGif/background_sn.gif");
+		backGif = new QMovie(":/openGif/background_sn.gif");
 	}
 	else {
 		moon.load(":/openRes/moon_s.png");
@@ -32,16 +31,18 @@ void MainWindow::loadImage() {
 	rightPlayer->start();
 }
 
-void MainWindow::paintEvent(QPaintEvent *e){
+void MainWindow::paintEvent(QPaintEvent *e) {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, 960, 720, backGif->currentPixmap());
-	if (sunX != -1) {
-		painter.drawImage(sunX, sunY, sun);
+	if (weather == 0) {
+		if (sunX != -1) {
+			painter.drawImage(sunX, sunY, sun);
+		}
+		else {
+			painter.drawImage(60, 100, moon);
+		}
 	}
-	else {
-		painter.drawImage(60, 100, moon);
-	}
-    painter.drawImage(0, sceneHeight, back_mou, forMouLocation, 0);
+	painter.drawImage(0, sceneHeight, back_mou, forMouLocation, 0);
 	if (forMouLocation + 960 > 3840) {
 		painter.drawImage(3840 - forMouLocation, sceneHeight, back_mou);
 	}
@@ -49,11 +50,19 @@ void MainWindow::paintEvent(QPaintEvent *e){
 	if (forMouLocation + 960 > 3840) {
 		painter.drawImage(3840 - forMouLocation, sceneHeight, for_mou);
 	}
-	painter.drawPixmap(380, 275 + sceneHeight, 200, 400, rightPlayer->currentPixmap());
+	painter.drawPixmap(380, 390 + sceneHeight, 100, 200, rightPlayer->currentPixmap());
 	if (forMouLocation + 960 > 3840) {
 		painter.drawImage(3840 - forMouLocation, sceneHeight, earth);
 	}
 	painter.drawImage(0, sceneHeight, earth, forMouLocation, 0);
+
+	if (weather == 1) {
+		painter.drawImage(0, 0, cloud);
+	}
+	else if (weather == 2) {
+		painter.drawImage(0, 0, cloud);
+		painter.drawPixmap(0, 0, 960, 720, rain->currentPixmap());
+	}
 }
 
 void MainWindow::moveMou() {
@@ -83,8 +92,25 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 	initVerticalTimer();
 }
 
+extern void saveToDisk(QByteArray content, QString path);
+
+extern QByteArray loadFromDisk(QString path);
+
 void MainWindow::initWeather() {
-	QString url("https://free-api.heweather.com/v5/weather?city=%E6%AD%A6%E6%B1%89&key=4e3b3b56219b44ed8e6c46afae3bf6a8");
+	QTime time = QTime::currentTime();
+	int hour = time.hour();
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/weather.info")));
+	if (!document.isNull()) {
+		QJsonObject obj = document.object();
+		int time = obj.take("time").toString().toInt();
+		if (_ABS(time - hour) <= 2) {
+			weather = obj.take("weather").toString().toInt();
+			loadWeatherImage();
+			qDebug() << "read weather cache successful  " << obj.take("string").toString();
+			return;
+		}
+	}
+	QString url("https://free-api.heweather.com/v5/weather?city=%E6%AD%A6%E6%B1%89&key=4e3b3b56219b44ed8e6c46afae3bf6a8&lang=en");
 	QNetworkRequest netRequest;
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 	netRequest.setUrl(QUrl(url));
@@ -96,18 +122,42 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 	QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
 	QJsonObject obj = doc.object();
 	QString whe(obj.value("HeWeather5").toArray().at(0).toObject()
-			.take("now").toObject().take("cond").toObject().take("txt").toString());
-	if (whe.compare("«Á")) {
+		.take("now").toObject().take("cond").toObject().take("txt").toString());
+
+	//int a = whe.toLower().compare("overcast");
+
+	if (whe.compare("«Á") == 0) {
+		weather = 0;
+	}
+	else if (whe.toLower().compare("overcast") == 0) {
 		weather = 1;
 	}
-	else if (whe.compare("“ı")) {
+	else {
 		weather = 2;
 	}
-	else {
-		weather = 3;
-	}
+	loadWeatherImage();
+
+	QJsonObject saves;
+	saves.insert("weather", weather);
+	saves.insert("string", whe);
+	saves.insert("time", QTime::currentTime().hour());
+	QJsonDocument document;
+	document.setObject(saves);
+	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
+	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/weather.info"));
+
 	qDebug() << whe << weather;
-	//UiManager::getInstance()->showMainWindow();
+}
+
+void MainWindow::loadWeatherImage() {
+	if (weather == 1) {
+		cloud.load(":/openRes/cloud.png");
+	}
+	else if (weather == 2) {
+		cloud.load(":/openRes/cloud.png");
+		rain = new QMovie(":/openRes/rain.gif");
+		rain->start();
+	}
 }
 
 
@@ -137,7 +187,6 @@ void MainWindow::initTimer() {
 	timer->start(90);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+MainWindow::~MainWindow() {
+	delete ui;
 }

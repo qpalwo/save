@@ -7,6 +7,10 @@ Loading::Loading(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
+	setWindowFlag(Qt::FramelessWindowHint);
+	backGif = new QMovie(":/openGif/letter_2.gif");
+	ui->gifLabel->setMovie(backGif);
+	backGif->start();
 }
 
 Loading::~Loading()
@@ -28,3 +32,8 @@ void Loading::on_pushButton_3_clicked()
 {
 	UiManager::getInstance()->showSceneForest();
 }
+
+void Loading::on_pushButton_4_clicked() {
+	close();
+}
+
