@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/player">
         <file>main.gif</file>
-        <file>main_light.gif</file>
+        <file>main_left.gif</file>
     </qresource>
 </RCC>
