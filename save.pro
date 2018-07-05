@@ -48,4 +48,6 @@ FORMS += \
 
 RESOURCES += \
     res/op/openres.qrc \
-    res/op/opengif.qrc
+    res/op/opengif.qrc \
+    res/people/player.qrc \
+    res/desertb.qrc

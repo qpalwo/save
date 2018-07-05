@@ -3,9 +3,4 @@
         <file>background_se.gif</file>
         <file>background_sn.gif</file>
     </qresource>
-    <qresource prefix="/">
-        <file>../scene/desert_1.png</file>
-        <file>../scene/desert_2.png</file>
-        <file>../scene/player.png</file>
-    </qresource>
 </RCC>

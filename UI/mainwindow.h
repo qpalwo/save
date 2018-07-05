@@ -48,7 +48,6 @@ private:
 	QImage moon;
 	QMovie *backGif;
 
-
 	void loadImage();
 	void initWeather();
 	void initSun();

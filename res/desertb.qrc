@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/desertB">
+        <file>scene/desert_1.png</file>
+        <file>scene/desert_2.png</file>
+    </qresource>
+</RCC>

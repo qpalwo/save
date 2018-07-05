@@ -33,7 +33,7 @@ private:
 
 	void loadImage();
 	void moveMent();
-
+	void keyPressEvent(QKeyEvent *e);
 
 	int backX;
 	int backY;

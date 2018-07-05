@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/player">
+        <file>main.gif</file>
+        <file>main_light.gif</file>
+    </qresource>
+</RCC>
