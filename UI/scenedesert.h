@@ -32,10 +32,13 @@ private:
 	QMovie *player; 
 
 	void loadImage();
+	void moveMent();
 
-	int XX;
-	int YY;
-	int Location;
+
+	int backX;
+	int backY;
+	int backLocation;
+	int playerX;
 	int p;
 };
 
