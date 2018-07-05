@@ -2,6 +2,7 @@
 
 #include "mainwindow.h"
 #include "loading.h"
+#include "scenedesert.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -13,12 +14,11 @@ public:
 
 public slots:
 	void showMainWindow();
+	void showSceneDesert();
 
 private:
 	static UiManager *Instance;
 	UiManager();
-	MainWindow *mainWindow;
-	Loading *loading;
-
+	QWidget *window[10]{ 0 };
 };
 

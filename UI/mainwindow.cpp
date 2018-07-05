@@ -20,7 +20,7 @@ void MainWindow::loadImage() {
 	earth.load(":/openRes/earth_s.png");
 	if (sunX != -1) {
 		sun.load(":/openRes/sun_s.png");
-	//	backGif = new QMovie(":/openGif/background_sn.gif");
+	backGif = new QMovie(":/openGif/background_sn.gif");
 	}
 	else {
 		moon.load(":/openRes/moon_s.png");
@@ -51,7 +51,7 @@ void MainWindow::paintEvent(QPaintEvent *e){
 }
 
 void MainWindow::moveMou() {
-	if (p >= 200)
+	if (p >= 200 || p <= 0)
 		p = 0;
 	p++;
 	forMouLocation = p * 19;
@@ -69,7 +69,7 @@ void MainWindow::initWeather() {
 
 void MainWindow::handelWeather(QNetworkReply *reply) {
 	QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-	QJsonObject obj = doc.object();//取得最外层这个大对象
+	QJsonObject obj = doc.object();
 	QString whe(obj.value("HeWeather5").toArray().at(0).toObject()
 			.take("now").toObject().take("cond").toObject().take("txt").toString());
 	if (whe.compare("晴")) {
@@ -89,18 +89,20 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 void MainWindow::initSun() {
 	QTime time = QTime::currentTime();
 	int hour = time.hour();
-	if (hour > 6 && hour < 12) {
-		sunY = 56 * (hour - 6);
-		sunX = 66 * hour + 40;
+	//hour = 20;
+	if (hour >= 6 && hour < 12) {
+		sunY = 300 - 56 * (hour - 6);
+		sunX = 66 * (hour - 6) - 20;
 	}
 	else if (hour >= 12 && hour < 19) {
-		sunY = 340 - 56 * (hour - 12);
-		sunX = 66 * (hour - 6) + 40;
+		sunY = 56 * (hour - 12) - 20;
+		sunX = 66 * (hour - 6) - 20;
 	}
 	else {
 		sunY = -1;
 		sunX = -1;
 	}
+	forMouLocation = 0;
 
 }
 

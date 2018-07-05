@@ -13,3 +13,13 @@ Loading::~Loading()
 {
     delete ui;
 }
+
+void Loading::on_pushButton_clicked()
+{
+    UiManager::getInstance()->showMainWindow();
+}
+
+void Loading::on_pushButton_2_clicked()
+{
+	UiManager::getInstance()->showSceneDesert();
+}

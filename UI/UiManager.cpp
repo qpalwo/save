@@ -6,8 +6,13 @@ UiManager::UiManager() {
 }
 
 void UiManager::showMainWindow() {
-	mainWindow->show();
-	loading->close();
+	window[1]->show();
+	window[0]->close();
+}
+
+void UiManager::showSceneDesert() {
+	window[2]->show();
+	window[0]->close();
 }
 
 UiManager*UiManager::Instance = new UiManager();
@@ -17,10 +22,11 @@ UiManager* UiManager::getInstance() {
 }
 
 void UiManager::init() {
-	mainWindow = new MainWindow();
-	loading = new Loading();
-	loading->show();
-	showMainWindow();
+	window[0] = new Loading();
+	window[1] = new MainWindow();
+	window[2] = new SceneDesert();
+	window[0]->show();
+	//showMainWindow();
 }
 
 UiManager::~UiManager() {

@@ -30,18 +30,21 @@ SOURCES += \
         UI\loading.cpp \
         UI\UiManager.cpp \
     attr/player.cpp \
-    attr/gameworld.cpp
+    attr/gameworld.cpp \
+    UI/scenedesert.cpp
 
 HEADERS += \
         UI\mainwindow.h \
         UI\loading.h \
         UI\UiManager.h \
     attr/player.h \
-    attr/gameworld.h
+    attr/gameworld.h \
+    UI/scenedesert.h
 
 FORMS += \
         UI\mainwindow.ui \
-    UI\loading.ui
+    UI\loading.ui \
+    UI/scenedesert.ui
 
 RESOURCES += \
     res/op/openres.qrc \
