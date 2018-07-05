@@ -41,7 +41,6 @@ private:
 	int playerX;
 	bool stop;
 	bool left;
-	bool stopB;
 };
 
 #endif // SCENEDESERT_H

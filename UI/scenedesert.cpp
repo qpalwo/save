@@ -1,6 +1,8 @@
 #include "scenedesert.h"
 #include "ui_scenedesert.h"
 #include <QKeyEvent>
+#define BDL -2880
+#define BDR 0
 
 SceneDesert::SceneDesert(QWidget *parent) :
     QWidget(parent),
@@ -11,7 +13,6 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	backX = 0;   backY = 0; 
 	playerX = 0;  
 	stop = false; 
-	stopB = false;
 	left = false;
 	loadImage();
 }
@@ -30,8 +31,8 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
     painter.drawImage(backX, backY, backGround);
 	
-	if (playerX >= 430) {
-		stop = true;  
+	if (playerX == 430) {
+		stop = true;  	
 	}
 	if (left) painter.drawPixmap(playerX,250, 100, 200, player_left->currentPixmap());
 	else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
@@ -47,8 +48,8 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_D: backX -= 10;  left = false;  break;
 		case Qt::Key_Right: backX -= 10;  left = false;  break;
 		}
-		if (backX <= -2890) backX += 10;
-		if (backX >= 0) backX -= 10;
+		if (backX < BDL) { backX += 10;  stop = false; playerX += 10;  }
+		if (backX > BDR) { backX -= 10;   stop = false; playerX -= 10; }
 	}
 	else {
 		switch (e->key())
@@ -57,8 +58,11 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_Left: playerX -= 10;  left = true; break;
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
+		if (playerX < 0) { playerX += 10; }
+		if (playerX > 860) { playerX -= 10; }
 		}
 	}
+
 	update();
 }
 
