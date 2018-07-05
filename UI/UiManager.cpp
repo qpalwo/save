@@ -15,6 +15,11 @@ void UiManager::showSceneDesert() {
 	window[0]->close();
 }
 
+void UiManager::showSceneForest() {
+	window[3]->show();
+	window[0]->close();
+}
+
 UiManager*UiManager::Instance = new UiManager();
 
 UiManager* UiManager::getInstance() {
@@ -25,6 +30,7 @@ void UiManager::init() {
 	window[0] = new Loading();
 	window[1] = new MainWindow();
 	window[2] = new SceneDesert();
+	window[3] = new SceneForest();
 	window[0]->show();
 	//showMainWindow();
 }

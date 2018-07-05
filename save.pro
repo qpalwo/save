@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +31,8 @@ SOURCES += \
         UI\UiManager.cpp \
     attr/player.cpp \
     attr/gameworld.cpp \
-    UI/scenedesert.cpp
+    UI/scenedesert.cpp \
+    UI/sceneforest.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -39,12 +40,14 @@ HEADERS += \
         UI\UiManager.h \
     attr/player.h \
     attr/gameworld.h \
-    UI/scenedesert.h
+    UI/scenedesert.h \
+    UI/sceneforest.h
 
 FORMS += \
         UI\mainwindow.ui \
     UI\loading.ui \
-    UI/scenedesert.ui
+    UI/scenedesert.ui \
+    UI/sceneforest.ui
 
 RESOURCES += \
     res/op/openres.qrc \

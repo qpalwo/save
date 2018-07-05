@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "loading.h"
 #include "scenedesert.h"
+#include "sceneforest.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -15,6 +16,7 @@ public:
 public slots:
 	void showMainWindow();
 	void showSceneDesert();
+	void showSceneForest();
 
 private:
 	static UiManager *Instance;
