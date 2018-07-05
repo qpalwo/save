@@ -30,16 +30,17 @@ private:
 	QImage backGround;
 	QImage earth;
 	QMovie *player; 
+	QMovie *player_left;
 
 	void loadImage();
-	void moveMent();
 	void keyPressEvent(QKeyEvent *e);
 
 	int backX;
 	int backY;
-	int backLocation;
+	//int backLocation;
 	int playerX;
-	int p;
+	bool stop;
+	bool left;
 };
 
 #endif // SCENEDESERT_H

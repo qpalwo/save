@@ -31,15 +31,18 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 	void paintEvent(QPaintEvent * e);
+	void keyPressEvent(QKeyEvent *e);
 
 public slots:
 	void handelWeather(QNetworkReply *);
 
 private slots:
 	void moveMou();
+	void moveScene();
 
 private:
     Ui::MainWindow *ui;
+	QTimer *verticalTimer;
 
 	QImage back_mou;
 	QImage for_mou;
@@ -47,17 +50,20 @@ private:
 	QImage sun;
 	QImage moon;
 	QMovie *backGif;
+	QMovie *rightPlayer;
 
 	void loadImage();
 	void initWeather();
 	void initSun();
 	void initTimer();
+	void initVerticalTimer();
 
 	int weather;
 	int sunY;
 	int sunX;
 	int forMouLocation;
 	int p;
+	int sceneHeight;
 };
 
 #endif // MAINWINDOW_H

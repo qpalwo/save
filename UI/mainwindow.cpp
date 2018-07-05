@@ -12,12 +12,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	//initWeather();
 	initSun();
 	loadImage();
+	sceneHeight = 0;
 }
 
 void MainWindow::loadImage() {
 	back_mou.load(":/openRes/back_moun_s.png");
 	for_mou.load(":/openRes/fro_moun_s.png");
 	earth.load(":/openRes/earth_s.png");
+	rightPlayer = new QMovie(":/player/main.gif");
 	if (sunX != -1) {
 		sun.load(":/openRes/sun_s.png");
 	backGif = new QMovie(":/openGif/background_sn.gif");
@@ -27,6 +29,7 @@ void MainWindow::loadImage() {
 		backGif = new QMovie(":/openGif/background_se.gif");
 	}
 	backGif->start();
+	rightPlayer->start();
 }
 
 void MainWindow::paintEvent(QPaintEvent *e){
@@ -38,15 +41,19 @@ void MainWindow::paintEvent(QPaintEvent *e){
 	else {
 		painter.drawImage(60, 100, moon);
 	}
-    painter.drawImage(0, 0, back_mou, forMouLocation, 0);
-	painter.drawImage(0, 0, for_mou, forMouLocation, 0);
-	painter.drawImage(0, 0, earth, forMouLocation, 0);
-
+    painter.drawImage(0, sceneHeight, back_mou, forMouLocation, 0);
 	if (forMouLocation + 960 > 3840) {
-		painter.drawImage(3840 - forMouLocation, 0, back_mou);
-		painter.drawImage(3840 - forMouLocation, 0, for_mou);
-		painter.drawImage(3840 - forMouLocation, 0, earth);
-    }
+		painter.drawImage(3840 - forMouLocation, sceneHeight, back_mou);
+	}
+	painter.drawImage(0, sceneHeight, for_mou, forMouLocation, 0);
+	if (forMouLocation + 960 > 3840) {
+		painter.drawImage(3840 - forMouLocation, sceneHeight, for_mou);
+	}
+	painter.drawPixmap(380, 275 + sceneHeight, 200, 400, rightPlayer->currentPixmap());
+	if (forMouLocation + 960 > 3840) {
+		painter.drawImage(3840 - forMouLocation, sceneHeight, earth);
+	}
+	painter.drawImage(0, sceneHeight, earth, forMouLocation, 0);
 }
 
 void MainWindow::moveMou() {
@@ -55,6 +62,25 @@ void MainWindow::moveMou() {
 	p++;
 	forMouLocation = p * 19;
 	update();
+}
+
+void MainWindow::moveScene() {
+	if (sceneHeight >= 0 && sceneHeight <= 120) {
+		sceneHeight++;
+	}
+	if (sceneHeight == 120) {
+		verticalTimer->stop();
+	}
+}
+
+void MainWindow::initVerticalTimer() {
+	verticalTimer = new QTimer(this);
+	connect(verticalTimer, SIGNAL(timeout()), this, SLOT(moveScene()));
+	verticalTimer->start(8);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e) {
+	initVerticalTimer();
 }
 
 void MainWindow::initWeather() {
@@ -88,7 +114,7 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 void MainWindow::initSun() {
 	QTime time = QTime::currentTime();
 	int hour = time.hour();
-	//hour = 20;
+	hour = 20;
 	if (hour >= 6 && hour < 12) {
 		sunY = 300 - 56 * (hour - 6);
 		sunX = 66 * (hour - 6) - 20;
