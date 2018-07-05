@@ -27,7 +27,6 @@ void MainWindow::loadImage() {
 		backGif = new QMovie(":/openGif/background_se.gif");
 	}
 	backGif->start();
-	
 }
 
 void MainWindow::paintEvent(QPaintEvent *e){
