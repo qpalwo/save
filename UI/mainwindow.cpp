@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::CustomizeWindowHint);
-	//setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
+	setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
 	initTimer();
 	initWeather();
 	initSun();
@@ -24,7 +24,7 @@ void MainWindow::initMenu() {
 		set = new OpenPageButton("set", this);
 	}
 
-	if (isDown) {
+	if (isDown && open != NULL) {
 		open->setGeometry(rect().x() + 300, rect().y() - 40 + sceneHeight * 2, 130, 50);
 		b_continue->setGeometry(rect().x() + 500, rect().y() + -40 + sceneHeight * 2, 130, 50);
 		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + sceneHeight * 2, 130, 50);
@@ -126,7 +126,8 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 }
 
 void MainWindow::onContinueClicked() {
-
+	GameWorld::getInstance()->quitGame();
+	
 }
 
 void MainWindow::onAchieveClicked() {

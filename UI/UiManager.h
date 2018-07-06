@@ -4,7 +4,6 @@
 #include "scenedesert.h"
 #include "sceneforest.h"
 #include "wordwindow.h"
-#include <qwidget.h>
 #include "loading.h"
 
 class UiManager : QObject{
@@ -35,11 +34,13 @@ public slots:
 
 private:
 	static UiManager *Instance;
-	WordWindow *m_wordWindow;
-	MainWindow *mainWindow;
-	SceneDesert *sceneDesert;
-	SceneForest *sceneForest;
-	QWidget *loading;
+	WordWindow *m_wordWindow = NULL;
+	MainWindow *mainWindow = NULL;
+	SceneDesert *sceneDesert = NULL;
+	SceneForest *sceneForest = NULL;
+	QWidget *loading = NULL;
+
+	bool isWordWindowOpen = false;
 
 	UiManager();
 

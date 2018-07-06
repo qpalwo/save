@@ -10,6 +10,7 @@
 #include <qstring.h>
 #include <QtConcurrent/qtconcurrentrun.h>
 #include <QFile>
+//#include "UI/UiManager.h"
 
 
 class Achieve {

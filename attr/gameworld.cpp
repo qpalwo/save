@@ -1,4 +1,5 @@
 #include "gameworld.h"
+#include "UI/UiManager.h"
 
 void saveToDisk(QByteArray content, QString path) {
 	QFile file(path);
@@ -35,8 +36,16 @@ QByteArray loadFromDisk(QString path) {
 	}
 }
 
-void GameWorld::quitGame() {
+void GameWorld::save() {
 
+}
+
+void GameWorld::load() {
+
+}
+void GameWorld::quitGame() {
+	GameWorld::save();
+	qApp->quit();
 }
 
 GameWorld::GameWorld(QObject *parent) : QObject(parent)

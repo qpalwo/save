@@ -23,6 +23,7 @@
 #include <QtConcurrent/qtconcurrentrun.h>
 #include "openpagebutton.h"
 #include <QHBoxLayout>
+#include "attr/gameworld.h"
 
 namespace Ui {
 class MainWindow;
