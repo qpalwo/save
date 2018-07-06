@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/menuZ">
+        <file>menu/menu_achieve_1.png</file>
+        <file>menu/menu_achieve_2.png</file>
+        <file>menu/menu_achieve_3.png</file>
+        <file>menu/menu_background.png</file>
+        <file>menu/menu_bag_1.png</file>
+        <file>menu/menu_bag_2.png</file>
+        <file>menu/menu_bag_3.png</file>
+        <file>menu/menu_map_1.png</file>
+        <file>menu/menu_map_2.png</file>
+        <file>menu/menu_map_3.png</file>
+        <file>menu/menu_read_1.png</file>
+        <file>menu/menu_read_2.png</file>
+        <file>menu/menu_read_3.png</file>
+        <file>menu/menu_save_1.png</file>
+        <file>menu/menu_save_2.png</file>
+        <file>menu/menu_save_3.png</file>
+        <file>menu/menu_set_1.png</file>
+        <file>menu/menu_set_2.png</file>
+        <file>menu/menu_set_3.png</file>
+        <file>menu/set_back_1.png</file>
+        <file>menu/set_back_2.png</file>
+        <file>menu/set_back_3.png</file>
+        <file>menu/set_background.png</file>
+        <file>menu/set_sound_1.png</file>
+        <file>menu/set_volume_1.png</file>
+        <file>menu/set_volume_2.png</file>
+    </qresource>
+</RCC>

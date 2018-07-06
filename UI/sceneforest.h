@@ -10,6 +10,7 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include "menuWidget.h"
 
 namespace Ui {
 class SceneForest;
@@ -32,8 +33,10 @@ private:
     QMovie* player;
     QMovie* player_left;
 
+
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
+    //void menuinit();
 
     int backX;
     int backY;
