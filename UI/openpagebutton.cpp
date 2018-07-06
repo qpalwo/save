@@ -18,6 +18,24 @@ OpenPageButton::OpenPageButton(QString res, QWidget *parent) :
 	this->setContentsMargins(0, 0, 0, 0);
 }
 
+OpenPageButton::OpenPageButton(QString path, QString res, QWidget *parent) :
+	QPushButton(parent) {
+	buttonState = Normal;
+
+	QString normal = ":/menuZ/menu/" + res + "_1.png";
+	QString hover = ":/menuZ/menu/" + res + "_2.png";
+	QString pressed = ":/menuZ/menu/" + res + "_3.png";
+
+	normalPixmap.load(normal);
+	hoverPixmap.load(hover);
+	pressPixmap.load(pressed);
+
+	this->setFixedSize(normalPixmap.size());
+
+	this->setContentsMargins(0, 0, 0, 0);
+}
+
+
 void OpenPageButton::paintEvent(QPaintEvent *) {
 	QPainter painter(this);
 

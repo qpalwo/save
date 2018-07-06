@@ -32,6 +32,7 @@ class GameWorld : public QObject
 public:
 	static GameWorld * getInstance();
 	void addAchieve(int);
+	void quitGame();
    
 
 signals:

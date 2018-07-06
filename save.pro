@@ -68,4 +68,5 @@ RESOURCES += \
     res/op/opengif.qrc \
     res/conver.qrc \
     res/forest.qrc \
-    res/menuz.qrc
+    res/menuz.qrc  \
+    res/button/button.qrc

@@ -17,21 +17,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 void MainWindow::initMenu() {
-	QHBoxLayout *leftLayout = new QHBoxLayout(this);
-	OpenPageButton *open = new OpenPageButton("begin", this);
-	OpenPageButton *b_continue = new OpenPageButton("continue", this);
-	OpenPageButton *achieve = new OpenPageButton("achieve", this);
+	if (!isDown) {
+		open = new OpenPageButton("begin", this);
+		b_continue = new OpenPageButton("continue", this);
+		achieve = new OpenPageButton("achieve", this);
+		set = new OpenPageButton("set", this);
+	}
 
-	leftLayout->addStretch();
-	leftLayout->addWidget(b_continue);
-	/*leftLayout->addStretch();
-	leftLayout->addWidget(open);
-	leftLayout->addStretch();
-	leftLayout->addWidget(achieve);
-	leftLayout->addStretch();
-	leftLayout->setSpacing(30);*/
-	
+	if (isDown) {
+		open->setGeometry(rect().x() + 300, rect().y() - 40 + sceneHeight * 2, 130, 50);
+		b_continue->setGeometry(rect().x() + 500, rect().y() + -40 + sceneHeight * 2, 130, 50);
+		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + sceneHeight * 2, 130, 50);
+		set->setGeometry(rect().x() + 500, rect().y() + 30 + sceneHeight * 2, 130, 50);
 
+		open->show();
+		b_continue->show();
+		achieve->show();
+		set->show();
+	}
+	if (!isDown) {
+		connect(open, SIGNAL(clicked()), this, SLOT(onBeginClicked()));
+		connect(b_continue, SIGNAL(clicked()), this, SLOT(onContinueClicked()));
+		connect(achieve, SIGNAL(clicked()), this, SLOT(onAchieveClicked()));
+		connect(set, SIGNAL(clicked()), this, SLOT(onSetClicked()));
+	}
 }
 
 void MainWindow::loadImage() {
@@ -100,6 +109,7 @@ void MainWindow::moveScene() {
 	if (sceneHeight == 120) {
 		verticalTimer->stop();
 	}
+	initMenu();	
 }
 
 void MainWindow::initVerticalTimer() {
@@ -109,7 +119,26 @@ void MainWindow::initVerticalTimer() {
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e) {
-	initVerticalTimer();
+	if (!isDown) {
+		isDown = true;
+		initVerticalTimer();
+	}
+}
+
+void MainWindow::onContinueClicked() {
+
+}
+
+void MainWindow::onAchieveClicked() {
+
+}
+
+void MainWindow::onSetClicked() {
+
+}
+
+void MainWindow::onBeginClicked() {
+	
 }
 
 extern void saveToDisk(QByteArray content, QString path);
@@ -215,4 +244,8 @@ MainWindow::~MainWindow() {
 	delete backGif;
 	delete rightPlayer;
 	delete rain;
+	delete open;
+	delete achieve;
+	delete set;
+	delete b_continue;
 }

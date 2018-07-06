@@ -1,27 +1,91 @@
 #include "UiManager.h"
 
 UiManager::UiManager() {
-	//loading.show();
-	//showMainWindow();
-	//initWordwindow();
+	
+}
+
+
+void UiManager::closeLoading() {
+	if (loading != NULL) {
+		loading->close();
+		delete loading;
+	}
+}
+
+void UiManager::closeWordWIndow() {
+	if (m_wordWindow != NULL) {
+		m_wordWindow->close();
+		delete m_wordWindow;
+	}
+}
+
+void UiManager::closeMainPage() {
+	if (mainWindow != NULL) {
+		mainWindow->close();
+		delete mainWindow;
+	}
+}
+
+void UiManager::closeSceneDesert() {
+	if (sceneDesert != NULL) {
+		sceneDesert->close();
+		delete sceneDesert;
+	}
+}
+
+void UiManager::closeSceneForest() {
+	if (sceneForest != NULL) {
+		sceneForest->close();
+		delete sceneForest;
+	}
+}
+
+void UiManager::closeAll() {
+	closeLoading();
+	closeMainPage();
+	closeSceneDesert();
+	closeSceneForest();
+	closeWordWIndow();
+}
+
+void UiManager::openLoading() {
+	loading = new Loading();
+	loading->show();
+}
+
+void UiManager::openMainPage() {
+	mainWindow = new MainWindow();
+	mainWindow->show();
+}
+
+void UiManager::openWordWIndow() {
+	m_wordWindow = new WordWindow();
+	m_wordWindow->showText();
+}
+
+void UiManager::openSceneDesert() {
+	sceneDesert = new SceneDesert();
+	sceneDesert->show();
+}
+
+void UiManager::openSceneForest() {
+	sceneForest = new SceneForest();
+	sceneForest->show();
 }
 
 void UiManager::showMainWindow() {
-	isLoading = false;
-	window[1]->show();
-	window[0]->close();
+	openMainPage();
+	closeLoading();
 }
 
 void UiManager::showSceneDesert() {
-	isLoading = false;
-	window[2]->show();
-	window[0]->close();
+	openSceneDesert();
+	closeLoading();
 }
 
 void UiManager::showSceneForest() {
-	isLoading = false;
-	window[3]->show();
-	window[0]->close();
+	openSceneForest();
+	closeLoading();
 }
 
 UiManager*UiManager::Instance = new UiManager();
@@ -31,20 +95,10 @@ UiManager* UiManager::getInstance() {
 }
 
 void UiManager::init() {
-	window[0] = new Loading();
-	window[1] = new MainWindow();
-	window[2] = new SceneDesert();
-	window[3] = new SceneForest();
-	window[0]->show();
-	m_wordWindow = new WordWindow();
-	initWordwindow();
+	openWordWIndow();
+	openLoading();
 }
 
-void UiManager::initWordwindow() {
-	//if (!isLoading) {
-		m_wordWindow->showText();
-	//}
-}
 
 UiManager::~UiManager() {
 
