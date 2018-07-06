@@ -33,9 +33,12 @@ private:
 	QImage option_2;
 	QImage option_3;
 	QImage conver;
+	QImage name;
+
 	QMovie *player; 
 	QMovie *player_left;
 
+	bool underTheTree(int n);
 	void loadImage();
     void keyPressEvent(QKeyEvent *e);
 
@@ -43,6 +46,8 @@ private:
 	int backY;
 	//int backLocation;
 	int playerX;
+	int waitTime;
+
 	bool stop;
 	bool left;
 };
