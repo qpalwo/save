@@ -60,4 +60,5 @@ RESOURCES += \
     res/op/openres.qrc \
     res/people/player.qrc \
     res/desertb.qrc \
-    res/op/opengif.qrc
+    res/op/opengif.qrc \
+    res/conver.qrc

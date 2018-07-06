@@ -39,13 +39,13 @@ void WordWindow::handelWord(QNetworkReply * reply) {
 	QJsonObject obj = doc.object();
 	showedText = obj.take("text").toString();
 	int a = showedText.length();
-	if (a >= 30) {
+	if (a >= 25) {
 		showText();
 		return;
 	}
 	update();
 	this->show();
-	QTimer::singleShot(20000, this, SLOT(hidWindow()));
+	//QTimer::singleShot(20000, this, SLOT(hidWindow()));
 }
 
 

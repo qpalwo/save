@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/conver">
+        <file>convar/choice_3.png</file>
+        <file>convar/choice_1.png</file>
+        <file>convar/choice_2.png</file>
+        <file>convar/convar.png</file>
+        <file>convar/name.png</file>
+    </qresource>
+</RCC>

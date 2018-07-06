@@ -29,11 +29,16 @@ private:
 
 	QImage backGround;
 	QImage earth;
+	QImage option_1;
+	QImage option_2;
+	QImage option_3;
+	QImage conver;
 	QMovie *player; 
 	QMovie *player_left;
 
 	void loadImage();
     void keyPressEvent(QKeyEvent *e);
+	void plot(QKeyEvent *e);
 
 	int backX;
 	int backY;
