@@ -4,6 +4,7 @@
 #include "loading.h"
 #include "scenedesert.h"
 #include "sceneforest.h"
+#include "wordwindow.h"
 
 class UiManager : QObject{
 	Q_OBJECT

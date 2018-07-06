@@ -3,6 +3,7 @@
 UiManager::UiManager() {
 	//loading.show();
 	//showMainWindow();
+	
 }
 
 void UiManager::showMainWindow() {
@@ -33,6 +34,8 @@ void UiManager::init() {
 	window[3] = new SceneForest();
 	window[0]->show();
 	//showMainWindow();
+	WordWindow *w = new WordWindow();
+	w->showText();
 }
 
 UiManager::~UiManager() {

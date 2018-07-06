@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "UiManager.h"
+#include <QMovie>
 
 namespace Ui {
 class Loading;
@@ -23,8 +24,11 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+	void on_pushButton_4_clicked();
+
 private:
     Ui::Loading *ui;
+	QMovie * backGif;
 };
 
 #endif // LOADING_H

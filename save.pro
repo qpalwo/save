@@ -32,7 +32,10 @@ SOURCES += \
     attr/player.cpp \
     attr/gameworld.cpp \
     UI/scenedesert.cpp \
-    UI/sceneforest.cpp
+    UI/sceneforest.cpp \
+    game/basegame.cpp \
+    game/basegame.cpp \
+    UI/wordwindow.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -41,16 +44,20 @@ HEADERS += \
     attr/player.h \
     attr/gameworld.h \
     UI/scenedesert.h \
-    UI/sceneforest.h
+    UI/sceneforest.h \
+    game/basegame.h \
+    game/basegame.h \
+    UI/wordwindow.h
 
 FORMS += \
         UI\mainwindow.ui \
     UI\loading.ui \
     UI/scenedesert.ui \
-    UI/sceneforest.ui
+    UI/sceneforest.ui \
+    UI/wordwindow.ui
 
 RESOURCES += \
     res/op/openres.qrc \
-    res/op/opengif.qrc \
     res/people/player.qrc \
-    res/desertb.qrc
+    res/desertb.qrc \
+    res/op/opengif.qrc
