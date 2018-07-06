@@ -61,4 +61,5 @@ RESOURCES += \
     res/people/player.qrc \
     res/desertb.qrc \
     res/op/opengif.qrc \
-    res/conver.qrc
+    res/conver.qrc \
+    res/forest.qrc
