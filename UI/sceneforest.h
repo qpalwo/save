@@ -37,7 +37,6 @@ private:
 
     int backX;
     int backY;
-    int p;
     int playerX;
     bool stop;
     bool left;
