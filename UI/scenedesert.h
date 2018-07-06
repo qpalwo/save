@@ -10,6 +10,17 @@
 #include <QTime>
 #include <QMovie>
 #include <QWidget>
+#include <QKeyEvent>
+#include <qstring.h>
+
+#define BDL -2880
+#define BDR 0
+
+struct plot {
+	QString a;
+	int l;
+	int r;
+};
 
 namespace Ui {
 class SceneDesert;
@@ -33,16 +44,23 @@ private:
 	QImage option_2;
 	QImage option_3;
 	QImage conver;
+	QImage name;
+
 	QMovie *player; 
 	QMovie *player_left;
 
+	bool underTheTree(int n);
 	void loadImage();
     void keyPressEvent(QKeyEvent *e);
+	void loadPlot();
 
 	int backX;
 	int backY;
 	//int backLocation;
 	int playerX;
+	int waitTime;
+	struct plot q[100];
+
 	bool stop;
 	bool left;
 };

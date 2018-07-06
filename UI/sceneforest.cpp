@@ -1,6 +1,8 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
 #include <QKeyEvent>
+#define BDL -2880
+#define BDR 0
 
 SceneForest::SceneForest(QWidget *parent) :
     QWidget(parent),
@@ -9,8 +11,9 @@ SceneForest::SceneForest(QWidget *parent) :
     ui->setupUi(this);
     backX = 0;
     backY = 0;
-    p = 0;
     playerX = 0;
+    stop = false;
+    left = false;
     loadImage();
 }
 
@@ -27,12 +30,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
     QPainter painter(this);
 
     painter.drawImage(backX, backY, backGround);
-    if (backX < -2880)
-    {
-        p = (-backX+960)/3840;
-        painter.drawImage(backX + 3840*p, backY, backGround);
-        painter.drawImage(backX + 3840*(p-1), backY, backGround);
-    }
 
     if (playerX == 430)
     {
@@ -48,12 +45,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
         painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
     painter.drawImage(backX, backY, earth);
-    if (backX < -2880)
-    {
-        p = (-backX+960)/3840;
-        painter.drawImage(backX + 3840*p, backY, earth);
-        painter.drawImage(backX + 3840*(p-1), backY, earth);
-    }
 }
 
 void SceneForest::keyPressEvent(QKeyEvent* e)
@@ -81,7 +72,13 @@ void SceneForest::keyPressEvent(QKeyEvent* e)
         default:
             break;
         }
-        if (backX > 0)
+        if (backX < BDL)
+        {
+            backX += 10;
+            stop = false;
+            playerX += 10;
+        }
+        if (backX > BDR)
         {
             backX -= 10;
             stop = false;
@@ -112,6 +109,10 @@ void SceneForest::keyPressEvent(QKeyEvent* e)
         if (playerX < 0)
         {
             playerX += 10;
+        }
+        if (playerX > 860)
+        {
+            playerX -= 10;
         }
     }
 
