@@ -15,6 +15,10 @@ SceneForest::SceneForest(QWidget *parent) :
     stop = false;
     left = false;
     loadImage();
+
+    menuwidget *menu = new menuwidget(this);
+
+    menu->show();
 }
 
 void SceneForest::loadImage()
@@ -45,6 +49,7 @@ void SceneForest::paintEvent(QPaintEvent * e) {
         painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
     painter.drawImage(backX, backY, earth);
+
 }
 
 void SceneForest::keyPressEvent(QKeyEvent* e)
