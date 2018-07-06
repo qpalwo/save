@@ -58,9 +58,9 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_Left: playerX -= 10;  left = true; break;
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
+		}
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
-		}
 	}
 
 	update();
