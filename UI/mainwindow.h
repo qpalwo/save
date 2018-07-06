@@ -45,6 +45,12 @@ private slots:
 	void moveMou();
 	void moveScene();
 
+	void onBeginClicked();
+	void onAchieveClicked();
+	void onSetClicked();
+	void onContinueClicked();
+
+
 private:
     Ui::MainWindow *ui;
 	QTimer *verticalTimer;
@@ -59,6 +65,11 @@ private:
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
 
+	OpenPageButton *open;
+	OpenPageButton *b_continue;
+	OpenPageButton *achieve;
+	OpenPageButton *set;
+
 	void loadImage();
 	void loadWeatherImage();
 	void initWeather();
@@ -67,6 +78,7 @@ private:
 	void initVerticalTimer();
 	void initMenu();
 
+	bool isDown = false;
 	int weather;
 	int sunY;
 	int sunX;

@@ -1,9 +1,9 @@
 #ifndef LOADING_H
 #define LOADING_H
-
+#pragma once
 #include <QWidget>
-#include "UiManager.h"
 #include <QMovie>
+#include "UiManager.h"
 
 namespace Ui {
 class Loading;

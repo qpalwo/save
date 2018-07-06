@@ -27,28 +27,6 @@
      <string>exit</string>
     </property>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>120</y>
-      <width>241</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="leftLayout"/>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>120</y>
-      <width>271</width>
-      <height>411</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="rightLayout"/>
-   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

@@ -17,6 +17,7 @@ class OpenPageButton:public QPushButton
 {
 public:
 	OpenPageButton(QString res, QWidget *parent);
+	OpenPageButton(QString path,QString res, QWidget *parent);
 
 signals:
 

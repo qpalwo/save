@@ -64,4 +64,5 @@ RESOURCES += \
     res/desertb.qrc \
     res/op/opengif.qrc \
     res/conver.qrc \
-    res/forest.qrc
+    res/forest.qrc \
+    res/button/button.qrc

@@ -35,6 +35,10 @@ QByteArray loadFromDisk(QString path) {
 	}
 }
 
+void GameWorld::quitGame() {
+
+}
+
 GameWorld::GameWorld(QObject *parent) : QObject(parent)
 {
 
