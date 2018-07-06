@@ -38,7 +38,6 @@ private:
 
 	void loadImage();
     void keyPressEvent(QKeyEvent *e);
-	void plot(QKeyEvent *e);
 
 	int backX;
 	int backY;

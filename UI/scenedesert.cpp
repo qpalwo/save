@@ -63,12 +63,6 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 	update();
 }
 
-void SceneDesert::plot(QKeyEvent *e) {
-    
-
-
-	update();
-}
 
 
 SceneDesert::~SceneDesert() {
