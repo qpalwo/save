@@ -2,6 +2,14 @@
 #define SCENEFOREST_H
 
 #include <QWidget>
+#include <QMainWindow>
+#include <qpainter.h>
+#include <qimage.h>
+#include <qrect.h>
+#include <qpixmap.h>
+#include <qtimer.h>
+#include <QTime>
+#include <QMovie>
 
 namespace Ui {
 class SceneForest;
@@ -18,6 +26,22 @@ public:
 
 private:
     Ui::SceneForest *ui;
+
+    QImage backGround;
+    QImage earth;
+    QMovie* player;
+    QMovie* player_left;
+
+    void loadImage();
+    void keyPressEvent(QKeyEvent *e);
+
+    int backX;
+    int backY;
+    int p;
+    int playerX;
+    bool stop;
+    bool left;
+
 };
 
 #endif // SCENEFOREST_H

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/forest">
+        <file>scene/forest_1.png</file>
+        <file>scene/forest_2.png</file>
+    </qresource>
+</RCC>

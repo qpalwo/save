@@ -33,7 +33,7 @@ private:
 	QMovie *player_left;
 
 	void loadImage();
-	void keyPressEvent(QKeyEvent *e);
+    void keyPressEvent(QKeyEvent *e);
 
 	int backX;
 	int backY;
