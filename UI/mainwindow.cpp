@@ -126,10 +126,10 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 
 	//int a = whe.toLower().compare("overcast");
 
-	if (whe.compare("Çç") == 0) {
+	if (whe.toLower().mid(0, 5).compare("sunny") == 0) {
 		weather = 0;
 	}
-	else if (whe.toLower().compare("overcast") == 0) {
+	else if (whe.toLower().mid(0, 8).compare("overcast") == 0) {
 		weather = 1;
 	}
 	else {
@@ -164,7 +164,7 @@ void MainWindow::loadWeatherImage() {
 void MainWindow::initSun() {
 	QTime time = QTime::currentTime();
 	int hour = time.hour();
-	hour = 20;
+	//hour = 20;
 	if (hour >= 6 && hour < 12) {
 		sunY = 300 - 56 * (hour - 6);
 		sunX = 66 * (hour - 6) - 20;

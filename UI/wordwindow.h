@@ -12,6 +12,7 @@
 #include <qjsonobject.h>
 #include <qjsondocument.h>
 #include <QTimer>
+#include <qdesktopwidget.h>
 
 namespace Ui {
 class WordWindow;

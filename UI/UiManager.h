@@ -20,8 +20,14 @@ public slots:
 	void showSceneForest();
 
 private:
+	bool isLoading = true;
+
 	static UiManager *Instance;
+
 	UiManager();
+	void initWordwindow();
+
 	QWidget *window[10]{ 0 };
+	WordWindow *m_wordWindow;
 };
 
