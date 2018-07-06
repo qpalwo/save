@@ -12,6 +12,26 @@ MainWindow::MainWindow(QWidget *parent) :
 	initSun();
 	loadImage();
 	sceneHeight = 0;
+	initMenu();
+}
+
+
+void MainWindow::initMenu() {
+	QHBoxLayout *leftLayout = new QHBoxLayout(this);
+	OpenPageButton *open = new OpenPageButton("begin", this);
+	OpenPageButton *b_continue = new OpenPageButton("continue", this);
+	OpenPageButton *achieve = new OpenPageButton("achieve", this);
+
+	leftLayout->addStretch();
+	leftLayout->addWidget(b_continue);
+	/*leftLayout->addStretch();
+	leftLayout->addWidget(open);
+	leftLayout->addStretch();
+	leftLayout->addWidget(achieve);
+	leftLayout->addStretch();
+	leftLayout->setSpacing(30);*/
+	
+
 }
 
 void MainWindow::loadImage() {
@@ -130,6 +150,9 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 		weather = 0;
 	}
 	else if (whe.toLower().mid(0, 8).compare("overcast") == 0) {
+		weather = 2;
+	}
+	else if (whe.toLower().mid(0, 8).compare("cloudy") == 0) {
 		weather = 1;
 	}
 	else {
@@ -189,4 +212,7 @@ void MainWindow::initTimer() {
 
 MainWindow::~MainWindow() {
 	delete ui;
+	delete backGif;
+	delete rightPlayer;
+	delete rain;
 }

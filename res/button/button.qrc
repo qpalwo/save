@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/button">
+        <file>achieve_1.png</file>
+        <file>achieve_2.png</file>
+        <file>achieve_3.png</file>
+        <file>begin_1.png</file>
+        <file>begin_2.png</file>
+        <file>begin_3.png</file>
+        <file>continue_1.png</file>
+        <file>continue_2.png</file>
+        <file>continue_3.png</file>
+        <file>easy_1.png</file>
+        <file>easy_2.png</file>
+        <file>easy_3.png</file>
+        <file>hard_1.png</file>
+        <file>hard_2.png</file>
+        <file>hard_3.png</file>
+        <file>mid_1.png</file>
+        <file>mid_2.png</file>
+        <file>mid_3.png</file>
+        <file>news_1.png</file>
+        <file>news_2.png</file>
+        <file>news_3.png</file>
+        <file>set_1.png</file>
+        <file>set_2.png</file>
+        <file>set_3.png</file>
+    </qresource>
+</RCC>

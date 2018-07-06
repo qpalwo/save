@@ -21,6 +21,8 @@
 #include <qjsonvalue.h>
 #include <QFile>
 #include <QtConcurrent/qtconcurrentrun.h>
+#include "openpagebutton.h"
+#include <QHBoxLayout>
 
 namespace Ui {
 class MainWindow;
@@ -63,6 +65,7 @@ private:
 	void initSun();
 	void initTimer();
 	void initVerticalTimer();
+	void initMenu();
 
 	int weather;
 	int sunY;

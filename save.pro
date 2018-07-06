@@ -35,7 +35,8 @@ SOURCES += \
     UI/sceneforest.cpp \
     game/basegame.cpp \
     game/basegame.cpp \
-    UI/wordwindow.cpp
+    UI/wordwindow.cpp \
+    UI/openpagebutton.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -47,7 +48,8 @@ HEADERS += \
     UI/sceneforest.h \
     game/basegame.h \
     game/basegame.h \
-    UI/wordwindow.h
+    UI/wordwindow.h \
+    UI/openpagebutton.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -61,4 +63,5 @@ RESOURCES += \
     res/people/player.qrc \
     res/desertb.qrc \
     res/op/opengif.qrc \
-    res/conver.qrc
+    res/conver.qrc \
+    res/forest.qrc
