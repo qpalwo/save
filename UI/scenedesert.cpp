@@ -68,8 +68,12 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawPixmap(850, 250, 100, 200, player_left->currentPixmap());
 		painter.drawImage(0, 0, conver);
 
-		painter.drawText(280, 620, q[talk].s);
 
+		painter.drawText(280, 620, q[talk].s);
+		if (q[talk].diff||q[talk].hu) {
+			talk++;
+			painter.drawText(280, 666, q[talk].s);
+		}
 	}
 
 }
@@ -97,17 +101,18 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_Left: playerX -= 10;  left = true; break;
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
-		//case Qt::Key_Z: zz = true;  break;
-	//	case Qt::Key_X: xx = true;  break;
-		//case Qt::Key_Space: if (q[talk].trigger) choose = true; break;
+
 		}
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
 			if (underTheTree(1))	waitTime++;
-		}
-		else waitTime = 0;
-
+		} else waitTime = 0;
 
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
+
+		if (q[talk].diff) {
+			if (e->key() == Qt::Key_Z) talk = q[talk-1].l;
+			if (e->key() == Qt::Key_X) talk = q[talk].l;
+		}
 
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
@@ -131,14 +136,54 @@ bool SceneDesert::underTheTree(int n) {
 void SceneDesert::loadPlot() {
 	int i = 0, j = 0;
 
-	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false;
+	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;
 
-	j++; q[0].l = 1;   q[1].s = QString::fromLocal8Bit("z. 我是来体验的");   q[1].diff = true;
-	j++; q[0].r = 2;   q[2].s = QString::fromLocal8Bit("x. (不说话)");           q[2].diff = true;
+	 q[0].l = 1;   q[1].s = QString::fromLocal8Bit("z. 我是来体验的");   q[1].diff = true;  q[1].hu = false;
+	 q[0].r = 2;   q[2].s = QString::fromLocal8Bit("x. (不说话)");          q[2].diff = true; q[2].hu = false;
 
-	j++; q[1].l = 3;   q[3].s = QString::fromLocal8Bit("大叔：少女情怀总是诗啊，和大叔一样！");  
+	 q[1].l = 3;   q[3].s = QString::fromLocal8Bit("大叔：少女情怀总是诗啊，和大叔一样！");   q[3].diff = false; q[3].hu = false;
 
-	j++; q[2].l = 4;  q[4].s = QString::fromLocal8Bit("大叔：小姑娘还挺害羞的。");   
+	 q[2].l = 4;  q[4].s = QString::fromLocal8Bit("大叔：小姑娘还挺害羞的。");      q[4].diff = false;  q[4].hu = false;
+
+	q[3].l = 5;  q[4].l = 5;  q[5].s = QString::fromLocal8Bit("大叔：走！大叔带你去逛逛（掏出一系列证件）看, 我不是坏");  q[5].diff = false;  q[5].hu = true;
+
+	q[5].l = 6;  q[6].s = QString::fromLocal8Bit("人(凑过去一看）驾驶证,学生证,一张奇怪的东西的照片...");   q[6].diff = false;  q[6].hu = true;
+	
+	q[6].l = 7;  q[7].s = QString::fromLocal8Bit("z. 询问奇怪的东西是什么");      q[7].diff = true; q[7].hu = false;
+	q[6].r = 8;  q[8].s = QString::fromLocal8Bit("x. 不询问");      q[8].diff = true; q[8].hu = false;
+
+	q[7].l = 9;  q[9].s = QString::fromLocal8Bit("大叔：奇怪的东西？哈哈哈，这可不是什么奇怪的东西, 这是");  q[9].diff = false;  q[9].hu = true;
+	q[9].l = 10; q[10].s= QString::fromLocal8Bit("大宝贝。看你这么有眼光，我破例带你去参观一下。"); q[10].diff = false;  q[10].hu = false;
+
+	q[8].l = 11; q[11].s = QString::fromLocal8Bit("大叔：走吧，这热浪真可溺人。"); q[11].diff = false;  q[11].hu = false;
+
+	q[10].l = 12; q[11].l = 12;  q[12].s = QString::fromLocal8Bit("结果和大叔一起走到了奇怪的东西的面前（出现船）");  q[12].diff = false;  q[12].hu = false; 
+
+	q[12].l = 13; q[13].s = QString::fromLocal8Bit("大叔：怎么样？是不是特别好看~");  q[13].diff = false;  q[13].hu = false;
+
+	q[13].l = 14; q[14].s = QString::fromLocal8Bit("我：是很厉害。。。这是什么呢");  q[14].diff = false;  q[14].hu = false;
+
+	q[14].l = 15;  q[15].s = QString::fromLocal8Bit("大叔:这叫船,乘风破浪,勇往直前,无所畏惧！是蓝色大海的拥护");  q[15].diff = false;  q[15].hu = true;
+	q[15].l = 16; q[16].s = QString::fromLocal8Bit("是海洋的结晶！早在我太太太爷爷的时候,他们乘船披荆斩棘...."); q[16].diff = false;  q[16].hu = false;
+
+	q[16].l = 17; q[17].s = QString::fromLocal8Bit("我：(打断）可是早在很早以前世界上已经没有海了。"); q[17].diff = false;  q[17].hu = false;
+
+	q[17].l = 18; q[18].s = QString::fromLocal8Bit("大叔：胡说！海明明一直在，船还在，我还在，怎么能说，"); q[18].diff = false;  q[18].hu = true;
+	q[18].l = 19; q[19].s = QString::fromLocal8Bit("海没有了呢？？！");  q[19].diff = false;  q[19].hu = false;
+
+	q[19].l = 20; q[20].s= QString::fromLocal8Bit("z.可船已经行驶不了,无法起航了啊..不能航行的船,还有意义吗");  q[20].diff = true;  q[20].hu = false;
+	q[19].r = 21; q[21].s = QString::fromLocal8Bit("x.是啊，即使已经消失，但始终有人记得.有人记得便不会消失");  q[21].diff = true;  q[21].hu = false;
+
+	q[20].l = 22; q[22].s = QString::fromLocal8Bit("大叔：谁说船不能航行！要不是轴承滑轮出了点问题，，，唉");  q[22].diff = false;  q[22].hu = false;
+
+	q[21].l = 23; q[23].s = QString::fromLocal8Bit("大叔：只要记得，便不会消失，只要存在过，就有价值......");  q[23].diff = false;  q[23].hu = true;
+	q[23].l = 24; q[24].s = QString::fromLocal8Bit("如果不是因为船缺少一个轴承滑轮的珠子，真想邀请你一起驾驶啊");  q[24].diff = false;  q[24].hu = false;
+
+	q[22].l = 25; q[24].l = 25;  q[25].s = QString::fromLocal8Bit("大叔：(叹气)这么多年了啊...我一个人在这沙漠里这么多年了");q[25].diff = false;  q[25].hu = true;
+	q[25].l = 26; q[26].s= QString::fromLocal8Bit("为什么还是差一点...就差那么一点...难道我真的要放弃吗"); q[26].diff = false;  q[26].hu = false;
+
+	q[26].l = 27; q[27].s = QString::fromLocal8Bit("我：(唔，，轴承滑轮的问题...看看包里有什么东西吧"); q[27].diff = false;  q[27].hu = false;
+
 
 }
 

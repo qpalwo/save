@@ -20,8 +20,7 @@
 struct plot {
 	QString s;
 	bool diff;
-	QString a;
-	QString b;
+	bool hu;
 	int l;
 	int r;
 };
