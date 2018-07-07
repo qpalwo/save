@@ -36,7 +36,6 @@ private:
 
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
-    //void menuinit();
 
     int backX;
     int backY;

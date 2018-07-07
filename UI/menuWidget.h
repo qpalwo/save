@@ -4,10 +4,11 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPixmap>
-#include <QPushButton>
 #include <QMouseEvent>
 #include <QImage>
 #include <QPoint>
+#include <QPushButton>
+#include "openpagebutton.h"
 
 
 namespace Ui {
@@ -26,23 +27,23 @@ private:
     Ui::menuwidget *ui;
 
     QImage backGround;
-    QPixmap acheive;
-    QPixmap bag;
-    QPixmap map;
-    QPixmap read;
-    QPixmap save;
-    QPixmap set;
+
+    OpenPageButton *acheive;
+    OpenPageButton *bag;
+    OpenPageButton *map;
+    OpenPageButton *read;
+    OpenPageButton *save;
+    OpenPageButton *set;
+
+    QPushButton *acheive1;
 
     int backX;
-
-    int buttonState;
 
     void loadImage();
     void paintEvent(QPaintEvent *e);
     void enterEvent(QEvent *e);
     void leaveEvent(QEvent *e);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
+    void initbutton();
 };
 
 #endif // MENUWIDGET_H
