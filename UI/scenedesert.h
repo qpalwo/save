@@ -12,12 +12,16 @@
 #include <QWidget>
 #include <QKeyEvent>
 #include <qstring.h>
+#include<QMouseEvent>
 
 #define BDL -2880
 #define BDR 0
 
 struct plot {
+	QString s;
+	bool diff;
 	QString a;
+	QString b;
 	int l;
 	int r;
 };
@@ -45,6 +49,7 @@ private:
 	QImage option_3;
 	QImage conver;
 	QImage name;
+	QPoint mouse;
 
 	QMovie *player; 
 	QMovie *player_left;
@@ -52,17 +57,22 @@ private:
 	bool underTheTree(int n);
 	void loadImage();
     void keyPressEvent(QKeyEvent *e);
+	void mouseMoveEvent(QMouseEvent* event);
 	void loadPlot();
 
 	int backX;
 	int backY;
-	//int backLocation;
 	int playerX;
 	int waitTime;
+	int talk;
+	QString mouse_out;
 	struct plot q[100];
 
 	bool stop;
 	bool left;
+	bool choose;
+	bool zz;
+	bool xx;
 };
 
 #endif // SCENEDESERT_H
