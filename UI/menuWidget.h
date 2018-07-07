@@ -9,6 +9,7 @@
 #include <QPoint>
 #include <QPushButton>
 #include "openpagebutton.h"
+#include <QGridLayout>
 
 
 namespace Ui {
@@ -28,14 +29,14 @@ private:
 
     QImage backGround;
 
-    OpenPageButton *acheive;
+    OpenPageButton *achieve;
     OpenPageButton *bag;
     OpenPageButton *map;
     OpenPageButton *read;
     OpenPageButton *save;
     OpenPageButton *set;
 
-    QPushButton *acheive1;
+    QGridLayout *myLayout;
 
     int backX;
 

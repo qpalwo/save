@@ -29,18 +29,27 @@ void menuwidget::paintEvent(QPaintEvent *e)
 
 void menuwidget::initbutton()
 {
-    acheive = new OpenPageButton("", "menu_acheive",this);
+    achieve = new OpenPageButton("", "menu_achieve",this);
     bag = new OpenPageButton("", "menu_bag", this);
-   // map = new OpenPageButton("", "menu_map", this);
-   // read = new OpenPageButton("", "menu_read", this);
-    //save = new OpenPageButton("", "menu_save", this);
-   // set = new OpenPageButton("", "menu_set", this);
+    map = new OpenPageButton("", "menu_map", this);
+    read = new OpenPageButton("", "menu_read", this);
+    save = new OpenPageButton("", "menu_save", this);
+    set = new OpenPageButton("", "menu_set", this);
 
-    acheive->setGeometry(rect().x(),rect().y(), 130, 50);
-    bag->setGeometry(rect().x()-200, rect().y()-100, 130, 50);
+    myLayout = new QGridLayout;
 
-    acheive->show();
-    bag->show();
+    myLayout->addWidget(achieve,1,1,Qt::Alignment());
+    myLayout->addWidget(bag,1,2,Qt::Alignment());
+    myLayout->addWidget(map,2,1,Qt::Alignment());
+    myLayout->addWidget(read,2,2,Qt::Alignment());
+    myLayout->addWidget(save,3,1,Qt::Alignment());
+    myLayout->addWidget(set,3,2,Qt::Alignment());
+
+    myLayout->setHorizontalSpacing(30);
+    myLayout->setVerticalSpacing(0);
+    myLayout->setContentsMargins(25,100,60,100);
+
+    this->setLayout(myLayout);
 }
 
 void menuwidget::enterEvent(QEvent *e)
@@ -49,7 +58,6 @@ void menuwidget::enterEvent(QEvent *e)
     {
         backX = 0;
         this->setGeometry(backX,120,380,440);
-        //initbutton();
     }
     update();
 }
@@ -60,7 +68,6 @@ void menuwidget::leaveEvent(QEvent *e)
     {
         backX = -340;
         this->setGeometry(backX,120,380,440);
-        //initbutton();
     }
     update();
 }
