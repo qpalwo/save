@@ -10,4 +10,7 @@
     <qresource prefix="/">
         <file>uncle.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>uncle.png</file>
+    </qresource>
 </RCC>
