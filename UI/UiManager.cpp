@@ -45,6 +45,14 @@ void UiManager::closeSceneForest() {
 	}
 }
 
+void UiManager::closeSunSmellCollect() {
+	if (sunSmellCollect != NULL) {
+		sunSmellCollect->close();
+		delete sunSmellCollect;
+		sunSmellCollect = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -85,6 +93,12 @@ void UiManager::openSceneForest() {
 	openWordWIndow();
 }
 
+void UiManager::openSunSmellCollect() {
+	sunSmellCollect = new SunSmellCollect();
+	sunSmellCollect->show();
+	openWordWIndow();
+}
+
 void UiManager::showMainWindow() {
 	openMainPage();
 	closeLoading();
@@ -99,6 +113,12 @@ void UiManager::showSceneDesert() {
 
 void UiManager::showSceneForest() {
 	openSceneForest();
+	closeLoading();
+	openWordWIndow();
+}
+
+void UiManager::showSunSmellCollect() {
+	openSunSmellCollect();
 	closeLoading();
 	openWordWIndow();
 }

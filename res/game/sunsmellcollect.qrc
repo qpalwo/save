@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/game/SunSmellCollect">
+        <file>smell.png</file>
+    </qresource>
+</RCC>

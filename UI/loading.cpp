@@ -37,3 +37,7 @@ void Loading::on_pushButton_4_clicked() {
 	close();
 }
 
+void Loading::on_pushButton_5_clicked() {
+	UiManager::getInstance()->showSunSmellCollect();
+}
+
