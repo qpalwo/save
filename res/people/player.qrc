@@ -3,4 +3,7 @@
         <file>main.gif</file>
         <file>main_left.gif</file>
     </qresource>
+    <qresource prefix="/">
+        <file>uncle.png</file>
+    </qresource>
 </RCC>

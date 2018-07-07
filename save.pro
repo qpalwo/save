@@ -70,3 +70,6 @@ RESOURCES += \
     res/forest.qrc \
     res/menuz.qrc  \
     res/button/button.qrc
+
+DISTFILES += \
+    res/people/uncle.png

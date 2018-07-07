@@ -48,6 +48,7 @@ private:
 	QImage option_3;
 	QImage conver;
 	QImage name;
+	QImage uncle;
 	QPoint mouse;
 
 	QMovie *player; 

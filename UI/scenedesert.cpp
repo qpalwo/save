@@ -26,6 +26,7 @@ void SceneDesert::loadImage() {
 	earth.load(":/desertB/scene/desert_2.png");
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
+	uncle.load(":/uncle.png");
 	option_1.load(":/conver/convar/choice_1.png");
 	option_2.load(":/conver/convar/choice_2.png");
 	option_3.load(":/conver/convar/choice_3.png");
@@ -65,7 +66,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //»æÖÆ¾ØÐÎ 
 
 	if (playerX >= 560) {
-		painter.drawPixmap(850, 250, 100, 200, player_left->currentPixmap());
+		painter.drawImage(850, 270, uncle);
 		painter.drawImage(0, 0, conver);
 
 
