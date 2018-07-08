@@ -19,11 +19,49 @@ SunSmellCollect::SunSmellCollect(QWidget *parent) :
 }
 
 void SunSmellCollect::loadRes() {
-	SmellOfGame *smell = new SmellOfGame(300, 200, -20, -10);
-	SmellOfGame *smell1 = new SmellOfGame(130, 200, -20, -10);
+	collecter = new CollecterOfGame();
+	scene->addItem(collecter);
+	sendTimer = new QTimer(this);
+	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendSmell()));
+	sendTimer->start(500);
+}
+
+void SunSmellCollect::sendSmell() {
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	bool type1 = qrand() % 2;
+	bool type2 = qrand() % 2;
+	int vx, vy;
+	if (type1) {
+		vx = qrand() % 20;
+	}
+	else {
+		vx = -(qrand() % 20);
+	}
+
+	if (type2) {
+		vy = qrand() % 10;
+	}
+	else {
+		vy = -(qrand() % 10);
+	}
+
+	SmellOfGame *smell = new SmellOfGame((qrand() % (960 - 400)) + 200, qrand() % 150, vx, vy);
+	smell->bindCollecter(collecter);
 	scene->addItem(smell);
-	scene->addItem(smell1);
-	bool is = smell->collidesWithItem(smell1);
+	connect(this, SIGNAL(finishGame()), smell, SLOT(finishGame()));
+	connect(smell, SIGNAL(collected()), this, SLOT(addMark()));
+
+}
+
+void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
+	if (collecter != NULL) {
+		collecter->setFocus();
+		bool temp = collecter->hasFocus();
+	}
+}
+
+void SunSmellCollect::addMark() {
+	collecter->moveBy(0, 10);
 }
 
 
@@ -31,4 +69,5 @@ SunSmellCollect::~SunSmellCollect()
 {
     delete ui;
 	delete scene;
+	delete collecter;
 }
