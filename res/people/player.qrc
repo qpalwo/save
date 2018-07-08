@@ -2,5 +2,15 @@
     <qresource prefix="/player">
         <file>main.gif</file>
         <file>main_left.gif</file>
+        <file>main_op.gif</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>uncle.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>uncle.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>uncle.png</file>
     </qresource>
 </RCC>

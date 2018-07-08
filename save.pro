@@ -33,11 +33,11 @@ SOURCES += \
     attr/gameworld.cpp \
     UI/scenedesert.cpp \
     UI/sceneforest.cpp \
-    game/basegame.cpp \
-    game/basegame.cpp \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
-    UI/menuwidget.cpp
+    UI/menuwidget.cpp \
+    game/sunsmellcollect.cpp \
+    game/smellofgame.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -47,11 +47,11 @@ HEADERS += \
     attr/gameworld.h \
     UI/scenedesert.h \
     UI/sceneforest.h \
-    game/basegame.h \
-    game/basegame.h \
     UI/wordwindow.h \
     UI/openpagebutton.h \
-    UI/menuwidget.h
+    UI/menuwidget.h \
+    game/sunsmellcollect.h \
+    game/smellofgame.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -59,7 +59,8 @@ FORMS += \
     UI/scenedesert.ui \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
-    UI/menuwidget.ui
+    UI/menuwidget.ui \
+    game/sunsmellcollect.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -69,4 +70,8 @@ RESOURCES += \
     res/conver.qrc \
     res/forest.qrc \
     res/menuz.qrc  \
-    res/button/button.qrc
+    res/button/button.qrc \
+    res/game/sunsmellcollect.qrc
+
+DISTFILES += \
+    res/people/uncle.png

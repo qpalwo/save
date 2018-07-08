@@ -20,8 +20,7 @@
 struct plot {
 	QString s;
 	bool diff;
-	QString a;
-	QString b;
+	bool hu;
 	int l;
 	int r;
 };
@@ -49,6 +48,7 @@ private:
 	QImage option_3;
 	QImage conver;
 	QImage name;
+	QImage uncle;
 	QPoint mouse;
 
 	QMovie *player; 
