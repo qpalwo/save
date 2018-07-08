@@ -3,9 +3,8 @@
 
 SunSmellCollect::SunSmellCollect(QWidget *parent) :
 	QGraphicsView(parent),
-    ui(new Ui::SunSmellCollect)
-{
-    ui->setupUi(this);
+	ui(new Ui::SunSmellCollect) {
+	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -65,9 +64,8 @@ void SunSmellCollect::addMark() {
 }
 
 
-SunSmellCollect::~SunSmellCollect()
-{
-    delete ui;
+SunSmellCollect::~SunSmellCollect() {
+	delete ui;
 	delete scene;
 	delete collecter;
 }

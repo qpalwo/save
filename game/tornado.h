@@ -1,37 +1,39 @@
-#ifndef SMELLOFGAME_H
-#define SMELLOFGAME_H
+#ifndef TORNADO_H
+#define TORNADO_H
 
+#include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QPixmap>
 #include <QTimer>
-#include <QObject>
 #include <QPainterPath>
-#include "collecterofgame.h"
+#include "playerinwind.h"
+#include <QtGlobal>
+#include <QTime>
 
-class SmellOfGame : public QObject, public QGraphicsItem
+
+class Tornado : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-
 public:
-    SmellOfGame(int x, int y, int vx, int vy);
-	~SmellOfGame();
+    Tornado();
+	~Tornado();
 
 	QRectF boundingRect() const;
 	void paint(QPainter *painter,
 		const QStyleOptionGraphicsItem *option,
 		QWidget *widget);
 
-	bool collidesWithItem(const CollecterOfGame *other,
+	bool collidesWithItem(const PlayerInWind *other,
 		Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
+	void bindPlayer(PlayerInWind*);
 
-	void bindCollecter(CollecterOfGame*);
 
 	int height;
 	int width;
 
 signals:
-	void collected();
+	void collided();
 
 public slots:
 	void finishGame();
@@ -39,18 +41,16 @@ public slots:
 
 private:
 	QPixmap pixMap;
-	CollecterOfGame *collecter = NULL;
-	QTimer *reFreshTimer;
+	QTimer *reFreshTimer = NULL;
+	PlayerInWind *playInWind = NULL;
 
 	QPainterPath shape() const;
-	void calculateX();
 	void calculateY();
 	void calculateVY();
 	void killMe();
 
-	const float G = 1.5;
+	float G = 1.5;
 	float vy;
-	float vx;
 };
 
-#endif // SMELLOFGAME_H
+#endif // TORNADO_H

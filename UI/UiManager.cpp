@@ -53,6 +53,14 @@ void UiManager::closeSunSmellCollect() {
 	}
 }
 
+void UiManager::closeAvoidStorm() {
+	if (avoidStorm != NULL) {
+		avoidStorm->close();
+		delete avoidStorm;
+		avoidStorm = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -99,28 +107,35 @@ void UiManager::openSunSmellCollect() {
 	openWordWIndow();
 }
 
+void UiManager::openAvoidStorm() {
+	avoidStorm = new AvoidStorm();
+	avoidStorm->show();
+	openWordWIndow();
+}
+
 void UiManager::showMainWindow() {
 	openMainPage();
 	closeLoading();
-	openWordWIndow();
 }
 
 void UiManager::showSceneDesert() {
 	openSceneDesert();
 	closeLoading();
-	openWordWIndow();
 }
 
 void UiManager::showSceneForest() {
 	openSceneForest();
 	closeLoading();
-	openWordWIndow();
 }
 
 void UiManager::showSunSmellCollect() {
 	openSunSmellCollect();
 	closeLoading();
-	openWordWIndow();
+}
+
+void UiManager::showAvoidStorm() {
+	openAvoidStorm();
+	closeLoading();
 }
 
 UiManager*UiManager::Instance = new UiManager();
