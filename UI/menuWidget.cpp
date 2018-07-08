@@ -6,11 +6,12 @@ menuwidget::menuwidget(QWidget *parent) :
     ui(new Ui::menuwidget)
 {
     ui->setupUi(this);
-    backX = -340;
 
+    backX = -350;
     this->setWindowFlag(Qt::FramelessWindowHint);
-    this->setGeometry(backX,120,380,440);
+    this->setGeometry(backX, 120, 380, 440);
     initbutton();
+    initTimer();
 
     loadImage();
 }
@@ -18,12 +19,12 @@ menuwidget::menuwidget(QWidget *parent) :
 void menuwidget::loadImage()
 {
     backGround.load(":/menuZ/menu/menu_background.png");
+    setBackGround.load(":/menuZ/menu/set_background.png");
 }
 
 void menuwidget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-
     painter.drawImage( 0, -80, backGround);
 }
 
@@ -50,26 +51,103 @@ void menuwidget::initbutton()
     myLayout->setContentsMargins(25,100,60,100);
 
     this->setLayout(myLayout);
+
+    connect(achieve, SIGNAL(clicked()),this,SLOT(onAchieveClicked()));
+    connect(bag, SIGNAL(clicked()),this,SLOT(onBagClicked()));
+    connect(map, SIGNAL(clicked()),this,SLOT(onMapClicked()));
+    connect(read, SIGNAL(clicked()),this,SLOT(onReadClicked()));
+    connect(save, SIGNAL(clicked()),this,SLOT(onSaveClicked()));
+    connect(set, SIGNAL(clicked()),this,SLOT(onSetClicked()));
+}
+
+void menuwidget::onAchieveClicked()
+{
+
+}
+
+void menuwidget::onBagClicked()
+{
+
+}
+
+void menuwidget::onMapClicked()
+{
+
+}
+
+void menuwidget::onReadClicked()
+{
+
+}
+
+void menuwidget::onSaveClicked()
+{
+
+}
+
+void menuwidget::onSetClicked()
+{
+    this->hide();
+}
+
+void menuwidget::initTimer()
+{
+    timerShow = new QTimeLine(500, this);
+    timerShow->setFrameRange(0,100);
+    timerShow->setCurveShape(QTimeLine::LinearCurve);
+    timerShow->setUpdateInterval(5);
+    connect(timerShow,SIGNAL(frameChanged(int)),this,SLOT(menuShow()));
+
+    timerHide = new QTimeLine(500, this);
+    timerHide->setFrameRange(0,100);
+    timerHide->setCurveShape(QTimeLine::LinearCurve);
+    timerHide->setUpdateInterval(5);
+    connect(timerHide,SIGNAL(frameChanged(int)),this,SLOT(menuHide()));
+
+}
+
+void menuwidget::menuShow()
+{
+    if(backX < -5)
+    {
+        backX += 5;
+        this->move(backX, 120);
+    }
+}
+
+void menuwidget::menuHide()
+{
+    if(backX > -345)
+    {
+        backX  -= 5;
+        this->move(backX, 120);
+    }
 }
 
 void menuwidget::enterEvent(QEvent *e)
 {
-    if (backX == -340)
+    if(timerShow->state() == QTimeLine::Running)
     {
-        backX = 0;
-        this->setGeometry(backX,120,380,440);
+        timerShow->stop();
     }
-    update();
+    if(timerHide->state() == QTimeLine::Running)
+    {
+        timerHide->stop();
+    }
+    timerShow->start();
 }
 
 void menuwidget::leaveEvent(QEvent *e)
 {
-    if (backX == 0)
+    if(timerShow->state() == QTimeLine::Running)
     {
-        backX = -340;
-        this->setGeometry(backX,120,380,440);
+        timerShow->stop();
     }
-    update();
+    if(timerHide->state() == QTimeLine::Running)
+    {
+        timerHide->stop();
+    }
+    timerHide->start();
 }
 menuwidget::~menuwidget()
 {
