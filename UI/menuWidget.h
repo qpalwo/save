@@ -9,7 +9,8 @@
 #include <QPoint>
 #include <QPushButton>
 #include "openpagebutton.h"
-
+#include <QGridLayout>
+#include <QTimeLine>
 
 namespace Ui {
 class menuwidget;
@@ -27,15 +28,18 @@ private:
     Ui::menuwidget *ui;
 
     QImage backGround;
+    QImage setBackGround;
 
-    OpenPageButton *acheive;
+    OpenPageButton *achieve;
     OpenPageButton *bag;
     OpenPageButton *map;
     OpenPageButton *read;
     OpenPageButton *save;
     OpenPageButton *set;
 
-    QPushButton *acheive1;
+    QGridLayout *myLayout;
+    QTimeLine *timerShow;
+    QTimeLine *timerHide;
 
     int backX;
 
@@ -44,6 +48,17 @@ private:
     void enterEvent(QEvent *e);
     void leaveEvent(QEvent *e);
     void initbutton();
+    void initTimer();
+
+private slots:
+    void menuShow();
+    void menuHide();
+    void onAchieveClicked();
+    void onBagClicked();
+    void onMapClicked();
+    void onReadClicked();
+    void onSaveClicked();
+    void onSetClicked();
 };
 
 #endif // MENUWIDGET_H

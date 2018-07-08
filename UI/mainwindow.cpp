@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
+//	QSound back(":/music/µÚÁùÄ».wav");
+	//back.play();
 }
 
 
@@ -22,6 +24,10 @@ void MainWindow::initMenu() {
 		b_continue = new OpenPageButton("continue", this);
 		achieve = new OpenPageButton("achieve", this);
 		set = new OpenPageButton("set", this);
+		open->hide();
+		b_continue->hide();
+		achieve->hide();
+		set->hide();
 	}
 
 	if (isDown && open != NULL) {

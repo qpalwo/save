@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network concurrent
+QT       += core gui network concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,7 +37,12 @@ SOURCES += \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
     game/sunsmellcollect.cpp \
-    game/smellofgame.cpp
+    game/smellofgame.cpp \
+	game/collecterofgame.cpp \
+    game/avoidstorm.cpp \
+    game/tornado.cpp \
+    game/playerinwind.cpp \
+    game/avoidstorm.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -51,7 +56,12 @@ HEADERS += \
     UI/openpagebutton.h \
     UI/menuwidget.h \
     game/sunsmellcollect.h \
-    game/smellofgame.h
+    game/smellofgame.h \
+	game/collecterofgame.h \
+    game/avoidstorm.h \
+    game/tornado.h \
+    game/playerinwind.h \
+    game/avoidstorm.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -60,7 +70,8 @@ FORMS += \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
-    game/sunsmellcollect.ui
+    game/sunsmellcollect.ui \
+    game/avoidstorm.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -71,7 +82,8 @@ RESOURCES += \
     res/forest.qrc \
     res/menuz.qrc  \
     res/button/button.qrc \
-    res/game/sunsmellcollect.qrc
+    res/game/sunsmellcollect.qrc \
+    res/music/music.qrc
 
 DISTFILES += \
     res/people/uncle.png

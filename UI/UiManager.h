@@ -6,6 +6,7 @@
 #include "wordwindow.h"
 #include "loading.h"
 #include "game/sunsmellcollect.h"
+#include "game/avoidstorm.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -19,6 +20,7 @@ public:
 	void closeSceneDesert();
 	void closeSceneForest();
 	void closeSunSmellCollect();
+	void closeAvoidStorm();
 	void closeAll();
 
 	void openMainPage();
@@ -27,6 +29,7 @@ public:
 	void openSceneForest();
 	void openLoading();
 	void openSunSmellCollect();
+	void openAvoidStorm();
 
 	void init();
 
@@ -35,6 +38,7 @@ public slots:
 	void showSceneDesert();
 	void showSceneForest();
 	void showSunSmellCollect();
+	void showAvoidStorm();
 
 private:
 	static UiManager *Instance;
@@ -45,6 +49,7 @@ private:
 	QWidget *loading = NULL;
 
 	SunSmellCollect *sunSmellCollect = NULL;
+	AvoidStorm *avoidStorm = NULL;
 
 	bool isWordWindowOpen = false;
 
