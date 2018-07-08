@@ -1,19 +1,22 @@
 #include "smellofgame.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-SmellOfGame::SmellOfGame(int x, int y, int vx, int vy)
-{
+SmellOfGame::SmellOfGame(int x, int y, int vx, int vy) {
 	setX(x);
 	setY(y);
-	this->x = x;
-	this->y = y;
+	height = 30;
+	width = 30;
 	this->vx = vx;
 	this->vy = vy;
 	moveBy(x, y);
 	pixMap.load(":/game/SunSmellCollect/smell.png");
-	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(reFresh()));
-	timer->start(80);
+}
+
+void SmellOfGame::bindCollecter(CollecterOfGame *targetCollecter) {
+	collecter = targetCollecter;
+	reFreshTimer = new QTimer(this);
+	connect(reFreshTimer, SIGNAL(timeout()), this, SLOT(reFresh()));
+	reFreshTimer->start(80);
 }
 
 void SmellOfGame::reFresh() {
@@ -21,23 +24,32 @@ void SmellOfGame::reFresh() {
 	calculateX();
 	calculateY();
 	moveBy(vx, vy);
+	if (y() > 960) {
+		killMe();
+		return;
+	}
+	if (collecter != NULL) {
+		if (collidesWithItem(collecter)) {
+			emit collected();
+			reFreshTimer->stop();
+			killMe();
+		}
+	}
 }
 
 QRectF SmellOfGame::boundingRect() const {
-	qreal penWidth = 1;
-	//return QRectF(32, 25, 66, 60);
 	return QRectF(10, 5, 90, 90);
 }
 
 void SmellOfGame::calculateX() {
-	this->x = this->x + vx;
-	if (this->x > 960 - 55 || this->x < -32) {
+	setX(x() + vx);
+	if (x() > 960 - 55 || x() < -32) {
 		vx = -vx;
 	}
 }
 
 void SmellOfGame::calculateY() {
-	this->y = this->y + vy;
+	setY(y() + vy);
 }
 
 void SmellOfGame::calculateVY() {
@@ -49,24 +61,27 @@ QPainterPath SmellOfGame::shape() const {
 	path.addEllipse(32, 25, 66, 60);
 	return path;
 }
-/*
-bool SmellOfGame::collidesWithItem(const QGraphicsItem *other,
-	Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const {
-	if(typeid(other) == typeid(this)) {
-		(_ABS(other->x - this->x) < 35 &&
-			_ABS(other->y - this->y) < 35) ? true : false;
-	}
 
-}*/
+bool SmellOfGame::collidesWithItem(const CollecterOfGame *other, Qt::ItemSelectionMode mode) const {
+	return (_ABS(other->x() - this->x()) < other->width &&_ABS(other->y() - this->y()) < height) ? true : false;
+}
 
 void SmellOfGame::paint(QPainter *painter,
 	const QStyleOptionGraphicsItem *option,
 	QWidget *widget) {
-	Q_UNUSED(option);  //标明该参数没有使用
+	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	painter->drawPixmap(0, 0, pixMap);
 }
 
-SmellOfGame::~SmellOfGame() {
+void SmellOfGame::killMe() {
+	delete this;
+}
 
+void SmellOfGame::finishGame() {
+	delete this;
+}
+
+SmellOfGame::~SmellOfGame() {
+	delete reFreshTimer;
 }
