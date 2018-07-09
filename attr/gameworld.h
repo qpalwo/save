@@ -11,10 +11,10 @@
 #include <QtConcurrent/qtconcurrentrun.h>
 #include <QFile>
 
-class Achieve {
+class AchieveData {
 public:
-	Achieve();
-	~Achieve();
+	AchieveData();
+	~AchieveData();
 	static const int ACHIEVE_ONE = 0;
 	void addAchieve(int);
 
@@ -37,6 +37,9 @@ public:
 
 	void fromMainToBegining();
 
+	void showAchieve();
+	void hideAchieve();
+
 signals:
 
 public slots:
@@ -45,7 +48,7 @@ private:
 	GameWorld(QObject *parent = nullptr);
 	static GameWorld *Instance;
 
-	Achieve m_achieve;
+	AchieveData m_achieve;
 	int gameHard = 0;
 
 	void save();

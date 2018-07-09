@@ -40,6 +40,14 @@ void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
 }
 
+void GameWorld::showAchieve() {
+	UiManager::getInstance()->openAchieve();
+}
+
+void GameWorld::hideAchieve() {
+	UiManager::getInstance()->closeAchieve();
+}
+
 void GameWorld::save() {
 
 }
@@ -73,17 +81,17 @@ GameWorld* GameWorld::getInstance() {
 }
 
 
-Achieve::Achieve() {
+AchieveData::AchieveData() {
 	load();
 }
 
 
-void Achieve::addAchieve(int num) {
-	Achieve::m_achieves[num] = true;
-	Achieve::save();
+void AchieveData::addAchieve(int num) {
+	AchieveData::m_achieves[num] = true;
+	AchieveData::save();
 }
 
-void Achieve::save() {
+void AchieveData::save() {
 	QJsonArray achieveArr;
 	for (bool i : m_achieves) {
 		achieveArr.append(i);
@@ -96,7 +104,7 @@ void Achieve::save() {
 
 
 
-void Achieve::load() {
+void AchieveData::load() {
 	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/achieve.info")));
 	if (!document.isNull()) {
 		if (document.isArray()) {
@@ -109,6 +117,6 @@ void Achieve::load() {
 	}
 }
 
-Achieve::~Achieve() {
+AchieveData::~AchieveData() {
 
 }

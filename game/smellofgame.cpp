@@ -38,7 +38,7 @@ void SmellOfGame::reFresh() {
 }
 
 QRectF SmellOfGame::boundingRect() const {
-	return QRectF(10, 5, 90, 90);
+	return QRectF(5, 5, 90, 90);
 }
 
 void SmellOfGame::calculateX() {

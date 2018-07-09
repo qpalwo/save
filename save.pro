@@ -46,7 +46,12 @@ SOURCES += \
     UI/sceneruins.cpp \
     UI/scenesnow.cpp \
     game/keepmoving.cpp \
-    UI/begining.cpp
+    UI/begining.cpp \
+    UI/achieve.cpp \
+    UI/saveandload.cpp \
+    game/burnbook.cpp \
+    game/booktoburn.cpp \
+    game/fireburnbook.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -69,7 +74,12 @@ HEADERS += \
     UI/sceneruins.h \
     UI/scenesnow.h \
     game/keepmoving.h \
-    UI/begining.h
+    UI/begining.h \
+    UI/achieve.h \
+    UI/saveandload.h \
+    game/burnbook.h \
+    game/booktoburn.h \
+    game/fireburnbook.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -84,7 +94,10 @@ FORMS += \
     UI/sceneruins.ui \
     UI/scenesnow.ui \
     game/keepmoving.ui \
-    UI/begining.ui
+    UI/begining.ui \
+    UI/achieve.ui \
+    UI/saveandload.ui \
+    game/burnbook.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -98,7 +111,9 @@ RESOURCES += \
     res/music/music.qrc \
     res/ruins.qrc \
     res/snow.qrc \
-    res/bag.qrc
+    res/bag.qrc \
+    res/game/gameRes.qrc \
+    res/save/saveandload.qrc
     res/game/gameRes.qrc
 
 DISTFILES += \
