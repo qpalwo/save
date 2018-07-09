@@ -45,7 +45,8 @@ SOURCES += \
     game/avoidstorm.cpp \
     UI/sceneruins.cpp \
     UI/scenesnow.cpp \
-    game/keepmoving.cpp
+    game/keepmoving.cpp \
+    UI/begining.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -67,7 +68,8 @@ HEADERS += \
     game/playerinwind.h \
     UI/sceneruins.h \
     UI/scenesnow.h \
-    game/keepmoving.h
+    game/keepmoving.h \
+    UI/begining.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -81,7 +83,8 @@ FORMS += \
     game/avoidstorm.ui \
     UI/sceneruins.ui \
     UI/scenesnow.ui \
-    game/keepmoving.ui
+    game/keepmoving.ui \
+    UI/begining.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -92,10 +95,10 @@ RESOURCES += \
     res/forest.qrc \
     res/menuz.qrc  \
     res/button/button.qrc \
-    res/game/sunsmellcollect.qrc \
     res/music/music.qrc \
     res/ruins.qrc \
-    res/snow.qrc
+    res/snow.qrc \
+    res/game/gameRes.qrc
 
 DISTFILES += \
     res/people/uncle.png
