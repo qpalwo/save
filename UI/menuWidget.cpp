@@ -40,11 +40,11 @@ void menuwidget::initbutton()
     myLayout = new QGridLayout;
 
     myLayout->addWidget(achieve,1,1,Qt::Alignment());
-    myLayout->addWidget(bag,1,2,Qt::Alignment());
-    myLayout->addWidget(map,2,1,Qt::Alignment());
-    myLayout->addWidget(read,2,2,Qt::Alignment());
+    myLayout->addWidget(bag,2,2,Qt::Alignment());
+    myLayout->addWidget(map,3,2,Qt::Alignment());
+    myLayout->addWidget(read,2,1,Qt::Alignment());
     myLayout->addWidget(save,3,1,Qt::Alignment());
-    myLayout->addWidget(set,3,2,Qt::Alignment());
+    myLayout->addWidget(set,1,2,Qt::Alignment());
 
     myLayout->setHorizontalSpacing(30);
     myLayout->setVerticalSpacing(0);
@@ -87,7 +87,7 @@ void menuwidget::onSaveClicked()
 
 void menuwidget::onSetClicked()
 {
-    this->hide();
+
 }
 
 void menuwidget::initTimer()
