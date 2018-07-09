@@ -79,6 +79,8 @@ void SmellOfGame::killMe() {
 }
 
 void SmellOfGame::finishGame() {
+	reFreshTimer->stop();
+	hide();
 	delete this;
 }
 

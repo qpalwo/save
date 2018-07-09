@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network concurrent
+QT       += core gui network concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,8 +36,16 @@ SOURCES += \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
+    UI/bag.cpp \
     game/sunsmellcollect.cpp \
-    game/smellofgame.cpp
+    game/smellofgame.cpp \
+	game/collecterofgame.cpp \
+    game/tornado.cpp \
+    game/playerinwind.cpp \
+    game/avoidstorm.cpp \
+    UI/sceneruins.cpp \
+    UI/scenesnow.cpp \
+    game/keepmoving.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -50,8 +58,16 @@ HEADERS += \
     UI/wordwindow.h \
     UI/openpagebutton.h \
     UI/menuwidget.h \
+    UI/bag.h \
     game/sunsmellcollect.h \
-    game/smellofgame.h
+    game/smellofgame.h \
+	game/collecterofgame.h \
+    game/avoidstorm.h \
+    game/tornado.h \
+    game/playerinwind.h \
+    UI/sceneruins.h \
+    UI/scenesnow.h \
+    game/keepmoving.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -60,7 +76,12 @@ FORMS += \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
-    game/sunsmellcollect.ui
+    UI/bag.ui \
+    game/sunsmellcollect.ui \
+    game/avoidstorm.ui \
+    UI/sceneruins.ui \
+    UI/scenesnow.ui \
+    game/keepmoving.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -71,7 +92,8 @@ RESOURCES += \
     res/forest.qrc \
     res/menuz.qrc  \
     res/button/button.qrc \
-    res/game/sunsmellcollect.qrc
+    res/game/sunsmellcollect.qrc \
+    res/music/music.qrc
 
 DISTFILES += \
     res/people/uncle.png

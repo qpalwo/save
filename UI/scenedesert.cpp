@@ -110,7 +110,7 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 
-		if (q[talk].diff) {
+ 		if (q[talk].diff) {
 			if (e->key() == Qt::Key_Z) talk = q[talk-1].l;
 			if (e->key() == Qt::Key_X) talk = q[talk].l;
 		}
