@@ -95,7 +95,8 @@ RESOURCES += \
     res/game/sunsmellcollect.qrc \
     res/music/music.qrc \
     res/ruins.qrc \
-    res/snow.qrc
+    res/snow.qrc \
+    res/bag.qrc
 
 DISTFILES += \
     res/people/uncle.png
