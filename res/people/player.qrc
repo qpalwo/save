@@ -5,6 +5,8 @@
         <file>main_op.gif</file>
         <file>forest_left.gif</file>
         <file>forest_right.gif</file>
+        <file>snow_left.gif</file>
+        <file>snow_right.gif</file>
     </qresource>
     <qresource prefix="/">
         <file>uncle.png</file>

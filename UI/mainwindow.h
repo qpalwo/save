@@ -26,6 +26,8 @@
 #include "attr/gameworld.h"
 #include <QSound>
 #include <QWidget>
+#include <QtGlobal>
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
@@ -95,6 +97,8 @@ private:
 	int forMouLocation;
 	int p;
 	int sceneHeight;
+	int sceneType;
+	int nowTime;
 };
 
 #endif // MAINWINDOW_H

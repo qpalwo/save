@@ -7,14 +7,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->setupUi(this);
 	setWindowFlag(Qt::CustomizeWindowHint);
 	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	sceneType = qrand() % 4;
 	initTimer();
 	initWeather();
 	initSun();
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
-	//	QSound back(":/music/µÚÁùÄ».wav");
-		//back.play();
 }
 
 
@@ -82,10 +82,58 @@ void MainWindow::initHardChoose() {
 
 
 void MainWindow::loadImage() {
-	back_mou.load(":/openRes/back_moun_s.png");
-	for_mou.load(":/openRes/fro_moun_s.png");
-	earth.load(":/openRes/earth_s.png");
-	rightPlayer = new QMovie(":/player/main_op.gif");
+	//sceneType = 2;
+	switch (sceneType) {
+	case 0:  //mou
+		rightPlayer = new QMovie(":/player/main_op.gif");
+		back_mou.load(":/openRes/back_moun_s.png");
+		for_mou.load(":/openRes/fro_moun_s.png");
+		earth.load(":/openRes/earth_s.png");
+		break;
+	case 1:  //forest
+		rightPlayer = new QMovie(":/player/forest_right.gif");
+		if (nowTime >= 7 && nowTime <= 19) {
+			for_mou.load(":/openRes/fro_forest_s.png");
+			earth.load(":/openRes/forest_s.png");
+		}
+		else if (nowTime > 19 || nowTime < 7) {
+			for_mou.load(":/openRes/fro_forest_n.png");
+			earth.load(":/openRes/forest_n.png");
+		}
+		break;
+	case 2: //snow
+		rightPlayer = new QMovie(":/player/snow_right.gif");
+		if (nowTime >= 7 && nowTime <= 17) {
+			for_mou.load(":/openRes/fro_snow_s.png");
+			earth.load(":/openRes/snow_s.png");
+		}
+		else if (nowTime > 17 && nowTime <= 20) {
+			for_mou.load(":/openRes/fro_snow_d.png");
+			earth.load(":/openRes/snow_d.png");
+		} 
+		else if(nowTime > 20 || nowTime < 7){
+			for_mou.load(":/openRes/fro_snow_n.png");
+			earth.load(":/openRes/snow_n.png");
+		}
+		break;
+	case 3: //ruin
+		rightPlayer = new QMovie(":/player/main_op.gif");
+		if (nowTime >= 7 && nowTime <= 19) {
+			for_mou.load(":/openRes/fro_ruins_s.png");
+			earth.load(":/openRes/ruins_s.png");
+		}
+		else if (nowTime > 19 || nowTime < 7 ) {
+			for_mou.load(":/openRes/fro_ruins_n.png");
+			earth.load(":/openRes/ruins_n.png");
+		}
+		break;
+	default:
+		rightPlayer = new QMovie(":/player/main_op.gif");
+		back_mou.load(":/openRes/back_moun_s.png");
+		for_mou.load(":/openRes/fro_moun_s.png");
+		earth.load(":/openRes/earth_s.png");
+		break;
+	}
 	if (sunX != -1) {
 		sun.load(":/openRes/sun_s.png");
 		backGif = new QMovie(":/openGif/background_sn.gif");
@@ -109,19 +157,38 @@ void MainWindow::paintEvent(QPaintEvent *e) {
 			painter.drawImage(60, 100, moon);
 		}
 	}
-	painter.drawImage(0, sceneHeight, back_mou, forMouLocation, 0);
-	if (forMouLocation + 960 > 3840) {
-		painter.drawImage(3840 - forMouLocation, sceneHeight, back_mou);
+
+	switch (sceneType) {
+	case 1: //forest
+	case 2: //snow
+	case 3: //ruin
+		painter.drawImage(0, sceneHeight + 155, for_mou, forMouLocation, 0);
+		if (forMouLocation + 960 > 3840) {
+			painter.drawImage(3840 - forMouLocation, sceneHeight + 155, for_mou);
+		}
+		painter.drawPixmap(380, 390 + sceneHeight, 100, 200, rightPlayer->currentPixmap());
+		if (forMouLocation + 960 > 3840) {
+			painter.drawImage(3840 - forMouLocation, sceneHeight + 155, earth);
+		}
+		painter.drawImage(0, sceneHeight + 155, earth, forMouLocation, 0);
+		break;
+	case 0: //mou
+	default:
+		painter.drawImage(0, sceneHeight, back_mou, forMouLocation, 0);
+		if (forMouLocation + 960 > 3840) {
+			painter.drawImage(3840 - forMouLocation, sceneHeight, back_mou);
+		}
+		painter.drawImage(0, sceneHeight, for_mou, forMouLocation, 0);
+		if (forMouLocation + 960 > 3840) {
+			painter.drawImage(3840 - forMouLocation, sceneHeight, for_mou);
+		}
+		painter.drawPixmap(380, 390 + sceneHeight, 100, 200, rightPlayer->currentPixmap());
+		if (forMouLocation + 960 > 3840) {
+			painter.drawImage(3840 - forMouLocation, sceneHeight, earth);
+		}
+		painter.drawImage(0, sceneHeight, earth, forMouLocation, 0);
+		break;
 	}
-	painter.drawImage(0, sceneHeight, for_mou, forMouLocation, 0);
-	if (forMouLocation + 960 > 3840) {
-		painter.drawImage(3840 - forMouLocation, sceneHeight, for_mou);
-	}
-	painter.drawPixmap(380, 390 + sceneHeight, 100, 200, rightPlayer->currentPixmap());
-	if (forMouLocation + 960 > 3840) {
-		painter.drawImage(3840 - forMouLocation, sceneHeight, earth);
-	}
-	painter.drawImage(0, sceneHeight, earth, forMouLocation, 0);
 
 	if (weather == 1) {
 		painter.drawImage(0, 0, cloud);
@@ -235,12 +302,13 @@ void MainWindow::handelWeather(QNetworkReply *reply) {
 	else if (whe.toLower().mid(0, 8).compare("overcast") == 0) {
 		weather = 2;
 	}
-	else if (whe.toLower().mid(0, 8).compare("cloudy") == 0) {
+	else if (whe.toLower().mid(0, 6).compare("cloudy") == 0) {
 		weather = 1;
 	}
 	else {
 		weather = 2;
 	}
+	//weather = 0;
 	loadWeatherImage();
 
 	QJsonObject saves;
@@ -270,12 +338,14 @@ void MainWindow::loadWeatherImage() {
 void MainWindow::initSun() {
 	QTime time = QTime::currentTime();
 	int hour = time.hour();
-	//hour = 20;
+	nowTime = hour;
+	//hour = 19;
+	//nowTime = 19;
 	if (hour >= 6 && hour < 12) {
 		sunY = 300 - 56 * (hour - 6);
 		sunX = 66 * (hour - 6) - 20;
 	}
-	else if (hour >= 12 && hour < 19) {
+	else if (hour >= 12 && hour <= 19) {
 		sunY = 56 * (hour - 12) - 20;
 		sunX = 66 * (hour - 6) - 20;
 	}

@@ -1,5 +1,10 @@
 #include "player.h"
 
+extern void saveToDisk(QByteArray content, QString path);
+
+extern QByteArray loadFromDisk(QString path);
+
+
 Player::Player(QObject *parent) : QObject(parent)
 {
 
@@ -51,11 +56,31 @@ BackBag::BackBag() {
 }
 
 void BackBag::save() {
-
+	QJsonArray arr;
+	for (BagThing t : m_bagThing) {
+		QJsonObject saves;
+		saves.insert("id", t.id);
+		saves.insert("num", t.num);
+		saves.insert("name", t.name);
+		arr.append(saves);
+	}
+	QJsonDocument document;
+	document.setArray(arr);
+	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
+	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/bag.info"));
 }
 
 void BackBag::load() {
-
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/bag.info")));
+	if (!document.isNull()) {
+		QJsonArray jsonArr = document.array();
+		for (int i = 0; i < 12; i++) {
+			QJsonObject job = jsonArr.at(i).toObject();
+			m_bagThing[i].id = job.take("id").toInt();
+			m_bagThing[i].num = job.take("num").toInt();
+			m_bagThing[i].name = job.take("name").toString();
+		}
+	}
 }
 
 BagThing BackBag::getBagThing(int thing) {
@@ -71,6 +96,7 @@ void BackBag::addBagThing(int thing) {
 }
 
 BackBag::~BackBag() {
+	save();
 }
 
 

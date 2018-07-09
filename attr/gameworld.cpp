@@ -4,15 +4,15 @@
 void saveToDisk(QByteArray content, QString path) {
 	QFile file(path);
 	if (!file.open(QIODevice::WriteOnly)) {
-		qDebug() << "unsuccessful";
+		qDebug() << "save unsuccessful";
 	}
 	else {
 		if (file.write(content) > 0) {
-			qDebug() << "successful";
+			qDebug() << "save successful";
 			file.close();
 		}
 		else {
-			qDebug() << "unsuccessful";
+			qDebug() << "save unsuccessful";
 		}	
 	}
 }
@@ -26,12 +26,12 @@ QByteArray loadFromDisk(QString path) {
 			return end;
 		}
 		else {
-			qDebug() << "unsuccessful";
+			qDebug() << "load unsuccessful";
 			return NULL;
 		}
 	}
 	else {
-		qDebug() << "unsuccessful";
+		qDebug() << "load unsuccessful";
 		return NULL;
 	}
 }
