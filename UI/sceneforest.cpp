@@ -25,8 +25,8 @@ void SceneForest::loadImage()
 {
     backGround.load(":/forest/scene/forest_1.png");
     earth.load(":/forest/scene/forest_2.png");
-    player = new QMovie(":/player/main.gif");
-    player_left = new QMovie(":/player/main_left.gif");
+    player = new QMovie(":/player/forest_right.gif");
+    player_left = new QMovie(":/player/forest_left.gif");
     player->start();
     player_left->start();
 }
