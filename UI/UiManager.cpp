@@ -61,6 +61,30 @@ void UiManager::closeAvoidStorm() {
 	}
 }
 
+void UiManager::closeRuins() {
+	if (sceneRuins != NULL) {
+		sceneRuins->close();
+		delete sceneRuins;
+		sceneRuins = NULL;
+	}
+}
+
+void UiManager::closeSnow() {
+	if (sceneSnow != NULL) {
+		sceneSnow->close();
+		delete sceneSnow;
+		sceneSnow = NULL;
+	}
+}
+
+void UiManager::closeKeepMoving() {
+	if (keepMoving != NULL) {
+		keepMoving->close();
+		delete keepMoving;
+		keepMoving = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -113,6 +137,24 @@ void UiManager::openAvoidStorm() {
 	openWordWIndow();
 }
 
+void UiManager::openRuins() {
+	sceneRuins = new SceneRuins();
+	sceneRuins->show();
+	openWordWIndow();
+}
+
+void UiManager::openSnow() {
+	sceneSnow = new SceneSnow();
+	sceneSnow->show();
+	openWordWIndow();
+}
+
+void UiManager::openKeepMoving() {
+	keepMoving = new KeepMoving();
+	keepMoving->show();
+	openWordWIndow();
+}
+
 void UiManager::showMainWindow() {
 	openMainPage();
 	closeLoading();
@@ -135,6 +177,21 @@ void UiManager::showSunSmellCollect() {
 
 void UiManager::showAvoidStorm() {
 	openAvoidStorm();
+	closeLoading();
+}
+
+void UiManager::showRuins() {
+	openRuins();
+	closeLoading();
+}
+
+void UiManager::showSnow() {
+	openSnow();
+	closeLoading();
+}
+
+void UiManager::showKeepMoving() {
+	openKeepMoving();
 	closeLoading();
 }
 

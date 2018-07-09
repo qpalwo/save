@@ -42,7 +42,10 @@ SOURCES += \
     game/avoidstorm.cpp \
     game/tornado.cpp \
     game/playerinwind.cpp \
-    game/avoidstorm.cpp
+    game/avoidstorm.cpp \
+    UI/sceneruins.cpp \
+    UI/scenesnow.cpp \
+    game/keepmoving.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -61,7 +64,10 @@ HEADERS += \
     game/avoidstorm.h \
     game/tornado.h \
     game/playerinwind.h \
-    game/avoidstorm.h
+    game/avoidstorm.h \
+    UI/sceneruins.h \
+    UI/scenesnow.h \
+    game/keepmoving.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -71,7 +77,10 @@ FORMS += \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
     game/sunsmellcollect.ui \
-    game/avoidstorm.ui
+    game/avoidstorm.ui \
+    UI/sceneruins.ui \
+    UI/scenesnow.ui \
+    game/keepmoving.ui
 
 RESOURCES += \
     res/op/openres.qrc \

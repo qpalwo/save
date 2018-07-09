@@ -1,15 +1,13 @@
 #include "tornado.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-Tornado::Tornado() {
-	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+Tornado::Tornado(int x) {
 	height = 30;
 	width = 30;
 	vy = 10;
 	setY(5);
-	setX(qrand() % 860);
-	int temp = x();
-	moveBy(x(), y());
+	setX(x);
+	moveBy(x, y());
 	pixMap.load(":/game/SunSmellCollect/smell.png");
 }
 

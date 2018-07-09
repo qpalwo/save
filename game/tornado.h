@@ -8,15 +8,14 @@
 #include <QTimer>
 #include <QPainterPath>
 #include "playerinwind.h"
-#include <QtGlobal>
-#include <QTime>
+
 
 
 class Tornado : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 public:
-    Tornado();
+    Tornado(int);
 	~Tornado();
 
 	QRectF boundingRect() const;

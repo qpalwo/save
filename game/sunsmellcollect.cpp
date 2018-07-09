@@ -13,6 +13,7 @@ SunSmellCollect::SunSmellCollect(QWidget *parent) :
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
 	loadRes();
 }
@@ -26,7 +27,6 @@ void SunSmellCollect::loadRes() {
 }
 
 void SunSmellCollect::sendSmell() {
-	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 	bool type1 = qrand() % 2;
 	bool type2 = qrand() % 2;
 	int vx, vy;
