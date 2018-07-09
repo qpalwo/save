@@ -9,6 +9,11 @@
 #include <qjsonvalue.h>
 #include <qbytearray.h>
 #include <QFile>
+#include <qjsonobject.h>
+#include <qjsondocument.h>
+#include <qjsonarray.h>
+#include <qjsonvalue.h>
+#include <QtConcurrent/qtconcurrentrun.h>
 
 struct BagThing {
 	int id;
@@ -24,11 +29,11 @@ public:
 	BagThing getBagThing(int);
 	BagThing *getBagThing();
 	void addBagThing(int);
+	void save();
 
 private:
 	BagThing m_bagThing[12];
 
-	void save();
 	void load();
 
 };

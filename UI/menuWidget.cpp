@@ -74,7 +74,11 @@ void menuwidget::onAchieveClicked()
 
 void menuwidget::onBagClicked()
 {
-
+    timerHide->stop();
+    timerShow->stop();
+    Bag *bag =new Bag(this);
+    bag->show();
+    this->hide();
 }
 
 void menuwidget::onMapClicked()

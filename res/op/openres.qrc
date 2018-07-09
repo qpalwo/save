@@ -8,5 +8,19 @@
         <file>sun_s.png</file>
         <file>cloud.png</file>
         <file>rain.gif</file>
+        <file>fro_ruins_n.png</file>
+        <file>fro_ruins_s.png</file>
+        <file>fro_snow_d.png</file>
+        <file>fro_snow_n.png</file>
+        <file>fro_snow_s.png</file>
+        <file>ruins_n.png</file>
+        <file>ruins_s.png</file>
+        <file>snow_d.png</file>
+        <file>snow_n.png</file>
+        <file>snow_s.png</file>
+        <file>forest_n.png</file>
+        <file>forest_s.png</file>
+        <file>fro_forest_n.png</file>
+        <file>fro_forest_s.png</file>
     </qresource>
 </RCC>

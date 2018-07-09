@@ -98,6 +98,7 @@ RESOURCES += \
     res/music/music.qrc \
     res/ruins.qrc \
     res/snow.qrc \
+    res/bag.qrc
     res/game/gameRes.qrc
 
 DISTFILES += \
