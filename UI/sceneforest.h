@@ -12,6 +12,9 @@
 #include <QMovie>
 #include "menuWidget.h"
 
+#define BDL -2880
+#define BDR 0
+
 namespace Ui {
 class SceneForest;
 }

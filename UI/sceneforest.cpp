@@ -1,8 +1,6 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
-#include <QKeyEvent>
-#define BDL -2880
-#define BDR 0
+
 
 SceneForest::SceneForest(QWidget *parent) :
     QWidget(parent),
@@ -17,6 +15,8 @@ SceneForest::SceneForest(QWidget *parent) :
     loadImage();
 
     menuwidget *menu = new menuwidget(this);
+
+    setFocus();
 
     menu->show();
 }
@@ -48,8 +48,8 @@ void SceneForest::paintEvent(QPaintEvent * e) {
     {
         painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
-    painter.drawImage(backX, backY, earth);
 
+    painter.drawImage(backX, backY, earth);
 }
 
 void SceneForest::keyPressEvent(QKeyEvent* e)
@@ -107,7 +107,8 @@ void SceneForest::keyPressEvent(QKeyEvent* e)
             break;
         case Qt::Key_Right:
             playerX += 10;
-            left = false; break;
+            left = false;
+            break;
         default:
             break;
         }
@@ -120,7 +121,6 @@ void SceneForest::keyPressEvent(QKeyEvent* e)
             playerX -= 10;
         }
     }
-
     update();
 }
 SceneForest::~SceneForest()

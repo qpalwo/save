@@ -93,7 +93,9 @@ RESOURCES += \
     res/menuz.qrc  \
     res/button/button.qrc \
     res/game/sunsmellcollect.qrc \
-    res/music/music.qrc
+    res/music/music.qrc \
+    res/ruins.qrc \
+    res/snow.qrc
 
 DISTFILES += \
     res/people/uncle.png
