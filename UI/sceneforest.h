@@ -58,6 +58,8 @@ private:
 	QImage house_closed;
 	QImage house_open;
 	QPoint mouse;
+	QString record_1;
+	QString record_2;
 
 	QMovie *player;
 	QMovie *player_left;
@@ -82,8 +84,9 @@ private:
 	bool left;
 	bool choose;
 	bool first;
-	bool zz;
-	bool xx;
+	bool zx;
+	bool zxFuck;
+	bool f[100];
 };
 
 #endif // SCENEDESERT_H
