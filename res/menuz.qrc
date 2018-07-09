@@ -26,5 +26,7 @@
         <file>menu/set_sound_1.png</file>
         <file>menu/set_volume_1.png</file>
         <file>menu/set_volume_2.png</file>
+        <file>menu/bag_back.png</file>
+        <file>menu/bag_fro.png</file>
     </qresource>
 </RCC>

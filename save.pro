@@ -95,16 +95,11 @@ RESOURCES += \
     res/forest.qrc \
     res/menuz.qrc  \
     res/button/button.qrc \
-<<<<<<< HEAD
-    res/game/sunsmellcollect.qrc \
-    res/music/music.qrc \
-    res/forest.qrc
-=======
     res/music/music.qrc \
     res/ruins.qrc \
     res/snow.qrc \
+    res/bag.qrc
     res/game/gameRes.qrc
->>>>>>> 97f5d0eaff24b7d21c059b68598a07f220574b0e
 
 DISTFILES += \
     res/people/uncle.png

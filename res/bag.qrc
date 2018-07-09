@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/bag">
+        <file>prop/stellball_bag.png</file>
+        <file>prop/stick_bag.png</file>
+    </qresource>
+</RCC>
