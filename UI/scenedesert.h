@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include <qstring.h>
 #include<QMouseEvent>
+#include "menuwidget.h"
 
 #define BDL -2880
 #define BDR 0
@@ -37,6 +38,9 @@ public:
     explicit SceneDesert(QWidget *parent = 0);
     ~SceneDesert();
 	void paintEvent(QPaintEvent * e);
+
+private slots:
+	void on_bag_clicked();
 
 private:
     Ui::SceneDesert *ui;
