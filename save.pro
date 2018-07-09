@@ -36,7 +36,7 @@ SOURCES += \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
-    UI/bag.cpp \
+    UI/bag.cpp\
     game/sunsmellcollect.cpp \
     game/smellofgame.cpp \
 	game/collecterofgame.cpp \
@@ -93,7 +93,9 @@ RESOURCES += \
     res/menuz.qrc  \
     res/button/button.qrc \
     res/game/sunsmellcollect.qrc \
-    res/music/music.qrc
+    res/music/music.qrc \
+    res/ruins.qrc \
+    res/snow.qrc
 
 DISTFILES += \
     res/people/uncle.png
