@@ -1,9 +1,6 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
-<<<<<<< HEAD
-=======
-
->>>>>>> 97f5d0eaff24b7d21c059b68598a07f220574b0e
+#include "menuwidget.h"
 
 SceneForest::SceneForest(QWidget *parent) :
 	QWidget(parent),
@@ -23,7 +20,10 @@ SceneForest::SceneForest(QWidget *parent) :
 	loadImage();
 	loadPlot();
 
-<<<<<<< HEAD
+	menuwidget *menu = new menuwidget(this);
+	setFocus();
+	menu->show();
+
 	setMouseTracking(true);     //牛逼    不用按下鼠标就能监控其位置
 }
 
@@ -42,21 +42,6 @@ void SceneForest::loadImage() {
 	name.load(":/conver/convar/name.png");
 	player->start();
 	player_left->start();
-=======
-    setFocus();
-
-    menu->show();
-}
-
-void SceneForest::loadImage()
-{
-    backGround.load(":/forest/scene/forest_1.png");
-    earth.load(":/forest/scene/forest_2.png");
-    player = new QMovie(":/player/forest_right.gif");
-    player_left = new QMovie(":/player/forest_left.gif");
-    player->start();
-    player_left->start();
->>>>>>> 97f5d0eaff24b7d21c059b68598a07f220574b0e
 }
 
 void SceneForest::paintEvent(QPaintEvent * e) {
@@ -81,7 +66,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 
 	if (playerX == 430)  stop = true;
 
-<<<<<<< HEAD
 	if (left) painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
 	else painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
 	painter.drawImage(backX, backY, earth);
@@ -170,90 +154,6 @@ bool SceneForest::underTheTree(int n) {
 		if ((backX >= -2580) && (backX <= -2550))  return true;
 	}
 	return false;
-=======
-    if (left)
-    {
-        painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
-    }
-    else
-    {
-        painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
-    }
-
-    painter.drawImage(backX, backY, earth);
-}
-
-void SceneForest::keyPressEvent(QKeyEvent* e)
-{
-    if (stop)
-    {
-        switch (e->key())
-        {
-        case Qt::Key_A:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_Left:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_D:
-            backX -= 10;
-            left = false;
-            break;
-        case Qt::Key_Right:
-            backX -= 10;
-            left = false;
-            break;
-        default:
-            break;
-        }
-        if (backX < BDL)
-        {
-            backX += 10;
-            stop = false;
-            playerX += 10;
-        }
-        if (backX > BDR)
-        {
-            backX -= 10;
-            stop = false;
-            playerX -= 10;
-        }
-    }
-    else {
-        switch (e->key())
-        {
-        case Qt::Key_A:
-            playerX -= 10;
-            left = true;
-            break;
-        case Qt::Key_Left:
-            playerX -= 10;
-            left = true;
-            break;
-        case Qt::Key_D:
-            playerX += 10;
-            left = false;
-            break;
-        case Qt::Key_Right:
-            playerX += 10;
-            left = false;
-            break;
-        default:
-            break;
-        }
-        if (playerX < 0)
-        {
-            playerX += 10;
-        }
-        if (playerX > 860)
-        {
-            playerX -= 10;
-        }
-    }
-    update();
->>>>>>> 97f5d0eaff24b7d21c059b68598a07f220574b0e
 }
 
 
