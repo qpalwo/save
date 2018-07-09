@@ -21,8 +21,12 @@ public:
 	BackBag();
 	~BackBag();
 
+	BagThing getBagThing(int);
+	BagThing *getBagThing();
+	void addBagThing(int);
+
 private:
-	BagThing m_bagThing[15];
+	BagThing m_bagThing[12];
 
 	void save();
 	void load();

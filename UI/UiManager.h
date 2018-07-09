@@ -10,6 +10,7 @@
 #include "sceneruins.h"
 #include "scenesnow.h"
 #include "game/keepmoving.h"
+#include "begining.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -27,6 +28,7 @@ public:
 	void closeRuins();
 	void closeSnow();
 	void closeKeepMoving();
+	void closeBegining();
 	void closeAll();
 
 	void openMainPage();
@@ -39,6 +41,7 @@ public:
 	void openRuins();
 	void openSnow();
 	void openKeepMoving();
+	void openBegining();
 
 	void init();
 
@@ -61,6 +64,7 @@ private:
 	SceneRuins *sceneRuins = NULL;
 	SceneSnow *sceneSnow = NULL;
 	QWidget *loading = NULL;
+	Begining *begining = NULL;
 
 	SunSmellCollect *sunSmellCollect = NULL;
 	AvoidStorm *avoidStorm = NULL;

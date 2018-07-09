@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ruins">
+        <file>scene/ruins_1.png</file>
+        <file>scene/ruins_2.png</file>
+    </qresource>
+</RCC>

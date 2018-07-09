@@ -23,9 +23,10 @@ void UiManager::closeWordWIndow() {
 
 void UiManager::closeMainPage() {
 	if (mainWindow != NULL) {
-		mainWindow->close();
-		delete mainWindow;
-		mainWindow = NULL;
+		mainWindow->hide();
+		//mainWindow->close();
+		//delete mainWindow;
+		//mainWindow = NULL;
 	}
 }
 
@@ -82,6 +83,14 @@ void UiManager::closeKeepMoving() {
 		keepMoving->close();
 		delete keepMoving;
 		keepMoving = NULL;
+	}
+}
+
+void UiManager::closeBegining() {
+	if (begining != NULL) {
+		begining->close();
+		delete begining;
+		begining = NULL;
 	}
 }
 
@@ -152,6 +161,12 @@ void UiManager::openSnow() {
 void UiManager::openKeepMoving() {
 	keepMoving = new KeepMoving();
 	keepMoving->show();
+	openWordWIndow();
+}
+
+void UiManager::openBegining() {
+	begining = new Begining();
+	begining->show();
 	openWordWIndow();
 }
 

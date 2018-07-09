@@ -25,6 +25,9 @@ struct plot2 {
 	int r;
 };
 
+#define BDL -2880
+#define BDR 0
+
 namespace Ui {
 	class SceneForest;
 }

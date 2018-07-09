@@ -47,6 +47,27 @@ Player* Player::getInstance() {
 
 
 BackBag::BackBag() {
+
+}
+
+void BackBag::save() {
+
+}
+
+void BackBag::load() {
+
+}
+
+BagThing BackBag::getBagThing(int thing) {
+	return m_bagThing[thing];
+}
+
+BagThing* BackBag::getBagThing() {
+	return m_bagThing;
+}
+
+void BackBag::addBagThing(int thing) {
+	m_bagThing[thing].num++;
 }
 
 BackBag::~BackBag() {

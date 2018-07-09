@@ -36,6 +36,10 @@ QByteArray loadFromDisk(QString path) {
 	}
 }
 
+void GameWorld::setGameHard(int hard) {
+	this->gameHard = hard;
+}
+
 void GameWorld::save() {
 
 }
@@ -57,6 +61,11 @@ GameWorld* GameWorld::Instance = new GameWorld();
 
 void GameWorld::addAchieve(int num) {
 	m_achieve.addAchieve(num);
+}
+
+void GameWorld::fromMainToBegining() {
+	UiManager::getInstance()->openBegining();
+	UiManager::getInstance()->closeMainPage();
 }
 
 GameWorld* GameWorld::getInstance() {
