@@ -36,10 +36,10 @@ SOURCES += \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
+    UI/bag.cpp \
     game/sunsmellcollect.cpp \
     game/smellofgame.cpp \
 	game/collecterofgame.cpp \
-    game/avoidstorm.cpp \
     game/tornado.cpp \
     game/playerinwind.cpp \
     game/avoidstorm.cpp \
@@ -58,13 +58,13 @@ HEADERS += \
     UI/wordwindow.h \
     UI/openpagebutton.h \
     UI/menuwidget.h \
+    UI/bag.h \
     game/sunsmellcollect.h \
     game/smellofgame.h \
 	game/collecterofgame.h \
     game/avoidstorm.h \
     game/tornado.h \
     game/playerinwind.h \
-    game/avoidstorm.h \
     UI/sceneruins.h \
     UI/scenesnow.h \
     game/keepmoving.h
@@ -76,6 +76,7 @@ FORMS += \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
+    UI/bag.ui \
     game/sunsmellcollect.ui \
     game/avoidstorm.ui \
     UI/sceneruins.ui \
