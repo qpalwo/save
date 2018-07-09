@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network concurrent
+QT       += core gui network concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,12 +33,20 @@ SOURCES += \
     attr/gameworld.cpp \
     UI/scenedesert.cpp \
     UI/sceneforest.cpp \
-    game/basegame.cpp \
-    game/basegame.cpp \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
+<<<<<<< HEAD
     UI/bag.cpp
+=======
+    game/sunsmellcollect.cpp \
+    game/smellofgame.cpp \
+	game/collecterofgame.cpp \
+    game/avoidstorm.cpp \
+    game/tornado.cpp \
+    game/playerinwind.cpp \
+    game/avoidstorm.cpp
+>>>>>>> 1795870f9b47ec4696625762c634640b33eba0d1
 
 HEADERS += \
         UI\mainwindow.h \
@@ -48,12 +56,20 @@ HEADERS += \
     attr/gameworld.h \
     UI/scenedesert.h \
     UI/sceneforest.h \
-    game/basegame.h \
-    game/basegame.h \
     UI/wordwindow.h \
     UI/openpagebutton.h \
     UI/menuwidget.h \
+<<<<<<< HEAD
     UI/bag.h
+=======
+    game/sunsmellcollect.h \
+    game/smellofgame.h \
+	game/collecterofgame.h \
+    game/avoidstorm.h \
+    game/tornado.h \
+    game/playerinwind.h \
+    game/avoidstorm.h
+>>>>>>> 1795870f9b47ec4696625762c634640b33eba0d1
 
 FORMS += \
         UI\mainwindow.ui \
@@ -62,7 +78,12 @@ FORMS += \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
+<<<<<<< HEAD
     UI/bag.ui
+=======
+    game/sunsmellcollect.ui \
+    game/avoidstorm.ui
+>>>>>>> 1795870f9b47ec4696625762c634640b33eba0d1
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -72,7 +93,9 @@ RESOURCES += \
     res/conver.qrc \
     res/forest.qrc \
     res/menuz.qrc  \
-    res/button/button.qrc
+    res/button/button.qrc \
+    res/game/sunsmellcollect.qrc \
+    res/music/music.qrc
 
 DISTFILES += \
     res/people/uncle.png

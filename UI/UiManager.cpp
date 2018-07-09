@@ -45,6 +45,22 @@ void UiManager::closeSceneForest() {
 	}
 }
 
+void UiManager::closeSunSmellCollect() {
+	if (sunSmellCollect != NULL) {
+		sunSmellCollect->close();
+		delete sunSmellCollect;
+		sunSmellCollect = NULL;
+	}
+}
+
+void UiManager::closeAvoidStorm() {
+	if (avoidStorm != NULL) {
+		avoidStorm->close();
+		delete avoidStorm;
+		avoidStorm = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -85,22 +101,41 @@ void UiManager::openSceneForest() {
 	openWordWIndow();
 }
 
+void UiManager::openSunSmellCollect() {
+	sunSmellCollect = new SunSmellCollect();
+	sunSmellCollect->show();
+	openWordWIndow();
+}
+
+void UiManager::openAvoidStorm() {
+	avoidStorm = new AvoidStorm();
+	avoidStorm->show();
+	openWordWIndow();
+}
+
 void UiManager::showMainWindow() {
 	openMainPage();
 	closeLoading();
-	openWordWIndow();
 }
 
 void UiManager::showSceneDesert() {
 	openSceneDesert();
 	closeLoading();
-	openWordWIndow();
 }
 
 void UiManager::showSceneForest() {
 	openSceneForest();
 	closeLoading();
-	openWordWIndow();
+}
+
+void UiManager::showSunSmellCollect() {
+	openSunSmellCollect();
+	closeLoading();
+}
+
+void UiManager::showAvoidStorm() {
+	openAvoidStorm();
+	closeLoading();
 }
 
 UiManager*UiManager::Instance = new UiManager();

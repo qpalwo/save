@@ -24,6 +24,7 @@
 #include "openpagebutton.h"
 #include <QHBoxLayout>
 #include "attr/gameworld.h"
+#include <QSound>
 
 namespace Ui {
 class MainWindow;

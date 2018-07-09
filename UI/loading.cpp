@@ -37,3 +37,11 @@ void Loading::on_pushButton_4_clicked() {
 	close();
 }
 
+void Loading::on_pushButton_5_clicked() {
+	UiManager::getInstance()->showSunSmellCollect();
+}
+
+void Loading::on_pushButton_6_clicked() {
+	UiManager::getInstance()->showAvoidStorm();
+}
+

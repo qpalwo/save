@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
+//	QSound back(":/music/µÚÁùÄ».wav");
+	//back.play();
 }
 
 
@@ -22,6 +24,10 @@ void MainWindow::initMenu() {
 		b_continue = new OpenPageButton("continue", this);
 		achieve = new OpenPageButton("achieve", this);
 		set = new OpenPageButton("set", this);
+		open->hide();
+		b_continue->hide();
+		achieve->hide();
+		set->hide();
 	}
 
 	if (isDown && open != NULL) {
@@ -47,7 +53,7 @@ void MainWindow::loadImage() {
 	back_mou.load(":/openRes/back_moun_s.png");
 	for_mou.load(":/openRes/fro_moun_s.png");
 	earth.load(":/openRes/earth_s.png");
-	rightPlayer = new QMovie(":/player/main.gif");
+	rightPlayer = new QMovie(":/player/main_op.gif");
 	if (sunX != -1) {
 		sun.load(":/openRes/sun_s.png");
 		backGif = new QMovie(":/openGif/background_sn.gif");
