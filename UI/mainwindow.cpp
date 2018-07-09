@@ -6,15 +6,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::CustomizeWindowHint);
-	setWindowFlags(Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
+	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 	initTimer();
 	initWeather();
 	initSun();
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
-//	QSound back(":/music/µÚÁùÄ».wav");
-	//back.play();
+	//	QSound back(":/music/µÚÁùÄ».wav");
+		//back.play();
 }
 
 
@@ -24,6 +24,7 @@ void MainWindow::initMenu() {
 		b_continue = new OpenPageButton("continue", this);
 		achieve = new OpenPageButton("achieve", this);
 		set = new OpenPageButton("set", this);
+
 		open->hide();
 		b_continue->hide();
 		achieve->hide();
@@ -32,7 +33,7 @@ void MainWindow::initMenu() {
 
 	if (isDown && open != NULL) {
 		open->setGeometry(rect().x() + 300, rect().y() - 40 + sceneHeight * 2, 130, 50);
-		b_continue->setGeometry(rect().x() + 500, rect().y() + -40 + sceneHeight * 2, 130, 50);
+		b_continue->setGeometry(rect().x() + 500, rect().y() -40 + sceneHeight * 2, 130, 50);
 		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + sceneHeight * 2, 130, 50);
 		set->setGeometry(rect().x() + 500, rect().y() + 30 + sceneHeight * 2, 130, 50);
 
@@ -48,6 +49,37 @@ void MainWindow::initMenu() {
 		connect(set, SIGNAL(clicked()), this, SLOT(onSetClicked()));
 	}
 }
+
+void MainWindow::hideMenu() {
+	if (isDown && open != NULL) {
+		open->hide();
+		b_continue->hide();
+		achieve->hide();
+		set->hide();
+		isDown = false;
+	}
+}
+
+void MainWindow::initHardChoose() {
+	hideMenu();
+	easy = new OpenPageButton("easy", this);
+	mid = new OpenPageButton("mid", this);
+	hard = new OpenPageButton("hard", this);
+
+	easy->setGeometry(rect().x() + 400, rect().y() - 40 + sceneHeight * 2, 130, 50);
+	mid->setGeometry(rect().x() + 400, rect().y() + 30 + sceneHeight * 2, 130, 50);
+	hard->setGeometry(rect().x() + 400, rect().y() + 100 + sceneHeight * 2, 130, 50);
+
+	easy->show();
+	mid->show();
+	hard->show();
+
+	connect(easy, SIGNAL(clicked()), this, SLOT(onEasyClicked()));
+	connect(mid, SIGNAL(clicked()), this, SLOT(onMidClicked()));
+	connect(hard, SIGNAL(clicked()), this, SLOT(onHardClicked()));
+}
+
+
 
 void MainWindow::loadImage() {
 	back_mou.load(":/openRes/back_moun_s.png");
@@ -115,7 +147,7 @@ void MainWindow::moveScene() {
 	if (sceneHeight == 120) {
 		verticalTimer->stop();
 	}
-	initMenu();	
+	initMenu();
 }
 
 void MainWindow::initVerticalTimer() {
@@ -133,7 +165,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 
 void MainWindow::onContinueClicked() {
 	GameWorld::getInstance()->quitGame();
-	
+
 }
 
 void MainWindow::onAchieveClicked() {
@@ -145,7 +177,22 @@ void MainWindow::onSetClicked() {
 }
 
 void MainWindow::onBeginClicked() {
-	
+	initHardChoose();
+}
+
+void MainWindow::onEasyClicked() {
+	GameWorld::getInstance()->setGameHard(1);
+	GameWorld::getInstance()->fromMainToBegining();
+}
+
+void MainWindow::onMidClicked() {
+	GameWorld::getInstance()->setGameHard(2);
+	GameWorld::getInstance()->fromMainToBegining();
+}
+
+void MainWindow::onHardClicked() {
+	GameWorld::getInstance()->setGameHard(3);
+	GameWorld::getInstance()->fromMainToBegining();
 }
 
 extern void saveToDisk(QByteArray content, QString path);
@@ -255,4 +302,7 @@ MainWindow::~MainWindow() {
 	delete achieve;
 	delete set;
 	delete b_continue;
+	delete easy;
+	delete mid;
+	delete hard;
 }

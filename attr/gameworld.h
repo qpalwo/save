@@ -10,8 +10,6 @@
 #include <qstring.h>
 #include <QtConcurrent/qtconcurrentrun.h>
 #include <QFile>
-//#include "UI/UiManager.h"
-
 
 class Achieve {
 public:
@@ -34,7 +32,10 @@ public:
 	static GameWorld * getInstance();
 	void addAchieve(int);
 	void quitGame();
-   
+
+	void setGameHard(int);
+
+	void fromMainToBegining();
 
 signals:
 
@@ -45,6 +46,7 @@ private:
 	static GameWorld *Instance;
 
 	Achieve m_achieve;
+	int gameHard = 0;
 
 	void save();
 	void load();

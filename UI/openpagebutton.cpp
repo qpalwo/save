@@ -55,18 +55,24 @@ void OpenPageButton::paintEvent(QPaintEvent *) {
 
 void OpenPageButton::enterEvent(QEvent *) {
 	buttonState = Hover;
-	update();
+	if (this) {
+		update();
+	}
 }
 
 void OpenPageButton::leaveEvent(QEvent *) {
 	buttonState = Normal;
-	update();
+	if (this) {
+		update();
+	}
 }
 
 void OpenPageButton::mousePressEvent(QMouseEvent *e) {
 	if (e->button() == Qt::LeftButton) {
 		buttonState = Pressed;
-		update();
+		if (this) {
+			update();
+		}
 	}
 }
 
@@ -86,6 +92,12 @@ void OpenPageButton::mouseReleaseEvent(QMouseEvent *e) {
 		}
 
 		buttonState = Hover;
-		update();
+		if (this) {
+			update();
+		}
 	}
+}
+
+OpenPageButton::~OpenPageButton() {
+
 }

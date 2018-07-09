@@ -1,18 +1,18 @@
 #include "tornado.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-Tornado::Tornado(int x) {
+Tornado::Tornado(int x, QString path) {
 	height = 30;
 	width = 30;
 	vy = 10;
 	setY(5);
 	setX(x);
 	moveBy(x, y());
-	pixMap.load(":/game/SunSmellCollect/smell.png");
+	pixMap.load(path);
 }
 
 QRectF Tornado::boundingRect() const {
-	return QRectF(5, 5, 95, 85);
+	return QRectF(5, 0, 100, 90);
 }
 
 bool Tornado::collidesWithItem(const PlayerInWind *other, Qt::ItemSelectionMode mode) const {
