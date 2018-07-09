@@ -25,6 +25,7 @@
 #include <QHBoxLayout>
 #include "attr/gameworld.h"
 #include <QSound>
+#include <QWidget>
 
 namespace Ui {
 class MainWindow;
@@ -51,7 +52,9 @@ private slots:
 	void onAchieveClicked();
 	void onSetClicked();
 	void onContinueClicked();
-
+	void onEasyClicked();
+	void onMidClicked();
+	void onHardClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -63,14 +66,17 @@ private:
 	QImage sun;
 	QImage moon;
 	QImage cloud;
-	QMovie *backGif;
+	QMovie *backGif = NULL;
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
 
-	OpenPageButton *open;
-	OpenPageButton *b_continue;
-	OpenPageButton *achieve;
-	OpenPageButton *set;
+	OpenPageButton *open = NULL;
+	OpenPageButton *b_continue = NULL;
+	OpenPageButton *achieve = NULL;
+	OpenPageButton *set = NULL;
+	OpenPageButton *easy = NULL;
+	OpenPageButton *mid = NULL;
+	OpenPageButton *hard = NULL;
 
 	void loadImage();
 	void loadWeatherImage();
@@ -79,6 +85,8 @@ private:
 	void initTimer();
 	void initVerticalTimer();
 	void initMenu();
+	void initHardChoose();
+	void hideMenu();
 
 	bool isDown = false;
 	int weather;

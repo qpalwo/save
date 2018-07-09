@@ -27,7 +27,7 @@ void AvoidStorm::loadRes() {
 }
 
 void AvoidStorm::sendTornado() {
-	Tornado *tornado = new Tornado(qrand() % 860);
+	Tornado *tornado = new Tornado(qrand() % 860, QString(":/game/SunSmellCollect/smell.png"));
 	tornado->bindPlayer(playerInWind);
 	scene->addItem(tornado);
 	connect(this, SIGNAL(finishGame()), tornado, SLOT(finishGame()));

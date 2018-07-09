@@ -2,13 +2,13 @@
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
 CollecterOfGame::CollecterOfGame() {
-	pixMap.load(":/game/SunSmellCollect/collecter.png");
+	pixMap.load(":/game/SunSmellCollect/bottle.png");
 	setFlag(QGraphicsItem::ItemIsFocusable);
 	setFocus(Qt::OtherFocusReason);
 	moveBy(480, 500);
 	speed = 10;
-	height = 135;
-	width = 255;
+	height = 150;
+	width = 130;
 }
 
 QRectF CollecterOfGame::boundingRect() const {
@@ -19,7 +19,7 @@ void CollecterOfGame::paint(QPainter *painter,const QStyleOptionGraphicsItem *op
 	QWidget *widget) {
 	Q_UNUSED(option);  //标明该参数没有使用
 	Q_UNUSED(widget);
-	painter->drawPixmap(0, 0, pixMap);
+	painter->drawPixmap(0, 0, width, height, pixMap);
 }
 
 void CollecterOfGame::keyPressEvent(QKeyEvent *event) {

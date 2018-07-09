@@ -13,11 +13,6 @@ int main(int argc, char *argv[])
 
 	UiManager *uiManager = UiManager::getInstance();
 	uiManager->init();
-	//Loading loading;
-	//loading.show();
-
-    //MainWindow w;
-    //w.show();
 
     return a.exec();
 }

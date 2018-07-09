@@ -17,9 +17,7 @@ public:
 	~CollecterOfGame();
 
 	QRectF boundingRect() const;
-	void paint(QPainter *painter,
-		const QStyleOptionGraphicsItem *option,
-		QWidget *widget);
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	int height;
 	int width;

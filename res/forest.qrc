@@ -1,6 +1,11 @@
 <RCC>
-    <qresource prefix="/forest">
+    <qresource prefix="/">
+        <file>people/forest_left.gif</file>
+        <file>people/forest_right.gif</file>
+        <file>people/young.png</file>
         <file>scene/forest_1.png</file>
         <file>scene/forest_2.png</file>
+        <file>scene/forest_house_close.png</file>
+        <file>scene/forest_house_open.png</file>
     </qresource>
 </RCC>

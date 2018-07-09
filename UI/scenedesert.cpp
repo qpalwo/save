@@ -1,6 +1,6 @@
 #include "scenedesert.h"
 #include "ui_scenedesert.h"
-
+//#include "logindlg.h"
 
 SceneDesert::SceneDesert(QWidget *parent) :
 	QWidget(parent),
@@ -17,6 +17,10 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	xx = false;
 	loadImage();
 	loadPlot();
+
+	menuwidget *menu = new menuwidget(this);
+	setFocus();
+	menu->show();
 
 	setMouseTracking(true);     //牛逼    不用按下鼠标就能监控其位置
 }
@@ -65,7 +69,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
-	if (playerX >= 560) {
+	if (playerX > 430) {
 		painter.drawImage(850, 270, uncle);
 		painter.drawImage(0, 0, conver);
 
@@ -108,7 +112,8 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 			if (underTheTree(1))	waitTime++;
 		} else waitTime = 0;
 
-		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
+		if ((e->key() == Qt::Key_J) && (!q[talk].diff))  
+			talk = q[talk].l;
 
  		if (q[talk].diff) {
 			if (e->key() == Qt::Key_Z) talk = q[talk-1].l;
@@ -200,6 +205,11 @@ void SceneDesert::mouseMoveEvent(QMouseEvent* event)
 	mouse_out = QString::number(event->x()) + '  ' + QString::number(event->y());
 	//setText(QString("(%1,%2)").arg(m.x()).arg(m.y()));
 
+}
+
+void SceneDesert::on_bag_clicked() {
+	//QDialog *dlg = new QDialog(this);
+	//dlg->show();
 }
 
 SceneDesert::~SceneDesert() {

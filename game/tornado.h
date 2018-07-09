@@ -8,14 +8,14 @@
 #include <QTimer>
 #include <QPainterPath>
 #include "playerinwind.h"
-
+#include <QString>
 
 
 class Tornado : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 public:
-    Tornado(int);
+    Tornado(int, QString);
 	~Tornado();
 
 	QRectF boundingRect() const;
@@ -42,6 +42,7 @@ private:
 	QPixmap pixMap;
 	QTimer *reFreshTimer = NULL;
 	PlayerInWind *playInWind = NULL;
+	//QString path;
 
 	QPainterPath shape() const;
 	void calculateY();
