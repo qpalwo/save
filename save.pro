@@ -36,24 +36,16 @@ SOURCES += \
     UI/wordwindow.cpp \
     UI/openpagebutton.cpp \
     UI/menuwidget.cpp \
-<<<<<<< HEAD
     UI/bag.cpp\
-=======
-    UI/bag.cpp \
->>>>>>> 4fa6d3408ac8862e22c5b633db6d7c7b0a8be8c0
     game/sunsmellcollect.cpp \
     game/smellofgame.cpp \
 	game/collecterofgame.cpp \
     game/tornado.cpp \
     game/playerinwind.cpp \
-<<<<<<< HEAD
-    game/avoidstorm.cpp
-=======
     game/avoidstorm.cpp \
     UI/sceneruins.cpp \
     UI/scenesnow.cpp \
     game/keepmoving.cpp
->>>>>>> 4fa6d3408ac8862e22c5b633db6d7c7b0a8be8c0
 
 HEADERS += \
         UI\mainwindow.h \
@@ -66,25 +58,16 @@ HEADERS += \
     UI/wordwindow.h \
     UI/openpagebutton.h \
     UI/menuwidget.h \
-<<<<<<< HEAD
-    UI/bag.h\
-=======
     UI/bag.h \
->>>>>>> 4fa6d3408ac8862e22c5b633db6d7c7b0a8be8c0
     game/sunsmellcollect.h \
     game/smellofgame.h \
 	game/collecterofgame.h \
     game/avoidstorm.h \
     game/tornado.h \
     game/playerinwind.h \
-<<<<<<< HEAD
-    game/avoidstorm.h
-
-=======
     UI/sceneruins.h \
     UI/scenesnow.h \
     game/keepmoving.h
->>>>>>> 4fa6d3408ac8862e22c5b633db6d7c7b0a8be8c0
 
 FORMS += \
         UI\mainwindow.ui \
@@ -93,19 +76,12 @@ FORMS += \
     UI/sceneforest.ui \
     UI/wordwindow.ui \
     UI/menuwidget.ui \
-<<<<<<< HEAD
-    UI/bag.ui\
-    game/sunsmellcollect.ui \
-    game/avoidstorm.ui
-
-=======
     UI/bag.ui \
     game/sunsmellcollect.ui \
     game/avoidstorm.ui \
     UI/sceneruins.ui \
     UI/scenesnow.ui \
     game/keepmoving.ui
->>>>>>> 4fa6d3408ac8862e22c5b633db6d7c7b0a8be8c0
 
 RESOURCES += \
     res/op/openres.qrc \
