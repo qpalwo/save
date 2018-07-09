@@ -37,6 +37,13 @@ void menuwidget::initbutton()
     save = new OpenPageButton("", "menu_save", this);
     set = new OpenPageButton("", "menu_set", this);
 
+    achieve->setFocusPolicy(Qt::NoFocus);
+    bag->setFocusPolicy(Qt::NoFocus);
+    map->setFocusPolicy(Qt::NoFocus);
+    read->setFocusPolicy(Qt::NoFocus);
+    save->setFocusPolicy(Qt::NoFocus);
+    set->setFocusPolicy(Qt::NoFocus);
+
     myLayout = new QGridLayout;
 
     myLayout->addWidget(achieve,1,1,Qt::Alignment());
