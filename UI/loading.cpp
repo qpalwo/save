@@ -45,3 +45,15 @@ void Loading::on_pushButton_6_clicked() {
 	UiManager::getInstance()->showAvoidStorm();
 }
 
+void Loading::on_pushButton_7_clicked() {
+	UiManager::getInstance()->showRuins();
+}
+
+void Loading::on_pushButton_8_clicked() {
+	UiManager::getInstance()->showSnow();
+}
+
+void Loading::on_pushButton_9_clicked() {
+	UiManager::getInstance()->showKeepMoving();
+}
+

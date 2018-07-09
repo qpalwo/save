@@ -8,6 +8,8 @@
 #include "playerinwind.h"
 #include "tornado.h"
 #include <QTimer>
+#include <QtGlobal>
+#include <QTime>
 
 namespace Ui {
 class AvoidStorm;
