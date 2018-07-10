@@ -1,7 +1,7 @@
 #include "menuwidget.h"
 #include "ui_menuwidget.h"
 
-menuwidget::menuwidget(QWidget *parent,QString res) :
+menuwidget::menuwidget(QString res,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::menuwidget)
 {
@@ -77,8 +77,7 @@ void menuwidget::onBagClicked()
 {
     timerHide->stop();
     timerShow->stop();
-    //bagwidget = new Bag(parentWidget(), scene);
-    //bagwidget->show();
+
     this->hide();
     //this->show();
     //connect(bag,SIGNAL(exitBag()),this,SLOT(show()));

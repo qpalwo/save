@@ -15,7 +15,7 @@ SceneSnow::SceneSnow(QWidget *parent) :
     left = false;
     loadImage();
 
-    menuwidget *menu = new menuwidget(this,"snow");
+    menuwidget *menu = new menuwidget("snow",this);
 
     setFocus();
 

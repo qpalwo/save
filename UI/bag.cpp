@@ -1,7 +1,7 @@
 #include "bag.h"
 #include "ui_bag.h"
 
-Bag::Bag(QWidget *parent,QString res) :
+Bag::Bag(QString res,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Bag)
 {
@@ -17,8 +17,6 @@ Bag::Bag(QWidget *parent,QString res) :
 void Bag::loadImage()
 {
     backGround.load(":/menuZ/menu/bag_back_"+scene+".png");
-    stellball.load(":/bag/prop/stellball_bag.png");
-    stick.load(":/bag/prop/stick_bag.png");
 }
 
 void Bag::initTimer()

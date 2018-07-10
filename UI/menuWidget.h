@@ -23,7 +23,7 @@ class menuwidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit menuwidget(QWidget *parent = 0,QString res);
+    menuwidget(QString res,QWidget *parent = 0);
     ~menuwidget();
 
 private:

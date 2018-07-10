@@ -18,7 +18,7 @@ class Bag : public QWidget
     Q_OBJECT
 
 public:
-    explicit Bag(QWidget *parent = nullptr,QString res);
+    Bag(QString res,QWidget *parent = nullptr);
     void closeEvent(QCloseEvent *e);
     ~Bag();
 
