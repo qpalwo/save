@@ -35,20 +35,9 @@ void Player::minusMood(int num) {
 	checkStaus();
 }
 
-void Player::addSatiety(int num) {
-	Player::m_satiety += num;
-	checkStaus();
-}
-
-void Player::minusSatiety(int num) {
-	Player::m_satiety -= num;
-	checkStaus();
-}
-
 Player* Player::getInstance() {
 	return Player::Instance;
 }
-
 
 
 BackBag::BackBag() {

@@ -20,13 +20,22 @@ public:
     explicit BurnBook(QWidget *parent = 0);
     ~BurnBook();
 
+public slots:
+	void onBurned();
+	void onUnBurned();
+
+protected:
+
 private:
     Ui::BurnBook *ui;
 	QGraphicsScene *scene = NULL;
 	FireBurnBook *fireBurnBook = NULL;
+	BookToBurn *m_book = NULL;
 
-
+	void addBook();
 	void loadRes();
+
+	int leftBook;
 };
 
 #endif // BURNBOOK_H

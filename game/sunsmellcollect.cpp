@@ -14,6 +14,8 @@ SunSmellCollect::SunSmellCollect(QWidget *parent) :
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	scene->setFocus();
+	grabKeyboard();
 
 	loadRes();
 }
@@ -21,6 +23,8 @@ SunSmellCollect::SunSmellCollect(QWidget *parent) :
 void SunSmellCollect::loadRes() {
 	collecter = new CollecterOfGame();
 	scene->addItem(collecter);
+	scene->setFocusItem(collecter);
+	collecter->grabKeyboard();
 	sendTimer = new QTimer(this);
 	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendSmell()));
 	sendTimer->start(500);

@@ -12,6 +12,7 @@
 #include <QGridLayout>
 #include <QTimeLine>
 #include <QString>
+#include "attr/gameworld.h"
 
 class Bag;
 #include "bag.h"

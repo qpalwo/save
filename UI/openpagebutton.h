@@ -9,9 +9,9 @@
 #include <qpoint.h>
 #include <qwidget.h>
 
-#define Normal 0
-#define Hover 1
-#define Pressed 2
+#define __Normal 0
+#define __Hover 1
+#define __Pressed 2
 
 class OpenPageButton:public QPushButton 
 {
