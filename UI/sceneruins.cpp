@@ -15,7 +15,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
     left = false;
     loadImage();
 
-    menuwidget *menu = new menuwidget(this);
+    menuwidget *menu = new menuwidget("ruins",this);
 
     setFocus();
 

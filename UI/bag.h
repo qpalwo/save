@@ -6,6 +6,8 @@
 #include <QImage>
 #include <QGridLayout>
 #include <QTimeLine>
+#include <QCloseEvent>
+#include <QString>
 
 namespace Ui {
 class Bag;
@@ -16,13 +18,15 @@ class Bag : public QWidget
     Q_OBJECT
 
 public:
-    explicit Bag(QWidget *parent = nullptr);
+    Bag(QString res,QWidget *parent = nullptr);
+    void closeEvent(QCloseEvent *e);
     ~Bag();
 
 private:
     Ui::Bag *ui;
 
     QImage backGround;
+    QString scene;
 
     QImage bottle;
     QImage conch;
@@ -44,6 +48,9 @@ private:
 private slots:
     void bagShow();
     void bagHide();
+
+signals:
+    void exitBag();
 
 };
 
