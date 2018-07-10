@@ -10,8 +10,11 @@ Begining::Begining(QWidget *parent) :
 
 	zx = false;
 	jump1 = false;
+	Lock = false;
+	c2 = 0;
 	count = 0;
 	jump = 0;
+	jump2 = 0;
 	load();
 }
 
@@ -50,22 +53,60 @@ void Begining::paintEvent(QPaintEvent * e) {
 		}
 	}
 	if (jump == 2) {
-
+		if (c2 < 1) {
+			painter.drawText(160, 140, p[10]);
+			painter.drawText(220, 180, p[11]);
+			painter.drawText(220, 220, p[12]);
+			painter.drawText(220, 260, p[13]);
+			painter.drawText(220, 300, p[14]);
+			painter.drawText(220, 340, p[15]);
+			painter.drawText(220, 380, p[16]);
+			painter.drawText(220, 420, p[17]);
+			painter.drawText(220, 460, p[18]);
+		}
+		else {
+			if (!Lock) {
+				for (i = 1; i <= c2; i++)
+					painter.drawText(270, 140 + i * 40, p[20 + i]);
+			}
+			else {
+				if (jump2 == 1) { 
+					painter.drawText(260, 300 , p[40]);
+					painter.drawText(260, 350, p[41]);
+				}
+				if (jump2 == 2) {
+					painter.drawText(270, 200, p[42]);
+					painter.drawText(270, 240, p[43]);
+					painter.drawText(270, 280, p[44]);
+					painter.drawText(270, 320, p[45]);
+					painter.drawText(270, 360, p[46]);
+				}
+			}
+		}
 	}
 
 }
 
 void Begining::keyPressEvent(QKeyEvent *e) {
-	if (count < 7) {
-		if (e->key() == Qt::Key_Space) count++;
-	}
-	else {
-		if (e->key() == Qt::Key_Z) { zx = true; jump = 1; }
-		if (e->key() == Qt::Key_X) { zx = true; jump = 2; }
+
+	if (jump == 2) {
+		if (e->key() == Qt::Key_Space) c2++;
+		if (c2 > 5) c2 = 5;
+		if (e->key() == Qt::Key_Z) { Lock = true; jump2 = 2; }
+		if (e->key() == Qt::Key_X) { Lock = true; jump2 = 1; }
 	}
 
+	if (jump == 0) {
+		if (count < 7) {
+			if (e->key() == Qt::Key_Space) count++;
+		}
+		else {
+			if (e->key() == Qt::Key_Z) { zx = true; jump = 1; }
+			if (e->key() == Qt::Key_X) { zx = true; jump = 2; }
+		}
+	}
 	if ((jump == 1) && (e->key() == Qt::Key_Space)) jump1 = true;
-	
+
 	update();
 }
 
@@ -85,10 +126,34 @@ void Begining::load() {
 	p[8] = QString::fromLocal8Bit("  z. 不了     x. 看一下");
 
 	p[30]= QString::fromLocal8Bit("还是算了...毕竟也是要去陪他的人了，");
-	p[31] = QString::fromLocal8Bit("有什么东西在到时候再说吧。");
+	p[31] = QString::fromLocal8Bit("有什么东西到时候再说吧。");
 	p[32] = QString::fromLocal8Bit("（滴滴答答的声音响起..）");
 	p[33] = QString::fromLocal8Bit("不对...我, 似乎..上不了天堂啊..");
 	p[34] = QString::fromLocal8Bit("抱歉，老头...（BadEnding）");
+
+	p[10] = QString::fromLocal8Bit("打开信件:");
+	p[11] = QString::fromLocal8Bit("丫头，老头这辈子没啥愿望，就想去外面把世界看一遭");
+	p[12] = QString::fromLocal8Bit("知道你不喜欢这世界，但还是想厚着脸皮让你替我看一遍");
+	p[13] = QString::fromLocal8Bit("如果你愿意的话，就带上老头子的拐杖一起");
+	p[14] = QString::fromLocal8Bit("让我们");
+	p[15] = QString::fromLocal8Bit("这一次，");
+	p[16] = QString::fromLocal8Bit("再一次，");
+	p[17] = QString::fromLocal8Bit("最后一次，");
+	p[18] = QString::fromLocal8Bit("试着去爱这个世界吧。");
+
+	p[21] = QString::fromLocal8Bit("什么嘛...这么自作主张的就决定了..");
+	p[22] = QString::fromLocal8Bit("根本就没有考虑我的意见");
+	p[23] = QString::fromLocal8Bit("..一开始擅自救我就是这样，到现在还是这样，");
+	p[24] = QString::fromLocal8Bit("根本就没有问过我想不想活着啊。");
+	p[25] = QString::fromLocal8Bit("z.决定出发    x.拒绝行动");
+
+	p[40] = QString::fromLocal8Bit("抱歉啊，老头...一直以来都在为别人活着...");
+	p[41] = QString::fromLocal8Bit("那么这次，请让我为自己去死。。");
+	p[42] = QString::fromLocal8Bit("真是过分...肯定早就猜到我会同意了吧");
+	p[43] = QString::fromLocal8Bit("不过，才不仅仅因为你啊，");
+	p[44] = QString::fromLocal8Bit("只是因为，只是因为，");
+	p[45] = QString::fromLocal8Bit("我也想在给自己一次机会，");
+	p[46] = QString::fromLocal8Bit("一次救赎的机会。");
 }
 
 Begining::~Begining()
