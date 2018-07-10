@@ -39,7 +39,7 @@ private:
     OpenPageButton *achieve;
     OpenPageButton *bag;
     OpenPageButton *map;
-    OpenPageButton *read;
+    OpenPageButton *back;
     OpenPageButton *save;
     OpenPageButton *set;
 
@@ -64,7 +64,7 @@ private slots:
     void onAchieveClicked();
     void onBagClicked();
     void onMapClicked();
-    void onReadClicked();
+    void onBackClicked();
     void onSaveClicked();
     void onSetClicked();
 };

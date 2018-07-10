@@ -11,6 +11,7 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QPoint>
+#include "attr/player.h"
 
 class menuwidget;
 #include "menuWidget.h"
@@ -53,6 +54,10 @@ private:
     QTimeLine *timerHide;
 
     menuwidget *newMenu;
+
+    Player *player;
+    int num[12];
+    QString s[12];
 
     int backX;
 

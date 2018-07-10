@@ -15,6 +15,15 @@ Bag::Bag(QString res,QWidget *menu,QWidget *parent) :
     loadImage();
     newMenu = new menuwidget(scene,parentWidget());
 
+    player = Player::getInstance();
+
+    for(int i = 0;i<12;i++)
+    {
+        num[i] = (player->getBagThing() + i)->num;
+        s[i] = QString::number(num[i],10);
+    }
+
+
     setMouseTracking(true);
 }
 
@@ -67,6 +76,19 @@ void Bag::paintEvent(QPaintEvent *e)
     painter.drawPixmap(130,262,39,58,prop10);
     painter.drawPixmap(190,270,prop11);
     painter.drawPixmap(263,268,prop12);
+
+    painter.drawText(93,185,s[0]);
+    painter.drawText(160,185,s[1]);
+    painter.drawText(228,185,s[2]);
+    painter.drawText(295,185,s[3]);
+    painter.drawText(95,252,s[4]);
+    painter.drawText(160,252,s[5]);
+    painter.drawText(228,252,s[6]);
+    painter.drawText(295,252,s[7]);
+    painter.drawText(95,320,s[8]);
+    painter.drawText(160,320,s[9]);
+    painter.drawText(228,320,s[10]);
+    painter.drawText(295,320,s[11]);
 }
 
 void Bag::bagShow()

@@ -109,5 +109,17 @@
         <file>menu/set_volume_ruins_2.png</file>
         <file>menu/set_volume_snow_1.png</file>
         <file>menu/set_volume_snow_2.png</file>
+        <file>menu/menu_back_desert_1.png</file>
+        <file>menu/menu_back_desert_2.png</file>
+        <file>menu/menu_back_desert_3.png</file>
+        <file>menu/menu_back_forest_1.png</file>
+        <file>menu/menu_back_forest_2.png</file>
+        <file>menu/menu_back_forest_3.png</file>
+        <file>menu/menu_back_ruins_1.png</file>
+        <file>menu/menu_back_ruins_2.png</file>
+        <file>menu/menu_back_ruins_3.png</file>
+        <file>menu/menu_back_snow_1.png</file>
+        <file>menu/menu_back_snow_2.png</file>
+        <file>menu/menu_back_snow_3.png</file>
     </qresource>
 </RCC>
