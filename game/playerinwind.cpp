@@ -1,11 +1,11 @@
 #include "playerinwind.h"
 
-PlayerInWind::PlayerInWind() {
+PlayerInWind::PlayerInWind(int playerSpeed) {
 	pixMap.load("://uncle.png");
 	setFlag(QGraphicsItem::ItemIsFocusable);
 	setFocus(Qt::OtherFocusReason);
 	moveBy(480, 500);
-	speed = 10;
+	speed = playerSpeed;
 	height = 200;
 	width = 100;
 }
@@ -30,7 +30,7 @@ void PlayerInWind::keyPressEvent(QKeyEvent *event) {
 		break;
 	case Qt::Key_D:
 	case Qt::Key_Right:
-		if (x() + 235 + speed < 960)
+		if (x() + 135 + speed < 960)
 			moveBy(speed, 0);
 		break;
 	default:

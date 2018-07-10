@@ -13,7 +13,7 @@ class PlayerInWind : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 public:
-    PlayerInWind();
+    PlayerInWind(int);
 	~PlayerInWind();
 	QRectF boundingRect() const;
 	void paint(QPainter *painter,

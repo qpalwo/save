@@ -57,7 +57,7 @@ private:
 	static GameWorld *Instance;
 
 	AchieveData m_achieve;
-	int gameHard = 0;
+	int gameHard;
 
 	void save();
 	void load();

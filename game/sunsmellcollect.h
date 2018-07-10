@@ -41,8 +41,11 @@ private:
 	QTimer *sendTimer = NULL;
 
 	void loadRes();
+	void determineHard();
 
 	int gameHard;
+	int collecterSpeed;
+	int lunchSpeed;
 };
 
 #endif // SUNSMELLCOLLECT_H

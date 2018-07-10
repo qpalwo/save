@@ -39,8 +39,12 @@ private:
 	QTimer *sendTimer = NULL;
 
 	int gameHard;
+	int playerSpeed;
+	float tornadoVy;
+	int lunchSpeed;
 
 	void loadRes();
+	void determineHard();
 	
 };
 
