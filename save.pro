@@ -118,4 +118,5 @@ RESOURCES += \
     res/game/gameRes.qrc
 
 DISTFILES += \
-    res/people/uncle.png
+    res/people/uncle.png \
+    res/scene/begining.png

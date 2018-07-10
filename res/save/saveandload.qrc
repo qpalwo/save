@@ -11,4 +11,7 @@
         <file>background.png</file>
         <file>pure.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>../scene/begining.png</file>
+    </qresource>
 </RCC>
