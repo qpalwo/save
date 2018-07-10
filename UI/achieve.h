@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPIxmap>
+#include "openpagebutton.h"
 
 namespace Ui {
 class Achieve;
@@ -20,10 +21,14 @@ public:
 protected:
 	void paintEvent(QPaintEvent *e);
 
+private slots:
+	void onBackClicked();
+
 private:
     Ui::Achieve *ui;
 
 	QPixmap back;
+	OpenPageButton *backButton = NULL;
 };
 
 #endif // ACHIEVE_H

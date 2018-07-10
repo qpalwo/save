@@ -12,7 +12,7 @@ class FireBurnBook : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 public:
-    FireBurnBook();
+    FireBurnBook(int, int);
 	~FireBurnBook();
 
 	QRectF boundingRect() const;

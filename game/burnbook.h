@@ -23,6 +23,8 @@ public:
 private:
     Ui::BurnBook *ui;
 	QGraphicsScene *scene = NULL;
+	FireBurnBook *fireBurnBook = NULL;
+
 
 	void loadRes();
 };
