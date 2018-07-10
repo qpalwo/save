@@ -14,6 +14,8 @@ KeepMoving::KeepMoving(QWidget *parent) :
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	scene->setFocus();
+	grabKeyboard();
 
 	loadRes();
 }
@@ -21,6 +23,8 @@ KeepMoving::KeepMoving(QWidget *parent) :
 void KeepMoving::loadRes() {
 	playerInWind = new PlayerInWind();
 	scene->addItem(playerInWind);
+	scene->setFocusItem(playerInWind);
+	playerInWind->grabKeyboard();
 	machineSendTimer = new QTimer(this);
 	lighteSendTimer = new QTimer(this);
 	connect(machineSendTimer, SIGNAL(timeout()), this, SLOT(sendMachine()));

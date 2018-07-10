@@ -6,6 +6,7 @@ WordWindow::WordWindow(QWidget *parent) :
 	ui(new Ui::WordWindow) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
+	setFocusPolicy(Qt::NoFocus);
 	QDesktopWidget *deskWgt = QApplication::desktop();
 	move(deskWgt->width() / 2 - 480, deskWgt->height() / 2 + 340);
 }

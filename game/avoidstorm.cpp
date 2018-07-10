@@ -14,6 +14,8 @@ AvoidStorm::AvoidStorm(QWidget *parent) :
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	scene->setFocus();
+	grabKeyboard();
 
 	loadRes();
 }
@@ -21,6 +23,8 @@ AvoidStorm::AvoidStorm(QWidget *parent) :
 void AvoidStorm::loadRes() {
 	playerInWind = new PlayerInWind();
 	scene->addItem(playerInWind);
+	scene->setFocusItem(playerInWind);
+	playerInWind->grabKeyboard();
 	sendTimer = new QTimer(this);
 	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendTornado()));
 	sendTimer->start(500);

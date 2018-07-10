@@ -17,6 +17,7 @@ public:
 	~AchieveData();
 	static const int ACHIEVE_ONE = 0;
 	void addAchieve(int);
+	bool *getAllAchieve();
 
 private:
 	bool m_achieves[25] = { 0 };

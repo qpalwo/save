@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QObject>
 #include <QPainterPath>
+#include <QKeyEvent>
 #include "fireburnbook.h"
 
 class BookToBurn : public QObject, public QGraphicsItem 
