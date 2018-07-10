@@ -38,6 +38,7 @@ public:
 
 private:
     Ui::SceneRuins *ui;
+
     QImage backGround;
     QImage earth;
 	QImage conver;
