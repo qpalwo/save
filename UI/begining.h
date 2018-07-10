@@ -2,6 +2,10 @@
 #define BEGINING_H
 
 #include <QWidget>
+#include <qpainter.h>
+#include <qimage.h>
+#include <QKeyEvent>
+#include <qstring.h>
 
 namespace Ui {
 class Begining;
@@ -14,9 +18,17 @@ class Begining : public QWidget
 public:
     explicit Begining(QWidget *parent = 0);
     ~Begining();
+	void paintEvent(QPaintEvent * e);
 
 private:
     Ui::Begining *ui;
+	void load();
+	void keyPressEvent(QKeyEvent *e);
+
+	int count;
+
+	QImage back;
+	QString p[20];
 };
 
 #endif // BEGINING_H
