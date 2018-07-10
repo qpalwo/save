@@ -77,10 +77,9 @@ void menuwidget::onBagClicked()
 {
     timerHide->stop();
     timerShow->stop();
-
+    bagwidget = new Bag(scene, this, parentWidget());
     this->hide();
-    //this->show();
-    //connect(bag,SIGNAL(exitBag()),this,SLOT(show()));
+    bagwidget->show();
 }
 
 void menuwidget::onMapClicked()

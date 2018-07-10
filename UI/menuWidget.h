@@ -11,8 +11,10 @@
 #include "openpagebutton.h"
 #include <QGridLayout>
 #include <QTimeLine>
-#include "bag.h"
 #include <QString>
+
+class Bag;
+#include "bag.h"
 
 namespace Ui {
 class menuwidget;

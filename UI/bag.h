@@ -8,6 +8,12 @@
 #include <QTimeLine>
 #include <QCloseEvent>
 #include <QString>
+#include <QPixmap>
+#include <QMouseEvent>
+#include <QPoint>
+
+class menuwidget;
+#include "menuWidget.h"
 
 namespace Ui {
 class Bag;
@@ -18,7 +24,7 @@ class Bag : public QWidget
     Q_OBJECT
 
 public:
-    Bag(QString res,QWidget *parent = nullptr);
+    Bag(QString res,QWidget *menu,QWidget *parent = nullptr);
     void closeEvent(QCloseEvent *e);
     ~Bag();
 
@@ -28,14 +34,25 @@ private:
     QImage backGround;
     QString scene;
 
-    QImage bottle;
-    QImage conch;
-    QImage gem;
-    QImage stellball;
-    QImage stick;
+    QPixmap prop1;
+    QPixmap prop2;
+    QPixmap prop3;
+    QPixmap prop4;
+    QPixmap prop5;
+    QPixmap prop6;
+    QPixmap prop7;
+    QPixmap prop8;
+    QPixmap prop9;
+    QPixmap prop10;
+    QPixmap prop11;
+    QPixmap prop12;
+
+    QPoint mouse;
 
     QTimeLine *timerShow;
     QTimeLine *timerHide;
+
+    menuwidget *newMenu;
 
     int backX;
 
@@ -48,9 +65,6 @@ private:
 private slots:
     void bagShow();
     void bagHide();
-
-signals:
-    void exitBag();
 
 };
 
