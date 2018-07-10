@@ -26,8 +26,12 @@ private:
 	void keyPressEvent(QKeyEvent *e);
 
 	int count;
+	int c2;
 	int jump;
+	int jump2;
 	bool zx;
+	bool Lock;
+	
 	bool jump1;
 
 	QImage back;
