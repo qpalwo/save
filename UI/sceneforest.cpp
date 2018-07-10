@@ -33,7 +33,7 @@ void SceneForest::loadImage() {
 	earth.load(":/scene/forest_2.png");
 	player = new QMovie(":/people/forest_right.gif");
 	player_left = new QMovie(":/people/forest_left.gif");
-	uncle.load(":/people/young.png");
+	uncle.load(":/people/young_right.png");
 	house_closed.load(":/scene/forest_house_close.png");
 	house_open.load(":/scene/forest_house_open.png");
 	option_1.load(":/conver/convar/choice_1.png");
@@ -78,8 +78,17 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	if (first) 	painter.drawText(180, 150, begin);
 
 	painter.setPen(QColor(250, 250, 250));
+
+	if (talk == 2) 	playerX =560;
+	else if (talk == 14) playerX = 630;
+
+	if (talk >= 16) { 
+		painter.drawImage(580, 240, uncle); 
+	}	else
+	if (talk>=12) painter.drawImage(400, 240, uncle);
+
 	if (playerX >= 440) {
-		painter.drawImage(850, 260, uncle);
+	//	painter.drawImage(850, 260, uncle);
 		if (not_yet)
 			painter.drawImage(BDL, -10, house_closed);
 		else	painter.drawImage(BDL, -10, house_open);
