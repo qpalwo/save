@@ -30,11 +30,12 @@ public:
 	BagThing *getBagThing();
 	void addBagThing(int);
 	void save();
+	void load();
 
 private:
 	BagThing m_bagThing[12];
 
-	void load();
+	
 
 };
 
@@ -42,6 +43,7 @@ class Player : public QObject
 {
     Q_OBJECT
 public:
+	~Player();
 	static Player * getInstance();
 	void checkStaus();
 
@@ -51,8 +53,11 @@ public:
 	void minusMood(int);
 	BagThing *getBagThing();
 	void addBagThing(int);
+	int nowStaus();
+	void load();
 
 signals:
+	void stausChange();
 
 public slots:
 
@@ -70,7 +75,6 @@ private:
 	int m_staus;
 
 	void save();
-	void load();
 };
 
 

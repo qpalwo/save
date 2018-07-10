@@ -89,7 +89,7 @@ void menuwidget::onMapClicked()
 
 void menuwidget::onReadClicked()
 {
-
+	GameWorld::getInstance()->showSaveAndLoad();
 }
 
 void menuwidget::onSaveClicked()

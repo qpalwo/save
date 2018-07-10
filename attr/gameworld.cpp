@@ -13,7 +13,7 @@ void saveToDisk(QByteArray content, QString path) {
 		}
 		else {
 			qDebug() << "save unsuccessful";
-		}	
+		}
 	}
 }
 
@@ -53,7 +53,7 @@ void GameWorld::hideAchieve() {
 }
 
 void GameWorld::save() {
-
+	m_achieve.save();
 }
 
 void GameWorld::load() {
@@ -72,9 +72,8 @@ void GameWorld::addAchieve(int num) {
 	m_achieve.addAchieve(num);
 }
 
-GameWorld::GameWorld(QObject *parent) : QObject(parent)
-{
-
+GameWorld::GameWorld(QObject *parent) : QObject(parent) {
+	GameWorld::load();
 }
 
 GameWorld* GameWorld::Instance = new GameWorld();
@@ -88,6 +87,10 @@ void GameWorld::fromMainToBegining() {
 void GameWorld::fromBeginingToRuinsCity() {
 	UiManager::getInstance()->openRuins();
 	UiManager::getInstance()->closeBegining();
+}
+
+void GameWorld::showSaveAndLoad() {
+	UiManager::getInstance()->openSaveAndLoad();
 }
 
 void GameWorld::beginSmellCollect() {
@@ -106,14 +109,30 @@ void GameWorld::beginBurnBook() {
 	UiManager::getInstance()->openBurnBook(gameHard);
 }
 
+QString* GameWorld::getAllSaves() {
+	return savesPath;
+}
+
+void GameWorld::addSaves(QString path, int position) {
+	savesPath[position] = path;
+}
 
 GameWorld* GameWorld::getInstance() {
 	return Instance;
 }
 
 
+GameWorld::~GameWorld() {
+	GameWorld::save();
+}
+
+
+
+
+
+
 AchieveData::AchieveData() {
-	load();
+	AchieveData::load();
 }
 
 
@@ -156,5 +175,5 @@ bool * AchieveData::getAllAchieve() {
 }
 
 AchieveData::~AchieveData() {
-
+	AchieveData::save();
 }

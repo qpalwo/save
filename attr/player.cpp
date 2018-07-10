@@ -5,15 +5,14 @@ extern void saveToDisk(QByteArray content, QString path);
 extern QByteArray loadFromDisk(QString path);
 
 
-Player::Player(QObject *parent) : QObject(parent)
-{
+Player::Player(QObject *parent) : QObject(parent) {
 
 }
 
 Player* Player::Instance = new Player();
 
 void Player::checkStaus() {
-
+	// if staus change, emit stausChange
 }
 
 void Player::addPower(int num) {
@@ -43,9 +42,29 @@ void Player::addBagThing(int num) {
 	backBag.addBagThing(num);
 }
 
+int Player::nowStaus() {
+	return m_staus;
+}
+
+void Player::save() {
+	backBag.save();
+}
+
+void Player::load() {
+
+}
+
+
 Player* Player::getInstance() {
 	return Player::Instance;
 }
+
+Player::~Player() {
+	Player::save();
+}
+
+
+
 
 
 BackBag::BackBag() {
@@ -93,6 +112,7 @@ BagThing* BackBag::getBagThing() {
 
 void BackBag::addBagThing(int thing) {
 	m_bagThing[thing].num++;
+	BackBag::save();
 }
 
 BackBag::~BackBag() {

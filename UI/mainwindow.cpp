@@ -231,7 +231,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 }
 
 void MainWindow::onContinueClicked() {
-	GameWorld::getInstance()->quitGame();
+	GameWorld::getInstance()->showSaveAndLoad();
 
 }
 
