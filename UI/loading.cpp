@@ -57,3 +57,7 @@ void Loading::on_pushButton_9_clicked() {
 	UiManager::getInstance()->showKeepMoving();
 }
 
+void Loading::on_pushButton_10_clicked() {
+	UiManager::getInstance()->showBurnBook();
+}
+

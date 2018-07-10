@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow) {
 	ui->setupUi(this);
-	setWindowFlag(Qt::CustomizeWindowHint);
-	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
+	setWindowFlag(Qt::FramelessWindowHint);
+	//setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 	sceneType = qrand() % 4;
 	initTimer();
@@ -236,7 +236,7 @@ void MainWindow::onContinueClicked() {
 }
 
 void MainWindow::onAchieveClicked() {
-
+	GameWorld::getInstance()->showAchieve();
 }
 
 void MainWindow::onSetClicked() {

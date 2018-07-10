@@ -2,7 +2,6 @@
 #define KEEPMOVING_H
 
 #include <QGraphicsView>
-#include <QPixmap>
 #include <QPainter>
 #include <QGraphicsScene>
 #include <QTimer>
@@ -32,7 +31,6 @@ public slots:
 
 private:
     Ui::KeepMoving *ui;
-	QPixmap back;
 	QGraphicsScene *scene = NULL;
 	PlayerInWind *playerInWind = NULL;
 	QTimer *machineSendTimer = NULL;

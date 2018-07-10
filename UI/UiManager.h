@@ -11,6 +11,8 @@
 #include "scenesnow.h"
 #include "game/keepmoving.h"
 #include "begining.h"
+#include "game/burnbook.h"
+#include "achieve.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -29,6 +31,8 @@ public:
 	void closeSnow();
 	void closeKeepMoving();
 	void closeBegining();
+	void closeBurnBook();
+	void closeAchieve();
 	void closeAll();
 
 	void openMainPage();
@@ -42,6 +46,8 @@ public:
 	void openSnow();
 	void openKeepMoving();
 	void openBegining();
+	void openBurnBook();
+	void openAchieve();
 
 	void init();
 
@@ -54,6 +60,7 @@ public slots:
 	void showRuins();
 	void showSnow();
 	void showKeepMoving();
+	void showBurnBook();
 
 private:
 	static UiManager *Instance;
@@ -65,10 +72,12 @@ private:
 	SceneSnow *sceneSnow = NULL;
 	QWidget *loading = NULL;
 	Begining *begining = NULL;
+	Achieve *achieve = NULL;
 
 	SunSmellCollect *sunSmellCollect = NULL;
 	AvoidStorm *avoidStorm = NULL;
 	KeepMoving *keepMoving = NULL;
+	BurnBook *burnBook = NULL;
 
 	bool isWordWindowOpen = false;
 
