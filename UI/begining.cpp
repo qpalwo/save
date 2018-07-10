@@ -6,7 +6,7 @@ Begining::Begining(QWidget *parent) :
     ui(new Ui::Begining)
 {
     ui->setupUi(this);
-	setWindowFlag(Qt::CustomizeWindowHint);
+	setWindowFlag(Qt::FramelessWindowHint);
 }
 
 Begining::~Begining()
