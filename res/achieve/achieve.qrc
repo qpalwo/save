@@ -1,5 +1,51 @@
 <RCC>
     <qresource prefix="/achieve">
         <file>back.png</file>
+        <file>achieve_1.png</file>
+        <file>achieve_1_2.png</file>
+        <file>achieve_2.png</file>
+        <file>achieve_2_2.png</file>
+        <file>achieve_3.png</file>
+        <file>achieve_3_2.png</file>
+        <file>achieve_4.png</file>
+        <file>achieve_4_2.png</file>
+        <file>achieve_5.png</file>
+        <file>achieve_5_2.png</file>
+        <file>achieve_6.png</file>
+        <file>achieve_6_2.png</file>
+        <file>achieve_7.png</file>
+        <file>achieve_7_2.png</file>
+        <file>achieve_8.png</file>
+        <file>achieve_8_2.png</file>
+        <file>achieve_9.png</file>
+        <file>achieve_9_2.png</file>
+        <file>achieve_10.png</file>
+        <file>achieve_10_2.png</file>
+        <file>achieve_11.png</file>
+        <file>achieve_11_2.png</file>
+        <file>achieve_12.png</file>
+        <file>achieve_12_2.png</file>
+        <file>achieve_13.png</file>
+        <file>achieve_13_2.png</file>
+        <file>achieve_14.png</file>
+        <file>achieve_14_2.png</file>
+        <file>achieve_15.png</file>
+        <file>achieve_15_2.png</file>
+        <file>achieve_16.png</file>
+        <file>achieve_16_2.png</file>
+        <file>achieve_17.png</file>
+        <file>achieve_17_2.png</file>
+        <file>achieve_18.png</file>
+        <file>achieve_18_2.png</file>
+        <file>achieve_19.png</file>
+        <file>achieve_19_2.png</file>
+        <file>achieve_20.png</file>
+        <file>achieve_20_2.png</file>
+        <file>achieve_21.png</file>
+        <file>achieve_21_2.png</file>
+        <file>achieve_22.png</file>
+        <file>achieve_22_2.png</file>
+        <file>achieve_23.png</file>
+        <file>achieve_23_2.png</file>
     </qresource>
 </RCC>
