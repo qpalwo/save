@@ -67,7 +67,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //绘制矩形 
 
-
 	if (first) 	painter.drawText(180, 150, begin);
 
 	painter.setPen(QColor(250, 250, 250));
@@ -130,12 +129,11 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_Left: playerX -= 10;  left = true; break;
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
-
 		}
+
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
 			if (underTheTree(1))	waitTime++;
-		}
-		else waitTime = 0;
+		}	else waitTime = 0;
 
 		if (playerX < 430) first = true;
 
@@ -169,7 +167,6 @@ bool SceneForest::underTheTree(int n) {
 
 
 void SceneForest::loadPlot() {
-	int i = 0, j = 0;
 
 	begin = QString::fromLocal8Bit("这就是森林吗....为什么会有花....不是早就灭绝了吗");
 

@@ -32,7 +32,7 @@ void SceneRuins::loadImage()
     earth.load(":/ruins/scene/ruins_1.png");
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
-
+	child.load(":/ruins/people/pink.png");
 	conver.load(":/conver/convar/convar.png");
     player->start();
     player_left->start();
@@ -47,7 +47,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	painter.setPen(pen); //添加画笔
 	painter.setBrush(brush); //添加画刷
 
-	painter.setPen(QColor(100, 100, 20));
+	painter.setPen(QColor(100, 200, 200));
 	QFont font;
 	font.setFamily("微软雅黑");
 	font.setPointSize(14);	// 大小
@@ -67,7 +67,32 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //绘制矩形 
 
+	if (first) 	painter.drawText(180, 150, begin);
     painter.drawImage(backX, backY, earth);
+
+	painter.setPen(QColor(250, 250, 250));
+	if (playerX >= 440) {
+		painter.drawImage(690, 25, child);
+		painter.drawImage(0, 0, conver);
+		if (zxLock) {
+			painter.drawText(280, 612, record_1);
+			painter.drawText(280, 666, record_2);
+		}
+		else {
+			painter.drawText(280, 612, q[talk].s);
+			if (q[talk].hu) {
+				painter.drawText(280, 666, q[talk + 1].s);
+			}
+			if (q[talk].diff) {
+				record_1 = q[talk].s;
+				record_2 = q[talk + 1].s;
+				talk++;
+				painter.drawText(280, 666, q[talk].s);
+				zxLock = true;
+			}
+		}
+	}
+	first = false;
 }
 
 void SceneRuins::keyPressEvent(QKeyEvent* e)
@@ -93,6 +118,10 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
             stop = false;
             playerX -= 10;
         }
+
+		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
+			if (underDoor(2))	waitTime++;
+		}	else waitTime = 0;
     }
     else {
         switch (e->key())
@@ -123,12 +152,40 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
         {
             playerX -= 10;
         }
+
+		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
+			if (underDoor(1))	waitTime++;
+		}	else waitTime = 0;
+
+		if (playerX < 430) first = true;
+
+		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
+
+		if (q[talk].diff) {
+			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxLock = false; }
+			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxLock = false; }
+		}
     }
 
     update();
 }
 
+bool SceneRuins::underDoor(int n) {
+	if (n == 2) {
+		if ((backX >= -70) && (backX <= -40))  return true;
+		if ((backX >= -570) && (backX <= -530))  return true;
+		if ((backX >= -1410) && (backX <= -1380))  return true;
+		if ((backX >= -2110) && (backX <= -2070))  return true;
+	}
+	return false;
+}
+
 void SceneRuins::loadPlot() {
+	begin = QString::fromLocal8Bit("千篇一律的灰色...果然,压抑的布局也会使人心情更不愉快啊");
+
+	q[0].s= QString::fromLocal8Bit("恩？似乎有什么声音？(抬头)"); q[0].diff = false; q[0].hu = false;
+
+	q[0].l = 1; q[1].s = QString::fromLocal8Bit("（看见一个小孩爬在塔上，快要掉下来）"); q[1].diff = false; q[1].hu = false;
 
 }
 

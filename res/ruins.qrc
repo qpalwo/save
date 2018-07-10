@@ -2,5 +2,6 @@
     <qresource prefix="/ruins">
         <file>scene/ruins_1.png</file>
         <file>scene/ruins_2.png</file>
+        <file>people/pink.png</file>
     </qresource>
 </RCC>
