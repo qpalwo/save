@@ -8,7 +8,10 @@ Begining::Begining(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 
+	zx = false;
+	jump1 = false;
 	count = 0;
+	jump = 0;
 	load();
 }
 
@@ -27,7 +30,7 @@ void Begining::paintEvent(QPaintEvent * e) {
 
 	painter.drawImage(0,0,back);
 
-	if (count < 8) {
+	if (!zx) {
 		for (i = 0; i <= count; i++) {
 			if (i == 7) {
 				painter.drawText(290, 100 + i * 40, p[i]);
@@ -37,13 +40,32 @@ void Begining::paintEvent(QPaintEvent * e) {
 			painter.drawText(290, 100 + i * 40, p[i]);
 		}
 	}
+	if (jump == 1) {
+		painter.drawText(290, 200, p[30]);
+		painter.drawText(290, 240, p[31]);
+		if (jump1) {
+			painter.drawText(290, 300, p[32]);
+			painter.drawText(290, 340, p[33]);
+			painter.drawText(290, 380, p[34]);
+		}
+	}
+	if (jump == 2) {
 
+	}
 
 }
 
 void Begining::keyPressEvent(QKeyEvent *e) {
+	if (count < 7) {
+		if (e->key() == Qt::Key_Space) count++;
+	}
+	else {
+		if (e->key() == Qt::Key_Z) { zx = true; jump = 1; }
+		if (e->key() == Qt::Key_X) { zx = true; jump = 2; }
+	}
 
-	if (e->key()==Qt::Key_Space) count++;
+	if ((jump == 1) && (e->key() == Qt::Key_Space)) jump1 = true;
+	
 	update();
 }
 
@@ -61,6 +83,12 @@ void Begining::load() {
 	p[6] = QString::fromLocal8Bit("除了——老头最后留下的信");
 	p[7] = QString::fromLocal8Bit("是否查看信件?  ");
 	p[8] = QString::fromLocal8Bit("  z. 不了     x. 看一下");
+
+	p[30]= QString::fromLocal8Bit("还是算了...毕竟也是要去陪他的人了，");
+	p[31] = QString::fromLocal8Bit("有什么东西在到时候再说吧。");
+	p[32] = QString::fromLocal8Bit("（滴滴答答的声音响起..）");
+	p[33] = QString::fromLocal8Bit("不对...我, 似乎..上不了天堂啊..");
+	p[34] = QString::fromLocal8Bit("抱歉，老头...（BadEnding）");
 }
 
 Begining::~Begining()

@@ -26,9 +26,12 @@ private:
 	void keyPressEvent(QKeyEvent *e);
 
 	int count;
+	int jump;
+	bool zx;
+	bool jump1;
 
 	QImage back;
-	QString p[20];
+	QString p[50];
 };
 
 #endif // BEGINING_H
