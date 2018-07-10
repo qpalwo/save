@@ -37,7 +37,14 @@ private:
 	QTimer *lighteSendTimer = NULL;
 
 	void loadRes();
+	void determineHard();
+
 	int gameHard;
+	int playerSpeed;
+	float lightSpeed;
+	float machineSpeed;
+	int machineLunchSpeed;
+	int lightLunchSpeed;
 
 };
 

@@ -1,10 +1,10 @@
 #include "tornado.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-Tornado::Tornado(int x, QString path) {
+Tornado::Tornado(int x, float game_vy, QString path) {
 	height = 30;
 	width = 30;
-	vy = 10;
+	vy = game_vy;
 	setY(5);
 	setX(x);
 	moveBy(x, y());

@@ -11,6 +11,7 @@ KeepMoving::KeepMoving(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	determineHard();
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
@@ -22,7 +23,7 @@ KeepMoving::KeepMoving(int hard, QWidget *parent) :
 }
 
 void KeepMoving::loadRes() {
-	playerInWind = new PlayerInWind();
+	playerInWind = new PlayerInWind(playerSpeed);
 	scene->addItem(playerInWind);
 	scene->setFocusItem(playerInWind);
 	playerInWind->grabKeyboard();
@@ -30,8 +31,8 @@ void KeepMoving::loadRes() {
 	lighteSendTimer = new QTimer(this);
 	connect(machineSendTimer, SIGNAL(timeout()), this, SLOT(sendMachine()));
 	connect(lighteSendTimer, SIGNAL(timeout()), this, SLOT(sendLight()));
-	machineSendTimer->start(500);
-	lighteSendTimer->start(500);
+	machineSendTimer->start(machineLunchSpeed);
+	lighteSendTimer->start(lightLunchSpeed);
 }
 
 void KeepMoving::sendMachine() {
@@ -49,7 +50,7 @@ void KeepMoving::sendMachine() {
 	else {
 		path = ":/game/SunSmellCollect/machine.png";
 	}
-	Tornado *tornado = new Tornado(qrand() % 860, path);
+	Tornado *tornado = new Tornado(qrand() % 860, machineSpeed, path);
 	tornado->bindPlayer(playerInWind);
 	scene->addItem(tornado);
 	connect(this, SIGNAL(finishGame()), tornado, SLOT(finishGame()));
@@ -57,11 +58,39 @@ void KeepMoving::sendMachine() {
 }
 
 void KeepMoving::sendLight() {
-	Tornado *tornado = new Tornado(qrand() % 860, QString(":/game/SunSmellCollect/light.png"));
+	Tornado *tornado = new Tornado(qrand() % 860, lightSpeed, QString(":/game/SunSmellCollect/light.png"));
 	tornado->bindPlayer(playerInWind);
 	scene->addItem(tornado);
 	connect(this, SIGNAL(finishGame()), tornado, SLOT(finishGame()));
 	connect(tornado, SIGNAL(collided()), this, SLOT(addMark()));
+}
+
+void KeepMoving::determineHard() {
+	switch (gameHard) {
+	case 1:
+		playerSpeed = 16;
+		machineLunchSpeed = 800;
+		lightLunchSpeed = 300;
+		lightSpeed = 5;
+		machineSpeed = 5;
+
+		break;
+	case 2:
+		playerSpeed = 13;
+		machineLunchSpeed = 500;
+		lightLunchSpeed = 500;
+		lightSpeed = 4;
+		machineSpeed = 6;
+		break;
+	case 3:
+	default:
+		playerSpeed = 10;
+		machineLunchSpeed = 300;
+		lightLunchSpeed = 800;
+		lightSpeed = 3;
+		machineSpeed = 7;
+		break;
+	}
 }
 
 void KeepMoving::addMark() {

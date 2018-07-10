@@ -1,12 +1,10 @@
 #include "fireburnbook.h"
 
-FireBurnBook::FireBurnBook(int x, int y) {
+FireBurnBook::FireBurnBook(int x, int y, int size) {
 	pixMap.load(":/game/SunSmellCollect/fire.png");
-	//setFlag(QGraphicsItem::ItemIsFocusable);
-	//setFocus(Qt::OtherFocusReason);
 	moveBy(x, y);
-	height = 150;
-	width = 150;
+	height = size;
+	width = size;
 }
 
 QRectF FireBurnBook::boundingRect() const {
