@@ -49,8 +49,6 @@ public:
 	void minusPower(int);
 	void addMood(int);
 	void minusMood(int);
-	void addSatiety(int);
-	void minusSatiety(int);
 
 signals:
 
@@ -66,7 +64,6 @@ private:
 
 	int m_power;
 	int m_mood;
-	int m_satiety;
 
 	int m_staus;
 

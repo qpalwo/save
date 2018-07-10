@@ -70,7 +70,7 @@ void menuwidget::initbutton()
 
 void menuwidget::onAchieveClicked()
 {
-
+	GameWorld::getInstance()->showAchieve();
 }
 
 void menuwidget::onBagClicked()

@@ -13,6 +13,7 @@
 #include <QTimeLine>
 #include "bag.h"
 #include <QString>
+#include "attr/gameworld.h"
 
 namespace Ui {
 class menuwidget;

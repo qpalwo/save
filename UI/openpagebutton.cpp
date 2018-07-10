@@ -3,7 +3,7 @@
 
 OpenPageButton::OpenPageButton(QString res, QWidget *parent) :
 	QPushButton(parent) {
-	buttonState = Normal;
+	buttonState = __Normal;
 
 	QString normal = ":/button/" + res + "_1.png";
 	QString hover = ":/button/" + res + "_2.png";
@@ -20,7 +20,7 @@ OpenPageButton::OpenPageButton(QString res, QWidget *parent) :
 
 OpenPageButton::OpenPageButton(QString path, QString res, QWidget *parent) :
 	QPushButton(parent) {
-	buttonState = Normal;
+	buttonState = __Normal;
 
 	QString normal = ":/menuZ/menu/" + res + "_1.png";
 	QString hover = ":/menuZ/menu/" + res + "_2.png";
@@ -37,7 +37,7 @@ OpenPageButton::OpenPageButton(QString path, QString res, QWidget *parent) :
 
 OpenPageButton::OpenPageButton(QWidget *parent, QString path, QString res) : 
 	QPushButton(parent) {
-	buttonState = Normal;
+	buttonState = __Normal;
 
 	QString normal = ":" + path + res + "_1.png";
 	QString hover = ":" + path + res + "_2.png";
@@ -57,13 +57,13 @@ void OpenPageButton::paintEvent(QPaintEvent *) {
 	QPainter painter(this);
 
 	switch (buttonState) {
-	case Normal:
+	case __Normal:
 		painter.drawPixmap(this->rect(), normalPixmap);
 		break;
-	case Hover:
+	case __Hover:
 		painter.drawPixmap(this->rect(), hoverPixmap);
 		break;
-	case Pressed:
+	case __Pressed:
 		painter.drawPixmap(this->rect(), pressPixmap);
 	}
 
@@ -71,14 +71,14 @@ void OpenPageButton::paintEvent(QPaintEvent *) {
 }
 
 void OpenPageButton::enterEvent(QEvent *) {
-	buttonState = Hover;
+	buttonState = __Hover;
 	if (this) {
 		update();
 	}
 }
 
 void OpenPageButton::leaveEvent(QEvent *) {
-	buttonState = Normal;
+	buttonState = __Normal;
 	if (this) {
 		update();
 	}
@@ -86,7 +86,7 @@ void OpenPageButton::leaveEvent(QEvent *) {
 
 void OpenPageButton::mousePressEvent(QMouseEvent *e) {
 	if (e->button() == Qt::LeftButton) {
-		buttonState = Pressed;
+		buttonState = __Pressed;
 		if (this) {
 			update();
 		}
@@ -108,7 +108,7 @@ void OpenPageButton::mouseReleaseEvent(QMouseEvent *e) {
 			emit clicked();
 		}
 
-		buttonState = Hover;
+		buttonState = __Hover;
 		if (this) {
 			update();
 		}

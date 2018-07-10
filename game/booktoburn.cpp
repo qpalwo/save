@@ -25,7 +25,7 @@ void BookToBurn::bindFire(FireBurnBook *fire) {
 }
 
 void BookToBurn::keyPressEvent(QKeyEvent *event) {
-	if (!isPressing) {
+	if (!event->isAutoRepeat() && !isPressing) {
 		isPressing = true;
 		nowTime = 0;
 		pressTimer->start(50);
@@ -33,8 +33,8 @@ void BookToBurn::keyPressEvent(QKeyEvent *event) {
 }
 
 void BookToBurn::keyReleaseEvent(QKeyEvent *event) {
-	if (isPressing) {
-		isPressing = true;
+	if (!event->isAutoRepeat() && isPressing) {
+		isPressing = false;
 		pressTimer->stop();
 		throughBook();
 	}
@@ -42,7 +42,7 @@ void BookToBurn::keyReleaseEvent(QKeyEvent *event) {
 
 
 QRectF BookToBurn::boundingRect() const {
-	return QRectF(0, 5, 80, 80);
+	return QRectF(0, 0, 80, 80);
 }
 
 void BookToBurn::onPressing() {
