@@ -17,7 +17,7 @@ class BurnBook : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit BurnBook(QWidget *parent = 0);
+    explicit BurnBook(int hard, QWidget *parent = 0);
     ~BurnBook();
 
 public slots:
@@ -35,6 +35,7 @@ private:
 	void addBook();
 	void loadRes();
 
+	int gameHard;
 	int leftBook;
 };
 

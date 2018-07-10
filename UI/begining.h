@@ -6,6 +6,7 @@
 #include <qimage.h>
 #include <QKeyEvent>
 #include <qstring.h>
+#include "attr/gameworld.h"
 
 namespace Ui {
 class Begining;

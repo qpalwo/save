@@ -1,5 +1,6 @@
 #pragma once
 
+#include "QTimer"
 #include "mainwindow.h"
 #include "scenedesert.h"
 #include "sceneforest.h"
@@ -35,19 +36,19 @@ public:
 	void closeAchieve();
 	void closeAll();
 
-	void openMainPage();
-	void openWordWIndow();
 	void openSceneDesert();
 	void openSceneForest();
-	void openLoading();
-	void openSunSmellCollect();
-	void openAvoidStorm();
 	void openRuins();
 	void openSnow();
-	void openKeepMoving();
 	void openBegining();
-	void openBurnBook();
+	void openMainPage();
+	void openWordWIndow();
+	void openLoading();
 	void openAchieve();
+	void openSunSmellCollect(int);
+	void openAvoidStorm(int);
+	void openBurnBook(int);
+	void openKeepMoving(int);
 
 	void init();
 

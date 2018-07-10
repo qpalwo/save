@@ -1,10 +1,11 @@
 #include "sunsmellcollect.h"
 #include "ui_sunsmellcollect.h"
 
-SunSmellCollect::SunSmellCollect(QWidget *parent) :
+SunSmellCollect::SunSmellCollect(int hard, QWidget *parent) :
 	QGraphicsView(parent),
 	ui(new Ui::SunSmellCollect) {
 	ui->setupUi(this);
+	gameHard = hard;
 	setWindowFlag(Qt::FramelessWindowHint);
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
