@@ -94,9 +94,25 @@ void UiManager::closeBegining() {
 	}
 }
 
+void UiManager::closeBurnBook() {
+	if (burnBook != NULL) {
+		burnBook->close();
+		delete burnBook;
+		burnBook = NULL;
+	}
+}
+
+void UiManager::closeAchieve() {
+	if (achieve != NULL) {
+		achieve->close();
+		delete achieve;
+		achieve = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
-	closeMainPage();
+	//closeMainPage();
 	closeSceneDesert();
 	closeSceneForest();
 	closeWordWIndow();
@@ -170,6 +186,18 @@ void UiManager::openBegining() {
 	openWordWIndow();
 }
 
+void UiManager::openBurnBook() {
+	burnBook = new BurnBook();
+	burnBook->show();
+	openWordWIndow();
+}
+
+void UiManager::openAchieve() {
+	achieve = new Achieve();
+	achieve->show();
+	openWordWIndow();
+}
+
 void UiManager::showMainWindow() {
 	openMainPage();
 	closeLoading();
@@ -207,6 +235,11 @@ void UiManager::showSnow() {
 
 void UiManager::showKeepMoving() {
 	openKeepMoving();
+	closeLoading();
+}
+
+void UiManager::showBurnBook() {
+	openBurnBook();
 	closeLoading();
 }
 

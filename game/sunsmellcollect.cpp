@@ -9,7 +9,7 @@ SunSmellCollect::SunSmellCollect(QWidget *parent) :
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setBackgroundBrush(QPixmap(":/forest/scene/forest_1.png"));
+	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);

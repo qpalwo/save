@@ -6,6 +6,7 @@ SceneSnow::SceneSnow(QWidget *parent) :
     ui(new Ui::SceneSnow)
 {
     ui->setupUi(this);
+	setWindowFlag(Qt::FramelessWindowHint);
 
     backX = 0;
     backY = 0;

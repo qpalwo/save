@@ -8,5 +8,6 @@
         <file>machine.png</file>
         <file>machine2.png</file>
         <file>machine3.png</file>
+        <file>back.png</file>
     </qresource>
 </RCC>

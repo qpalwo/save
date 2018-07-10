@@ -143,6 +143,19 @@
     <string>KeepMoving</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_10">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>180</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>burnBook</string>
+   </property>
+  </widget>
   <zorder>gifLabel</zorder>
   <zorder>pushButton</zorder>
   <zorder>pushButton_2</zorder>
@@ -153,6 +166,7 @@
   <zorder>pushButton_7</zorder>
   <zorder>pushButton_8</zorder>
   <zorder>pushButton_9</zorder>
+  <zorder>pushButton_10</zorder>
  </widget>
  <resources/>
  <connections/>

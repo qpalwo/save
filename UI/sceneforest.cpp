@@ -6,6 +6,7 @@ SceneForest::SceneForest(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::SceneForest) {
 	ui->setupUi(this);
+	setWindowFlag(Qt::FramelessWindowHint);
 
 	backX = 0;   backY = 0;
 	playerX = 0;

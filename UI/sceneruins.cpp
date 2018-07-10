@@ -6,6 +6,8 @@ SceneRuins::SceneRuins(QWidget *parent) :
     ui(new Ui::SceneRuins)
 {
     ui->setupUi(this);
+	setWindowFlag(Qt::FramelessWindowHint);
+
     backX = 0;
     backY = 0;
     playerX = 0;
