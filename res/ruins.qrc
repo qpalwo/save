@@ -4,5 +4,6 @@
         <file>scene/ruins_2.png</file>
         <file>people/pink.png</file>
         <file>scene/begining.png</file>
+        <file>people/pink_left.png</file>
     </qresource>
 </RCC>

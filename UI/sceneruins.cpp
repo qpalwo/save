@@ -32,7 +32,7 @@ void SceneRuins::loadImage()
     earth.load(":/ruins/scene/ruins_1.png");
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
-	child.load(":/ruins/people/pink.png");
+	child.load(":/ruins/people/pink_left.png");
 	conver.load(":/conver/convar/convar.png");
     player->start();
     player_left->start();
@@ -73,7 +73,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 	painter.setPen(QColor(250, 250, 250));
 	if (playerX >= 440) {
-		painter.drawImage(690, 25, child);
+		painter.drawImage(750, 25, child);
 		painter.drawImage(0, 0, conver);
 		if (zxLock) {
 			painter.drawText(280, 612, record_1);
