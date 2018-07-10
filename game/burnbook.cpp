@@ -11,6 +11,7 @@ BurnBook::BurnBook(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	determineHard(); // 决定游戏难度
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
@@ -21,7 +22,7 @@ BurnBook::BurnBook(int hard, QWidget *parent) :
 }
 
 void BurnBook::loadRes() {
-	fireBurnBook = new FireBurnBook(700, 500);
+	fireBurnBook = new FireBurnBook(700, 500, fireSize);
 	scene->addItem(fireBurnBook);
 	addBook();
 }
@@ -39,6 +40,20 @@ void BurnBook::addBook() {
 	}
 }
 
+void BurnBook::determineHard() {
+	switch (gameHard) {
+	case 1:
+		fireSize = 150;
+		break;
+	case 2:
+		fireSize = 130;
+		break;
+	case 3:
+	default:
+		fireSize = 110;
+		break;
+	}
+}
 
 void BurnBook::onBurned() {
 	m_book = NULL;

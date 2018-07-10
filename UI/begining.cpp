@@ -7,6 +7,7 @@ Begining::Begining(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
+	grabKeyboard();
 
 	zx = false;
 	jump1 = false;

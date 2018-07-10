@@ -149,8 +149,10 @@ void AchieveData::load() {
 }
 
 bool * AchieveData::getAllAchieve() {
-	bool a[23] = { true, true, true, true, true, true, true, true, true, true };
-	return a;
+	for (int i = 0; i < 7; i++) {
+		m_achieves[i] = true;
+	}
+	return m_achieves;
 }
 
 AchieveData::~AchieveData() {

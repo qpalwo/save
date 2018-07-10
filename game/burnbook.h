@@ -34,9 +34,11 @@ private:
 
 	void addBook();
 	void loadRes();
+	void determineHard();
 
 	int gameHard;
 	int leftBook;
+	int fireSize;
 };
 
 #endif // BURNBOOK_H

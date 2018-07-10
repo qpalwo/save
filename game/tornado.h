@@ -15,7 +15,7 @@ class Tornado : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 public:
-    Tornado(int, QString);
+    Tornado(int, float, QString);
 	~Tornado();
 
 	QRectF boundingRect() const;

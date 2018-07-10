@@ -7,7 +7,7 @@ UiManager::UiManager() {
 void UiManager::closeLoading() {
 	if (loading != NULL) {
 		loading->close();
-		delete loading;
+		loading->deleteLater();
 		loading = NULL;
 	}
 }
@@ -15,16 +15,15 @@ void UiManager::closeLoading() {
 void UiManager::closeWordWIndow() {
 	if (m_wordWindow != NULL) {
 		m_wordWindow->close();
-		delete m_wordWindow;
+		m_wordWindow->deleteLater();
 		m_wordWindow = NULL;
 	}
 }
 
 void UiManager::closeMainPage() {
 	if (mainWindow != NULL) {
-		mainWindow->hide();
 		mainWindow->close();
-		delete mainWindow;
+		mainWindow->deleteLater();
 		mainWindow = NULL;
 	}
 }
@@ -32,7 +31,7 @@ void UiManager::closeMainPage() {
 void UiManager::closeSceneDesert() {
 	if (sceneDesert != NULL) {
 		sceneDesert->close();
-		delete sceneDesert;
+		sceneDesert->deleteLater();
 		sceneDesert = NULL;
 	}
 }
@@ -40,15 +39,15 @@ void UiManager::closeSceneDesert() {
 void UiManager::closeSceneForest() {
 	if (sceneForest != NULL) {
 		sceneForest->close();
-		delete sceneForest;
-		sceneDesert = NULL;
+		sceneForest->deleteLater();
+		sceneForest = NULL;
 	}
 }
 
 void UiManager::closeSunSmellCollect() {
 	if (sunSmellCollect != NULL) {
 		sunSmellCollect->close();
-		delete sunSmellCollect;
+		sunSmellCollect->deleteLater();
 		sunSmellCollect = NULL;
 	}
 }
@@ -56,7 +55,7 @@ void UiManager::closeSunSmellCollect() {
 void UiManager::closeAvoidStorm() {
 	if (avoidStorm != NULL) {
 		avoidStorm->close();
-		delete avoidStorm;
+		avoidStorm->deleteLater();
 		avoidStorm = NULL;
 	}
 }
@@ -64,7 +63,7 @@ void UiManager::closeAvoidStorm() {
 void UiManager::closeRuins() {
 	if (sceneRuins != NULL) {
 		sceneRuins->close();
-		delete sceneRuins;
+		sceneRuins->deleteLater();
 		sceneRuins = NULL;
 	}
 }
@@ -72,7 +71,7 @@ void UiManager::closeRuins() {
 void UiManager::closeSnow() {
 	if (sceneSnow != NULL) {
 		sceneSnow->close();
-		delete sceneSnow;
+		sceneSnow->deleteLater();
 		sceneSnow = NULL;
 	}
 }
@@ -80,7 +79,7 @@ void UiManager::closeSnow() {
 void UiManager::closeKeepMoving() {
 	if (keepMoving != NULL) {
 		keepMoving->close();
-		delete keepMoving;
+		keepMoving->deleteLater();
 		keepMoving = NULL;
 	}
 }
@@ -88,7 +87,7 @@ void UiManager::closeKeepMoving() {
 void UiManager::closeBegining() {
 	if (begining != NULL) {
 		begining->close();
-		delete begining;
+		begining->deleteLater();
 		begining = NULL;
 	}
 }
@@ -96,7 +95,7 @@ void UiManager::closeBegining() {
 void UiManager::closeBurnBook() {
 	if (burnBook != NULL) {
 		burnBook->close();
-		delete burnBook;
+		burnBook->deleteLater();
 		burnBook = NULL;
 	}
 }
@@ -104,7 +103,7 @@ void UiManager::closeBurnBook() {
 void UiManager::closeAchieve() {
 	if (achieve != NULL) {
 		achieve->close();
-		delete achieve;
+		achieve->deleteLater();
 		achieve = NULL;
 	}
 }
@@ -212,16 +211,6 @@ void UiManager::showSceneForest() {
 	closeLoading();
 }
 
-void UiManager::showSunSmellCollect() {
-	openSunSmellCollect(1);
-	closeLoading();
-}
-
-void UiManager::showAvoidStorm() {
-	openAvoidStorm(1);
-	closeLoading();
-}
-
 void UiManager::showRuins() {
 	openRuins();
 	closeLoading();
@@ -233,12 +222,22 @@ void UiManager::showSnow() {
 }
 
 void UiManager::showKeepMoving() {
-	openKeepMoving(1);
+	openKeepMoving(3);
 	closeLoading();
 }
 
 void UiManager::showBurnBook() {
-	openBurnBook(1);
+	openBurnBook(3);
+	closeLoading();
+}
+
+void UiManager::showSunSmellCollect() {
+	openSunSmellCollect(3);
+	closeLoading();
+}
+
+void UiManager::showAvoidStorm() {
+	openAvoidStorm(3);
 	closeLoading();
 }
 
