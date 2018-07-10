@@ -60,6 +60,14 @@ void GameWorld::quitGame() {
 	qApp->quit();
 }
 
+bool* GameWorld::getAllAchieve() {
+	return m_achieve.getAllAchieve();
+}
+
+void GameWorld::addAchieve(int num) {
+	m_achieve.addAchieve(num);
+}
+
 GameWorld::GameWorld(QObject *parent) : QObject(parent)
 {
 
@@ -67,9 +75,6 @@ GameWorld::GameWorld(QObject *parent) : QObject(parent)
 
 GameWorld* GameWorld::Instance = new GameWorld();
 
-void GameWorld::addAchieve(int num) {
-	m_achieve.addAchieve(num);
-}
 
 void GameWorld::fromMainToBegining() {
 	UiManager::getInstance()->openBegining();
@@ -115,6 +120,11 @@ void AchieveData::load() {
 			}
 		}
 	}
+}
+
+bool * AchieveData::getAllAchieve() {
+	bool a[23] = { true, true, true, true, true, true, true, true, true, true };
+	return a;
 }
 
 AchieveData::~AchieveData() {

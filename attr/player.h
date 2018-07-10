@@ -49,6 +49,8 @@ public:
 	void minusPower(int);
 	void addMood(int);
 	void minusMood(int);
+	BagThing *getBagThing();
+	void addBagThing(int);
 
 signals:
 
