@@ -41,6 +41,7 @@ void SceneRuins::loadImage()
 void SceneRuins::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
 	QPen pen; //画笔
 	pen.setColor(QColor(255, 255, 0));
 	QBrush brush(QColor(255, 255, 0, 125)); //画刷
@@ -186,6 +187,9 @@ void SceneRuins::loadPlot() {
 	q[0].s= QString::fromLocal8Bit("恩？似乎有什么声音？(抬头)"); q[0].diff = false; q[0].hu = false;
 
 	q[0].l = 1; q[1].s = QString::fromLocal8Bit("（看见一个小孩爬在塔上，快要掉下来）"); q[1].diff = false; q[1].hu = false;
+
+	q[1].l = 2; q[2].s = QString::fromLocal8Bit("z.冲过去接住他（要求体力值大于**）"); q[2].diff = true; q[2].hu = false;
+    q[3].s = QString::fromLocal8Bit("x.不冲过去"); q[3].diff = true; q[3].hu = false;
 
 }
 

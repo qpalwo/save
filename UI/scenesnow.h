@@ -15,6 +15,14 @@
 #define BDL -2880
 #define BDR 0
 
+struct plot4 {
+	QString s;
+	bool diff;
+	bool hu;
+	int l;
+	int r;
+};
+
 namespace Ui {
 class SceneSnow;
 }
@@ -33,18 +41,31 @@ private:
 
     QImage backGround;
     QImage earth;
+	QImage conver;
+	QImage girl;
+	QString record_1;
+	QString record_2;
+	QString begin;
+	QString begin2;
+
     QMovie* player;
     QMovie* player_left;
 
 
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
+	void loadPlot();
+	struct plot4 q[100];
 
     int backX;
     int backY;
     int playerX;
+	int talk;
+
     bool stop;
     bool left;
+	bool zxLock;
+	bool first;
 };
 
 #endif // SCENESNOW_H

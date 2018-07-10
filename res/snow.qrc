@@ -2,5 +2,6 @@
     <qresource prefix="/snow">
         <file>scene/snow_1.png</file>
         <file>scene/snow_2.png</file>
+        <file>people/yellow.png</file>
     </qresource>
 </RCC>

@@ -88,7 +88,7 @@ void UiManager::closeKeepMoving() {
 void UiManager::closeBegining() {
 	if (begining != NULL) {
 		begining->close();
-		delete begining;
+		//delete begining;
 		begining = NULL;
 	}
 }
