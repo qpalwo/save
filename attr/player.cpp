@@ -35,13 +35,24 @@ void Player::minusMood(int num) {
 	checkStaus();
 }
 
+BagThing *Player::getBagThing() {
+	return backBag.getBagThing();
+}
+
+void Player::addBagThing(int num) {
+	backBag.addBagThing(num);
+}
+
 Player* Player::getInstance() {
 	return Player::Instance;
 }
 
 
 BackBag::BackBag() {
-
+	for (int i = 0; i < 12; i++) {
+		m_bagThing[i].id = i;
+		m_bagThing[i].num = 2;
+	}
 }
 
 void BackBag::save() {

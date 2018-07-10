@@ -20,7 +20,7 @@ public:
 	bool *getAllAchieve();
 
 private:
-	bool m_achieves[25] = { 0 };
+	bool m_achieves[23] = { 0 };
 	void save();
 	void load();
 
@@ -35,9 +35,9 @@ public:
 	void quitGame();
 
 	void setGameHard(int);
+	bool* getAllAchieve();
 
 	void fromMainToBegining();
-
 	void showAchieve();
 	void hideAchieve();
 
