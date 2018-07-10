@@ -47,11 +47,15 @@ private:
 
 	QImage backGround;
 	QImage earth;
-	QImage option_1;
-	QImage option_2;
-	QImage option_3;
 	QImage conver;
 	QImage uncle;
+
+	QString record_1;
+	QString record_2;
+	QString mouse_out;
+	QString begin;
+	QString begin2;
+
 	QPoint mouse;
 
 	QMovie *player; 
@@ -68,14 +72,13 @@ private:
 	int playerX;
 	int waitTime;
 	int talk;
-	QString mouse_out;
 	struct plot q[100];
 
 	bool stop;
 	bool left;
-	bool choose;
-	bool zz;
-	bool xx;
+	bool first;
+	bool zxFuck;
+	bool f[100];
 };
 
 #endif // SCENEDESERT_H
