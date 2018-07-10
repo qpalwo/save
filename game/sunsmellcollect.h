@@ -20,7 +20,7 @@ class SunSmellCollect : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit SunSmellCollect(QWidget *parent = 0);
+    explicit SunSmellCollect(int hard, QWidget *parent = 0);
     ~SunSmellCollect();
 
 protected:
@@ -41,6 +41,8 @@ private:
 	QTimer *sendTimer = NULL;
 
 	void loadRes();
+
+	int gameHard;
 };
 
 #endif // SUNSMELLCOLLECT_H

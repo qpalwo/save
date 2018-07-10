@@ -1,10 +1,11 @@
 #include "burnbook.h"
 #include "ui_burnbook.h"
 
-BurnBook::BurnBook(QWidget *parent) :
+BurnBook::BurnBook(int hard, QWidget *parent) :
 	QGraphicsView(parent),
 	ui(new Ui::BurnBook) {
 	ui->setupUi(this);
+	gameHard = hard;
 	setWindowFlag(Qt::FramelessWindowHint);
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

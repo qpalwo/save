@@ -1,10 +1,11 @@
 #include "avoidstorm.h"
 #include "ui_avoidstorm.h"
 
-AvoidStorm::AvoidStorm(QWidget *parent) :
+AvoidStorm::AvoidStorm(int hard, QWidget *parent) :
 	QGraphicsView(parent),
 	ui(new Ui::AvoidStorm) {
 	ui->setupUi(this);
+	gameHard = hard;
 	setWindowFlag(Qt::FramelessWindowHint);
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
