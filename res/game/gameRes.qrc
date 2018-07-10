@@ -10,5 +10,14 @@
         <file>machine3.png</file>
         <file>back.png</file>
         <file>wind.png</file>
+        <file>book.gif</file>
+        <file>book_1.png</file>
+        <file>book_2.png</file>
+        <file>book_3.png</file>
+        <file>book_4.png</file>
+        <file>machine.gif</file>
+        <file>machine_1.png</file>
+        <file>machine_2.png</file>
+        <file>machine_3.png</file>
     </qresource>
 </RCC>

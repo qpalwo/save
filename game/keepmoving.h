@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QPainter>
+#include <QMovie>
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QtGlobal>
@@ -29,12 +30,16 @@ public slots:
 	void addMark();
 	void minusMark();
 
+	void reFreshBack();
+
 private:
     Ui::KeepMoving *ui;
 	QGraphicsScene *scene = NULL;
 	PlayerInWind *playerInWind = NULL;
+	QMovie *backMovie = NULL;
 	QTimer *machineSendTimer = NULL;
 	QTimer *lighteSendTimer = NULL;
+	QTimer *reFreshBackTimer = NULL;
 
 	void loadRes();
 	void determineHard();

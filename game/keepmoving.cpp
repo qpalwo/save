@@ -10,7 +10,12 @@ KeepMoving::KeepMoving(int hard, QWidget *parent) :
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	backMovie = new QMovie(":/game/SunSmellCollect/machine.gif");
+	reFreshBackTimer = new QTimer(this);
+	connect(reFreshBackTimer, SIGNAL(timeout()), this, SLOT(reFreshBack()));
+	backMovie->start();
+	reFreshBackTimer->start(150);
+
 	determineHard();
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
@@ -91,6 +96,10 @@ void KeepMoving::determineHard() {
 		machineSpeed = 7;
 		break;
 	}
+}
+
+void KeepMoving::reFreshBack() {
+	setBackgroundBrush(backMovie->currentImage());
 }
 
 void KeepMoving::addMark() {
