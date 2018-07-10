@@ -113,7 +113,8 @@ RESOURCES += \
     res/snow.qrc \
     res/bag.qrc \
     res/game/gameRes.qrc \
-    res/save/saveandload.qrc
+    res/save/saveandload.qrc \
+    res/achieve/achieve.qrc
     res/game/gameRes.qrc
 
 DISTFILES += \
