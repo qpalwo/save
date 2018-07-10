@@ -13,15 +13,13 @@ SceneForest::SceneForest(QWidget *parent) :
 	talk = 0;
 	first = false;
 	stop = false;
-	not_yet = true;
 	left = false;
-	choose = false;
-	zx = false;
 	zxFuck = false;
+
 	loadImage();
 	loadPlot();
 
-	menuwidget *menu = new menuwidget(this);
+	menuwidget *menu = new menuwidget("forest",this);
 	setFocus();
 	menu->show();
 
@@ -36,11 +34,8 @@ void SceneForest::loadImage() {
 	uncle.load(":/people/young_right.png");
 	house_closed.load(":/scene/forest_house_close.png");
 	house_open.load(":/scene/forest_house_open.png");
-	option_1.load(":/conver/convar/choice_1.png");
-	option_2.load(":/conver/convar/choice_2.png");
-	option_3.load(":/conver/convar/choice_3.png");
+
 	conver.load(":/conver/convar/convar.png");
-	name.load(":/conver/convar/name.png");
 	player->start();
 	player_left->start();
 }
@@ -62,8 +57,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	painter.setFont(font);	// Ê¹ÓÃ×ÖÌå
 
 	painter.drawImage(backX, backY, backGround);
-
-	//painter.drawText(220, 220, mouse_out);
 
 	if (playerX == 430)  stop = true;
 
@@ -89,9 +82,9 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 
 	if (playerX >= 440) {
 	//	painter.drawImage(850, 260, uncle);
-		if (not_yet)
-			painter.drawImage(BDL, -10, house_closed);
-		else	painter.drawImage(BDL, -10, house_open);
+
+		painter.drawImage(BDL, -10, house_closed);
+
 		painter.drawImage(0, 0, conver);
 		if (zxFuck) {
 			painter.drawText(280, 612, record_1); 
@@ -111,7 +104,7 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 			}
 		}
 	}
-	first = false; zx = false;
+	first = false; 
 }
 
 void SceneForest::keyPressEvent(QKeyEvent *e) {
@@ -277,14 +270,7 @@ void SceneForest::loadPlot() {
 
 void SceneForest::mouseMoveEvent(QMouseEvent* event)
 {
-	//QPoint m = event->pos();
-	//mouse = QString::number(m.x()) +'  ' + QString::number(m.y());
-
 	mouse = event->pos();
-
-	mouse_out = QString::number(event->x()) + '  ' + QString::number(event->y());
-	//setText(QString("(%1,%2)").arg(m.x()).arg(m.y()));
-
 }
 
 void SceneForest::on_bag_clicked() {

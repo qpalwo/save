@@ -15,6 +15,14 @@
 #define BDL -2880
 #define BDR 0
 
+struct plot3 {
+	QString s;
+	bool diff;
+	bool hu;
+	int l;
+	int r;
+};
+
 namespace Ui {
 class SceneRuins;
 }
@@ -32,18 +40,31 @@ private:
     Ui::SceneRuins *ui;
     QImage backGround;
     QImage earth;
+	QImage conver;
+	QImage child;
+	QString record_1;
+	QString record_2;
+	QString begin;
+
     QMovie* player;
     QMovie* player_left;
 
-
+	bool underDoor(int n);
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
+	void loadPlot();
+	struct plot3 q[100];
 
     int backX;
     int backY;
     int playerX;
+	int waitTime;
+	int talk;
+
     bool stop;
     bool left;
+	bool zxLock;
+	bool first;
 };
 
 #endif // SCENERUINS_H

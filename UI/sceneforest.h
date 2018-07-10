@@ -49,17 +49,15 @@ private:
 
 	QImage backGround;
 	QImage earth;
-	QImage option_1;
-	QImage option_2;
-	QImage option_3;
 	QImage conver;
-	QImage name;
 	QImage uncle;
 	QImage house_closed;
 	QImage house_open;
 	QPoint mouse;
 	QString record_1;
 	QString record_2;
+	QString mouse_out;
+	QString begin;
 
 	QMovie *player;
 	QMovie *player_left;
@@ -75,16 +73,12 @@ private:
 	int playerX;
 	int waitTime;
 	int talk;
-	QString mouse_out;
-	QString begin;
-	struct plot2 q[100];
 
-	bool not_yet;
+	struct plot2 q[100];
+	
 	bool stop;
 	bool left;
-	bool choose;
 	bool first;
-	bool zx;
 	bool zxFuck;
 	bool f[100];
 };

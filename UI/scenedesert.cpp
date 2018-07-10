@@ -19,7 +19,7 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	loadImage();
 	loadPlot();
 
-	menuwidget *menu = new menuwidget(this);
+	menuwidget *menu = new menuwidget("desert",this);
 	setFocus();
 	menu->show();
 
@@ -36,7 +36,6 @@ void SceneDesert::loadImage() {
 	option_2.load(":/conver/convar/choice_2.png");
 	option_3.load(":/conver/convar/choice_3.png");
 	conver.load(":/conver/convar/convar.png");
-	name.load(":/conver/convar/name.png");
 	player->start();
 	player_left->start();
 }
