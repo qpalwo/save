@@ -18,7 +18,13 @@ BurnBook::BurnBook(QWidget *parent) :
 }
 
 void BurnBook::loadRes() {
+	fireBurnBook = new FireBurnBook(700, 500);
+	scene->addItem(fireBurnBook);
 
+	BookToBurn *book = new BookToBurn(30, 200);
+	book->bindFire(fireBurnBook);
+	scene->addItem(book);
+	
 }
 
 BurnBook::~BurnBook()

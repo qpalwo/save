@@ -1,8 +1,14 @@
 #include "booktoburn.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-BookToBurn::BookToBurn() {
+BookToBurn::BookToBurn(int x, int y) {
 	pixMap.load(":/game/SunSmellCollect/book.png");
+	setFlag(QGraphicsItem::ItemIsFocusable);
+	setFocus(Qt::OtherFocusReason);
+	vy = 0;
+	moveBy(x, y);
+	setX(x);
+	setY(y);
 }
 
 void BookToBurn::bindFire(FireBurnBook *fire) {
@@ -10,14 +16,81 @@ void BookToBurn::bindFire(FireBurnBook *fire) {
 	reFreshTimer = new QTimer(this);
 	connect(reFreshTimer, SIGNAL(timeout()), this, SLOT(reFresh()));
 	reFreshTimer->start(100);
+	reFreshTimer = new QTimer(this);
+	pressTimer = new QTimer(this);
+
+	connect(reFreshTimer, SIGNAL(timeout()), this, SLOT(reFresh()));
+	connect(pressTimer, SIGNAL(timeout()), this, SLOT(onPressing()));
+	reFreshTimer->start(100);
 }
 
+void BookToBurn::keyPressEvent(QKeyEvent *event) {
+	if (!isPressing) {
+		isPressing = true;
+		nowTime = 0;
+		pressTimer->start(50);
+	}
+}
+
+void BookToBurn::keyReleaseEvent(QKeyEvent *event) {
+	if (isPressing) {
+		isPressing = true;
+		pressTimer->stop();
+		throughBook();
+	}
+}
+
+
 QRectF BookToBurn::boundingRect() const {
-	return QRectF(5, 5, 90, 90);
+	return QRectF(0, 5, 80, 80);
+}
+
+void BookToBurn::onPressing() {
+	nowTime++;
+}
+
+void BookToBurn::throughBook() {
+	vx = nowTime;
+	isThrough = true;
+	reFreshTimer->start(80);
 }
 
 void BookToBurn::reFresh() {
+	if (!isPressing) {
+		if (!isThrough) {
+			if (x() > 600)
+				isRight = false;
+			if (x() < 30)
+				isRight = true;
+			if (isRight) {
+				moveBy(10, 0);
+				setX(x() + 10);
+			}
+			else {
+				moveBy(-10, 0);
+				setX(x() - 10);
+			}
+		}
 
+		if (isThrough) {
+			calculateVY();
+			calculateX();
+			calculateY();
+			moveBy(vx, vy);
+			if (y() >= 960) {
+				emit unBurned();
+				killMe();
+				return;
+			}
+			if (fireBurnBook != NULL) {
+				if (collidesWithItem(fireBurnBook)) {
+					emit burned();
+					reFreshTimer->stop();
+					killMe();
+				}
+			}
+		}
+	}
 }
 
 void BookToBurn::calculateX() {
@@ -66,7 +139,7 @@ void BookToBurn::paint(QPainter *painter,
 	QWidget *widget) {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
-	painter->drawPixmap(0, 0, 100, 100, pixMap);
+	painter->drawPixmap(0, 0, 80, 80, pixMap);
 }
 
 void BookToBurn::killMe() {

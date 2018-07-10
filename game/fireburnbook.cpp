@@ -1,10 +1,10 @@
 #include "fireburnbook.h"
 
-FireBurnBook::FireBurnBook() {
+FireBurnBook::FireBurnBook(int x, int y) {
 	pixMap.load(":/game/SunSmellCollect/fire.png");
-	setFlag(QGraphicsItem::ItemIsFocusable);
-	setFocus(Qt::OtherFocusReason);
-	moveBy(680, 550);
+	//setFlag(QGraphicsItem::ItemIsFocusable);
+	//setFocus(Qt::OtherFocusReason);
+	moveBy(x, y);
 	height = 150;
 	width = 150;
 }
