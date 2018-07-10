@@ -20,7 +20,7 @@ class AvoidStorm : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit AvoidStorm(QWidget *parent = 0);
+    explicit AvoidStorm(int hard, QWidget *parent = 0);
     ~AvoidStorm();
 
 signals:
@@ -37,6 +37,8 @@ private:
 	PlayerInWind *playerInWind = NULL;
 	QPixmap back;
 	QTimer *sendTimer = NULL;
+
+	int gameHard;
 
 	void loadRes();
 	

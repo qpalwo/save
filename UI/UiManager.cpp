@@ -4,7 +4,6 @@ UiManager::UiManager() {
 	
 }
 
-
 void UiManager::closeLoading() {
 	if (loading != NULL) {
 		loading->close();
@@ -24,9 +23,9 @@ void UiManager::closeWordWIndow() {
 void UiManager::closeMainPage() {
 	if (mainWindow != NULL) {
 		mainWindow->hide();
-		//mainWindow->close();
-		//delete mainWindow;
-		//mainWindow = NULL;
+		mainWindow->close();
+		delete mainWindow;
+		mainWindow = NULL;
 	}
 }
 
@@ -112,7 +111,7 @@ void UiManager::closeAchieve() {
 
 void UiManager::closeAll() {
 	closeLoading();
-	//closeMainPage();
+	closeMainPage();
 	closeSceneDesert();
 	closeSceneForest();
 	closeWordWIndow();
@@ -150,14 +149,14 @@ void UiManager::openSceneForest() {
 	openWordWIndow();
 }
 
-void UiManager::openSunSmellCollect() {
-	sunSmellCollect = new SunSmellCollect();
+void UiManager::openSunSmellCollect(int hard) {
+	sunSmellCollect = new SunSmellCollect(hard);
 	sunSmellCollect->show();
 	openWordWIndow();
 }
 
-void UiManager::openAvoidStorm() {
-	avoidStorm = new AvoidStorm();
+void UiManager::openAvoidStorm(int hard) {
+	avoidStorm = new AvoidStorm(hard);
 	avoidStorm->show();
 	openWordWIndow();
 }
@@ -174,8 +173,8 @@ void UiManager::openSnow() {
 	openWordWIndow();
 }
 
-void UiManager::openKeepMoving() {
-	keepMoving = new KeepMoving();
+void UiManager::openKeepMoving(int hard) {
+	keepMoving = new KeepMoving(hard);
 	keepMoving->show();
 	openWordWIndow();
 }
@@ -186,8 +185,8 @@ void UiManager::openBegining() {
 	openWordWIndow();
 }
 
-void UiManager::openBurnBook() {
-	burnBook = new BurnBook();
+void UiManager::openBurnBook(int hard) {
+	burnBook = new BurnBook(hard);
 	burnBook->show();
 	openWordWIndow();
 }
@@ -214,12 +213,12 @@ void UiManager::showSceneForest() {
 }
 
 void UiManager::showSunSmellCollect() {
-	openSunSmellCollect();
+	openSunSmellCollect(1);
 	closeLoading();
 }
 
 void UiManager::showAvoidStorm() {
-	openAvoidStorm();
+	openAvoidStorm(1);
 	closeLoading();
 }
 
@@ -234,12 +233,12 @@ void UiManager::showSnow() {
 }
 
 void UiManager::showKeepMoving() {
-	openKeepMoving();
+	openKeepMoving(1);
 	closeLoading();
 }
 
 void UiManager::showBurnBook() {
-	openBurnBook();
+	openBurnBook(1);
 	closeLoading();
 }
 

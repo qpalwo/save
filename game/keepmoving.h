@@ -19,7 +19,7 @@ class KeepMoving : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit KeepMoving(QWidget *parent = 0);
+    explicit KeepMoving(int, QWidget *parent = 0);
     ~KeepMoving();
 
 public slots:
@@ -37,6 +37,7 @@ private:
 	QTimer *lighteSendTimer = NULL;
 
 	void loadRes();
+	int gameHard;
 
 };
 

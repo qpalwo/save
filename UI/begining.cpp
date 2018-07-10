@@ -80,6 +80,7 @@ void Begining::paintEvent(QPaintEvent * e) {
 					painter.drawText(270, 280, p[44]);
 					painter.drawText(270, 320, p[45]);
 					painter.drawText(270, 360, p[46]);
+					GameWorld::getInstance()->fromBeginingToRuinsCity();
 				}
 			}
 		}

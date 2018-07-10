@@ -1,10 +1,11 @@
 #include "keepmoving.h"
 #include "ui_keepmoving.h"
 
-KeepMoving::KeepMoving(QWidget *parent) :
+KeepMoving::KeepMoving(int hard, QWidget *parent) :
 	QGraphicsView(parent),
 	ui(new Ui::KeepMoving) {
 	ui->setupUi(this);
+	gameHard = hard;
 	setWindowFlag(Qt::FramelessWindowHint);
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

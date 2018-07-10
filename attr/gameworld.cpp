@@ -40,6 +40,10 @@ void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
 }
 
+int GameWorld::getGameHard() {
+	return gameHard;
+}
+
 void GameWorld::showAchieve() {
 	UiManager::getInstance()->openAchieve();
 }
@@ -80,6 +84,28 @@ void GameWorld::fromMainToBegining() {
 	UiManager::getInstance()->openBegining();
 	UiManager::getInstance()->closeMainPage();
 }
+
+void GameWorld::fromBeginingToRuinsCity() {
+	UiManager::getInstance()->openRuins();
+	UiManager::getInstance()->closeBegining();
+}
+
+void GameWorld::beginSmellCollect() {
+	UiManager::getInstance()->openSunSmellCollect(gameHard);
+}
+
+void GameWorld::beginAvoidStorm() {
+	UiManager::getInstance()->openAvoidStorm(gameHard);
+}
+
+void GameWorld::beginKeepMoving() {
+	UiManager::getInstance()->openKeepMoving(gameHard);
+}
+
+void GameWorld::beginBurnBook() {
+	UiManager::getInstance()->openBurnBook(gameHard);
+}
+
 
 GameWorld* GameWorld::getInstance() {
 	return Instance;

@@ -109,9 +109,9 @@ void OpenPageButton::mouseReleaseEvent(QMouseEvent *e) {
 		}
 
 		buttonState = __Hover;
-		if (this) {
+		/*if (this) {
 			update();
-		}
+		}*/
 	}
 }
 

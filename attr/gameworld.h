@@ -35,11 +35,18 @@ public:
 	void quitGame();
 
 	void setGameHard(int);
+	int getGameHard();
 	bool* getAllAchieve();
 
 	void fromMainToBegining();
+	void fromBeginingToRuinsCity();
 	void showAchieve();
 	void hideAchieve();
+
+	void beginSmellCollect();
+	void beginAvoidStorm();
+	void beginKeepMoving();
+	void beginBurnBook();
 
 signals:
 
