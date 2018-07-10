@@ -1,12 +1,13 @@
 #include "menuwidget.h"
 #include "ui_menuwidget.h"
 
-menuwidget::menuwidget(QWidget *parent) :
+menuwidget::menuwidget(QWidget *parent,QString res) :
     QWidget(parent),
     ui(new Ui::menuwidget)
 {
     ui->setupUi(this);
 
+    scene = res;
     backX = -350;
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setGeometry(backX, 120, 380, 440);
@@ -18,8 +19,8 @@ menuwidget::menuwidget(QWidget *parent) :
 
 void menuwidget::loadImage()
 {
-    backGround.load(":/menuZ/menu/menu_background.png");
-    setBackGround.load(":/menuZ/menu/set_background.png");
+    backGround.load(":/menuZ/menu/menu_background_"+scene+".png");
+    setBackGround.load(":/menuZ/menu/set_background_"+scene+".png");
 }
 
 void menuwidget::paintEvent(QPaintEvent *e)
@@ -30,12 +31,12 @@ void menuwidget::paintEvent(QPaintEvent *e)
 
 void menuwidget::initbutton()
 {
-    achieve = new OpenPageButton("", "menu_achieve",this);
-    bag = new OpenPageButton("", "menu_bag", this);
-    map = new OpenPageButton("", "menu_map", this);
-    read = new OpenPageButton("", "menu_read", this);
-    save = new OpenPageButton("", "menu_save", this);
-    set = new OpenPageButton("", "menu_set", this);
+    achieve = new OpenPageButton("", "menu_achieve_"+scene,this);
+    bag = new OpenPageButton("", "menu_bag_"+scene, this);
+    map = new OpenPageButton("", "menu_map_"+scene, this);
+    read = new OpenPageButton("", "menu_read_"+scene, this);
+    save = new OpenPageButton("", "menu_save_"+scene, this);
+    set = new OpenPageButton("", "menu_set_"+scene, this);
 
     achieve->setFocusPolicy(Qt::NoFocus);
     bag->setFocusPolicy(Qt::NoFocus);
@@ -76,9 +77,11 @@ void menuwidget::onBagClicked()
 {
     timerHide->stop();
     timerShow->stop();
-    Bag *bag =new Bag(this);
-    bag->show();
+    //bagwidget = new Bag(parentWidget(), scene);
+    //bagwidget->show();
     this->hide();
+    //this->show();
+    //connect(bag,SIGNAL(exitBag()),this,SLOT(show()));
 }
 
 void menuwidget::onMapClicked()

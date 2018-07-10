@@ -1,20 +1,22 @@
 #include "bag.h"
 #include "ui_bag.h"
 
-Bag::Bag(QWidget *parent) :
+Bag::Bag(QWidget *parent,QString res) :
     QWidget(parent),
     ui(new Ui::Bag)
 {
     ui->setupUi(this);
     backX = 0;
-    this->setGeometry(backX, 0, 380,440);
+    scene = res;
+    this->setWindowFlag(Qt::FramelessWindowHint);
+    this->setGeometry(backX, 120, 380,440);
     initTimer();
     loadImage();
 }
 
 void Bag::loadImage()
 {
-    backGround.load(":/menuZ/menu/bag_back.png");
+    backGround.load(":/menuZ/menu/bag_back_"+scene+".png");
     stellball.load(":/bag/prop/stellball_bag.png");
     stick.load(":/bag/prop/stick_bag.png");
 }
@@ -45,7 +47,7 @@ void Bag::bagShow()
     if(backX < -5)
     {
         backX += 5;
-        parentWidget()->move(backX, 120);
+        this->move(backX, 120);
     }
 }
 
@@ -54,13 +56,17 @@ void Bag::bagHide()
     if(backX > -345)
     {
         backX  -= 5;
-        parentWidget()->move(backX, 120);
+        this->move(backX, 120);
     }
-    if(backX == -345)
+    if(backX <= -345)
     {
-        this->hide();
-        parentWidget()->show();
+
     }
+}
+
+void Bag::closeEvent(QCloseEvent *e)
+{
+
 }
 
 void Bag::enterEvent(QEvent *e)

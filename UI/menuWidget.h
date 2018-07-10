@@ -12,6 +12,7 @@
 #include <QGridLayout>
 #include <QTimeLine>
 #include "bag.h"
+#include <QString>
 
 namespace Ui {
 class menuwidget;
@@ -22,7 +23,7 @@ class menuwidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit menuwidget(QWidget *parent = 0);
+    explicit menuwidget(QWidget *parent = 0,QString res);
     ~menuwidget();
 
 private:
@@ -30,6 +31,7 @@ private:
 
     QImage backGround;
     QImage setBackGround;
+    QString scene;
 
     OpenPageButton *achieve;
     OpenPageButton *bag;
@@ -41,6 +43,8 @@ private:
     QGridLayout *myLayout;
     QTimeLine *timerShow;
     QTimeLine *timerHide;
+
+    Bag *bagwidget;
 
     int backX;
 
