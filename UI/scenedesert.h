@@ -51,7 +51,6 @@ private:
 	QImage option_2;
 	QImage option_3;
 	QImage conver;
-	QImage name;
 	QImage uncle;
 	QPoint mouse;
 

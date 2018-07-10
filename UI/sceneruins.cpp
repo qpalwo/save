@@ -11,14 +11,18 @@ SceneRuins::SceneRuins(QWidget *parent) :
     backX = 0;
     backY = 0;
     playerX = 0;
+	talk = 0;
+
     stop = false;
     left = false;
-    loadImage();
+	first = false;
+	zxLock= false;
 
-    menuwidget *menu = new menuwidget(this);
+	loadImage();
+	loadPlot();
 
+    menuwidget *menu = new menuwidget("ruins",this);
     setFocus();
-
     menu->show();
 }
 
@@ -28,6 +32,8 @@ void SceneRuins::loadImage()
     earth.load(":/ruins/scene/ruins_1.png");
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
+
+	conver.load(":/conver/convar/convar.png");
     player->start();
     player_left->start();
 }
@@ -35,22 +41,32 @@ void SceneRuins::loadImage()
 void SceneRuins::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+	QPen pen; //»­±Ê
+	pen.setColor(QColor(255, 255, 0));
+	QBrush brush(QColor(255, 255, 0, 125)); //»­Ë¢
+	painter.setPen(pen); //Ìí¼Ó»­±Ê
+	painter.setBrush(brush); //Ìí¼Ó»­Ë¢
+
+	painter.setPen(QColor(100, 100, 20));
+	QFont font;
+	font.setFamily("Î¢ÈíÑÅºÚ");
+	font.setPointSize(14);	// ´óÐ¡
+	font.setBold(true);
+	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// ÉèÖÃ×Ö·û¼ä¾à
+	painter.setFont(font);	// Ê¹ÓÃ×ÖÌå
+
 
     painter.drawImage(backX, backY, backGround);
 
-    if (playerX == 430)
-    {
-        stop = true;
-    }
+    if (playerX == 430)   stop = true;
 
-    if (left)
-    {
+    if (left)  {
         painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
-    }
-    else
-    {
-        painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
-    }
+    }  else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
+
+	if ((waitTime>0) && (waitTime <= 28))
+		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //»æÖÆ¾ØÐÎ 
+
     painter.drawImage(backX, backY, earth);
 }
 
@@ -60,33 +76,19 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
     {
         switch (e->key())
         {
-        case Qt::Key_A:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_Left:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_D:
-            backX -= 10;
-            left = false;
-            break;
-        case Qt::Key_Right:
-            backX -= 10;
-            left = false;
-            break;
-        default:
-            break;
+        case Qt::Key_A: backX += 10;  left = true;    break;
+        case Qt::Key_Left:  backX += 10; left = true;  break;
+        case Qt::Key_D: backX -= 10; left = false    ; break;
+        case Qt::Key_Right:    backX -= 10;  left = false;   break;
+        default: break;
         }
-        if (backX < BDL)
-        {
+
+        if (backX < BDL) {
             backX += 10;
             stop = false;
             playerX += 10;
         }
-        if (backX > BDR)
-        {
+        if (backX > BDR)  {
             backX -= 10;
             stop = false;
             playerX -= 10;
@@ -124,6 +126,10 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
     }
 
     update();
+}
+
+void SceneRuins::loadPlot() {
+
 }
 
 SceneRuins::~SceneRuins()

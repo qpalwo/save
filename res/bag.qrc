@@ -1,3 +1,9 @@
 <RCC>
-    <qresource prefix="/bag"/>
+    <qresource prefix="/bag">
+        <file>prop/1_bag.png</file>
+        <file>prop/2_bag.png</file>
+        <file>prop/3_bag.png</file>
+        <file>prop/4_bag.png</file>
+        <file>prop/5_bag.png</file>
+    </qresource>
 </RCC>

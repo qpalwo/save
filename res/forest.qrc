@@ -7,5 +7,6 @@
         <file>scene/forest_2.png</file>
         <file>scene/forest_house_close.png</file>
         <file>scene/forest_house_open.png</file>
+        <file>people/young_right.png</file>
     </qresource>
 </RCC>
