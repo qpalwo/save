@@ -5,6 +5,9 @@
 #include <QPainter>
 #include <QPixmap>
 #include "openpagebutton.h"
+#include <QLabel>
+#include <QGridLayout>
+#include "attr/gameworld.h"
 
 namespace Ui {
 class Achieve;
@@ -52,6 +55,9 @@ private:
     QPixmap achieve21;
     QPixmap achieve22;
     QPixmap achieve23;
+
+    void loadPixmap();
+    bool *a = NULL;
 };
 
 #endif // ACHIEVE_H
