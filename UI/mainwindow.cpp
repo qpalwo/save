@@ -15,6 +15,16 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
+
+    v = GameWorld::getInstance()->getVolume();
+    bgm = new QMediaPlayer();
+    bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.wav"));
+    bgm->setVolume(v);
+    bgm->play();
+
+
+    myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));
+    this->setCursor(*myCursor);
 }
 
 

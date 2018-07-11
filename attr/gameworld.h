@@ -61,6 +61,9 @@ public:
 	void beginKeepMoving();
 	void beginBurnBook();
 
+    void setVolume(int v);
+    int getVolume();
+
 signals:
 
 public slots:
@@ -73,6 +76,7 @@ private:
 	AchieveData m_achieve;
 	QString savesPath[6];
 	int gameHard;
+    int volume = 20;
 
 	void save();
 	void load();

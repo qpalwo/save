@@ -46,12 +46,16 @@ void AvoidStorm::loadRes() {
 	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado.png"));
 	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado_2.png"));
 	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado_3.png"));
+	teaching = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado_illustrate.png"));
 	staus1->moveBy(stausX, stausY);
 	staus2->moveBy(stausX, stausY + stausDY);
 	staus3->moveBy(stausX, stausY + stausDY * 2);
+	teaching->moveBy(stausX + 10, stausY + 6 * stausDY);
+	
 	scene->addItem(staus1);
 	scene->addItem(staus2);
 	scene->addItem(staus3);
+	scene->addItem(teaching);
 
 	text1 = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus1);
 	text2 = new QGraphicsSimpleTextItem(QString::number(nowShoot, 10), staus2);

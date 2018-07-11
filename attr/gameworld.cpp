@@ -145,7 +145,13 @@ GameWorld* GameWorld::getInstance() {
 	return Instance;
 }
 
+void GameWorld::setVolume(int v){
+    volume = v;
+}
 
+int GameWorld::getVolume(){
+    return volume;
+}
 GameWorld::~GameWorld() {
 	GameWorld::save();
 }

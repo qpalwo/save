@@ -11,7 +11,7 @@
 #include <QTime>
 #include <QMovie>
 #include <QtGlobal>
-
+#include "gainachieve.h"
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -74,6 +74,7 @@ private:
 	bool zxLock;
 	bool first;
 	bool f[100];
+	bool isShow = false;
 };
 
 #endif // SCENESNOW_H
