@@ -30,6 +30,8 @@
 #include <QTime>
 #include "set.h"
 #include <QSound>
+#include <QCursor>
+#include <QMouseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -76,6 +78,8 @@ private:
 
     QSound *bgm;
 
+    QCursor *myCursor;
+
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;
 	OpenPageButton *achieve = NULL;
@@ -94,7 +98,7 @@ private:
 	void initVerticalTimer();
 	void initMenu();
 	void initHardChoose();
-	void hideMenu();
+    void hideMenu();
 
 	bool isDown = false;
 	int weather;
