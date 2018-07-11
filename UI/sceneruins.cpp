@@ -61,7 +61,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	painter.setFont(font);	// Ê¹ÓÃ×ÖÌå
 	
 	painter.drawImage(0, 0, sky);
-	painter.drawImage(backX, backY + 20, backGround);
+	painter.drawImage(backX, backY , backGround);
    
 
     if (playerX == 430)   stop = true;
