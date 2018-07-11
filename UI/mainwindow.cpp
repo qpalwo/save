@@ -15,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadImage();
 	sceneHeight = 0;
 	initMenu();
+
+    bgm = new QSound(":/music/beginning_bgm.wav");
+    bgm->setLoops(QSound::Infinite);
+    bgm->play();
 }
 
 

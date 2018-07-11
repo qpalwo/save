@@ -29,6 +29,7 @@
 #include <QtGlobal>
 #include <QTime>
 #include "set.h"
+#include <QSound>
 
 namespace Ui {
 class MainWindow;
@@ -72,6 +73,8 @@ private:
 	QMovie *backGif = NULL;
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
+
+    QSound *bgm;
 
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;
