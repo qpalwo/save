@@ -63,6 +63,8 @@ public:
 	void informeForest();
 	void informeRuins();
 
+	void changeStaus(bool, bool, bool, bool);
+
 public slots:
 	void showMainWindow();
 	void showSceneDesert();

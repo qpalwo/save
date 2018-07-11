@@ -165,19 +165,19 @@ void Bag::mouseMoveEvent(QMouseEvent *event){
     int y[4]={130, 189, 258, 325};
     posX = mouse.x();
     posY = mouse.y();
-    id = 0;
+    int id = 0;
     if(posX>x[0]&&posX<x[1]&&posY>y[0]&&posY<y[1])  id = 1;
-    if(posX>x[1]&&posX<x[2]&&posY>y[0]&&posY<y[1])  id = 2;
-    if(posX>x[2]&&posX<x[3]&&posY>y[0]&&posY<y[1])  id = 3;
-    if(posX>x[3]&&posX<x[4]&&posY>y[0]&&posY<y[1])  id = 4;
-    if(posX>x[0]&&posX<x[1]&&posY>y[1]&&posY<y[2])  id = 5;
-    if(posX>x[1]&&posX<x[2]&&posY>y[1]&&posY<y[2])  id = 6;
-    if(posX>x[2]&&posX<x[3]&&posY>y[1]&&posY<y[2])  id = 7;
-    if(posX>x[3]&&posX<x[4]&&posY>y[1]&&posY<y[2])  id = 8;
-    if(posX>x[0]&&posX<x[1]&&posY>y[2]&&posY<y[3])  id = 9;
-    if(posX>x[1]&&posX<x[2]&&posY>y[2]&&posY<y[3])  id = 10;
-    if(posX>x[2]&&posX<x[3]&&posY>y[2]&&posY<y[3])  id = 11;
-    if(posX>x[3]&&posX<x[4]&&posY>y[2]&&posY<y[3])  id = 12;
+    else if(posX>x[1]&&posX<x[2]&&posY>y[0]&&posY<y[1])  id = 2;
+    else if(posX>x[2]&&posX<x[3]&&posY>y[0]&&posY<y[1])  id = 3;
+    else if(posX>x[3]&&posX<x[4]&&posY>y[0]&&posY<y[1])  id = 4;
+    else if(posX>x[0]&&posX<x[1]&&posY>y[1]&&posY<y[2])  id = 5;
+    else if(posX>x[1]&&posX<x[2]&&posY>y[1]&&posY<y[2])  id = 6;
+    else if(posX>x[2]&&posX<x[3]&&posY>y[1]&&posY<y[2])  id = 7;
+    else if(posX>x[3]&&posX<x[4]&&posY>y[1]&&posY<y[2])  id = 8;
+    else if(posX>x[0]&&posX<x[1]&&posY>y[2]&&posY<y[3])  id = 9;
+    else if(posX>x[1]&&posX<x[2]&&posY>y[2]&&posY<y[3])  id = 10;
+    else if(posX>x[2]&&posX<x[3]&&posY>y[2]&&posY<y[3])  id = 11;
+    else if(posX>x[3]&&posX<x[4]&&posY>y[2]&&posY<y[3])  id = 12;
 
     if (id != 0){
     propExplain.load(":/bag/prop/"+QString::number(id,10)+"_explain.png");
@@ -223,6 +223,33 @@ void Bag::mouseMoveEvent(QMouseEvent *event){
         break;
     }
 }
+}
+
+void Bag::mousePressEvent(QMouseEvent *event) {
+	mouseClick = event->pos();
+
+	int x[5] = { 53, 112, 178, 246, 309 };
+	int y[4] = { 130, 189, 258, 325 };
+	mouseClickX = mouseClick.x();
+	mouseClickY = mouseClick.y();
+	int id = 0;
+	if (mouseClickX>x[0] && mouseClickX<x[1] && mouseClickY>y[0] && mouseClickY<y[1])  id = 1;
+	else if (mouseClickX>x[1] && mouseClickX<x[2] && mouseClickY>y[0] && mouseClickY<y[1])  id = 2;
+	else if (mouseClickX>x[2] && mouseClickX<x[3] && mouseClickY>y[0] && mouseClickY<y[1])  id = 3;
+	else if (mouseClickX>x[3] && mouseClickX<x[4] && mouseClickY>y[0] && mouseClickY<y[1])  id = 4;
+	else if (mouseClickX>x[0] && mouseClickX<x[1] && mouseClickY>y[1] && mouseClickY<y[2])  id = 5;
+	else if (mouseClickX>x[1] && mouseClickX<x[2] && mouseClickY>y[1] && mouseClickY<y[2])  id = 6;
+	else if (mouseClickX>x[2] && mouseClickX<x[3] && mouseClickY>y[1] && mouseClickY<y[2])  id = 7;
+	else if (mouseClickX>x[3] && mouseClickX<x[4] && mouseClickY>y[1] && mouseClickY<y[2])  id = 8;
+	else if (mouseClickX>x[0] && mouseClickX<x[1] && mouseClickY>y[2] && mouseClickY<y[3])  id = 9;
+	else if (mouseClickX>x[1] && mouseClickX<x[2] && mouseClickY>y[2] && mouseClickY<y[3])  id = 10;
+	else if (mouseClickX>x[2] && mouseClickX<x[3] && mouseClickY>y[2] && mouseClickY<y[3])  id = 11;
+	else if (mouseClickX>x[3] && mouseClickX<x[4] && mouseClickY>y[2] && mouseClickY<y[3])  id = 12;
+
+	if (id != 0) {
+		Player::getInstance()->useBagThing(id);
+		leaveEvent(NULL);
+	}
 }
 
 

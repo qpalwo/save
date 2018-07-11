@@ -15,6 +15,7 @@
 #include <qjsonvalue.h>
 #include <QtConcurrent/qtconcurrentrun.h>
 
+
 struct BagThing {
 	int id;
 	int num;
@@ -29,11 +30,13 @@ public:
 	BagThing getBagThing(int);
 	BagThing *getBagThing();
 	void addBagThing(int);
-	void save();
-	void load();
+	void useBagThing(int);
+	void save(QString);
+	void load(QString);
 
 private:
 	BagThing m_bagThing[12];
+	QString savePath;
 
 	
 
@@ -53,11 +56,14 @@ public:
 	bool* getMapStaus();
 	void setMapStaus(int);
 	void addBagThing(int);
-	int nowStaus();
+	void useBagThing(int);
+	bool* nowStaus();
 	void load();
+	void load(QString path);
+	void newPlayer(QString path, int hard);
 
 signals:
-	void stausChange();
+	void stausChange(bool, bool, bool, bool);
 
 public slots:
 
@@ -68,12 +74,14 @@ private:
 	const int HUNGGRY = 1;
 
 	BackBag backBag;
+	QString m_path;
 	bool m_map[4];
+	int m_hard;
 
 	int m_power;
 	int m_mood;
 
-	int m_staus;
+	bool m_staus[4] = {false};
 
 	void save();
 };

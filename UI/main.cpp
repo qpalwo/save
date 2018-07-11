@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 	GameWorld *gamaWord = GameWorld::getInstance();
-	Player *player = Player::getInstance();
+	//Player *player = Player::getInstance();
 
 	UiManager *uiManager = UiManager::getInstance();
 	uiManager->init();

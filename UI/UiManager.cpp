@@ -132,6 +132,21 @@ void UiManager::closeAll() {
 	closeWordWIndow();
 }
 
+void UiManager::changeStaus(bool a, bool b, bool c, bool d) {
+	if (sceneDesert != NULL) {
+
+	}
+	else if (sceneForest != NULL) {
+
+	}
+	else if (sceneRuins != NULL) {
+
+	}
+	else if (sceneSnow != NULL){
+		
+	}
+}
+
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();

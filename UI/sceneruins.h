@@ -11,6 +11,8 @@
 #include <QTime>
 #include <QMovie>
 #include <QtGlobal>
+#include"attr/player.h"
+#include"gainachieve.h"
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -36,6 +38,9 @@ public:
     explicit SceneRuins(QWidget *parent = 0);
     ~SceneRuins();
     void paintEvent(QPaintEvent *e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a, bool b, bool c, bool d);
 
 private:
     Ui::SceneRuins *ui;
@@ -82,6 +87,9 @@ private:
 	bool f[100] = {false};
 	bool space1;
 	bool space2;
+	bool gameover;
+	bool statement[5] = {false};
+	bool rightThing;
 };
 
 #endif // SCENERUINS_H
