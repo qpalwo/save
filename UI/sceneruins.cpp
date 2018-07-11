@@ -59,9 +59,10 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	font.setBold(true);
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
-
-	painter.drawImage(backX, backY, sky);
-    painter.drawImage(backX, backY, backGround);
+	
+	painter.drawImage(0, 0, sky);
+	painter.drawImage(backX, backY + 20, backGround);
+   
 
     if (playerX == 430)   stop = true;
 
@@ -100,7 +101,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	}
 	if (talk == 27) {
 		if (f[4] && f[14]) {
-			painter.drawImage(backX, backY, sky2);
+			painter.drawImage(0, 0, sky2);
 			painter.drawImage(backX, backY, backGround2);
 			if (left) 	painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
 			else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
