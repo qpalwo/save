@@ -73,6 +73,7 @@ private:
     int playerX;
 	int waitTime;
 	int talk;
+	int ti;
 
     bool stop;
     bool left;

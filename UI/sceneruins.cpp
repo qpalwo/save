@@ -13,6 +13,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
     backY = 0;
     playerX = 0;
 	talk = 0;
+	ti = 0;
 
     stop = false;
     left = false;
@@ -76,6 +77,11 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //»æÖÆ¾ØÐÎ 
+
+	if (waitTime > 30) {
+		if (waitTime == 31) 	ti = qrand() % 7;
+		painter.drawText(380, 280, get[ti]);
+	}
 
 	if (first) 	painter.drawText(180, 150, begin);
     painter.drawImage(backX, backY, earth);

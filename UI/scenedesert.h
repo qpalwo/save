@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include <qstring.h>
 #include<QMouseEvent>
+#include <QtGlobal>
 #include "menuwidget.h"
 
 #define BDL -2880
@@ -56,7 +57,7 @@ private:
 	QString mouse_out;
 	QString begin;
 	QString begin2;
-
+	QString get[10];
 	QPoint mouse;
 
 	QMovie *player; 
@@ -73,6 +74,7 @@ private:
 	int playerX;
 	int waitTime;
 	int talk;
+	int ti;
 	struct plot q[100];
 
 	bool stop;

@@ -7,10 +7,13 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	ui(new Ui::SceneDesert) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
 	backX = 0;   backY = 0;
 	playerX = 0;
 	talk = 0;
+	ti = 0;
+
 	first = false;
 	stop = false;
 	left = false;
@@ -73,12 +76,15 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
+	if (waitTime > 30) {
+		if (waitTime == 31) 	ti = qrand() % 7;
+		painter.drawText(380, 280, get[ti]);
+	} 
 
 	if (first) { 
 		painter.drawText(180, 140, begin);
 		painter.drawText(320, 180, begin2);
 	 }
-
 
 	if (playerX >= 440) {
 		if (talk == 28) {
@@ -168,6 +174,14 @@ bool SceneDesert::underTheTree(int n) {
 void SceneDesert::loadPlot() {
 	begin = QString::fromLocal8Bit("炎热的感觉。。。透不过气。。。就像是溺在海里。。。");
 	begin2 = QString::fromLocal8Bit("得赶快找个地方休息一下");
+
+	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
+	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
 
 	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;
 
