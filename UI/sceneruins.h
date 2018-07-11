@@ -10,6 +10,7 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include <QtGlobal>
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -55,6 +56,7 @@ private:
 	QString Ending2;
 	QString Achieve1;
 	QString Achieve2;
+	QString get[15];
 
 
     QMovie* player;
