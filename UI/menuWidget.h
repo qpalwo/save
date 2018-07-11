@@ -17,6 +17,9 @@
 class Bag;
 #include "bag.h"
 
+class set_menu;
+#include "set_menu.h"
+
 namespace Ui {
 class menuwidget;
 }
@@ -48,6 +51,7 @@ private:
     QTimeLine *timerHide;
 
     Bag *bagwidget;
+    set_menu *setting;
 
     int backX;
 

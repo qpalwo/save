@@ -89,7 +89,7 @@ void menuwidget::onMapClicked()
 
 void menuwidget::onBackClicked()
 {
-
+    GameWorld::getInstance()->quitGame();
 }
 
 void menuwidget::onSaveClicked()
@@ -99,7 +99,11 @@ void menuwidget::onSaveClicked()
 
 void menuwidget::onSetClicked()
 {
-
+    timerHide->stop();
+    timerShow->stop();
+    setting = new set_menu(scene,this,parentWidget());
+    this->hide();
+    setting->show();
 }
 
 void menuwidget::initTimer()

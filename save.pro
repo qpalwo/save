@@ -51,7 +51,9 @@ SOURCES += \
     UI/saveandload.cpp \
     game/burnbook.cpp \
     game/booktoburn.cpp \
-    game/fireburnbook.cpp
+    game/fireburnbook.cpp \
+    UI/set.cpp \
+    UI/set_menu.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -79,7 +81,9 @@ HEADERS += \
     UI/saveandload.h \
     game/burnbook.h \
     game/booktoburn.h \
-    game/fireburnbook.h
+    game/fireburnbook.h \
+    UI/set.h \
+    UI/set_menu.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -97,7 +101,9 @@ FORMS += \
     UI/begining.ui \
     UI/achieve.ui \
     UI/saveandload.ui \
-    game/burnbook.ui
+    game/burnbook.ui \
+    UI/set.ui \
+    UI/set_menu.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -115,7 +121,8 @@ RESOURCES += \
     res/game/gameRes.qrc \
     res/save/saveandload.qrc \
     res/achieve/achieve.qrc \
-    res/game/gameRes.qrc
+    res/game/gameRes.qrc \
+    res/setting/setting.qrc
 
 DISTFILES += \
     res/people/uncle.png \

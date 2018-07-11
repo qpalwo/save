@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include <QPoint>
 #include "attr/player.h"
+#include <QLabel>
 
 class menuwidget;
 #include "menuWidget.h"
@@ -34,7 +35,8 @@ private:
 
     QImage backGround;
     QString scene;
-
+    QLabel *explain;
+    QPixmap propExplain;
     QPixmap prop1;
     QPixmap prop2;
     QPixmap prop3;
@@ -59,13 +61,20 @@ private:
     int num[12];
     QString s[12];
 
+    QString m;
     int backX;
+
+    int id;
+    int posX;
+    int posY;
 
     void paintEvent(QPaintEvent *e);
     void loadImage();
     void leaveEvent(QEvent *e);
     void enterEvent(QEvent *e);
     void initTimer();
+    void mouseMoveEvent(QMouseEvent *event);
+    void showExplain();
 
 private slots:
     void bagShow();

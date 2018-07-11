@@ -23,30 +23,30 @@ void MainWindow::initMenu() {
 		open = new OpenPageButton("begin", this);
 		b_continue = new OpenPageButton("continue", this);
 		achieve = new OpenPageButton("achieve", this);
-		set = new OpenPageButton("set", this);
+        setting = new OpenPageButton("set", this);
 
 		open->hide();
 		b_continue->hide();
 		achieve->hide();
-		set->hide();
+        setting->hide();
 	}
 
 	if (isDown && open != NULL) {
 		open->setGeometry(rect().x() + 300, rect().y() - 40 + sceneHeight * 2, 130, 50);
 		b_continue->setGeometry(rect().x() + 500, rect().y() -40 + sceneHeight * 2, 130, 50);
 		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + sceneHeight * 2, 130, 50);
-		set->setGeometry(rect().x() + 500, rect().y() + 30 + sceneHeight * 2, 130, 50);
+        setting->setGeometry(rect().x() + 500, rect().y() + 30 + sceneHeight * 2, 130, 50);
 
 		open->show();
 		b_continue->show();
 		achieve->show();
-		set->show();
+        setting->show();
 	}
 	if (!isDown) {
 		connect(open, SIGNAL(clicked()), this, SLOT(onBeginClicked()));
 		connect(b_continue, SIGNAL(clicked()), this, SLOT(onContinueClicked()));
 		connect(achieve, SIGNAL(clicked()), this, SLOT(onAchieveClicked()));
-		connect(set, SIGNAL(clicked()), this, SLOT(onSetClicked()));
+        connect(setting, SIGNAL(clicked()), this, SLOT(onSetClicked()));
 	}
 }
 
@@ -55,7 +55,7 @@ void MainWindow::hideMenu() {
 		open->hide();
 		b_continue->hide();
 		achieve->hide();
-		set->hide();
+        setting->hide();
 		isDown = false;
 	}
 }
@@ -240,7 +240,9 @@ void MainWindow::onAchieveClicked() {
 }
 
 void MainWindow::onSetClicked() {
-
+    set_main = new set(this);
+    set_main->show();
+    set_main->setGeometry(0,0,960,720);
 }
 
 void MainWindow::onBeginClicked() {
@@ -370,7 +372,7 @@ MainWindow::~MainWindow() {
 	delete rain;
 	delete open;
 	delete achieve;
-	delete set;
+    delete setting;
 	delete b_continue;
 	delete easy;
 	delete mid;
