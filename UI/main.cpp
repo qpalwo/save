@@ -13,8 +13,5 @@ int main(int argc, char *argv[])
 
 	UiManager *uiManager = UiManager::getInstance();
 	uiManager->init();
-	/*bool *ddd = GameWorld::getInstance()->getAllAchieve();
-	BagThing* b = Player::getInstance()->getBagThing();
-	int c = 0;*/
     return a.exec();
 }

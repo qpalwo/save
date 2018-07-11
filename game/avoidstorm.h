@@ -12,6 +12,7 @@
 #include <QMovie>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsSimpleTextItem>
+#include "UI/gainachieve.h"
 
 namespace Ui {
 class AvoidStorm;
@@ -34,6 +35,7 @@ public slots:
 
 	void reFreshBack();
 	void countDown();
+	void closeMe();
 
 private:
     Ui::AvoidStorm *ui;
@@ -44,14 +46,20 @@ private:
 	QTimer *sendTimer = NULL;
 	QTimer *reFreshBackTimer = NULL;
 	QTimer *countDownTimer = NULL;
-	QGraphicsPixmapItem *staus = NULL;
-	QGraphicsSimpleTextItem *text = NULL;
+	QGraphicsPixmapItem *staus1 = NULL;
+	QGraphicsPixmapItem *staus2 = NULL;
+	QGraphicsPixmapItem *staus3 = NULL;
+	QGraphicsSimpleTextItem *text1 = NULL;
+	QGraphicsSimpleTextItem *text2 = NULL;
+	QGraphicsSimpleTextItem *text3 = NULL;
 
 	int gameHard;
 	int playerSpeed;
 	float tornadoVy;
 	int lunchSpeed;
 	int leftTime;
+	int nowShoot;
+	int leftShoot;
 	int stausDX;
 	int stausX;
 	int stausY;

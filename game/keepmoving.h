@@ -12,6 +12,7 @@
 #include <QGraphicsSimpleTextItem>
 #include "playerinwind.h"
 #include "tornado.h"
+#include "UI/gainachieve.h"
 
 namespace Ui {
 class KeepMoving;
@@ -34,6 +35,7 @@ public slots:
 
 	void reFreshBack();
 	void countDown();
+	void closeMe();
 
 signals:
 	void finishGame();

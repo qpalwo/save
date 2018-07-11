@@ -14,5 +14,11 @@
         <file>sunshine_win.png</file>
         <file>tornado_fail.png</file>
         <file>tornado_win.png</file>
+        <file>book_illustrate.png</file>
+        <file>machine_illustrate.png</file>
+        <file>sunshine_illustrate.png</file>
+        <file>tornado_2.png</file>
+        <file>tornado_3.png</file>
+        <file>tornado_illustrate.png</file>
     </qresource>
 </RCC>
