@@ -50,6 +50,8 @@ public:
 	void changePower(int);
 	void changeMood(int);
 	BagThing *getBagThing();
+	bool* getMapStaus();
+	void setMapStaus(int);
 	void addBagThing(int);
 	int nowStaus();
 	void load();
@@ -66,6 +68,7 @@ private:
 	const int HUNGGRY = 1;
 
 	BackBag backBag;
+	bool m_map[4];
 
 	int m_power;
 	int m_mood;

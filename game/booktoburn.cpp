@@ -153,5 +153,6 @@ void BookToBurn::finishGame() {
 }
 
 BookToBurn::~BookToBurn() {
-
+	delete reFreshTimer;
+	delete pressTimer;
 }

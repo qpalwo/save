@@ -116,6 +116,14 @@ void UiManager::closeSaveAndLoad() {
 	}
 }
 
+void UiManager::closeGameMap() {
+	if (gameMap != NULL) {
+		gameMap->close();
+		gameMap->deleteLater();
+		gameMap = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -207,6 +215,12 @@ void UiManager::openAchieve() {
 void UiManager::openSaveAndLoad() {
 	saveAndLoad = new SaveAndLoad();
 	saveAndLoad->show();
+	openWordWIndow();
+}
+
+void UiManager::openGameMap() {
+	gameMap = new GameMap();
+	gameMap->show();
 	openWordWIndow();
 }
 

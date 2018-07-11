@@ -49,6 +49,7 @@ public:
 	void fromBeginingToRuinsCity();
 	void showAchieve();
 	void showSaveAndLoad();
+	void showGameMap();
 	void hideAchieve();
 
 	void beginSmellCollect();

@@ -140,4 +140,18 @@ void BurnBook::reFreshBack() {
 BurnBook::~BurnBook()
 {
     delete ui;
+	delete scene;
+	delete fireBurnBook;
+	delete m_book;
+	delete back;
+	delete reFreshBackTimer;
+	delete staus1;
+	delete staus2;
+	delete staus3;
+	delete staus4;
+
+	delete text1;
+	delete text2;
+	delete text3;
+	delete text4;
 }

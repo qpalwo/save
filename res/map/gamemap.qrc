@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/GameMap">
+        <file>map_desert.png</file>
+        <file>map_forest.png</file>
+        <file>map_initial.png</file>
+        <file>map_ruins.png</file>
+        <file>map_snow.png</file>
+    </qresource>
+</RCC>
