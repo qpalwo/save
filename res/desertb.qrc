@@ -2,5 +2,6 @@
     <qresource prefix="/desertB">
         <file>scene/desert_1.png</file>
         <file>scene/desert_2.png</file>
+        <file>scene/desert_boat.png</file>
     </qresource>
 </RCC>

@@ -15,6 +15,7 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	stop = false;
 	left = false;
 	zxFuck = false;
+	zhu = false;
 
 	loadImage();
 	loadPlot();
@@ -29,6 +30,7 @@ SceneDesert::SceneDesert(QWidget *parent) :
 void SceneDesert::loadImage() {
 	backGround.load(":/desertB/scene/desert_1.png");
 	earth.load(":/desertB/scene/desert_2.png");
+	boat.load(":/desertB/scene/desert_boat.png");
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
@@ -59,12 +61,18 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 	if (playerX == 430)  stop = true;
 
-	if (left) painter.drawPixmap(playerX, 250, 100, 200, player_left->currentPixmap());
-	else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
-	painter.drawImage(backX, backY, earth);
+	if (talk < 12) {
+		if (left) painter.drawPixmap(playerX, 250, 100, 200, player_left->currentPixmap());
+		else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
+	} else {
+        painter.drawImage(210, 70, boat);
+		painter.drawPixmap(720, 250, 100, 200, player_left->currentPixmap());
+	}
+    painter.drawImage(backX, backY, earth);
 
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
+
 
 	if (first) { 
 		painter.drawText(180, 140, begin);
@@ -73,6 +81,11 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 
 	if (playerX >= 440) {
+		if (talk == 28) {
+			if (zhu) {
+
+			}  else talk = 30;
+		}
 		painter.drawImage(850, 260, uncle);
 		painter.drawImage(0, 0, conver);
 		if (zxFuck) {
@@ -196,14 +209,29 @@ void SceneDesert::loadPlot() {
 	q[20].l = 22; q[22].s = QString::fromLocal8Bit("大叔：谁说船不能航行！要不是轴承滑轮出了点问题，，，唉");  q[22].diff = false;  q[22].hu = false;
 
 	q[21].l = 23; q[23].s = QString::fromLocal8Bit("大叔：只要记得，便不会消失，只要存在过，就有价值......");  q[23].diff = false;  q[23].hu = true;
-	q[23].l = 24; q[24].s = QString::fromLocal8Bit("如果不是因为船缺少一个轴承滑轮的珠子，真想邀请你一起驾驶啊");  q[24].diff = false;  q[24].hu = false;
+	q[23].l = 24; q[24].s = QString::fromLocal8Bit("如果不是因为船缺少一个轴承滑轮的珠子，真想邀请你一起驾驶");  q[24].diff = false;  q[24].hu = false;
 
 	q[22].l = 25; q[24].l = 25;  q[25].s = QString::fromLocal8Bit("大叔：(叹气)这么多年了啊...我一个人在这沙漠里这么多年了");q[25].diff = false;  q[25].hu = true;
-	q[25].l = 26; q[26].s= QString::fromLocal8Bit("为什么还是差一点...就差那么一点...难道我真的要放弃吗"); q[26].diff = false;  q[26].hu = false;
+    q[26].s= QString::fromLocal8Bit("为什么还是差一点...就差那么一点...难道我真的要放弃吗"); q[26].diff = false;  q[26].hu = false;
 
-	q[26].l = 27; q[27].s = QString::fromLocal8Bit("我：(唔，，轴承滑轮的问题...看看包里有什么东西吧"); q[27].diff = false;  q[27].hu = false;
+	q[25].l = 27; q[27].s = QString::fromLocal8Bit("我：(唔，，轴承滑轮的问题...看看包里有什么东西吧"); q[27].diff = false;  q[27].hu = false;
+	q[27].l = 28; q[28].l = 28;
 
+    q[30].s = QString::fromLocal8Bit("大叔：虽然没有什么用，但还是谢谢你啊"); q[30].diff = false;  q[30].hu = false;
+	q[30].l = 31;  q[31].s = QString::fromLocal8Bit("大叔：我还是想试一次。即使可能不会成功，但还是想启航一次"); q[31].diff = false;  q[31].hu = false;
 
+	q[31].l = 32; q[32].s = QString::fromLocal8Bit("大叔：船。。。还是解体了啊。。。但是我也驾驶过，"); q[32].diff = false;  q[32].hu = true;
+	q[33].s= QString::fromLocal8Bit("至少证明，还是有可能的！再次行船还是有可能的！"); q[33].diff = false;  q[33].hu = true;
+
+	q[32].l = 34;  q[34].s = QString::fromLocal8Bit("大叔：只是可惜差那么一点。。。。。就差那么一点"); q[34].diff = false;  q[34].hu = false;
+	q[34].l = 34;
+
+	q[40].s= QString::fromLocal8Bit("大叔：是它！就是它！哈哈哈，我就要成功了！！听见了吗，"); q[40].diff = false;  q[40].hu =true;
+	q[41].s = QString::fromLocal8Bit("大海的召唤!"); q[41].diff = false;  q[41].hu = false;
+
+	q[41].l = 42;  q[42].s = QString::fromLocal8Bit("大叔：谢谢你，小姑娘。这个送给你吧"); q[42].diff = false;  q[42].hu = false;
+
+	q[42].l = 43;  q[43].s = QString::fromLocal8Bit("大叔：听见了吗,这是海的心脏跳动的声音。。。经久不息。"); q[43].diff = false;  q[43].hu = false;
 }
 
 

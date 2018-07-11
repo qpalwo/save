@@ -49,6 +49,7 @@ private:
 	QImage earth;
 	QImage conver;
 	QImage uncle;
+	QImage boat;
 
 	QString record_1;
 	QString record_2;
@@ -79,6 +80,7 @@ private:
 	bool first;
 	bool zxFuck;
 	bool f[100];
+	bool zhu;
 };
 
 #endif // SCENEDESERT_H
