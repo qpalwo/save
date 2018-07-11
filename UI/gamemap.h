@@ -6,6 +6,10 @@
 #include <QImage>
 #include <QPainter>
 #include "openpagebutton.h"
+#include <QPixmap>
+#include <QLabel>
+#include <QMouseEvent>
+#include <QPoint>
 
 namespace Ui {
 class GameMap;
@@ -31,10 +35,19 @@ private:
     QImage forest;
     QImage ruins;
     QImage snow;
+    QPixmap small;
+    QLabel *myLabel;
+
+    QPoint mouse;
+    int posX;
+    int posY;
+    int id = 0;
 
     OpenPageButton *backButton;
 
     void loadImage();
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 private slots:
     void onBackClicked();

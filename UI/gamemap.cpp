@@ -23,6 +23,9 @@ GameMap::GameMap(QWidget *parent) :
     backButton = new OpenPageButton(this, "/menuZ/menu/", "set_back_desert");
     backButton->setGeometry(830, 570, 70, 70);
     connect(backButton, SIGNAL(clicked()), this, SLOT(onBackClicked()));
+
+    myLabel = new QLabel(this);
+    setMouseTracking(true);
 }
 
 void GameMap::loadImage(){
@@ -40,6 +43,75 @@ void GameMap::paintEvent(QPaintEvent *event){
     if(!*(m_map+1)) paint.drawImage(0,0,forest);
     if(!*(m_map+2)) paint.drawImage(0,0,ruins);
     if(!*(m_map+3)) paint.drawImage(0,0,snow);
+}
+
+void GameMap::mouseMoveEvent(QMouseEvent *event){
+    mouse = event->pos();
+    posX=mouse.x();
+    posY=mouse.y();
+    if(posX>373&&posX<541&&posY>290&&posY<566) id = 3;
+    else{
+        if(posX>542&&posX<750&&posY>182&&posY<508) id = 4;
+        else{
+            if(posX>293&&posX<537&&posY>566&&posY<663) id = 1;
+            else{
+                if(posX>542&&posX<767&&posY>508&&posY<669) id = 2;
+                else id =0;
+            }
+        }
+    }
+
+    if(id != 0){
+        small.load(":/GameMap/small_2.png");
+        myLabel->setPixmap(small);
+        myLabel->show();
+    switch (id) {
+    case 1:
+        myLabel->setGeometry(109,628,54,54);
+        break;
+    case 2:
+        myLabel->setGeometry(859,495,54,54);
+        break;
+    case 3:
+        myLabel->setGeometry(198,363,54,54);
+        break;
+    case 4:
+        myLabel->setGeometry(788,313,54,54);
+        break;
+    default:
+        break;
+    }
+    }
+    else myLabel->hide();
+}
+
+void GameMap::mouseReleaseEvent(QMouseEvent *event){
+    if(posX>373&&posX<541&&posY>290&&posY<566) id = 3;
+    else{
+        if(posX>542&&posX<750&&posY>182&&posY<508) id = 4;
+        else{
+            if(posX>293&&posX<537&&posY>566&&posY<663) id = 1;
+            else{
+                if(posX>542&&posX<767&&posY>508&&posY<669) id = 2;
+                else id =0;
+            }
+        }
+    }
+
+    switch (id) {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    default:
+        break;
+    }
+
+
 }
 
 void GameMap::onBackClicked(){

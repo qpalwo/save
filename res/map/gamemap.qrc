@@ -5,5 +5,7 @@
         <file>map_initial.png</file>
         <file>map_ruins.png</file>
         <file>map_snow.png</file>
+        <file>small.png</file>
+        <file>small_2.png</file>
     </qresource>
 </RCC>
