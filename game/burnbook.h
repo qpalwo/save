@@ -10,6 +10,7 @@
 #include <QGraphicsSimpleTextItem>
 #include "fireburnbook.h"
 #include "booktoburn.h"
+#include "UI/gainachieve.h"
 
 namespace Ui {
 class BurnBook;

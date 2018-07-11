@@ -16,11 +16,14 @@ class GainAchieve : public QWidget
     Q_OBJECT
 
 public:
-    explicit GainAchieve(int, QWidget *parent = 0);
+    explicit GainAchieve(bool, int, QWidget *parent = 0);
     ~GainAchieve();
 
-private slots:
+public slots:
 	void onConfirmClicked();
+
+signals:
+	void achieveClosed();
 
 protected:
 	void paintEvent(QPaintEvent * e);
@@ -32,6 +35,7 @@ private:
 	OpenPageButton *confirm = NULL;
 
 	int m_achieve;
+	bool m_isWin;
 
 	void loadRes();
 };

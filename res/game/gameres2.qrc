@@ -6,5 +6,13 @@
         <file>sunshine_3.png</file>
         <file>tornado.gif</file>
         <file>tornado.png</file>
+        <file>book_fail.png</file>
+        <file>book_win.png</file>
+        <file>machine_fail.png</file>
+        <file>machine_win.png</file>
+        <file>sunshine_fail.png</file>
+        <file>sunshine_win.png</file>
+        <file>tornado_fail.png</file>
+        <file>tornado_win.png</file>
     </qresource>
 </RCC>

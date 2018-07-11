@@ -157,7 +157,8 @@ void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
 
 void SunSmellCollect::addMark() {
 	nowMark += 10;
-	nowNeed -= 10;
+	if(nowNeed > 0)
+		nowNeed -= 10;
 	text2->setText(QString::number(nowMark, 10));
 	text3->setText(QString::number(nowNeed, 10));
 	if (nowNeed <= 0) {
