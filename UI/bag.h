@@ -30,6 +30,9 @@ public:
     void closeEvent(QCloseEvent *e);
     ~Bag();
 
+protected:
+	void mousePressEvent(QMouseEvent *e);
+
 private:
     Ui::Bag *ui;
 
@@ -51,6 +54,7 @@ private:
     QPixmap prop12;
 
     QPoint mouse;
+	QPoint mouseClick;
 
     QTimeLine *timerShow;
     QTimeLine *timerHide;
@@ -64,9 +68,11 @@ private:
     QString m;
     int backX;
 
-    int id;
     int posX;
     int posY;
+
+	int mouseClickX;
+	int mouseClickY;
 
     void paintEvent(QPaintEvent *e);
     void loadImage();

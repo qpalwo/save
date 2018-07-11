@@ -1,5 +1,6 @@
 #include "gameworld.h"
 #include "UI/UiManager.h"
+#include "player.h"
 
 void saveToDisk(QByteArray content, QString path) {
 	QFile file(path);
@@ -38,10 +39,27 @@ QByteArray loadFromDisk(QString path) {
 
 void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
+	newPlayer(hard);
 }
 
 int GameWorld::getGameHard() {
 	return gameHard;
+}
+
+void GameWorld::newPlayer(int hard) {
+	int id = 0;
+	for (QString s : savesPath) {
+		if (s.length() > 1) id++;
+	}
+	if (id > 5) {
+		id = 0;
+	}
+	savesPath[id] = "userInfo/" + QTime::currentTime().toString();
+	Player::getInstance()->newPlayer(savesPath[id], hard);
+}
+
+void GameWorld::loadPlayer(int id) {
+	Player::getInstance()->load(savesPath[id]);
 }
 
 void GameWorld::showAchieve() {
@@ -82,6 +100,10 @@ GameWorld::GameWorld(QObject *parent) : QObject(parent) {
 
 GameWorld* GameWorld::Instance = new GameWorld();
 
+
+void GameWorld::changeStaus(bool a, bool b, bool c, bool d) {
+
+}
 
 void GameWorld::fromMainToBegining() {
 	UiManager::getInstance()->openBegining();
@@ -193,9 +215,6 @@ void AchieveData::load() {
 }
 
 bool * AchieveData::getAllAchieve() {
-	for (int i = 0; i < 7; i++) {
-		m_achieves[i] = true;
-	}
 	return m_achieves;
 }
 

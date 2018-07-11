@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QString>
 
+
 class AchieveData {
 public:
 	AchieveData();
@@ -20,6 +21,7 @@ public:
 	void addAchieve(int);
 	bool *getAllAchieve();
 	void save();
+	
 	
 
 private:
@@ -38,12 +40,15 @@ public:
 	static GameWorld * getInstance();
 	void addAchieve(int);
 	void quitGame();
+	void newPlayer(int);
+	void loadPlayer(int);
 
 	void setGameHard(int);
 	int getGameHard();
 	bool* getAllAchieve();
 	QString* getAllSaves();
 	void addSaves(QString, int);
+	void changeStaus(bool, bool, bool, bool);
 
 	void fromMainToBegining();
 	void fromBeginingToRuinsCity();
