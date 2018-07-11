@@ -19,5 +19,7 @@
         <file>machine_1.png</file>
         <file>machine_2.png</file>
         <file>machine_3.png</file>
+        <file>tornado.png</file>
+        <file>fire_3.gif</file>
     </qresource>
 </RCC>

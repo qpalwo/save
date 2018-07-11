@@ -29,7 +29,7 @@ public slots:
 	void reFreshBack();
 
 signals:
-
+	void finishGame();
 
 protected:
 
@@ -54,7 +54,6 @@ private:
 	void loadRes();
 	void determineHard();
 	void reFreshText();
-	void finishGame();
 
 	int gameHard;
 	int allBook;

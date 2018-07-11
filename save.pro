@@ -115,7 +115,8 @@ RESOURCES += \
     res/game/gameRes.qrc \
     res/save/saveandload.qrc \
     res/achieve/achieve.qrc \
-    res/game/gameRes.qrc
+    res/game/gameRes.qrc \
+    res/game/gameres2.qrc
 
 DISTFILES += \
     res/people/uncle.png \
