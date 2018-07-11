@@ -1,9 +1,5 @@
 <RCC>
     <qresource prefix="/music">
-        <file>beginning_bgm.wav</file>
-        <file>desert_bgm.wav</file>
-        <file>forest_bgm.wav</file>
-        <file>ruin_bgm.wav</file>
-        <file>snow_bgm.wav</file>
+        <file>beginning_bgm.mp3</file>
     </qresource>
 </RCC>

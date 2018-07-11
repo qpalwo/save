@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     v = GameWorld::getInstance()->getVolume();
     bgm = new QMediaPlayer();
-    bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.wav"));
+    bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));
     bgm->setVolume(v);
     bgm->play();
 

@@ -55,7 +55,8 @@ SOURCES += \
     UI/set.cpp \
     UI/set_menu.cpp \
     UI/gamemap.cpp \
-    UI/gainachieve.cpp
+    UI/gainachieve.cpp \
+    UI/ending.cpp
 
 HEADERS += \
         UI\mainwindow.h \
@@ -87,7 +88,8 @@ HEADERS += \
     UI/set.h \
     UI/set_menu.h \
     UI/gamemap.h \
-    UI/gainachieve.h
+    UI/gainachieve.h \
+    UI/ending.h
 
 FORMS += \
         UI\mainwindow.ui \
@@ -109,7 +111,8 @@ FORMS += \
     UI/set.ui \
     UI/set_menu.ui \
     UI/gamemap.ui \
-    UI/gainachieve.ui
+    UI/gainachieve.ui \
+    UI/ending.ui
 
 RESOURCES += \
     res/op/openres.qrc \
@@ -131,7 +134,8 @@ RESOURCES += \
     res/setting/setting.qrc \
     res/map/gamemap.qrc \
     res/game/gameres2.qrc \
-    res/mouse/mouse.qrc
+    res/mouse/mouse.qrc \
+    res/scene/ending.qrc
 
 DISTFILES += \
     res/people/uncle.png \
