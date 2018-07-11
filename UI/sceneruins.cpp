@@ -17,6 +17,8 @@ SceneRuins::SceneRuins(QWidget *parent) :
     left = false;
 	first = false;
 	zxLock= false;
+	space1 = false;
+	space2 = false;
 
 	loadImage();
 	loadPlot();
@@ -60,6 +62,8 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 	
+
+
 	painter.drawImage(0, 0, sky);
 	painter.drawImage(backX, backY , backGround);
    
@@ -99,16 +103,40 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 			}
 		}
 	}
-	if (talk == 27) {
+	
+	if (talk == 28) {  
 		if (f[4] && f[14]) {
-			painter.drawImage(0, 0, sky2);
-			painter.drawImage(backX, backY, backGround2);
-			if (left) 	painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
-			else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
-			painter.drawImage(750, 25, child);
-			painter.drawImage(backX, backY, earth2);
+			if (!space1){
+				painter.drawText(280, 612, q[40].s);
+				painter.drawText(280, 666, q[41].s);
+			}
+			else {
+				painter.drawImage(0, 0, sky2);
+				painter.drawImage(backX, backY, backGround2);
+				if (left) 	painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
+				else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
+				painter.drawImage(750, 25, child);
+				painter.drawImage(backX, backY, earth2);
+				painter.drawText(160, 500, Ending1);
+				painter.drawText(100, 545, Ending2);
+				painter.drawText(360, 590, Achieve1);
+			}
+		}
+		else {
+			if (!space1) 
+				painter.drawText(280, 612, q[30].s);
+			else {
+				if (!space2) 
+					painter.drawText(280, 612, q[31].s);
+				else {
+					painter.drawText(280, 612, q[32].s);
+					painter.drawText(280, 666, q[33].s);
+					painter.drawText(360, 280, Achieve2);
+				}
+			}
 		}
 	}
+
 	first = false;
 }
 
@@ -161,38 +189,37 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
         default:
             break;
         }
-        if (playerX < 0)
-        {
-            playerX += 10;
-        }
-        if (playerX > 860)
-        {
-            playerX -= 10;
-        }
+        if (playerX < 0)  playerX += 10;
+        if (playerX > 860)   playerX -= 10;
 
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
 			if (underDoor(1))	waitTime++;
 		}	else waitTime = 0;
 
-		if (playerX < 430) first = true;
+	    if ((talk == 28) && space1) space2 = true;
+		if ((talk == 28) && (e->key() == Qt::Key_Space)) space1 = true;
+	
 
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
-
 		if (q[talk].diff) {
 			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxLock = false; }
 			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxLock = false; }
 		}
+  
+        if (playerX < 430) first = true;
     }
 
     update();
 }
 
 bool SceneRuins::underDoor(int n) {
+	if (n == 1) {
+		if ((playerX >= 390) && (playerX <= 420)) return true;
+	}
 	if (n == 2) {
-		if ((backX >= -70) && (backX <= -40))  return true;
-		if ((backX >= -570) && (backX <= -530))  return true;
-		if ((backX >= -1410) && (backX <= -1380))  return true;
-		if ((backX >= -2110) && (backX <= -2070))  return true;
+		if ((backX >= -500) && (backX <= -460))  return true;
+		if ((backX >= -1340) && (backX <= -1300))  return true;
+		if ((backX >= -2040) && (backX <= -2000))  return true;
 	}
 	return false;
 }
@@ -250,7 +277,7 @@ void SceneRuins::loadPlot() {
 	q[26].s = QString::fromLocal8Bit("大概都是在期待谁的注视吧。"); q[26].diff = false; q[26].hu = false;
 
 	q[25].l = 27; q[27].s = QString::fromLocal8Bit("我：。。。。也许吧。。。"); q[27].diff = false; q[27].hu = false;
-	q[27].l = 27;
+	q[27].l = 28; q[28].diff = false; q[28].hu = false; q[28].l = 28;
 
 
 	q[30].s = QString::fromLocal8Bit("小孩:谢谢姐姐陪我这么久，这块巧克力送你吧，适合一路奔波"); q[30].diff = false; q[30].hu = false;
@@ -261,13 +288,13 @@ void SceneRuins::loadPlot() {
 
 	q[32].l = 33; q[33].s = QString::fromLocal8Bit("我：停留。。。吗？"); q[33].diff = false; q[33].hu = false;
 
-	q[40].s= QString::fromLocal8Bit("小孩：总之，谢谢姐姐，这个弹珠送你吧。。。虽然，不是透明的，"); q[40].diff = false; q[40].hu = true;
-	q[41].s= QString::fromLocal8Bit("但，这是妈妈辛苦收集到的玩具。"); q[41].diff = false; q[41].hu = false;
+	q[40].s= QString::fromLocal8Bit("小孩：总之，谢谢姐姐，这个弹珠送你吧。。。虽然，不是"); q[40].diff = false; q[40].hu = true;
+	q[41].s= QString::fromLocal8Bit("透明的，但这是妈妈辛苦收集到的玩具。"); q[41].diff = false; q[41].hu = false;
 
 	Ending1= QString::fromLocal8Bit("奇怪啊...冷黑色的钢珠...居然在太阳下映出最灿烂的色彩..."); 
 	Ending2 = QString::fromLocal8Bit("倒影着的世界都绚烂万分...（心情值++）就像是...最坚硬而又最温柔的心");
-	Achieve1= QString::fromLocal8Bit("（获得成就：众彩纷呈）");
-	Achieve2 = QString::fromLocal8Bit("（获得成就：过客而已）");
+	Achieve1= QString::fromLocal8Bit("[获得成就：众彩纷呈]");
+	Achieve2 = QString::fromLocal8Bit("[获得成就：过客而已]");
 }
 
 SceneRuins::~SceneRuins()

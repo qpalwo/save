@@ -56,6 +56,7 @@ private:
 	QString Achieve1;
 	QString Achieve2;
 
+
     QMovie* player;
     QMovie* player_left;
 
@@ -76,6 +77,8 @@ private:
 	bool zxLock;
 	bool first;
 	bool f[100] = {false};
+	bool space1;
+	bool space2;
 };
 
 #endif // SCENERUINS_H
