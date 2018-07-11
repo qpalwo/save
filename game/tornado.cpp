@@ -58,13 +58,13 @@ void Tornado::calculateVY() {
 }
 
 void Tornado::killMe() {
-	delete this;
+	deleteLater();
 }
 
 void Tornado::finishGame() {
 	reFreshTimer->stop();
 	hide();
-	delete this;
+	deleteLater();
 }
 
 QPainterPath Tornado::shape() const {

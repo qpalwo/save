@@ -10,6 +10,8 @@
 #include <QGraphicsSimpleTextItem>
 #include "fireburnbook.h"
 #include "booktoburn.h"
+#include "UI/gainachieve.h"
+#include "attr/gameworld.h"
 
 namespace Ui {
 class BurnBook;
@@ -27,6 +29,7 @@ public slots:
 	void onBurned();
 	void onUnBurned();
 	void reFreshBack();
+	void closeMe();
 
 signals:
 	void finishGame();

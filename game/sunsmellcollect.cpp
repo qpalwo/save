@@ -140,6 +140,16 @@ void SunSmellCollect::countDown() {
 		text3->setText(QString::number(nowNeed, 10));
 	}
 	else {
+		if (nowNeed <= 0) {
+			GainAchieve *achieve = new GainAchieve(true, 15, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 2, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
 		emit finishGame();
 	}
 }
@@ -157,17 +167,29 @@ void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
 
 void SunSmellCollect::addMark() {
 	nowMark += 10;
-	nowNeed -= 10;
+	if(nowNeed > 0)
+		nowNeed -= 10;
 	text2->setText(QString::number(nowMark, 10));
 	text3->setText(QString::number(nowNeed, 10));
 	if (nowNeed <= 0) {
+		GainAchieve *achieve = new GainAchieve(true, 15, this);
+		connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+		achieve->show();
 		emit finishGame();
 	}
+}
+
+void SunSmellCollect::closeMe() {
+	GameWorld::getInstance()->closeCollectSmell();
 }
 
 
 SunSmellCollect::~SunSmellCollect() {
 	delete ui;
-	delete scene;
-	delete collecter;
+	scene->deleteLater();
+	collecter->deleteLater();
+	back->deleteLater();
+	sendTimer->deleteLater();
+	reFreshBackTimer->deleteLater();
+	countDownTimer->deleteLater();
 }

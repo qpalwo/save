@@ -8,10 +8,13 @@ SceneSnow::SceneSnow(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
     backX = 0;
     backY = 0;
     playerX = 0;
 	talk = 0;
+	ti = 0;
 
     stop = false;
     left = false;
@@ -71,12 +74,17 @@ void SceneSnow::paintEvent(QPaintEvent *event)
     {
 		if ((waitTime>0) && (waitTime <= 30))
 			painter.drawPixmap(playerX, 235-waitTime * 6, 100, 200, player->currentPixmap());
-		else 
-        painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
+		else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
     //探索
 
     painter.drawImage(backX, backY, earth);
+
+	if (waitTime > 30) {
+		if (waitTime == 31) 	ti = qrand() % 4;
+		painter.drawText(380, 280, get[ti]);
+	}
+
 	if (first) painter.drawText(180, 550, begin);
 	if ((backX>=-2100)&&(backX<-1500))  painter.drawText(140, 550, begin2);
 
@@ -102,6 +110,8 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 			}
 		}
 	}
+
+
 	first = false;
 }
 
@@ -168,14 +178,8 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
         default:
             break;
         }
-        if (playerX < 0)
-        {
-            playerX += 10;
-        }
-        if (playerX > 860)
-        {
-            playerX -= 10;
-        }
+        if (playerX < 0)  playerX += 10;
+        if (playerX > 860)  playerX -= 10;
 		if (playerX < 430) first = true;
 
 		if ((e->key() == Qt::Key_W) || (e->key() == Qt::Key_Up)) {
@@ -205,6 +209,12 @@ bool SceneSnow::underTheSunshine(int n) {
 void SceneSnow::loadPlot() {
 	begin = QString::fromLocal8Bit("白茫茫的大地...真干净...只是好冷啊,冷到连我都有触觉");
 	begin2 = QString::fromLocal8Bit("唔，远处似乎有烟，应该有人吧...到那里去..到那里去就能活着");
+
+	get[0]=QString::fromLocal8Bit("获得物品 [病历单]");
+	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
+
 
 	q[0].s = QString::fromLocal8Bit("（到达房子口，看见一个正在烧书的少女）"); q[0].diff = false; q[0].hu = false;
 	q[0].l = 1; q[1].s = QString::fromLocal8Bit("少女：看见了吗？这一定是冬天蚂蚁过冬的方式。"); q[1].diff = false; q[1].hu = false;
@@ -263,7 +273,6 @@ void SceneSnow::loadPlot() {
 
 	q[39].s = QString::fromLocal8Bit("少女：谢谢你的好意。为了感谢你，请在这里多"); q[39].diff = false; q[39].hu = true;
 	q[40].s = QString::fromLocal8Bit("停留几日恢复体力吧。"); q[40].diff = false; q[40].hu = false;
-
 
 }
 

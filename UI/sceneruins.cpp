@@ -7,6 +7,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
     backX = 0;
     backY = 0;
@@ -62,7 +63,6 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 	
-
 
 	painter.drawImage(0, 0, sky);
 	painter.drawImage(backX, backY , backGround);
@@ -226,6 +226,15 @@ bool SceneRuins::underDoor(int n) {
 
 void SceneRuins::loadPlot() {
 	begin = QString::fromLocal8Bit("千篇一律的灰色...果然,压抑的布局也会使人心情更不愉快啊");
+
+	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
+	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+
 
 	q[0].s= QString::fromLocal8Bit("恩？似乎有什么声音？(抬头)"); q[0].diff = false; q[0].hu = false;
 

@@ -42,19 +42,35 @@ void AvoidStorm::loadRes() {
 	stausDX = 30;
 	stausX = 700;
 	stausY = 60;
-	stausDY = 40;
-	staus = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado.png"));
-	staus->moveBy(stausX, stausY);
-	scene->addItem(staus);
-	text = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus);
+	stausDY = 50;
+	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado.png"));
+	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado_2.png"));
+	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/tornado_3.png"));
+	staus1->moveBy(stausX, stausY);
+	staus2->moveBy(stausX, stausY + stausDY);
+	staus3->moveBy(stausX, stausY + stausDY * 2);
+	scene->addItem(staus1);
+	scene->addItem(staus2);
+	scene->addItem(staus3);
+
+	text1 = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus1);
+	text2 = new QGraphicsSimpleTextItem(QString::number(nowShoot, 10), staus2);
+	text3 = new QGraphicsSimpleTextItem(QString::number(leftShoot, 10), staus3);
 	int x = 108;
 	int y = 33;
-	text->moveBy(x, y);
+	text1->moveBy(x, y);
+	text2->moveBy(x, y);
+	text3->moveBy(x, y);
+
 	QFont font;
 	font.setBold(true);
 	font.setPixelSize(20);
-	text->setFont(font);
-	text->setBrush(QBrush(QColor(255, 255, 255)));
+	text1->setFont(font);
+	text2->setFont(font);
+	text3->setFont(font);
+	text1->setBrush(QBrush(QColor(255, 255, 255)));
+	text2->setBrush(QBrush(QColor(255, 255, 255)));
+	text3->setBrush(QBrush(QColor(255, 255, 255)));
 }
 
 void AvoidStorm::sendTornado() {
@@ -68,9 +84,20 @@ void AvoidStorm::sendTornado() {
 void AvoidStorm::countDown() {
 	if (leftTime > 0) {
 		leftTime--;
-		text->setText(QString::number(leftTime, 10));
+		text1->setText(QString::number(leftTime, 10));
 	}
 	else {
+		sendTimer->stop();
+		if (leftShoot > 0) {
+			GainAchieve *achieve = new GainAchieve(true, 3, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 1, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
 		emit finishGame();
 	}
 }
@@ -80,10 +107,27 @@ void AvoidStorm::reFreshBack() {
 }
 
 void AvoidStorm::endGame() {
-	playerInWind->moveBy(0, 10);
+	nowShoot++;
+	leftShoot--;
+	if (leftShoot > 0) {
+		text2->setText(QString::number(nowShoot, 10));
+		text3->setText(QString::number(leftShoot, 10));
+	}
+	else {
+		GainAchieve *achieve = new GainAchieve(false, 1, this);
+		connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+		achieve->show();
+		emit finishGame();
+	}
+}
+
+void AvoidStorm::closeMe() {
+	GameWorld::getInstance()->closeAvoidStorm();
 }
 
 void AvoidStorm::determineHard() {
+	nowShoot = 0;
+	leftShoot = 10;
 	switch (gameHard) {
 	case 1:
 		playerSpeed = 16;
@@ -109,12 +153,10 @@ void AvoidStorm::determineHard() {
 
 AvoidStorm::~AvoidStorm() {
 	delete ui;
-	delete scene;
-	delete playerInWind;
-	delete back;
-	delete sendTimer;
-	delete reFreshBackTimer;
-	delete countDownTimer;
-	delete staus;
-	delete text;
+	scene->deleteLater();
+	playerInWind->deleteLater();
+	back->deleteLater();
+	sendTimer->deleteLater();
+	reFreshBackTimer->deleteLater();
+	countDownTimer->deleteLater();
 }

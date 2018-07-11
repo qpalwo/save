@@ -280,6 +280,30 @@ void UiManager::init() {
 	openLoading();
 }
 
+void UiManager::informeSnow() {
+	if (sceneSnow != NULL) {
+		//informe snow
+	}
+}
+
+void UiManager::informeDesert() {
+	if (sceneDesert != NULL) {
+
+	}
+}
+
+void UiManager::informeForest() {
+	if (sceneForest != NULL) {
+
+	}
+}
+
+void UiManager::informeRuins() {
+	if (sceneRuins != NULL) {
+
+	}
+}
+
 
 UiManager::~UiManager() {
 	

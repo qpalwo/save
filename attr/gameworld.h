@@ -51,6 +51,10 @@ public:
 	void showSaveAndLoad();
 	void showGameMap();
 	void hideAchieve();
+	void closeBurnBook();
+	void closeAvoidStorm();
+	void closeCollectSmell();
+	void closeKeepMoving();
 
 	void beginSmellCollect();
 	void beginAvoidStorm();
@@ -63,6 +67,7 @@ public:
 signals:
 
 public slots:
+
 
 private:
 	GameWorld(QObject *parent = nullptr);

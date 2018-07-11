@@ -11,7 +11,6 @@ BurnBook::BurnBook(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	back = new QMovie(":/game/SunSmellCollect/book.gif");
-	//back = new QMovie(":/game/SunSmellCollect/tornado.gif");
 	reFreshBackTimer = new QTimer(this);
 	connect(reFreshBackTimer, SIGNAL(timeout()), this, SLOT(reFreshBack()));
 	back->start();
@@ -75,7 +74,8 @@ void BurnBook::loadRes() {
 }
 
 void BurnBook::reFreshText() {
-	text1->setText(QString::number(nowNeed, 10));
+	if(nowNeed >= 0)
+		text1->setText(QString::number(nowNeed, 10));
 	text2->setText(QString::number(allBook - leftBook, 10));
 	text3->setText(QString::number(burnedBook, 10));
 	text4->setText(QString::number(leftBook, 10));
@@ -94,8 +94,22 @@ void BurnBook::addBook() {
 		connect(m_book, SIGNAL(unBurned()), this, SLOT(onUnBurned()));
 	}
 	else if (leftBook <= 0) {
-		finishGame();
+		if (nowNeed <= 0) {
+			GainAchieve *achieve = new GainAchieve(true, 10, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 3, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		emit finishGame();
 	}
+}
+
+void BurnBook::closeMe() {
+	GameWorld::getInstance()->closeBurnBook();
 }
 
 void BurnBook::determineHard() {
@@ -140,18 +154,13 @@ void BurnBook::reFreshBack() {
 BurnBook::~BurnBook()
 {
     delete ui;
-	delete scene;
-	delete fireBurnBook;
-	delete m_book;
-	delete back;
-	delete reFreshBackTimer;
+	scene->deleteLater();
+	fireBurnBook->deleteLater();
+	m_book->deleteLater();
+	back->deleteLater();
+	reFreshBackTimer->deleteLater();
 	delete staus1;
 	delete staus2;
 	delete staus3;
 	delete staus4;
-
-	delete text1;
-	delete text2;
-	delete text3;
-	delete text4;
 }

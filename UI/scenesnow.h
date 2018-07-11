@@ -10,6 +10,8 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include <QtGlobal>
+
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -49,6 +51,7 @@ private:
 	QString record_2;
 	QString begin;
 	QString begin2;
+	QString get[15];
 
     QMovie* player;
     QMovie* player_left;
@@ -64,6 +67,7 @@ private:
     int playerX;
 	int talk;
 	int waitTime;
+	int ti;
 
     bool stop;
     bool left;

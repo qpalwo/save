@@ -8,6 +8,8 @@
 #include <QObject>
 #include <QPainterPath>
 #include "collecterofgame.h"
+#include "attr/gameworld.h"
+#include "UI/gainachieve.h"
 
 class SmellOfGame : public QObject, public QGraphicsItem
 {
