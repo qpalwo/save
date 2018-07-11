@@ -15,22 +15,13 @@ void Player::checkStaus() {
 	// if staus change, emit stausChange
 }
 
-void Player::addPower(int num) {
-	Player::m_power += num;
+void Player::changePower(int num) {
+	Player::m_power = num;
 	checkStaus();
 }
 
-void Player::minusPower(int num) {
-	Player::m_power -= num;
-	checkStaus();
-}
-void Player::addMood(int num) {
-	Player::m_mood += num;
-	checkStaus();
-}
-
-void Player::minusMood(int num) {
-	Player::m_mood -= num;
+void Player::changeMood(int num) {
+	Player::m_mood = num;
 	checkStaus();
 }
 

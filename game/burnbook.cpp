@@ -27,7 +27,10 @@ BurnBook::BurnBook(int hard, QWidget *parent) :
 void BurnBook::loadRes() {
 	fireBurnBook = new FireBurnBook(700, 500, fireSize);
 	scene->addItem(fireBurnBook);
-	addBook();
+	stausDX = 30;
+	stausX = 700;
+	stausY = 60;
+	stausDY = 40;
 	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_1.png"));
 	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_2.png"));
 	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_3.png"));
@@ -40,59 +43,42 @@ void BurnBook::loadRes() {
 	scene->addItem(staus2);
 	scene->addItem(staus3);
 	scene->addItem(staus4);
-	reFreshText();
-}
 
-void BurnBook::reFreshText() {
-	if (text1 != NULL) {
-		scene->removeItem(text1);
-		scene->removeItem(text2);
-		scene->removeItem(text3);
-		scene->removeItem(text4);
-		
-		/*text1->deleteLater();
-		text2->deleteLater();
-		text3->deleteLater();
-		text4->deleteLater();*/
-		delete text1;
-		delete text2;
-		delete text3;
-		delete text4;
-	}
+	text1 = new QGraphicsSimpleTextItem(QString::number(nowNeed, 10), staus1);
+	text2 = new QGraphicsSimpleTextItem(QString::number(allBook - leftBook, 10), staus2);
+	text3 = new QGraphicsSimpleTextItem(QString::number(burnedBook, 10), staus3);
+	text4 = new QGraphicsSimpleTextItem(QString::number(leftBook, 10), staus4);
+
+	int x = 118;
+	int y = 10;
+	text1->moveBy(x, y);
+	text2->moveBy(x, y);
+	text3->moveBy(x, y);
+	text4->moveBy(x, y);
 
 	QFont font;
-	font.setPixelSize(20);  // 像素大小
-	font.setItalic(true);  // 斜体
-	font.setUnderline(true);  // 下划线
-
-	text1 = new QGraphicsSimpleTextItem(QString("temptemp"));
-	text2 = new QGraphicsSimpleTextItem(QString(allBook - leftBook));
-	text3 = new QGraphicsSimpleTextItem(QString(burnedBook));
-	text4 = new QGraphicsSimpleTextItem(QString(leftBook));
+	font.setBold(true);
+	font.setPixelSize(20);
 
 	text1->setFont(font);
 	text2->setFont(font);
 	text3->setFont(font);
 	text4->setFont(font);
 
-	stausDX = 30;
-	stausX = 700;
-	stausY = 60;
-	stausDY = 40;
-	text1->moveBy(stausX + stausDX, stausY);
-	text1->moveBy(stausX + stausDX, stausY + stausDY);
-	text1->moveBy(stausX + stausDX, stausY + 2 * stausDY);
-	text1->moveBy(stausX + stausDX, stausY + 3 * stausDY);
+	text1->setBrush(QBrush(QColor(255, 255, 255)));
+	text2->setBrush(QBrush(QColor(255, 255, 255)));
+	text3->setBrush(QBrush(QColor(255, 255, 255)));
+	text4->setBrush(QBrush(QColor(255, 255, 255)));
 
-	text1->setBrush(QBrush(QColor(0, 160, 230)));
-	text2->setBrush(QBrush(QColor(0, 160, 230)));
-	text3->setBrush(QBrush(QColor(0, 160, 230)));
-	text4->setBrush(QBrush(QColor(0, 160, 230)));
+	addBook();
+}
 
-	scene->addItem(text1);
-	//scene->addItem(text2);
-	//scene->addItem(text3);
-	//scene->addItem(text4);
+void BurnBook::reFreshText() {
+	text1->setText(QString::number(nowNeed, 10));
+	text2->setText(QString::number(allBook - leftBook, 10));
+	text3->setText(QString::number(burnedBook, 10));
+	text4->setText(QString::number(leftBook, 10));
+
 }
 
 void BurnBook::addBook() {
@@ -105,7 +91,6 @@ void BurnBook::addBook() {
 		m_book->grabKeyboard();
 		connect(m_book, SIGNAL(burned()), this, SLOT(onBurned()));
 		connect(m_book, SIGNAL(unBurned()), this, SLOT(onUnBurned()));
-		leftBook--;
 	}
 	else if (leftBook <= 0) {
 		finishGame();

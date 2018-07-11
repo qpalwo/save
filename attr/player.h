@@ -47,10 +47,8 @@ public:
 	static Player * getInstance();
 	void checkStaus();
 
-	void addPower(int);
-	void minusPower(int);
-	void addMood(int);
-	void minusMood(int);
+	void changePower(int);
+	void changeMood(int);
 	BagThing *getBagThing();
 	void addBagThing(int);
 	int nowStaus();
