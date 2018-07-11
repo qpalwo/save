@@ -30,7 +30,7 @@ void set::paintEvent(QPaintEvent *event){
     painter.drawPixmap(0,0,back);
     painter.drawImage(530,300,volumeBack);
     //painter.drawImage(530,300,volumeCover,0,0,60+volumeShow,50);
-    painter.drawText(100,50,QString::number(volume));
+    //painter.drawText(100,50,QString::number(volume));
 }
 
 void set::mouseMoveEvent(QMouseEvent *event){
@@ -40,6 +40,7 @@ void set::mouseMoveEvent(QMouseEvent *event){
 void set::mousePressEvent(QMouseEvent *event){
     if(mouse.x()>=605&&mouse.x()<=840&&mouse.y()>=327&&mouse.y()<=337)
         press = true;
+    else press = false;
 }
 
 void set::mouseReleaseEvent(QMouseEvent *event){
@@ -57,8 +58,6 @@ void set::mouseReleaseEvent(QMouseEvent *event){
         volumeShow = volume*2.35;
         volumeSetting->setGeometry(530,300,60+volumeShow,50);
     }
-
-
 }
 
 void set::onBackClicked(){

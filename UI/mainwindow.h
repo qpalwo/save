@@ -47,8 +47,11 @@ public:
 	void paintEvent(QPaintEvent * e);
 	void keyPressEvent(QKeyEvent *e);
 
+
+
 public slots:
 	void handelWeather(QNetworkReply *);
+
 
 private slots:
 	void moveMou();
@@ -60,7 +63,7 @@ private slots:
 	void onContinueClicked();
 	void onEasyClicked();
 	void onMidClicked();
-	void onHardClicked();
+    void onHardClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -75,6 +78,8 @@ private:
 	QMovie *backGif = NULL;
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
+
+    int v;
 
     QMediaPlayer *bgm;
 
@@ -108,8 +113,7 @@ private:
 	int p;
 	int sceneHeight;
 	int sceneType;
-	int nowTime;
-    int v;
+    int nowTime;
 };
 
 #endif // MAINWINDOW_H

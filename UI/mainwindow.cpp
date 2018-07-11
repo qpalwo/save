@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bgm->setVolume(v);
     bgm->play();
 
+
     myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));
     this->setCursor(*myCursor);
 }
@@ -373,7 +374,6 @@ void MainWindow::initTimer() {
 	connect(timer, SIGNAL(timeout()), this, SLOT(moveMou()));
 	timer->start(90);
 }
-
 
 MainWindow::~MainWindow() {
 	delete ui;

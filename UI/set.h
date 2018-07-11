@@ -45,6 +45,7 @@ protected:
 
 private slots:
     void onBackClicked();
+
 };
 
 #endif // SET_H
