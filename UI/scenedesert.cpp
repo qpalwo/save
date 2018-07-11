@@ -75,7 +75,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
-	if (waitTime > 29) {
+	if (waitTime > 28) {
 		if (waitTime == 29) 	ti = qrand() % 7;
 		painter.drawText(380, 280, get[ti]);
 		Player::getInstance()->addBagThing(ti+6);
@@ -112,9 +112,13 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 			}
 		}
 	}
+
+	if (talk == 42) {
+		painter.setPen(QColor(0, 255, 250));
+		painter.drawText(360, 280, get[9]);
+		Player::getInstance()->addBagThing(5);
+	}
 	first = false;
-	//GainAchieve *Joker = new  GainAchieve(2, this);
-	//Joker->show();
 }
 
 void SceneDesert::keyPressEvent(QKeyEvent *e) {
@@ -212,7 +216,7 @@ void SceneDesert::loadPlot() {
 	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
 	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
 	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
-
+	get[9] = QString::fromLocal8Bit("获得特殊物品 [海螺]");
 
 
 	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;

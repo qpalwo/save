@@ -114,6 +114,11 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		if (rightThing) talk = 49;
 		else talk = 55;
 	}
+	if (talk == 53) {
+		painter.setPen(QColor(0, 0, 250));
+		painter.drawText(300, 280, get[9]);
+		Player::getInstance()->addBagThing(4);
+	}
 	first = false; 
 }
 
@@ -219,6 +224,7 @@ void SceneForest::loadPlot() {
 	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
 	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
 	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
+	get[9] = QString::fromLocal8Bit("获得特殊物品 [一罐阳光]");
 
 
 	q[0].s = QString::fromLocal8Bit("这里面是花园吗。。。。似乎有点小啊。。。"); q[0].diff = false; q[0].hu = true;

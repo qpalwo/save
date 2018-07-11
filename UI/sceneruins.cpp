@@ -129,6 +129,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				painter.drawText(100, 565, Ending2);
 				painter.setPen(QColor(0, 250, 250));
 				painter.drawText(350, 610, get[9]);
+				Player::getInstance()->addBagThing(2);
 				if (!isSpace) {
 					GainAchieve *Joker = new  GainAchieve(3, this);
 					Joker->show();
