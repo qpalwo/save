@@ -28,6 +28,7 @@
 #include <QWidget>
 #include <QtGlobal>
 #include <QTime>
+#include "set.h"
 
 namespace Ui {
 class MainWindow;
@@ -75,10 +76,12 @@ private:
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;
 	OpenPageButton *achieve = NULL;
-	OpenPageButton *set = NULL;
+    OpenPageButton *setting = NULL;
 	OpenPageButton *easy = NULL;
 	OpenPageButton *mid = NULL;
 	OpenPageButton *hard = NULL;
+
+    set *set_main = NULL;
 
 	void loadImage();
 	void loadWeatherImage();

@@ -34,14 +34,14 @@ void menuwidget::initbutton()
     achieve = new OpenPageButton("", "menu_achieve_"+scene,this);
     bag = new OpenPageButton("", "menu_bag_"+scene, this);
     map = new OpenPageButton("", "menu_map_"+scene, this);
-    read = new OpenPageButton("", "menu_read_"+scene, this);
+    back = new OpenPageButton("", "menu_back_"+scene, this);
     save = new OpenPageButton("", "menu_save_"+scene, this);
     set = new OpenPageButton("", "menu_set_"+scene, this);
 
     achieve->setFocusPolicy(Qt::NoFocus);
     bag->setFocusPolicy(Qt::NoFocus);
     map->setFocusPolicy(Qt::NoFocus);
-    read->setFocusPolicy(Qt::NoFocus);
+    back->setFocusPolicy(Qt::NoFocus);
     save->setFocusPolicy(Qt::NoFocus);
     set->setFocusPolicy(Qt::NoFocus);
 
@@ -49,9 +49,9 @@ void menuwidget::initbutton()
 
     myLayout->addWidget(achieve,1,1,Qt::Alignment());
     myLayout->addWidget(bag,2,2,Qt::Alignment());
-    myLayout->addWidget(map,3,2,Qt::Alignment());
-    myLayout->addWidget(read,2,1,Qt::Alignment());
-    myLayout->addWidget(save,3,1,Qt::Alignment());
+    myLayout->addWidget(map,3,1,Qt::Alignment());
+    myLayout->addWidget(back,3,2,Qt::Alignment());
+    myLayout->addWidget(save,2,1,Qt::Alignment());
     myLayout->addWidget(set,1,2,Qt::Alignment());
 
     myLayout->setHorizontalSpacing(30);
@@ -63,7 +63,7 @@ void menuwidget::initbutton()
     connect(achieve, SIGNAL(clicked()),this,SLOT(onAchieveClicked()));
     connect(bag, SIGNAL(clicked()),this,SLOT(onBagClicked()));
     connect(map, SIGNAL(clicked()),this,SLOT(onMapClicked()));
-    connect(read, SIGNAL(clicked()),this,SLOT(onReadClicked()));
+    connect(back, SIGNAL(clicked()),this,SLOT(onBackClicked()));
     connect(save, SIGNAL(clicked()),this,SLOT(onSaveClicked()));
     connect(set, SIGNAL(clicked()),this,SLOT(onSetClicked()));
 }
@@ -87,9 +87,9 @@ void menuwidget::onMapClicked()
 
 }
 
-void menuwidget::onReadClicked()
+void menuwidget::onBackClicked()
 {
-	GameWorld::getInstance()->showSaveAndLoad();
+    GameWorld::getInstance()->quitGame();
 }
 
 void menuwidget::onSaveClicked()
@@ -99,7 +99,11 @@ void menuwidget::onSaveClicked()
 
 void menuwidget::onSetClicked()
 {
-
+    timerHide->stop();
+    timerShow->stop();
+    setting = new set_menu(scene,this,parentWidget());
+    this->hide();
+    setting->show();
 }
 
 void menuwidget::initTimer()

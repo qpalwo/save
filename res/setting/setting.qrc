@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/setting">
+        <file>back.png</file>
+        <file>set_sound_1.png</file>
+        <file>set_volume_1.png</file>
+        <file>set_volume_2.png</file>
+    </qresource>
+</RCC>
