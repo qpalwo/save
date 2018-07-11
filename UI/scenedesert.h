@@ -14,6 +14,8 @@
 #include <qstring.h>
 #include<QMouseEvent>
 #include <QtGlobal>
+#include"attr/player.h"
+#include"gainachieve.h"
 #include "menuwidget.h"
 
 #define BDL -2880
@@ -39,6 +41,9 @@ public:
     explicit SceneDesert(QWidget *parent = 0);
     ~SceneDesert();
 	void paintEvent(QPaintEvent * e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a,bool b, bool c, bool d);
 
 private slots:
 	void on_bag_clicked();
@@ -83,6 +88,8 @@ private:
 	bool zxFuck;
 	bool f[100];
 	bool zhu;
+	bool gameover;
+	bool statement[5];
 };
 
 #endif // SCENEDESERT_H
