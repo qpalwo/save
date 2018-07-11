@@ -49,6 +49,7 @@ private:
 	QGraphicsPixmapItem *staus1 = NULL;
 	QGraphicsPixmapItem *staus2 = NULL;
 	QGraphicsPixmapItem *staus3 = NULL;
+	QGraphicsPixmapItem *teaching = NULL;
 	QGraphicsSimpleTextItem *text1 = NULL;
 	QGraphicsSimpleTextItem *text2 = NULL;
 	QGraphicsSimpleTextItem *text3 = NULL;
