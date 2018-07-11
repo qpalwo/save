@@ -75,22 +75,28 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	if (playerX >= 440) {
 		painter.drawImage(750, 25, child);
 		painter.drawImage(0, 0, conver);
+		
 		if (zxLock) {
 			painter.drawText(280, 612, record_1);
 			painter.drawText(280, 666, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);
+			painter.drawText(280, 612, q[talk].s);    f[talk] = true;
 			if (q[talk].hu) {
-				painter.drawText(280, 666, q[talk + 1].s);
+				painter.drawText(280, 666, q[talk + 1].s);   
 			}
 			if (q[talk].diff) {
-				record_1 = q[talk].s;
+				record_1 = q[talk].s;   
 				record_2 = q[talk + 1].s;
 				talk++;
-				painter.drawText(280, 666, q[talk].s);
+				painter.drawText(280, 666, q[talk].s);    
 				zxLock = true;
 			}
+		}
+	}
+	if (talk == 27) {
+		if (f[4] && f[14]) {
+
 		}
 	}
 	first = false;
@@ -191,6 +197,66 @@ void SceneRuins::loadPlot() {
 	q[1].l = 2; q[2].s = QString::fromLocal8Bit("z.冲过去接住他（要求体力值大于**）"); q[2].diff = true; q[2].hu = false;
     q[3].s = QString::fromLocal8Bit("x.不冲过去"); q[3].diff = true; q[3].hu = false;
 
+	q[2].l = 4; q[4].s = QString::fromLocal8Bit("呼。。。好累啊"); q[4].diff = false; q[4].hu = false;
+
+	q[3].l = 5; q[5].s= QString::fromLocal8Bit("糟了，提不起力气。。。"); q[5].diff = false; q[5].hu = false;
+
+	q[4].l = 6; q[6].s= QString::fromLocal8Bit("我：乖，别玩这么危险的游戏，一个人爬塔很不安全"); q[6].diff = false; q[6].hu = false;
+
+	q[6].l = 7; q[7].s= QString::fromLocal8Bit("小孩：我。。我才没有在玩游戏。。我是有重要的事！"); q[7].diff = false; q[7].hu = false;
+
+	q[7].l = 8; q[8].s = QString::fromLocal8Bit("我：什么重要的事情啊？"); q[8].diff = false; q[8].hu = false;
+
+	q[8].l = 9; q[9].s = QString::fromLocal8Bit("小孩：我要见一个很重要的人，就在塔顶上！"); q[9].diff = false; q[9].hu = false;
+
+	q[5].l = 10; q[10].s= QString::fromLocal8Bit("小孩：没什么。。。我自己可以的！"); q[10].diff = false; q[10].hu = false;
+
+	q[9].l = 11; q[10].l = 11; q[11].s= QString::fromLocal8Bit("小孩：谢谢你.终于到了啊...虽然这里什么都没有"); q[11].diff = false; q[11].hu = false;
+
+	q[11].l = 12; q[12].s = QString::fromLocal8Bit("z. 或许只是看不见而已"); q[12].diff = true; q[12].hu = false;
+	q[13].s= QString::fromLocal8Bit("x. 为什么这儿啥都没有"); q[13].diff = true; q[13].hu = false;
+
+	q[12].l = 14; q[14].s = QString::fromLocal8Bit("小孩：什么看不见？"); q[14].diff = false; q[14].hu = false;
+
+	q[14].l = 15; q[15].s= QString::fromLocal8Bit("我：重要的人看不见而已。。。但其实他们一直都在"); q[15].diff = false; q[15].hu = false;
+
+	q[15].l = 16; q[16].s = QString::fromLocal8Bit("小孩：。。。。大姐姐是个很温柔的人了"); q[16].diff = false; q[16].hu = false;
+
+	q[16].l = 17; q[17].s = QString::fromLocal8Bit("我：温柔？"); q[17].diff = false; q[17].hu = false;
+
+	q[17].l = 18; q[18].s = QString::fromLocal8Bit("小孩：恩，像妈妈一样"); q[18].diff = false; q[18].hu = false;
+
+	q[13].l = 19; q[19].s = QString::fromLocal8Bit("小孩：抱歉，妈妈和我说，她在天上陪着我的。。。"); q[19].diff = false; q[19].hu = true;
+	q[20].s = QString::fromLocal8Bit("我只是想见她一面"); q[20].diff = false; q[20].hu = false;
+
+	q[19].l = 21; q[18].l = 21; q[21].s= QString::fromLocal8Bit("小孩：姐姐，你说天上的星星真的很像眼睛吗？"); q[21].diff = false; q[21].hu = false;
+
+	q[21].l = 22; q[22].s= QString::fromLocal8Bit("z. 当然像"); q[22].diff = true; q[22].hu = false;
+	q[23].s= QString::fromLocal8Bit("x. 不太像"); q[23].diff = true; q[23].hu = false;
+
+	q[22].l = 24; q[23].l = 24; q[24].s = QString::fromLocal8Bit("小孩：我原来不觉得，现在看着像了。"); q[24].diff = false; q[24].hu = false;
+
+	q[24].l = 25; q[25].s = QString::fromLocal8Bit("小孩：妈妈离开后，它就开始像了，把星星比作眼睛的人，"); q[25].diff = false; q[25].hu = true;
+	q[26].s = QString::fromLocal8Bit("大概都是在期待谁的注视吧。"); q[26].diff = false; q[26].hu = false;
+
+	q[25].l = 27; q[27].s = QString::fromLocal8Bit("我：。。。。也许吧。。。"); q[27].diff = false; q[27].hu = false;
+
+
+	q[30].s = QString::fromLocal8Bit("小孩:谢谢姐姐陪我这么久，这块巧克力送你吧，适合一路奔波"); q[30].diff = false; q[30].hu = false;
+
+	q[30].l = 31; q[31].s= QString::fromLocal8Bit("我：一路奔波？"); q[31].diff = false; q[31].hu = false;
+
+	q[31].l = 32; q[32].s = QString::fromLocal8Bit("小孩：恩，姐姐不像是会停留的人"); q[32].diff = false; q[32].hu = false;
+
+	q[32].l = 33; q[33].s = QString::fromLocal8Bit("我：停留。。。吗？"); q[33].diff = false; q[33].hu = false;
+
+	q[40].s= QString::fromLocal8Bit("小孩：总之，谢谢姐姐，这个弹珠送你吧。。。虽然，不是透明的，"); q[40].diff = false; q[40].hu = true;
+	q[41].s= QString::fromLocal8Bit("但，这是妈妈辛苦收集到的玩具。"); q[41].diff = false; q[41].hu = false;
+
+	Ending1= QString::fromLocal8Bit("奇怪啊...冷黑色的钢珠...居然在太阳下映出最灿烂的色彩..."); 
+	Ending2 = QString::fromLocal8Bit("倒影着的世界都绚烂万分...（心情值++）就像是...最坚硬而又最温柔的心");
+	Achieve1= QString::fromLocal8Bit("（获得成就：众彩纷呈）");
+	Achieve2 = QString::fromLocal8Bit("（获得成就：过客而已）");
 }
 
 SceneRuins::~SceneRuins()

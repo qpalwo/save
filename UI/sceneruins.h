@@ -46,6 +46,10 @@ private:
 	QString record_1;
 	QString record_2;
 	QString begin;
+	QString Ending1;
+	QString Ending2;
+	QString Achieve1;
+	QString Achieve2;
 
     QMovie* player;
     QMovie* player_left;
@@ -66,6 +70,7 @@ private:
     bool left;
 	bool zxLock;
 	bool first;
+	bool f[100] = {false};
 };
 
 #endif // SCENERUINS_H
