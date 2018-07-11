@@ -37,6 +37,7 @@ public slots:
 	void sendSmell();
 	void reFreshBack();
 	void countDown();
+	void closeMe();
 
 private:
     Ui::SunSmellCollect *ui = NULL;

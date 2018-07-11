@@ -76,14 +76,12 @@ void SmellOfGame::paint(QPainter *painter,
 
 void SmellOfGame::killMe() {
 	deleteLater();
-	//delete this;
 }
 
 void SmellOfGame::finishGame() {
 	reFreshTimer->stop();
 	hide();
 	deleteLater();
-	//delete this;
 }
 
 SmellOfGame::~SmellOfGame() {

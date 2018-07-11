@@ -46,7 +46,7 @@ void KeepMoving::loadRes() {
 	stausDX = 30;
 	stausX = 700;
 	stausY = 60;
-	stausDY = 40;
+	stausDY = 60;
 	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_1.png"));
 	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_2.png"));
 	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_3.png"));
@@ -120,6 +120,16 @@ void KeepMoving::countDown() {
 		text3->setText(QString::number(leftTime, 10));
 	}
 	else {
+		if (nowNeed <= 0) {
+			GainAchieve *achieve = new GainAchieve(true, 15, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 3, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
 		emit finishGame();
 	}
 }
@@ -168,6 +178,9 @@ void KeepMoving::addMark() {
 	nowMark += 10;
 	nowNeed -= 10;
 	if (nowNeed <= 0) {
+		GainAchieve *achieve = new GainAchieve(true, 13, this);
+		connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+		achieve->show();
 		emit finishGame();
 	}
 }
@@ -177,6 +190,17 @@ void KeepMoving::minusMark() {
 	nowNeed += 10;
 }
 
+void KeepMoving::closeMe() {
+	GameWorld::getInstance()->closeKeepMoving();
+}
+
 KeepMoving::~KeepMoving() {
 	delete ui;
+	scene->deleteLater();
+	playerInWind->deleteLater();
+	backMovie->deleteLater();
+	machineSendTimer->deleteLater();
+	lighteSendTimer->deleteLater();
+	reFreshBackTimer->deleteLater();
+	countDownTimer->deleteLater();
 }

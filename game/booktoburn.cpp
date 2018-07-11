@@ -58,7 +58,7 @@ void BookToBurn::throughBook() {
 void BookToBurn::reFresh() {
 	if (!isPressing) {
 		if (!isThrough) {
-			if (x() > 600)
+			if (x() > 450)
 				isRight = false;
 			if (x() < 30)
 				isRight = true;

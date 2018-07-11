@@ -58,6 +58,11 @@ public:
 
 	void init();
 
+	void informeSnow();
+	void informeDesert();
+	void informeForest();
+	void informeRuins();
+
 public slots:
 	void showMainWindow();
 	void showSceneDesert();

@@ -113,6 +113,26 @@ void GameWorld::beginBurnBook() {
 	UiManager::getInstance()->openBurnBook(gameHard);
 }
 
+void GameWorld::closeBurnBook() {
+	UiManager::getInstance()->closeBurnBook();
+	UiManager::getInstance()->informeSnow();
+}
+
+void GameWorld::closeAvoidStorm() {
+	UiManager::getInstance()->closeAvoidStorm();
+	UiManager::getInstance()->informeDesert();
+}
+
+void GameWorld::closeCollectSmell() {
+	UiManager::getInstance()->closeSunSmellCollect();
+	UiManager::getInstance()->informeForest();
+}
+
+void GameWorld::closeKeepMoving() {
+	UiManager::getInstance()->closeKeepMoving();
+	UiManager::getInstance()->informeRuins();
+}
+
 QString* GameWorld::getAllSaves() {
 	return savesPath;
 }
@@ -141,7 +161,8 @@ AchieveData::AchieveData() {
 
 
 void AchieveData::addAchieve(int num) {
-	AchieveData::m_achieves[num] = true;
+	if(num - 1 >= 0 && num - 1 < 23)
+		AchieveData::m_achieves[num - 1] = true;
 	AchieveData::save();
 }
 
