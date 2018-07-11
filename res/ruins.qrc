@@ -9,5 +9,6 @@
         <file>scene/ruins_2_color.png</file>
         <file>scene/ruins_back.png</file>
         <file>scene/ruins_back_color.png</file>
+        <file>scene/ruins_2_zjk.png</file>
     </qresource>
 </RCC>
