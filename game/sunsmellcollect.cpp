@@ -47,14 +47,17 @@ void SunSmellCollect::loadRes() {
 	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_1.png"));
 	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_2.png"));
 	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_3.png"));
+	teaching = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_illustrate.png"));
 
 	staus1->moveBy(stausX, stausY);
 	staus2->moveBy(stausX, stausY + stausDY);
 	staus3->moveBy(stausX, stausY + 2 * stausDY);
+	teaching->moveBy(stausX + 25, stausY + 5 * stausDY);
 
 	scene->addItem(staus1);
 	scene->addItem(staus2);
 	scene->addItem(staus3);
+	scene->addItem(teaching);
 
 	text1 = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus1);
 	text2 = new QGraphicsSimpleTextItem(QString::number(nowMark, 10), staus2);

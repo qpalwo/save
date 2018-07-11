@@ -7,6 +7,7 @@ SceneForest::SceneForest(QWidget *parent) :
 	ui(new Ui::SceneForest) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
 	backX = 0;   backY = 0;
 	playerX = 0;
@@ -66,6 +67,11 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //绘制矩形 
+
+	if (waitTime > 30) {
+		if (waitTime == 31) 	ti = qrand() % 7;
+		painter.drawText(380, 280, get[ti]);
+	}
 
 	if (first) 	painter.drawText(180, 150, begin);
 
@@ -169,6 +175,14 @@ bool SceneForest::underTheTree(int n) {
 void SceneForest::loadPlot() {
 
 	begin = QString::fromLocal8Bit("这就是森林吗....为什么会有花....不是早就灭绝了吗");
+	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
+	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+
 
 	q[0].s = QString::fromLocal8Bit("这里面是花园吗。。。。似乎有点小啊。。。"); q[0].diff = false; q[0].hu = true;
 	q[1].s = QString::fromLocal8Bit("而且为什么是罩在玻璃罩里面。。。。"); q[1].diff = false; q[1].hu = false;

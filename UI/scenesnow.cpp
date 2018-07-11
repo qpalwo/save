@@ -27,6 +27,7 @@ SceneSnow::SceneSnow(QWidget *parent) :
     menuwidget *menu = new menuwidget("snow",this);
     setFocus();
     menu->show();
+
 }
 
 void SceneSnow::loadImage()
@@ -110,7 +111,11 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 			}
 		}
 	}
-
+	if (!isShow) {
+		GainAchieve *ach = new GainAchieve(10, this);
+		ach->show();
+		isShow = true;
+	}
 
 	first = false;
 }
