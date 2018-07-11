@@ -21,6 +21,7 @@ void set::paintEvent(QPaintEvent *event){
 
 void set::onBackClicked(){
     close();
+    deleteLater();
 }
 
 set::~set()
