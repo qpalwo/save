@@ -30,6 +30,7 @@ SceneDesert::SceneDesert(QWidget *parent) :
 void SceneDesert::loadImage() {
 	backGround.load(":/desertB/scene/desert_1.png");
 	earth.load(":/desertB/scene/desert_2.png");
+	boat.load(":/desertB/scene/desert_boat.png");
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
@@ -60,12 +61,18 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 	if (playerX == 430)  stop = true;
 
-	if (left) painter.drawPixmap(playerX, 250, 100, 200, player_left->currentPixmap());
-	else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
-	painter.drawImage(backX, backY, earth);
+	if (talk < 12) {
+		if (left) painter.drawPixmap(playerX, 250, 100, 200, player_left->currentPixmap());
+		else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
+	} else {
+        painter.drawImage(210, 70, boat);
+		painter.drawPixmap(720, 250, 100, 200, player_left->currentPixmap());
+	}
+    painter.drawImage(backX, backY, earth);
 
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //»æÖÆ¾ØÐÎ 
+
 
 	if (first) { 
 		painter.drawText(180, 140, begin);

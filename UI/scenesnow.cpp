@@ -30,8 +30,8 @@ void SceneSnow::loadImage()
 {
     backGround.load(":/snow/scene/snow_2.png");
     earth.load(":/snow/scene/snow_1.png");
-    player = new QMovie(":/player/main.gif");
-    player_left = new QMovie(":/player/main_left.gif");
+    player = new QMovie(":/snow/people/snow_right.gif");
+    player_left = new QMovie(":/snow/people/snow_left.gif");
 	girl.load(":/snow/people/yellow.png");
 	conver.load(":/conver/convar/convar.png");
     player->start();

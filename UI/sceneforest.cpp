@@ -246,6 +246,7 @@ void SceneForest::loadPlot() {
 	q[47].s= QString::fromLocal8Bit("能收集到的都是内陆的气味，真想收集到海洋的味道啊"); q[47].diff = false;  q[47].hu = false;
 
 	q[46].l = 48; q[48].s= QString::fromLocal8Bit("我：从背包里找一下吧"); q[48].diff = false;  q[48].hu = false;
+	q[48].l = 48;
 	//*********************
 	q[49].s= QString::fromLocal8Bit("青年：这是海里的东西吗？借我收集气味吧！"); q[49].diff = false;  q[49].hu = false;
 
