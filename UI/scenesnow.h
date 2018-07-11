@@ -43,6 +43,8 @@ private:
     QImage earth;
 	QImage conver;
 	QImage girl;
+
+
 	QString record_1;
 	QString record_2;
 	QString begin;

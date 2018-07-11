@@ -29,7 +29,11 @@ SceneRuins::SceneRuins(QWidget *parent) :
 void SceneRuins::loadImage()
 {
     backGround.load(":/ruins/scene/ruins_2.png");
+	backGround2.load(":/ruins/scene/ruins_2_color.png");
     earth.load(":/ruins/scene/ruins_1.png");
+	earth2.load(":/ruins/scene/ruins_1_color.png");
+	sky.load(":/ruins/scene/ruins_back.png");
+	sky2.load(":/ruins/scene/ruins_back_color.png");
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
 	child.load(":/ruins/people/pink_left.png");
@@ -56,7 +60,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 
-
+	painter.drawImage(backX, backY, sky);
     painter.drawImage(backX, backY, backGround);
 
     if (playerX == 430)   stop = true;
@@ -96,7 +100,12 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	}
 	if (talk == 27) {
 		if (f[4] && f[14]) {
-
+			painter.drawImage(backX, backY, sky2);
+			painter.drawImage(backX, backY, backGround2);
+			if (left) 	painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
+			else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
+			painter.drawImage(750, 25, child);
+			painter.drawImage(backX, backY, earth2);
 		}
 	}
 	first = false;
@@ -240,6 +249,7 @@ void SceneRuins::loadPlot() {
 	q[26].s = QString::fromLocal8Bit("大概都是在期待谁的注视吧。"); q[26].diff = false; q[26].hu = false;
 
 	q[25].l = 27; q[27].s = QString::fromLocal8Bit("我：。。。。也许吧。。。"); q[27].diff = false; q[27].hu = false;
+	q[27].l = 27;
 
 
 	q[30].s = QString::fromLocal8Bit("小孩:谢谢姐姐陪我这么久，这块巧克力送你吧，适合一路奔波"); q[30].diff = false; q[30].hu = false;

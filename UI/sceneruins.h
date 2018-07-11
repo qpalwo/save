@@ -40,9 +40,14 @@ private:
     Ui::SceneRuins *ui;
 
     QImage backGround;
+	QImage backGround2;
     QImage earth;
+	QImage earth2;
+	QImage sky;
+	QImage sky2;
 	QImage conver;
 	QImage child;
+
 	QString record_1;
 	QString record_2;
 	QString begin;
