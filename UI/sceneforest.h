@@ -44,12 +44,12 @@ public:
 	explicit SceneForest(QWidget *parent = 0);
 	~SceneForest();
 	void paintEvent(QPaintEvent * e);
-
-private slots:
-	void on_bag_clicked();
 	void gameOver();
 	void bagThingClick(int n);
 	void changeState(bool a, bool b, bool c, bool d);
+
+private slots:
+	void on_bag_clicked();
 
 private:
 	Ui::SceneForest *ui;

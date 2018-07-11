@@ -39,23 +39,20 @@ QByteArray loadFromDisk(QString path) {
 
 void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
-	newPlayer(hard);
+	newPlayer(hard, savesNum);
+	savesNum++;
+	if (savesNum >= 6) {
+		savesNum = 0;
+	}
 }
 
 int GameWorld::getGameHard() {
 	return gameHard;
 }
 
-void GameWorld::newPlayer(int hard) {
-	int id = 0;
-	for (QString s : savesPath) {
-		if (s.length() > 1) id++;
-	}
-	if (id > 5) {
-		id = 0;
-	}
-	savesPath[id] = "userInfo/" + QTime::currentTime().toString();
-	Player::getInstance()->newPlayer(savesPath[id], hard);
+void GameWorld::newPlayer(int hard, int id) {
+	savesPath[id] = "userInfo/" + QTime::currentTime().toString("yyyy-MM-dd-hh-mm-ss-zzz");
+	Player::getInstance()->newPlayer(savesPath[id], hard, id);
 }
 
 void GameWorld::loadPlayer(int id) {
@@ -76,12 +73,40 @@ void GameWorld::hideAchieve() {
 
 void GameWorld::save() {
 	m_achieve.save();
+	QJsonArray arr;
+	QJsonArray screen;
+	for (int i = 0; i < 6; i++) {
+		arr.append(savesPath[i]);
+		screen.append(screenShoot[i]);
+	}
+	QJsonObject obj;
+	obj.insert("savePath", arr);
+	obj.insert("screenShoot", screen);
+	obj.insert("volume", volume);
+	obj.insert("savesNum", savesNum);
+	QJsonDocument document;
+	document.setObject(obj);
+	QByteArray bytarr = document.toJson(QJsonDocument::Compact);
+	QtConcurrent::run(saveToDisk, bytarr, QString("userInfo/gameworld.info"));
 }
 
 void GameWorld::load() {
-
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
+	if (!document.isNull()) {
+		QJsonObject obj = document.object();
+		QJsonArray arr = obj.take("savePath").toArray();
+		QJsonArray screen = obj.take("screenShoot").toArray();
+		volume = obj.take("volume").toInt();
+		savesNum = obj.take("savesNum").toInt();
+		int size = arr.size();
+		for (int i = 0; i < size; i++) {
+			savesPath[i] = arr.at(i).toString();
+			screenShoot[i] = screen.at(i).toString();
+		}
+	}
 }
 void GameWorld::quitGame() {
+	screenShoot[Player::getInstance()->getMyId()] = UiManager::getInstance()->screenShoot();
 	GameWorld::save();
 	qApp->quit();
 }
@@ -95,6 +120,7 @@ void GameWorld::addAchieve(int num) {
 }
 
 GameWorld::GameWorld(QObject *parent) : QObject(parent) {
+	savesNum = 0;
 	GameWorld::load();
 }
 
@@ -157,6 +183,10 @@ void GameWorld::closeKeepMoving() {
 
 QString* GameWorld::getAllSaves() {
 	return savesPath;
+}
+
+QString* GameWorld::getAllShoot() {
+	return screenShoot;
 }
 
 void GameWorld::addSaves(QString path, int position) {

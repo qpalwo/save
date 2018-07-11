@@ -134,16 +134,16 @@ void UiManager::closeAll() {
 
 void UiManager::changeStaus(bool a, bool b, bool c, bool d) {
 	if (sceneDesert != NULL) {
-
+		sceneDesert->changeState(a, b, c, d);
 	}
 	else if (sceneForest != NULL) {
-
+		sceneForest->changeState(a, b, c, d);
 	}
 	else if (sceneRuins != NULL) {
-
+		sceneRuins->changeState(a, b, c, d);
 	}
 	else if (sceneSnow != NULL){
-		
+		sceneSnow->changeState(a, b, c, d);
 	}
 }
 
@@ -298,27 +298,69 @@ void UiManager::init() {
 void UiManager::informeSnow() {
 	if (sceneSnow != NULL) {
 		//informe snow
+		sceneSnow->gameOver();
 	}
 }
 
 void UiManager::informeDesert() {
 	if (sceneDesert != NULL) {
-
+		sceneDesert->gameOver();
 	}
 }
 
 void UiManager::informeForest() {
 	if (sceneForest != NULL) {
-
+		sceneForest->gameOver();
 	}
 }
 
 void UiManager::informeRuins() {
 	if (sceneRuins != NULL) {
-
+		sceneRuins->gameOver();
 	}
 }
 
+void UiManager::useThing(int id) {
+	if (sceneDesert != NULL) {
+		sceneDesert->bagThingClick(id);
+	}
+	else if (sceneForest != NULL) {
+		sceneForest->bagThingClick(id);
+	}
+	else if (sceneRuins != NULL) {
+		sceneRuins->bagThingClick(id);
+	}
+	else if (sceneSnow != NULL) {
+		sceneSnow->bagThingClick(id);
+	}
+}
+
+QString UiManager::screenShoot() {
+	QPixmap shoot;
+	if (sceneDesert != NULL) {
+		shoot = sceneDesert->grab(QRect(0, 0, 960, 720));
+	}
+	else if (sceneForest != NULL) {
+		shoot = sceneForest->grab(QRect(0, 0, 960, 720));
+	}
+	else if (sceneRuins != NULL) {
+		shoot = sceneRuins->grab(QRect(0, 0, 960, 720));
+	}
+	else if (sceneSnow != NULL) {
+		shoot = sceneSnow->grab(QRect(0, 0, 960, 720));
+	}
+
+	QString filePathName = "userInfo/shoot";
+
+	filePathName += QDateTime::currentDateTime().toString("yyyy-MM-dd hh-mm-ss-zzz");
+
+	filePathName += ".png";
+
+	if (!shoot.save(filePathName, "png")){
+		qDebug() << "save widget screen failed";
+	}
+	return filePathName;
+}
 
 UiManager::~UiManager() {
 	

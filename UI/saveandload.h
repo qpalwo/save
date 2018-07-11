@@ -39,6 +39,8 @@ private:
 	OpenPageButton *button6 = NULL;
 	OpenPageButton *backButton = NULL;
 
+	QString *shoot = NULL;
+
 	bool isSave[6] = { false };
 
 	void initSaveAndButton();

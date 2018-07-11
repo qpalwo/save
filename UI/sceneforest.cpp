@@ -1,7 +1,6 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
 
-
 SceneForest::SceneForest(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::SceneForest) {
@@ -181,7 +180,7 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
 	}
-
+	
 	update();
 }
 
