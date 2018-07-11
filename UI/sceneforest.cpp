@@ -137,7 +137,7 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 
 		if (playerX < 430) first = true;
 
-		if ((e->key() == Qt::Key_G) && (!q[talk].diff))
+		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))
 			talk = q[talk].l;
 
 		if (q[talk].diff) {

@@ -79,6 +79,7 @@ private:
 	bool first;
 	bool zxFuck;
 	bool f[100];
+	bool zhu;
 };
 
 #endif // SCENEDESERT_H
