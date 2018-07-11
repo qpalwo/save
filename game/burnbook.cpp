@@ -11,6 +11,7 @@ BurnBook::BurnBook(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	back = new QMovie(":/game/SunSmellCollect/book.gif");
+	//back = new QMovie(":/game/SunSmellCollect/tornado.gif");
 	reFreshBackTimer = new QTimer(this);
 	connect(reFreshBackTimer, SIGNAL(timeout()), this, SLOT(reFreshBack()));
 	back->start();
@@ -133,10 +134,6 @@ void BurnBook::onUnBurned() {
 
 void BurnBook::reFreshBack() {
 	setBackgroundBrush(back->currentImage());
-}
-
-void BurnBook::finishGame() {
-
 }
 
 

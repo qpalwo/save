@@ -10,7 +10,16 @@ SunSmellCollect::SunSmellCollect(int hard, QWidget *parent) :
 	setDragMode(QGraphicsView::NoDrag);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	back = new QMovie(":/game/SunSmellCollect/sunshine.gif");
+	reFreshBackTimer = new QTimer(this);
+	connect(reFreshBackTimer, SIGNAL(timeout()), this, SLOT(reFreshBack()));
+	back->start();
+	reFreshBackTimer->start(150);
+
+	countDownTimer = new QTimer(this);
+	connect(countDownTimer, SIGNAL(timeout()), this, SLOT(countDown()));
+	countDownTimer->start(1000);
+
 	determineHard();
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
@@ -30,6 +39,44 @@ void SunSmellCollect::loadRes() {
 	sendTimer = new QTimer(this);
 	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendSmell()));
 	sendTimer->start(lunchSpeed);
+
+	stausDX = 30;
+	stausX = 700;
+	stausY = 60;
+	stausDY = 50;
+	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_1.png"));
+	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_2.png"));
+	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/sunshine_3.png"));
+
+	staus1->moveBy(stausX, stausY);
+	staus2->moveBy(stausX, stausY + stausDY);
+	staus3->moveBy(stausX, stausY + 2 * stausDY);
+
+	scene->addItem(staus1);
+	scene->addItem(staus2);
+	scene->addItem(staus3);
+
+	text1 = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus1);
+	text2 = new QGraphicsSimpleTextItem(QString::number(nowMark, 10), staus2);
+	text3 = new QGraphicsSimpleTextItem(QString::number(nowNeed, 10), staus3);
+
+	int x = 138;
+	int y = 25;
+	text1->moveBy(x, y);
+	text2->moveBy(x, y);
+	text3->moveBy(x, y);
+
+	QFont font;
+	font.setBold(true);
+	font.setPixelSize(20);
+
+	text1->setFont(font);
+	text2->setFont(font);
+	text3->setFont(font);
+
+	text1->setBrush(QBrush(QColor(255, 255, 255)));
+	text2->setBrush(QBrush(QColor(255, 255, 255)));
+	text3->setBrush(QBrush(QColor(255, 255, 255)));
 }
 
 void SunSmellCollect::sendSmell() {
@@ -63,17 +110,42 @@ void SunSmellCollect::determineHard() {
 	case 1:
 		lunchSpeed = 300;
 		collecterSpeed = 10;
+		leftTime = 30;
+		nowMark = 0;
+		nowNeed = 15;
 		break;
 	case 2:
 		lunchSpeed = 500;
 		collecterSpeed = 13;
+		leftTime = 45;
+		nowMark = 0;
+		nowNeed = 30;
 		break;
 	case 3:
 	default:
 		lunchSpeed = 700;
 		collecterSpeed = 16;
+		leftTime = 60;
+		nowMark = 0;
+		nowNeed = 60;
 		break;
 	}
+}
+
+void SunSmellCollect::countDown() {
+	if (leftTime > 0) {
+		leftTime--;
+		text1->setText(QString::number(leftTime, 10));
+		text2->setText(QString::number(nowMark, 10));
+		text3->setText(QString::number(nowNeed, 10));
+	}
+	else {
+		emit finishGame();
+	}
+}
+
+void SunSmellCollect::reFreshBack() {
+	setBackgroundBrush(back->currentPixmap());
 }
 
 void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
@@ -84,7 +156,13 @@ void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
 }
 
 void SunSmellCollect::addMark() {
-	collecter->moveBy(0, 10);
+	nowMark += 10;
+	nowNeed -= 10;
+	text2->setText(QString::number(nowMark, 10));
+	text3->setText(QString::number(nowNeed, 10));
+	if (nowNeed <= 0) {
+		emit finishGame();
+	}
 }
 
 

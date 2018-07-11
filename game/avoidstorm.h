@@ -2,7 +2,6 @@
 #define AVOIDSTORM_H
 
 #include <QGraphicsView>
-#include <QPixmap>
 #include <QPainter>
 #include <QGraphicsScene>
 #include "playerinwind.h"
@@ -10,6 +9,9 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <QTime>
+#include <QMovie>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
 
 namespace Ui {
 class AvoidStorm;
@@ -30,18 +32,30 @@ public slots:
 	void endGame();
 	void sendTornado();
 
+	void reFreshBack();
+	void countDown();
+
 private:
     Ui::AvoidStorm *ui;
 
 	QGraphicsScene *scene = NULL;
 	PlayerInWind *playerInWind = NULL;
-	QPixmap back;
+	QMovie *back = NULL;
 	QTimer *sendTimer = NULL;
+	QTimer *reFreshBackTimer = NULL;
+	QTimer *countDownTimer = NULL;
+	QGraphicsPixmapItem *staus = NULL;
+	QGraphicsSimpleTextItem *text = NULL;
 
 	int gameHard;
 	int playerSpeed;
 	float tornadoVy;
 	int lunchSpeed;
+	int leftTime;
+	int stausDX;
+	int stausX;
+	int stausY;
+	int stausDY;
 
 	void loadRes();
 	void determineHard();
