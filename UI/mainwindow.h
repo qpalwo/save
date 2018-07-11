@@ -29,7 +29,7 @@
 #include <QtGlobal>
 #include <QTime>
 #include "set.h"
-#include <QSound>
+#include <QMediaPlayer>
 #include <QCursor>
 #include <QMouseEvent>
 
@@ -76,7 +76,7 @@ private:
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
 
-    QSound *bgm;
+    QMediaPlayer *bgm;
 
     QCursor *myCursor;
 
@@ -109,6 +109,7 @@ private:
 	int sceneHeight;
 	int sceneType;
 	int nowTime;
+    int v;
 };
 
 #endif // MAINWINDOW_H
