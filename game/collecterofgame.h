@@ -13,7 +13,7 @@ class CollecterOfGame : public QObject, public QGraphicsItem
 	Q_OBJECT
 
 public:
-	CollecterOfGame();
+	CollecterOfGame(int);
 	~CollecterOfGame();
 
 	QRectF boundingRect() const;

@@ -28,7 +28,8 @@ void Achieve::paintEvent(QPaintEvent *e) {
 }
 
 void Achieve::loadPixmap(){
-    if( a == NULL) achieve1.load(":/achieve/achieve_1_2.png");
+	
+    if(*(a + 13)) achieve1.load(":/achieve/achieve_1_2.png");
     else achieve1.load(":/achieve/achieve_1.png");
     achieve2.load(":/achieve/achieve_1.png");
     achieve3.load(":/achieve/achieve_1.png");
@@ -48,6 +49,7 @@ void Achieve::loadPixmap(){
 
 void Achieve::onBackClicked() {
 	close();
+	deleteLater();
 }
 
 Achieve::~Achieve() {

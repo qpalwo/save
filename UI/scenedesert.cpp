@@ -1,6 +1,6 @@
 #include "scenedesert.h"
 #include "ui_scenedesert.h"
-//#include "logindlg.h"
+
 
 SceneDesert::SceneDesert(QWidget *parent) :
 	QWidget(parent),
@@ -11,11 +11,11 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	backX = 0;   backY = 0;
 	playerX = 0;
 	talk = 0;
+	first = false;
 	stop = false;
 	left = false;
-	choose = false;
-	zz = false;
-	xx = false;
+	zxFuck = false;
+
 	loadImage();
 	loadPlot();
 
@@ -32,9 +32,6 @@ void SceneDesert::loadImage() {
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
-	option_1.load(":/conver/convar/choice_1.png");
-	option_2.load(":/conver/convar/choice_2.png");
-	option_3.load(":/conver/convar/choice_3.png");
 	conver.load(":/conver/convar/convar.png");
 	player->start();
 	player_left->start();
@@ -58,7 +55,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 
-	painter.drawText(220, 220, mouse_out);
+	//painter.drawText(220, 220, mouse_out);
 
 	if (playerX == 430)  stop = true;
 
@@ -69,18 +66,34 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
-	if (playerX > 430) {
-		painter.drawImage(850, 270, uncle);
+	if (first) { 
+		painter.drawText(180, 140, begin);
+		painter.drawText(320, 180, begin2);
+	 }
+
+
+	if (playerX >= 440) {
+		painter.drawImage(850, 260, uncle);
 		painter.drawImage(0, 0, conver);
-
-
-		painter.drawText(280, 620, q[talk].s);
-		if (q[talk].diff||q[talk].hu) {
-			talk++;
-			painter.drawText(280, 666, q[talk].s);
+		if (zxFuck) {
+			painter.drawText(280, 612, record_1);
+			painter.drawText(280, 666, record_2);
+		}
+		else {
+			painter.drawText(280, 612, q[talk].s);
+			if (q[talk].hu) {
+				painter.drawText(280, 666, q[talk + 1].s);
+			}
+			if (q[talk].diff) {
+				record_1 = q[talk].s;
+				record_2 = q[talk + 1].s;
+				talk++;
+				painter.drawText(280, 666, q[talk].s);
+				zxFuck = true;
+			}
 		}
 	}
-
+	first = false;
 }
 
 void SceneDesert::keyPressEvent(QKeyEvent *e) {
@@ -94,8 +107,7 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 
 		if ((e->key() == Qt::Key_S)|| (e->key() == Qt::Key_Down)) {
 			if (underTheTree(2))	waitTime++;
-		}
-		else waitTime = 0;
+		}	else waitTime = 0;
 
 		if (backX < BDL) { backX += 10;  stop = false; playerX += 10; }
 		if (backX > BDR) { backX -= 10;   stop = false; playerX -= 10; }
@@ -106,18 +118,19 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_Left: playerX -= 10;  left = true; break;
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
-
 		}
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
-			if (underTheTree(1))	waitTime++;
+			if (underTheTree(1))  waitTime++;
 		} else waitTime = 0;
 
-		if ((e->key() == Qt::Key_J) && (!q[talk].diff))  
+		if (playerX < 430) first = true;
+
+		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))
 			talk = q[talk].l;
 
- 		if (q[talk].diff) {
-			if (e->key() == Qt::Key_Z) talk = q[talk-1].l;
-			if (e->key() == Qt::Key_X) talk = q[talk].l;
+		if (q[talk].diff) {
+			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxFuck = false; }
+			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxFuck = false; }
 		}
 
 		if (playerX < 0) { playerX += 10; }
@@ -140,7 +153,8 @@ bool SceneDesert::underTheTree(int n) {
 }
 
 void SceneDesert::loadPlot() {
-	int i = 0, j = 0;
+	begin = QString::fromLocal8Bit("炎热的感觉。。。透不过气。。。就像是溺在海里。。。");
+	begin2 = QString::fromLocal8Bit("得赶快找个地方休息一下");
 
 	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;
 
@@ -152,8 +166,7 @@ void SceneDesert::loadPlot() {
 	 q[2].l = 4;  q[4].s = QString::fromLocal8Bit("大叔：小姑娘还挺害羞的。");      q[4].diff = false;  q[4].hu = false;
 
 	q[3].l = 5;  q[4].l = 5;  q[5].s = QString::fromLocal8Bit("大叔：走！大叔带你去逛逛（掏出一系列证件）看, 我不是坏");  q[5].diff = false;  q[5].hu = true;
-
-	q[5].l = 6;  q[6].s = QString::fromLocal8Bit("人(凑过去一看）驾驶证,学生证,一张奇怪的东西的照片...");   q[6].diff = false;  q[6].hu = true;
+	q[5].l = 6;  q[6].s = QString::fromLocal8Bit("人(凑过去一看）驾驶证,学生证,一张奇怪的东西的照片...");   q[6].diff = false;  q[6].hu = false;
 	
 	q[6].l = 7;  q[7].s = QString::fromLocal8Bit("z. 询问奇怪的东西是什么");      q[7].diff = true; q[7].hu = false;
 	q[6].r = 8;  q[8].s = QString::fromLocal8Bit("x. 不询问");      q[8].diff = true; q[8].hu = false;
@@ -202,9 +215,7 @@ void SceneDesert::mouseMoveEvent(QMouseEvent* event)
 
 	mouse = event->pos();
 
-	mouse_out = QString::number(event->x()) + '  ' + QString::number(event->y());
-	//setText(QString("(%1,%2)").arg(m.x()).arg(m.y()));
-
+    //	mouse_out = QString::number(event->x()) + '  ' + QString::number(event->y());
 }
 
 void SceneDesert::on_bag_clicked() {

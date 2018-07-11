@@ -1,14 +1,14 @@
 #include "collecterofgame.h"
 #define _ABS(x) ((x) > 0 ? (x) : -(x))
 
-CollecterOfGame::CollecterOfGame() {
+CollecterOfGame::CollecterOfGame(int collecterSpeed) {
 	pixMap.load(":/game/SunSmellCollect/bottle.png");
 	setFlag(QGraphicsItem::ItemIsFocusable);
 	setFocus(Qt::OtherFocusReason);
 	moveBy(480, 500);
-	speed = 10;
-	height = 150;
-	width = 130;
+	speed = collecterSpeed;
+	height = 120;
+	width = 100;
 }
 
 QRectF CollecterOfGame::boundingRect() const {
@@ -31,7 +31,7 @@ void CollecterOfGame::keyPressEvent(QKeyEvent *event) {
 		break;
 	case Qt::Key_D:
 	case Qt::Key_Right:
-		if (x() + 235 + speed < 960)
+		if (x() + 135 + speed < 960)
 		moveBy(speed, 0);
 		break;
 	default:

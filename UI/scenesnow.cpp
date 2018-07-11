@@ -62,12 +62,19 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 
     if (left)
     {
+        if ((waitTime>0) && (waitTime <= 30))
+			painter.drawPixmap(playerX, 235 - waitTime * 6, 100, 200, player_left->currentPixmap());
+		else 
         painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
     }
     else
     {
+		if ((waitTime>0) && (waitTime <= 30))
+			painter.drawPixmap(playerX, 235-waitTime * 6, 100, 200, player->currentPixmap());
+		else 
         painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
+    //Ì½Ë÷
 
     painter.drawImage(backX, backY, earth);
 	if (first) painter.drawText(180, 550, begin);
@@ -82,7 +89,6 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 			painter.drawText(280, 666, record_2);
 		}
 		else {
-
 			painter.drawText(280, 612, q[talk].s);
 			if (q[talk].hu) {
 				painter.drawText(280, 666, q[talk + 1].s);
@@ -136,6 +142,10 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
             stop = false;
             playerX -= 10;
         }
+		if ((e->key() == Qt::Key_W) || (e->key() == Qt::Key_Up)) {
+			if (underTheSunshine(2))	waitTime++;
+		}
+		else waitTime = 0;
     }
     else {
         switch (e->key())
@@ -168,6 +178,10 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
         }
 		if (playerX < 430) first = true;
 
+		if ((e->key() == Qt::Key_W) || (e->key() == Qt::Key_Up)) {
+			if (underTheSunshine(1))  waitTime++;
+		} else waitTime = 0;
+
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 
 		if (q[talk].diff) {
@@ -175,8 +189,17 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
 			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxLock = false; }
 		}
     }
-
     update();
+}
+
+bool SceneSnow::underTheSunshine(int n) {
+	if (n == 2) {
+		if ((backX >= -60) && (backX <= -10))  return true;
+		if ((backX >= -1330) && (backX <= -1270))  return true;
+		if ((backX >= -1660) && (backX <= -1620))  return true;
+		if ((backX >= -2850) && (backX <= -2800))  return true;
+	}
+	return false;
 }
 
 void SceneSnow::loadPlot() {

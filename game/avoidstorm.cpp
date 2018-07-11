@@ -11,6 +11,7 @@ AvoidStorm::AvoidStorm(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	determineHard();
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
@@ -22,17 +23,17 @@ AvoidStorm::AvoidStorm(int hard, QWidget *parent) :
 }
 
 void AvoidStorm::loadRes() {
-	playerInWind = new PlayerInWind();
+	playerInWind = new PlayerInWind(playerSpeed);
 	scene->addItem(playerInWind);
 	scene->setFocusItem(playerInWind);
 	playerInWind->grabKeyboard();
 	sendTimer = new QTimer(this);
 	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendTornado()));
-	sendTimer->start(500);
+	sendTimer->start(lunchSpeed);
 }
 
 void AvoidStorm::sendTornado() {
-	Tornado *tornado = new Tornado(qrand() % 860, QString(":/game/SunSmellCollect/smell.png"));
+	Tornado *tornado = new Tornado(qrand() % 860, tornadoVy, QString(":/game/SunSmellCollect/wind.png"));
 	tornado->bindPlayer(playerInWind);
 	scene->addItem(tornado);
 	connect(this, SIGNAL(finishGame()), tornado, SLOT(finishGame()));
@@ -41,6 +42,27 @@ void AvoidStorm::sendTornado() {
 
 void AvoidStorm::endGame() {
 	playerInWind->moveBy(0, 10);
+}
+
+void AvoidStorm::determineHard() {
+	switch (gameHard) {
+	case 1:
+		playerSpeed = 16;
+		lunchSpeed = 800;
+		tornadoVy = 5;
+		break;
+	case 2:
+		playerSpeed = 13;
+		lunchSpeed = 500;
+		tornadoVy = 7;
+		break;
+	case 3:
+	default:
+		playerSpeed = 10;
+		lunchSpeed = 300;
+		tornadoVy = 9;
+		break;
+	}
 }
 
 AvoidStorm::~AvoidStorm() {

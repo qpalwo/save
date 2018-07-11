@@ -10,6 +10,7 @@
 #include <qstring.h>
 #include <QtConcurrent/qtconcurrentrun.h>
 #include <QFile>
+#include <QString>
 
 class AchieveData {
 public:
@@ -18,18 +19,22 @@ public:
 	static const int ACHIEVE_ONE = 0;
 	void addAchieve(int);
 	bool *getAllAchieve();
+	void save();
+	
 
 private:
 	bool m_achieves[23] = { 0 };
-	void save();
 	void load();
 
 };
+
+
 
 class GameWorld : public QObject
 {
     Q_OBJECT
 public:
+	~GameWorld();
 	static GameWorld * getInstance();
 	void addAchieve(int);
 	void quitGame();
@@ -37,10 +42,13 @@ public:
 	void setGameHard(int);
 	int getGameHard();
 	bool* getAllAchieve();
+	QString* getAllSaves();
+	void addSaves(QString, int);
 
 	void fromMainToBegining();
 	void fromBeginingToRuinsCity();
 	void showAchieve();
+	void showSaveAndLoad();
 	void hideAchieve();
 
 	void beginSmellCollect();
@@ -57,7 +65,8 @@ private:
 	static GameWorld *Instance;
 
 	AchieveData m_achieve;
-	int gameHard = 0;
+	QString savesPath[6];
+	int gameHard;
 
 	void save();
 	void load();

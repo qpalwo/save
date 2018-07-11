@@ -11,6 +11,7 @@ SunSmellCollect::SunSmellCollect(int hard, QWidget *parent) :
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setBackgroundBrush(QPixmap(":/game/SunSmellCollect/back.png"));
+	determineHard();
 	scene = new QGraphicsScene(this);
 	scene->setSceneRect(0, 0, 960, 720);
 	setScene(scene);
@@ -22,13 +23,13 @@ SunSmellCollect::SunSmellCollect(int hard, QWidget *parent) :
 }
 
 void SunSmellCollect::loadRes() {
-	collecter = new CollecterOfGame();
+	collecter = new CollecterOfGame(collecterSpeed);
 	scene->addItem(collecter);
 	scene->setFocusItem(collecter);
 	collecter->grabKeyboard();
 	sendTimer = new QTimer(this);
 	connect(sendTimer, SIGNAL(timeout()), this, SLOT(sendSmell()));
-	sendTimer->start(500);
+	sendTimer->start(lunchSpeed);
 }
 
 void SunSmellCollect::sendSmell() {
@@ -55,6 +56,24 @@ void SunSmellCollect::sendSmell() {
 	connect(this, SIGNAL(finishGame()), smell, SLOT(finishGame()));
 	connect(smell, SIGNAL(collected()), this, SLOT(addMark()));
 
+}
+
+void SunSmellCollect::determineHard() {
+	switch (gameHard) {
+	case 1:
+		lunchSpeed = 300;
+		collecterSpeed = 10;
+		break;
+	case 2:
+		lunchSpeed = 500;
+		collecterSpeed = 13;
+		break;
+	case 3:
+	default:
+		lunchSpeed = 700;
+		collecterSpeed = 16;
+		break;
+	}
 }
 
 void SunSmellCollect::focusInEvent(QFocusEvent *focusEvent) {
