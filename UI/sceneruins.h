@@ -59,10 +59,7 @@ private:
 	QString begin;
 	QString Ending1;
 	QString Ending2;
-	QString Achieve1;
-	QString Achieve2;
 	QString get[15];
-
 
     QMovie* player;
     QMovie* player_left;
@@ -90,6 +87,7 @@ private:
 	bool gameover;
 	bool statement[5] = {false};
 	bool rightThing;
+	bool isSpace=false;
 };
 
 #endif // SCENERUINS_H

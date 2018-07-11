@@ -12,6 +12,7 @@
 #include <QMovie>
 #include <QtGlobal>
 #include "gainachieve.h"
+#include"attr/player.h"
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -37,6 +38,10 @@ public:
     explicit SceneSnow(QWidget *parent = 0);
     ~SceneSnow();
     void paintEvent(QPaintEvent *e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a, bool b, bool c, bool d);
+
 
 private:
     Ui::SceneSnow *ui;
@@ -74,7 +79,10 @@ private:
 	bool zxLock;
 	bool first;
 	bool f[100];
+	bool statement[5];
 	bool isShow = false;
+	bool gameover;
+	bool rightThing;
 };
 
 #endif // SCENESNOW_H
