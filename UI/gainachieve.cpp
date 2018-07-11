@@ -17,6 +17,17 @@ GainAchieve::GainAchieve(bool isWin, int id, QWidget *parent) :
 	}
 }
 
+GainAchieve::GainAchieve(int id, QWidget *parent) :
+	QWidget(parent),
+	ui(new Ui::GainAchieve) {
+	ui->setupUi(this);
+	setWindowFlag(Qt::FramelessWindowHint);
+	this->m_achieve = id;
+	m_isWin = true;
+	loadRes();
+	move(280, 300);
+}
+
 void GainAchieve::loadRes() {
 	if (m_isWin) {
 		back.load(":/achieve/acquire.png");

@@ -16,7 +16,8 @@ class GainAchieve : public QWidget
     Q_OBJECT
 
 public:
-    explicit GainAchieve(bool, int, QWidget *parent = 0);
+    GainAchieve(bool, int, QWidget *parent = 0);
+	GainAchieve(int, QWidget *parent = 0);
     ~GainAchieve();
 
 public slots:
