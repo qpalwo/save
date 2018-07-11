@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/mouse">
+        <file>pointer_1.png</file>
+        <file>pointer_2.png</file>
+        <file>pointer_3.png</file>
+        <file>pointer_4.png</file>
+        <file>pointer_5.png</file>
+        <file>pointer_6.png</file>
+        <file>pointer_7.png</file>
+        <file>pointer_8.png</file>
+    </qresource>
+</RCC>

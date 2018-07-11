@@ -19,6 +19,7 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	left = false;
 	zxFuck = false;
 	zhu = false;
+	gameover = false;
 
 	loadImage();
 	loadPlot();
@@ -60,8 +61,6 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 
-	//painter.drawText(220, 220, mouse_out);
-
 	if (playerX == 430)  stop = true;
 
 	if (talk < 12) {
@@ -76,9 +75,10 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0)&&(waitTime<=28))
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
-	if (waitTime > 30) {
-		if (waitTime == 31) 	ti = qrand() % 7;
+	if (waitTime > 29) {
+		if (waitTime == 29) 	ti = qrand() % 7;
 		painter.drawText(380, 280, get[ti]);
+		Player::getInstance()->addBagThing(ti+6);
 	} 
 
 	if (first) { 
@@ -89,7 +89,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if (playerX >= 440) {
 		if (talk == 28) {
 			if (zhu) {
-
+				talk = 40;
 			}  else talk = 30;
 		}
 		painter.drawImage(850, 260, uncle);
@@ -99,7 +99,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 			painter.drawText(280, 666, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);
+			painter.drawText(280, 612, q[talk].s);  f[talk] = true;
 			if (q[talk].hu) {
 				painter.drawText(280, 666, q[talk + 1].s);
 			}
@@ -113,6 +113,8 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		}
 	}
 	first = false;
+	//GainAchieve *Joker = new  GainAchieve(2, this);
+	//Joker->show();
 }
 
 void SceneDesert::keyPressEvent(QKeyEvent *e) {
@@ -152,10 +154,22 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxFuck = false; }
 		}
 
+		if (f[9] && (talk == 23)) {
+			GainAchieve *Joker = new  GainAchieve(5, this);
+			Joker->show();
+		}
+		if (talk==44) {
+			GainAchieve *Joker = new  GainAchieve(6, this);
+			Joker->show();
+		}
+
+		if ((talk == 41)||(talk==32))  GameWorld::getInstance()->beginAvoidStorm();
+	
+
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
 	}
-
+	
 	update();
 }
 
@@ -171,17 +185,35 @@ bool SceneDesert::underTheTree(int n) {
 	return false;
 }
 
+void SceneDesert::gameOver() {
+	gameover = true;
+}
+
+void SceneDesert::bagThingClick(int n) {
+	if (n == 2) zhu = true;
+}
+
+void SceneDesert::changeState(bool a,bool b,bool c,bool d) {
+	statement[1] = a;
+	statement[2] = b;
+	statement[3] = c;
+	statement[4] = d;
+}
+
+
 void SceneDesert::loadPlot() {
 	begin = QString::fromLocal8Bit("炎热的感觉。。。透不过气。。。就像是溺在海里。。。");
 	begin2 = QString::fromLocal8Bit("得赶快找个地方休息一下");
 
-	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
-	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
-	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
-	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
-	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
-	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
-	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+	get[0] = QString::fromLocal8Bit("获得物品 [过期罐头]");	
+	get[1] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[2] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[3] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
+
+
 
 	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;
 
@@ -241,14 +273,13 @@ void SceneDesert::loadPlot() {
 	q[34].l = 34;
 
 	q[40].s= QString::fromLocal8Bit("大叔：是它！就是它！哈哈哈，我就要成功了！！听见了吗，"); q[40].diff = false;  q[40].hu =true;
-	q[41].s = QString::fromLocal8Bit("大海的召唤!"); q[41].diff = false;  q[41].hu = false;
+	q[40].l = 41;  q[41].s = QString::fromLocal8Bit("大海的召唤!"); q[41].diff = false;  q[41].hu = false;
 
 	q[41].l = 42;  q[42].s = QString::fromLocal8Bit("大叔：谢谢你，小姑娘。这个送给你吧"); q[42].diff = false;  q[42].hu = false;
 
 	q[42].l = 43;  q[43].s = QString::fromLocal8Bit("大叔：听见了吗,这是海的心脏跳动的声音。。。经久不息。"); q[43].diff = false;  q[43].hu = false;
+	q[43].l = 44; q[44].l = 44;
 }
-
-
 
 void SceneDesert::mouseMoveEvent(QMouseEvent* event)
 {

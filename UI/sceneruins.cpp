@@ -21,6 +21,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	zxLock= false;
 	space1 = false;
 	space2 = false;
+	rightThing = false;
 
 	loadImage();
 	loadPlot();
@@ -78,9 +79,10 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //绘制矩形 
 
-	if (waitTime > 30) {
-		if (waitTime == 31) 	ti = qrand() % 7;
+	if (waitTime > 28) {
+		if (waitTime == 29) 	ti = qrand() % 7;
 		painter.drawText(380, 280, get[ti]);
+		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) 	painter.drawText(180, 150, begin);
@@ -205,12 +207,13 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
 	    if ((talk == 28) && space1) space2 = true;
 		if ((talk == 28) && (e->key() == Qt::Key_Space)) space1 = true;
 	
-
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 		if (q[talk].diff) {
 			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxLock = false; }
 			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxLock = false; }
 		}
+
+		if (talk == 11)  GameWorld::getInstance()->beginKeepMoving();
   
         if (playerX < 430) first = true;
     }
@@ -230,16 +233,34 @@ bool SceneRuins::underDoor(int n) {
 	return false;
 }
 
+void SceneRuins::gameOver() {
+	gameover = true;
+}
+
+void SceneRuins::bagThingClick(int n) {
+	if (n == 2) rightThing = true;
+}
+
+void SceneRuins::changeState(bool a, bool b, bool c, bool d) {
+	statement[1] = a;
+	statement[2] = b;
+	statement[3] = c;
+	statement[4] = d;
+}
+
+
+
 void SceneRuins::loadPlot() {
 	begin = QString::fromLocal8Bit("千篇一律的灰色...果然,压抑的布局也会使人心情更不愉快啊");
 
-	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
-	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
-	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
-	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
-	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
-	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
-	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+	get[0] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+	get[1] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[2] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[3] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
+
 
 
 	q[0].s= QString::fromLocal8Bit("恩？似乎有什么声音？(抬头)"); q[0].diff = false; q[0].hu = false;

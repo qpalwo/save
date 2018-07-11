@@ -130,7 +130,8 @@ RESOURCES += \
     res/game/gameRes.qrc \
     res/setting/setting.qrc \
     res/map/gamemap.qrc \
-    res/game/gameres2.qrc
+    res/game/gameres2.qrc \
+    res/mouse/mouse.qrc
 
 DISTFILES += \
     res/people/uncle.png \

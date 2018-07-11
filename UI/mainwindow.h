@@ -29,6 +29,9 @@
 #include <QtGlobal>
 #include <QTime>
 #include "set.h"
+#include <QMediaPlayer>
+#include <QCursor>
+#include <QMouseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -44,8 +47,11 @@ public:
 	void paintEvent(QPaintEvent * e);
 	void keyPressEvent(QKeyEvent *e);
 
+
+
 public slots:
 	void handelWeather(QNetworkReply *);
+
 
 private slots:
 	void moveMou();
@@ -57,7 +63,7 @@ private slots:
 	void onContinueClicked();
 	void onEasyClicked();
 	void onMidClicked();
-	void onHardClicked();
+    void onHardClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -72,6 +78,12 @@ private:
 	QMovie *backGif = NULL;
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
+
+    int v;
+
+    QMediaPlayer *bgm;
+
+    QCursor *myCursor;
 
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;
@@ -91,7 +103,7 @@ private:
 	void initVerticalTimer();
 	void initMenu();
 	void initHardChoose();
-	void hideMenu();
+    void hideMenu();
 
 	bool isDown = false;
 	int weather;
@@ -101,7 +113,7 @@ private:
 	int p;
 	int sceneHeight;
 	int sceneType;
-	int nowTime;
+    int nowTime;
 };
 
 #endif // MAINWINDOW_H
