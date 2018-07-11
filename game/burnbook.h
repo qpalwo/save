@@ -5,6 +5,9 @@
 #include <QPainter>
 #include <QGraphicsScene>
 #include <QTimer>
+#include <QMovie>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
 #include "fireburnbook.h"
 #include "booktoburn.h"
 
@@ -23,6 +26,10 @@ public:
 public slots:
 	void onBurned();
 	void onUnBurned();
+	void reFreshBack();
+
+signals:
+	void finishGame();
 
 protected:
 
@@ -31,14 +38,33 @@ private:
 	QGraphicsScene *scene = NULL;
 	FireBurnBook *fireBurnBook = NULL;
 	BookToBurn *m_book = NULL;
+	QMovie *back = NULL;
+	QTimer *reFreshBackTimer = NULL;
+	QGraphicsPixmapItem *staus1 = NULL;
+	QGraphicsPixmapItem *staus2 = NULL;
+	QGraphicsPixmapItem *staus3 = NULL;
+	QGraphicsPixmapItem *staus4 = NULL;
+
+	QGraphicsSimpleTextItem *text1 = NULL;
+	QGraphicsSimpleTextItem *text2 = NULL;
+	QGraphicsSimpleTextItem *text3 = NULL;
+	QGraphicsSimpleTextItem *text4 = NULL;
 
 	void addBook();
 	void loadRes();
 	void determineHard();
+	void reFreshText();
 
 	int gameHard;
+	int allBook;
 	int leftBook;
+	int burnedBook;
+	int nowNeed;
 	int fireSize;
+	int stausX;
+	int stausY;
+	int stausDX;
+	int stausDY;
 };
 
 #endif // BURNBOOK_H

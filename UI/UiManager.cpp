@@ -108,6 +108,14 @@ void UiManager::closeAchieve() {
 	}
 }
 
+void UiManager::closeSaveAndLoad() {
+	if (saveAndLoad != NULL) {
+		saveAndLoad->close();
+		saveAndLoad->deleteLater();
+		saveAndLoad = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -193,6 +201,12 @@ void UiManager::openBurnBook(int hard) {
 void UiManager::openAchieve() {
 	achieve = new Achieve();
 	achieve->show();
+	openWordWIndow();
+}
+
+void UiManager::openSaveAndLoad() {
+	saveAndLoad = new SaveAndLoad();
+	saveAndLoad->show();
 	openWordWIndow();
 }
 

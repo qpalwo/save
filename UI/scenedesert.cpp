@@ -107,8 +107,7 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 
 		if ((e->key() == Qt::Key_S)|| (e->key() == Qt::Key_Down)) {
 			if (underTheTree(2))	waitTime++;
-		}
-		else waitTime = 0;
+		}	else waitTime = 0;
 
 		if (backX < BDL) { backX += 10;  stop = false; playerX += 10; }
 		if (backX > BDR) { backX -= 10;   stop = false; playerX -= 10; }

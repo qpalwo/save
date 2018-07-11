@@ -14,6 +14,7 @@
 #include "begining.h"
 #include "game/burnbook.h"
 #include "achieve.h"
+#include "saveandload.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -34,6 +35,7 @@ public:
 	void closeBegining();
 	void closeBurnBook();
 	void closeAchieve();
+	void closeSaveAndLoad();
 	void closeAll();
 
 	void openSceneDesert();
@@ -45,6 +47,7 @@ public:
 	void openWordWIndow();
 	void openLoading();
 	void openAchieve();
+	void openSaveAndLoad();
 	void openSunSmellCollect(int);
 	void openAvoidStorm(int);
 	void openBurnBook(int);
@@ -74,6 +77,7 @@ private:
 	QWidget *loading = NULL;
 	Begining *begining = NULL;
 	Achieve *achieve = NULL;
+	SaveAndLoad *saveAndLoad = NULL;
 
 	SunSmellCollect *sunSmellCollect = NULL;
 	AvoidStorm *avoidStorm = NULL;

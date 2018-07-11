@@ -43,6 +43,8 @@ private:
     QImage earth;
 	QImage conver;
 	QImage girl;
+
+
 	QString record_1;
 	QString record_2;
 	QString begin;
@@ -51,7 +53,7 @@ private:
     QMovie* player;
     QMovie* player_left;
 
-
+	bool underTheSunshine(int n);
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
 	void loadPlot();
@@ -61,11 +63,13 @@ private:
     int backY;
     int playerX;
 	int talk;
+	int waitTime;
 
     bool stop;
     bool left;
 	bool zxLock;
 	bool first;
+	bool f[100];
 };
 
 #endif // SCENESNOW_H

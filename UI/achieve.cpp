@@ -107,6 +107,7 @@ void Achieve::loadPixmap(){
 
 void Achieve::onBackClicked() {
 	close();
+	deleteLater();
 }
 
 Achieve::~Achieve() {
