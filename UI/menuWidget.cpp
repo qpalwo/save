@@ -84,7 +84,7 @@ void menuwidget::onBagClicked()
 
 void menuwidget::onMapClicked()
 {
-
+	GameWorld::getInstance()->showGameMap();
 }
 
 void menuwidget::onBackClicked()

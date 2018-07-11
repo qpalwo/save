@@ -109,4 +109,12 @@ void AvoidStorm::determineHard() {
 
 AvoidStorm::~AvoidStorm() {
 	delete ui;
+	delete scene;
+	delete playerInWind;
+	delete back;
+	delete sendTimer;
+	delete reFreshBackTimer;
+	delete countDownTimer;
+	delete staus;
+	delete text;
 }

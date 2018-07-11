@@ -29,6 +29,15 @@ BagThing *Player::getBagThing() {
 	return backBag.getBagThing();
 }
 
+bool* Player::getMapStaus() {
+	return m_map;
+}
+
+void Player::setMapStaus(int map) {
+	if(map <= 4)
+		m_map[map - 1] = true;
+}
+
 void Player::addBagThing(int num) {
 	backBag.addBagThing(num);
 }
