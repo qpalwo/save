@@ -40,12 +40,12 @@ void MainWindow::initMenu() {
 		achieve->hide();
         setting->hide();
 	}
-
+	
 	if (isDown && open != NULL) {
-		open->setGeometry(rect().x() + 300, rect().y() - 40 + sceneHeight * 2, 130, 50);
-		b_continue->setGeometry(rect().x() + 500, rect().y() -40 + sceneHeight * 2, 130, 50);
-		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + sceneHeight * 2, 130, 50);
-        setting->setGeometry(rect().x() + 500, rect().y() + 30 + sceneHeight * 2, 130, 50);
+		open->setGeometry(rect().x() + 300, rect().y() - 40 + (sceneHeight + 40) * 2, 130, 50);
+		b_continue->setGeometry(rect().x() + 500, rect().y() -40 + (sceneHeight + 40) * 2, 130, 50);
+		achieve->setGeometry(rect().x() + 300, rect().y() + 30 + (sceneHeight + 40) * 2, 130, 50);
+        setting->setGeometry(rect().x() + 500, rect().y() + 30 + (sceneHeight + 40) * 2, 130, 50);
 
 		open->show();
 		b_continue->show();
@@ -75,10 +75,10 @@ void MainWindow::initHardChoose() {
 	easy = new OpenPageButton("easy", this);
 	mid = new OpenPageButton("mid", this);
 	hard = new OpenPageButton("hard", this);
-
-	easy->setGeometry(rect().x() + 400, rect().y() - 40 + sceneHeight * 2, 130, 50);
-	mid->setGeometry(rect().x() + 400, rect().y() + 30 + sceneHeight * 2, 130, 50);
-	hard->setGeometry(rect().x() + 400, rect().y() + 100 + sceneHeight * 2, 130, 50);
+	
+	easy->setGeometry(rect().x() + 400, rect().y() - 40 + (sceneHeight + 40) * 2, 130, 50);
+	mid->setGeometry(rect().x() + 400, rect().y() + 30 + (sceneHeight + 40) * 2, 130, 50);
+	hard->setGeometry(rect().x() + 400, rect().y() + 100 + (sceneHeight + 40) * 2, 130, 50);
 
 	easy->show();
 	mid->show();
@@ -92,7 +92,9 @@ void MainWindow::initHardChoose() {
 
 
 void MainWindow::loadImage() {
-	//sceneType = 2;
+	//sceneType = 0;
+	icon = new QMovie(":/openGif/save.gif");
+	icon->start();
 	switch (sceneType) {
 	case 0:  //mou
 		rightPlayer = new QMovie(":/player/main_op.gif");
@@ -207,6 +209,9 @@ void MainWindow::paintEvent(QPaintEvent *e) {
 		painter.drawImage(0, 0, cloud);
 		painter.drawPixmap(0, 0, 960, 720, rain->currentPixmap());
 	}
+	if (showIcon) {
+		painter.drawPixmap(0, 0, 960, 720, icon->currentPixmap());
+	}
 }
 
 void MainWindow::moveMou() {
@@ -220,6 +225,9 @@ void MainWindow::moveMou() {
 void MainWindow::moveScene() {
 	if (sceneHeight >= 0 && sceneHeight <= 120) {
 		sceneHeight++;
+	}
+	if (sceneHeight == 118) {
+		showIcon = true;
 	}
 	if (sceneHeight == 120) {
 		verticalTimer->stop();
@@ -351,8 +359,8 @@ void MainWindow::initSun() {
 	QTime time = QTime::currentTime();
 	int hour = time.hour();
 	nowTime = hour;
-	//hour = 19;
-	//nowTime = 19;
+	//hour = 16;
+	//nowTime = 16;
 	if (hour >= 6 && hour < 12) {
 		sunY = 300 - 56 * (hour - 6);
 		sunX = 66 * (hour - 6) - 20;

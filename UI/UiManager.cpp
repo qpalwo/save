@@ -158,6 +158,7 @@ void UiManager::changeStaus(bool a, bool b, bool c, bool d) {
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();
+	QTimer::singleShot(3000, this, SLOT(showMainWindow()));
 }
 
 void UiManager::openMainPage() {

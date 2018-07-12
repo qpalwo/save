@@ -104,7 +104,7 @@ void Player::addBagThing(int num) {
 
 void Player::useBagThing(int num) {
 	backBag.useBagThing(num);
-	UiManager::getInstance()->useThing(num);
+	UiManager::getInstance()->useThing(num + 1);
 }
 
 bool* Player::nowStaus() {

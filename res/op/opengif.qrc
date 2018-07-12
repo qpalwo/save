@@ -3,5 +3,6 @@
         <file>background_se.gif</file>
         <file>background_sn.gif</file>
         <file>letter_2.gif</file>
+        <file>save.gif</file>
     </qresource>
 </RCC>

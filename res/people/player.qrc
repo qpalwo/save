@@ -7,6 +7,7 @@
         <file>forest_right.gif</file>
         <file>snow_left.gif</file>
         <file>snow_right.gif</file>
+        <file>pink_left.png</file>
     </qresource>
     <qresource prefix="/">
         <file>uncle.png</file>

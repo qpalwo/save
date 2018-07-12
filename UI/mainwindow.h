@@ -77,6 +77,7 @@ private:
 	QMovie *backGif = NULL;
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
+	QMovie *icon = NULL;
 
     int v;//add volume
 
@@ -113,6 +114,7 @@ private:
 	int sceneHeight;
 	int sceneType;
     int nowTime;
+	bool showIcon = false;
 };
 
 #endif // MAINWINDOW_H

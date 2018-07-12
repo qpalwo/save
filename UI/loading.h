@@ -41,6 +41,7 @@ private slots:
 private:
     Ui::Loading *ui;
 	QMovie * backGif;
+	void hideButton();
 };
 
 #endif // LOADING_H

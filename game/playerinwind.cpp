@@ -1,7 +1,7 @@
 #include "playerinwind.h"
 
 PlayerInWind::PlayerInWind(int playerSpeed) {
-	pixMap.load("://uncle.png");
+	pixMap.load(":/player/pink_left.png");
 	setFlag(QGraphicsItem::ItemIsFocusable);
 	setFocus(Qt::OtherFocusReason);
 	moveBy(480, 500);

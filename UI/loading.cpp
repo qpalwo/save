@@ -8,9 +8,24 @@ Loading::Loading(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 	setWindowFlag(Qt::FramelessWindowHint);
+	hideButton();
 	backGif = new QMovie(":/openGif/letter_2.gif");
 	ui->gifLabel->setMovie(backGif);
 	backGif->start();
+	
+}
+
+void Loading::hideButton() {
+	ui->pushButton->hide();
+	ui->pushButton_2->hide();
+	ui->pushButton_3->hide();
+	ui->pushButton_4->hide();
+	ui->pushButton_5->hide();
+	ui->pushButton_6->hide();
+	ui->pushButton_7->hide();
+	ui->pushButton_8->hide();
+	ui->pushButton_9->hide();
+	ui->pushButton_10->hide();
 }
 
 Loading::~Loading()

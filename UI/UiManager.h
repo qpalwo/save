@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QPixmap>
-#include "QTimer"
+#include <QTimer>
 #include "mainwindow.h"
 #include "scenedesert.h"
 #include "sceneforest.h"
