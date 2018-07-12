@@ -88,10 +88,11 @@ void GameWorld::save() {
 	document.setObject(obj);
 	QByteArray bytarr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytarr, QString("userInfo/gameworld.info"));
+	//saveToDisk(bytarr, QString("userInfo/gameworld.info"));
 }
 
 void GameWorld::load() {
-	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
+	/*QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
 	if (!document.isNull()) {
 		QJsonObject obj = document.object();
 		QJsonArray arr = obj.take("savePath").toArray();
@@ -103,7 +104,7 @@ void GameWorld::load() {
 			savesPath[i] = arr.at(i).toString();
 			screenShoot[i] = screen.at(i).toString();
 		}
-	}
+	}*/
 }
 void GameWorld::quitGame() {
 	screenShoot[Player::getInstance()->getMyId()] = UiManager::getInstance()->screenShoot();
@@ -221,7 +222,7 @@ AchieveData::AchieveData() {
 void AchieveData::addAchieve(int num) {
 	if(num - 1 >= 0 && num - 1 < 23)
 		AchieveData::m_achieves[num - 1] = true;
-	AchieveData::save();
+	//AchieveData::save();
 }
 
 void AchieveData::save() {
@@ -232,7 +233,8 @@ void AchieveData::save() {
 	QJsonDocument document;
 	document.setArray(achieveArr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
-	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
+	//QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
+	saveToDisk(bytearr, QString("userInfo/achieve.info"));
 }
 
 

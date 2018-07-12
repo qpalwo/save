@@ -26,10 +26,23 @@ protected:
 public slots:
 	void onBackClicked();
 
+	void onButton1Clicked();
+	void onButton2Clicked();
+	void onButton3Clicked();
+	void onButton4Clicked();
+	void onButton5Clicked();
+	void onButton6Clicked();
+
 private:
     Ui::SaveAndLoad *ui;
 
 	QPixmap back;
+	QPixmap pix1;
+	QPixmap pix2;
+	QPixmap pix3;
+	QPixmap pix4;
+	QPixmap pix5;
+	QPixmap pix6;
 
 	OpenPageButton *button1 = NULL;
 	OpenPageButton *button2 = NULL;
