@@ -1,5 +1,6 @@
 #include "begining.h"
 #include "ui_begining.h"
+#include "UI/UiManager.h"
 
 Begining::Begining(QWidget *parent) :
     QWidget(parent),
@@ -51,6 +52,8 @@ void Begining::paintEvent(QPaintEvent * e) {
 			painter.drawText(290, 300, p[32]);
 			painter.drawText(290, 340, p[33]);
 			painter.drawText(290, 380, p[34]);
+			if (open)
+				UiManager::getInstance()->fromBeginingToEnding();
 		}
 	}
 	if (jump == 2) {
@@ -74,6 +77,8 @@ void Begining::paintEvent(QPaintEvent * e) {
 				if (jump2 == 1) { 
 					painter.drawText(260, 300 , p[40]);
 					painter.drawText(260, 350, p[41]);
+					if (open)
+						UiManager::getInstance()->fromBeginingToEnding();
 				}
 				if (jump2 == 2) {
 					painter.drawText(270, 200, p[42]);
@@ -81,6 +86,7 @@ void Begining::paintEvent(QPaintEvent * e) {
 					painter.drawText(270, 280, p[44]);
 					painter.drawText(270, 320, p[45]);
 					painter.drawText(270, 360, p[46]);
+					if (open)
 					GameWorld::getInstance()->fromBeginingToRuinsCity();
 				}
 			}
@@ -90,6 +96,7 @@ void Begining::paintEvent(QPaintEvent * e) {
 }
 
 void Begining::keyPressEvent(QKeyEvent *e) {
+	if ((jump>0) && ((jump2 > 0)||jump1)) open = true;
 
 	if (jump == 2) {
 		if (e->key() == Qt::Key_Space) c2++;

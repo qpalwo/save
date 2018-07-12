@@ -43,6 +43,8 @@ SceneForest::SceneForest(QWidget *parent) :
 void SceneForest::loadImage() {
 	backGround.load(":/scene/forest_1.png");
 	earth.load(":/scene/forest_2.png");
+	illustrate.load(":/ruins/scene/illustrate_forest.png");
+
 	player = new QMovie(":/people/forest_right.gif");
 	player_left = new QMovie(":/people/forest_left.gif");
 	uncle.load(":/people/young_right.png");
@@ -89,7 +91,10 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		painter.drawText(380, 280, get[ti]);
 	}
 
-	if (first) 	painter.drawText(180, 150, begin);
+	if (first) {
+		painter.drawText(180, 150, begin);
+		painter.drawImage(0, 430, illustrate);
+	}
 
 	painter.setPen(QColor(250, 250, 250));
 

@@ -52,7 +52,7 @@ private:
     QImage earth;
 	QImage conver;
 	QImage girl;
-
+	QImage illustrate;
 
 	QString record_1;
 	QString record_2;

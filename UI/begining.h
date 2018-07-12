@@ -34,6 +34,7 @@ private:
 	bool Lock;
 	
 	bool jump1;
+	bool open = false;
 
 	QImage back;
 	QString p[50];

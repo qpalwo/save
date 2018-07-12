@@ -47,6 +47,7 @@ void SceneSnow::loadImage()
 {
     backGround.load(":/snow/scene/snow_2.png");
     earth.load(":/snow/scene/snow_1.png");
+	illustrate.load(":/ruins/scene/illustrate_snow.png");
     player = new QMovie(":/snow/people/snow_right.gif");
     player_left = new QMovie(":/snow/people/snow_left.gif");
 	girl.load(":/snow/people/yellow.png");
@@ -104,7 +105,11 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 		painter.drawText(380, 280, get[ti]);
 	}
 
-	if (first) painter.drawText(180, 550, begin);
+	if (first) {
+		painter.drawText(180, 550, begin); 
+		painter.drawImage(0, 250, illustrate);
+	}
+
 	if ((backX>=-2100)&&(backX<-1500))  painter.drawText(140, 550, begin2);
 
 	painter.setPen(QColor(250, 250, 250));

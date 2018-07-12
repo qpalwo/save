@@ -13,6 +13,7 @@
 #include <QtGlobal>
 #include <QMediaPlayer>//add music
 #include <QCursor>//add cursor
+#include<qlabel.h>
 #include"attr/player.h"
 #include"gainachieve.h"
 #include "menuWidget.h"
@@ -44,17 +45,20 @@ public:
 	void bagThingClick(int n);
 	void changeState(bool a, bool b, bool c, bool d);
 
+public slots:
+	void reFresh();
+	void stopStratMovie();
+
 private:
     Ui::SceneRuins *ui;
 
     QImage backGround;
-	QImage backGround2;
     QImage earth;
-	QImage earth2;
 	QImage sky;
-	QImage sky2;
 	QImage conver;
 	QImage child;
+	QImage illustrate;
+	QImage tower;
 
 	QString record_1;
 	QString record_2;
@@ -65,11 +69,15 @@ private:
 
     QMovie* player;
     QMovie* player_left;
+	QMovie* color;
+	QMovie *startMovie;
+	QLabel *startLabel;
 
 	bool underDoor(int n);
     void loadImage();
     void keyPressEvent(QKeyEvent *e);
 	void loadPlot();
+	void initTimer();
 	struct plot3 q[100];
 
 	int v;//add volume
@@ -84,6 +92,7 @@ private:
 	int waitTime;
 	int talk;
 	int ti;
+	bool isPlay = false;
 
     bool stop;
     bool left;

@@ -9,6 +9,12 @@
         <file>scene/ruins_2_color.png</file>
         <file>scene/ruins_back.png</file>
         <file>scene/ruins_back_color.png</file>
-        <file>scene/ruins_2_zjk.png</file>
+        <file>scene/color.gif</file>
+        <file>scene/tower.gif</file>
+        <file>scene/illustrate_desert.png</file>
+        <file>scene/illustrate_forest.png</file>
+        <file>scene/illustrate_ruins.png</file>
+        <file>scene/illustrate_snow.png</file>
+        <file>scene/tower.png</file>
     </qresource>
 </RCC>

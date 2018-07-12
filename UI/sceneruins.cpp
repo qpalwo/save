@@ -8,6 +8,12 @@ SceneRuins::SceneRuins(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	startMovie = new QMovie(":/ruins/scene/tower.gif");
+	startLabel = new QLabel(this);
+	startLabel->setMovie(startMovie);
+	QTimer::singleShot(4000, this, SLOT(stopStratMovie()));
+	startMovie->start();
+	startLabel->setGeometry(0, 0, 960, 720);
 
 	Player::getInstance()->setMapStaus(3);
 
@@ -26,7 +32,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	rightThing = false;
 
 	loadImage();
-	loadPlot();
+	loadPlot(); 
 
     menuwidget *menu = new menuwidget("ruins",this);
     setFocus();
@@ -43,20 +49,40 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	this->setCursor(*myCursor);//set cursor
 }
 
+void SceneRuins::stopStratMovie() {
+	startMovie->stop();
+	startLabel->close();
+}
+
 void SceneRuins::loadImage()
 {
     backGround.load(":/ruins/scene/ruins_2.png");
-	backGround2.load(":/ruins/scene/ruins_2_color.png");
     earth.load(":/ruins/scene/ruins_1.png");
-	earth2.load(":/ruins/scene/ruins_1_color.png");
+	illustrate.load(":/ruins/scene/illustrate_ruins.png");
 	sky.load(":/ruins/scene/ruins_back.png");
-	sky2.load(":/ruins/scene/ruins_back_color.png");
+	tower.load(":/ruins/scene/tower.png");
+
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
+	color = new QMovie(":/ruins/scene/color.gif");
 	child.load(":/ruins/people/pink_left.png");
 	conver.load(":/conver/convar/convar.png");
     player->start();
     player_left->start();
+	color->start();
+}
+
+void SceneRuins::reFresh() {
+	update();
+}
+
+void SceneRuins::initTimer() {
+	if (!isPlay) {
+		QTimer *timer = new QTimer(this);
+		connect(timer, SIGNAL(timeout()), this, SLOT(reFresh()));
+		timer->start(150);
+		player->stop();
+	}
 }
 
 void SceneRuins::paintEvent(QPaintEvent *event)
@@ -80,7 +106,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 	painter.drawImage(0, 0, sky);
 	painter.drawImage(backX, backY , backGround);
-   
+	
 
     if (playerX == 430)   stop = true;
 
@@ -99,11 +125,15 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 		painter.drawText(380, 280, get[ti]);
 	}
 
-	if (first) 	painter.drawText(180, 150, begin);
     painter.drawImage(backX, backY, earth);
+	if (first) {
+		painter.drawText(180, 150, begin);
+		painter.drawImage(0, 230, illustrate);
+	}
 
 	painter.setPen(QColor(250, 250, 250));
 	if (playerX >= 440) {
+		painter.drawImage(0, 0, tower);
 		painter.drawImage(750, 25, child);
 		painter.drawImage(0, 0, conver);
 		
@@ -133,12 +163,14 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				painter.drawText(280, 666, q[41].s);
 			}
 			else {
-				painter.drawImage(0, 0, sky2);
-				painter.drawImage(backX, backY, backGround2);
+			
+				initTimer();
+				painter.drawPixmap(0, 0, 960, 720, color->currentPixmap());
+				painter.drawImage(0, 0, tower);
 				if (left) 	painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
 				else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
 				painter.drawImage(750, 25, child);
-				painter.drawImage(backX, backY, earth2);
+
 				painter.drawText(160, 520, Ending1);
 				painter.drawText(100, 565, Ending2);
 				painter.setPen(QColor(0, 250, 250));

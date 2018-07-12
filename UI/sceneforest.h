@@ -62,6 +62,8 @@ private:
 	QImage uncle;
 	QImage house_closed;
 	QImage house_open;
+	QImage illustrate;
+
 	QPoint mouse;
 	QString record_1;
 	QString record_2;

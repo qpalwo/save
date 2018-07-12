@@ -58,6 +58,7 @@ private:
 	QImage conver;
 	QImage uncle;
 	QImage boat;
+	QImage illustrate;
 
 	QString record_1;
 	QString record_2;

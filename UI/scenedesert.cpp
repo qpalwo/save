@@ -48,6 +48,7 @@ void SceneDesert::loadImage() {
 	backGround.load(":/desertB/scene/desert_1.png");
 	earth.load(":/desertB/scene/desert_2.png");
 	boat.load(":/desertB/scene/desert_boat.png");
+	illustrate.load(":/ruins/scene/illustrate_desert.png");
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
@@ -102,6 +103,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if (first) { 
 		painter.drawText(180, 140, begin);
 		painter.drawText(320, 180, begin2);
+		painter.drawImage(0, 430, illustrate);
 	 }
 
 	if (playerX >= 440) {
