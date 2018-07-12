@@ -61,6 +61,7 @@ public:
 	void load(QString path);
 	void newPlayer(QString path, int hard, int id);
 	void save();
+	void setOutScene(int);
 
 signals:
 	void stausChange(bool, bool, bool, bool);

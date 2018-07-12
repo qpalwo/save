@@ -155,6 +155,21 @@ void UiManager::changeStaus(bool a, bool b, bool c, bool d) {
 	}
 }
 
+int UiManager::getNowScene() {
+	if (sceneDesert != NULL) {
+		return 1;
+	}
+	else if (sceneForest != NULL) {
+		return 2;
+	}
+	else if (sceneRuins != NULL) {
+		return 3;
+	}
+	else if (sceneSnow != NULL) {
+		return 4;
+	}
+}
+
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();

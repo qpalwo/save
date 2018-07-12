@@ -101,6 +101,7 @@ void GameWorld::load() {
 }
 void GameWorld::quitGame() {
 	screenShoot[Player::getInstance()->getMyId()] = UiManager::getInstance()->screenShoot();
+	Player::getInstance()->setOutScene(UiManager::getInstance()->getNowScene());
 	GameWorld::save();
 	qApp->quit();
 }

@@ -115,6 +115,10 @@ bool* Player::nowStaus() {
 	return m_staus;
 }
 
+void Player::setOutScene(int out) {
+	m_outScene = out;
+}
+
 void Player::save() {
 	backBag.save(m_path);
 	QString savePath = m_path + "_user.info";

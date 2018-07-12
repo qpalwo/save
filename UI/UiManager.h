@@ -87,6 +87,7 @@ public:
 	void useThing(int);
 	void changeStaus(bool, bool, bool, bool);
 	void loadScene(int);
+	int getNowScene();
 
 public slots:
 	void showMainWindow();
