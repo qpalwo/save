@@ -91,6 +91,7 @@ private:
 	bool isShow = false;
 	bool gameover;
 	bool rightThing;
+	bool ifget = false;
 };
 
 #endif // SCENESNOW_H

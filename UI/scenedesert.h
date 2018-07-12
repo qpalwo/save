@@ -98,6 +98,7 @@ private:
 	bool zhu;
 	bool gameover;
 	bool statement[5];
+	bool ifget = false;
 };
 
 #endif // SCENEDESERT_H

@@ -101,6 +101,7 @@ private:
 	bool gameover;
 	bool rightThing;
 	bool statement[5];
+	bool ifget = false;
 };
 
 #endif // SCENEDESERT_H

@@ -7,8 +7,9 @@ SceneSnow::SceneSnow(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
-
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
+	Player::getInstance()->setMapStaus(4);
 
     backX = 0;
     backY = 0;
@@ -93,9 +94,11 @@ void SceneSnow::paintEvent(QPaintEvent *event)
     painter.drawImage(backX, backY, earth);
 
 	if (waitTime > 30) {
-		if (waitTime == 31) 	ti = qrand() % 7;
+		if (waitTime == 31) {
+			ti = qrand() % 7;
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) painter.drawText(180, 550, begin);
@@ -127,7 +130,10 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 	painter.setPen(QColor(250, 10, 10));
 	if (talk == 35) {
 		painter.drawText(350, 280, get[9]);
-		Player::getInstance()->addBagThing(3);
+		if (!ifget) {
+			Player::getInstance()->addBagThing(3);
+			ifget = true;
+		}
 	}
 
 	if (talk == 33) {

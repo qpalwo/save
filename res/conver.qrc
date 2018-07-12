@@ -5,5 +5,13 @@
         <file>convar/choice_2.png</file>
         <file>convar/convar.png</file>
         <file>convar/name.png</file>
+        <file>num/num_die.png</file>
+        <file>num/num_hunger.png</file>
+        <file>num/num_mood_desert.png</file>
+        <file>num/num_moribund.png</file>
+        <file>num/num_power_desert.png</file>
+        <file>num/num_sad.png</file>
+        <file>num/num_satiety_desert.png</file>
+        <file>num/num_tired.png</file>
     </qresource>
 </RCC>

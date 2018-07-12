@@ -96,6 +96,7 @@ private:
 	bool statement[5] = {false};
 	bool rightThing;
 	bool isSpace=false;
+	bool ifget=false;
 };
 
 #endif // SCENERUINS_H

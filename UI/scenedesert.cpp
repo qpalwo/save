@@ -9,6 +9,8 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	setWindowFlag(Qt::FramelessWindowHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
+	Player::getInstance()->setMapStaus(1);
+
 	backX = 0;   backY = 0;
 	playerX = 0;
 	talk = 0;
@@ -86,10 +88,12 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //»æÖÆ¾ØÐÎ 
 
 	if (waitTime > 28) {
-		if (waitTime == 29) 	ti = qrand() % 7;
+		if (waitTime == 29) {
+			ti = qrand() % 7;
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti+6);
-	} 
+	}
 
 	if (first) { 
 		painter.drawText(180, 140, begin);
@@ -126,7 +130,10 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if (talk == 42) {
 		painter.setPen(QColor(0, 255, 250));
 		painter.drawText(360, 280, get[9]);
-		Player::getInstance()->addBagThing(5);
+		if (!ifget) {
+			Player::getInstance()->addBagThing(5);
+			ifget = true;
+		}
 	}
 	first = false;
 }
