@@ -13,5 +13,9 @@
         <file>num/num_sad.png</file>
         <file>num/num_satiety_desert.png</file>
         <file>num/num_tired.png</file>
+        <file>convar/convar_forest.png</file>
+        <file>convar/convar_ruins.png</file>
+        <file>convar/convar_desert.png</file>
+        <file>convar/convar_snow.png</file>
     </qresource>
 </RCC>

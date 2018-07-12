@@ -52,7 +52,7 @@ void SceneDesert::loadImage() {
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
-	conver.load(":/conver/convar/convar.png");
+	conver.load(":/conver/convar/convar_desert.png");
 	player->start();
 	player_left->start();
 }
@@ -68,8 +68,6 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	painter.setPen(pen); //Ìí¼Ó»­±Ê
 	painter.setBrush(brush); //Ìí¼Ó»­Ë¢
 
-	painter.drawImage(backX, backY, backGround);
-
 	painter.setPen(QColor(250, 255, 250));
 	QFont font;
 	font.setFamily("Î¢ÈíÑÅºÚ");
@@ -80,6 +78,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 	if (playerX == 430)  stop = true;
 
+    painter.drawImage(backX, backY, backGround);
 	if (talk < 12) {
 		if (left) painter.drawPixmap(playerX, 250, 100, 200, player_left->currentPixmap());
 		else painter.drawPixmap(playerX, 250, 100, 200, player->currentPixmap());
