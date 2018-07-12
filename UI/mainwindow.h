@@ -24,13 +24,12 @@
 #include "openpagebutton.h"
 #include <QHBoxLayout>
 #include "attr/gameworld.h"
-#include <QSound>
 #include <QWidget>
 #include <QtGlobal>
 #include <QTime>
 #include "set.h"
-#include <QMediaPlayer>
-#include <QCursor>
+#include <QMediaPlayer>//add music
+#include <QCursor>//add cursor
 #include <QMouseEvent>
 
 namespace Ui {
@@ -79,11 +78,11 @@ private:
 	QMovie *rightPlayer = NULL;
 	QMovie *rain = NULL;
 
-    int v;
+    int v;//add volume
 
-    QMediaPlayer *bgm;
+    QMediaPlayer *bgm;//add bgm
 
-    QCursor *myCursor;
+    QCursor *myCursor;//add cursor
 
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;
