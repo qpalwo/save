@@ -106,12 +106,10 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawImage(0, 430, illustrate);
 	 }
 
+		if (talk == 28) 
+			if (zhu) talk = 40; else talk = 30;
+
 	if (playerX >= 440) {
-		if (talk == 28) {
-			if (zhu) {
-				talk = 40;
-			}  else talk = 30;
-		}
 		painter.drawImage(850, 260, uncle);
 		painter.drawImage(0, 0, conver);
 		if (zxFuck) {
@@ -271,22 +269,22 @@ void SceneDesert::loadPlot() {
 	q[13].l = 14; q[14].s = QString::fromLocal8Bit("我：是很厉害。。。这是什么呢");  q[14].diff = false;  q[14].hu = false;
 
 	q[14].l = 15;  q[15].s = QString::fromLocal8Bit("大叔:这叫船,乘风破浪,勇往直前,无所畏惧！是蓝色大海的拥护");  q[15].diff = false;  q[15].hu = true;
-	q[15].l = 16; q[16].s = QString::fromLocal8Bit("是海洋的结晶！早在我太太太爷爷的时候,他们乘船披荆斩棘...."); q[16].diff = false;  q[16].hu = false;
+    q[16].s = QString::fromLocal8Bit("是海洋的结晶！早在我太太太爷爷的时候,他们乘船披荆斩棘...."); q[16].diff = false;  q[16].hu = false;
 
-	q[16].l = 17; q[17].s = QString::fromLocal8Bit("我：(打断）可是早在很早以前世界上已经没有海了。"); q[17].diff = false;  q[17].hu = false;
+	q[15].l = 17; q[17].s = QString::fromLocal8Bit("我：(打断）可是早在很早以前世界上已经没有海了。"); q[17].diff = false;  q[17].hu = false;
 
 	q[17].l = 18; q[18].s = QString::fromLocal8Bit("大叔：胡说！海明明一直在，船还在，我还在，怎么能说，"); q[18].diff = false;  q[18].hu = true;
-	q[18].l = 19; q[19].s = QString::fromLocal8Bit("海没有了呢？？！");  q[19].diff = false;  q[19].hu = false;
+    q[19].s = QString::fromLocal8Bit("海没有了呢？？！");  q[19].diff = false;  q[19].hu = false;
 
-	q[19].l = 20; q[20].s= QString::fromLocal8Bit("z.可船已经行驶不了,无法起航了啊..不能航行的船,还有意义吗");  q[20].diff = true;  q[20].hu = false;
-	q[19].r = 21; q[21].s = QString::fromLocal8Bit("x.是啊，即使已经消失，但始终有人记得.有人记得便不会消失");  q[21].diff = true;  q[21].hu = false;
+	q[18].l = 20; q[20].s= QString::fromLocal8Bit("z.可船已经行驶不了,无法起航了啊..不能航行的船,还有意义吗");  q[20].diff = true;  q[20].hu = false;
+    q[21].s = QString::fromLocal8Bit("x.是啊，即使已经消失，但始终有人记得.有人记得便不会消失");  q[21].diff = true;  q[21].hu = false;
 
 	q[20].l = 22; q[22].s = QString::fromLocal8Bit("大叔：谁说船不能航行！要不是轴承滑轮出了点问题，，，唉");  q[22].diff = false;  q[22].hu = false;
 
 	q[21].l = 23; q[23].s = QString::fromLocal8Bit("大叔：只要记得，便不会消失，只要存在过，就有价值......");  q[23].diff = false;  q[23].hu = true;
-	q[23].l = 24; q[24].s = QString::fromLocal8Bit("如果不是因为船缺少一个轴承滑轮的珠子，真想邀请你一起驾驶");  q[24].diff = false;  q[24].hu = false;
+    q[24].s = QString::fromLocal8Bit("如果不是因为船缺少一个轴承滑轮的珠子，真想邀请你一起驾驶");  q[24].diff = false;  q[24].hu = false;
 
-	q[22].l = 25; q[24].l = 25;  q[25].s = QString::fromLocal8Bit("大叔：(叹气)这么多年了啊...我一个人在这沙漠里这么多年了");q[25].diff = false;  q[25].hu = true;
+	q[22].l = 25; q[23].l = 25;  q[25].s = QString::fromLocal8Bit("大叔：(叹气)这么多年了啊...我一个人在这沙漠里这么多年了");q[25].diff = false;  q[25].hu = true;
     q[26].s= QString::fromLocal8Bit("为什么还是差一点...就差那么一点...难道我真的要放弃吗"); q[26].diff = false;  q[26].hu = false;
 
 	q[25].l = 27; q[27].s = QString::fromLocal8Bit("我：(唔，，轴承滑轮的问题...看看包里有什么东西吧"); q[27].diff = false;  q[27].hu = false;
@@ -296,7 +294,7 @@ void SceneDesert::loadPlot() {
 	q[30].l = 31;  q[31].s = QString::fromLocal8Bit("大叔：我还是想试一次。即使可能不会成功，但还是想启航一次"); q[31].diff = false;  q[31].hu = false;
 
 	q[31].l = 32; q[32].s = QString::fromLocal8Bit("大叔：船。。。还是解体了啊。。。但是我也驾驶过，"); q[32].diff = false;  q[32].hu = true;
-	q[33].s= QString::fromLocal8Bit("至少证明，还是有可能的！再次行船还是有可能的！"); q[33].diff = false;  q[33].hu = true;
+	q[33].s= QString::fromLocal8Bit("至少证明，还是有可能的！再次行船还是有可能的！"); q[33].diff = false;  q[33].hu = false;
 
 	q[32].l = 34;  q[34].s = QString::fromLocal8Bit("大叔：只是可惜差那么一点。。。。。就差那么一点"); q[34].diff = false;  q[34].hu = false;
 	q[34].l = 34;
