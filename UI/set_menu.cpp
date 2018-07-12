@@ -19,11 +19,24 @@ set_menu::set_menu(QString res, QWidget *menu, QWidget *parent) :
     newMenu = new menuwidget(res,parentWidget());
 
     connect(back,SIGNAL(clicked()),this,SLOT(onBackClicked()));
+
+    setMouseTracking(true);
+
+    volume = GameWorld::getInstance()->getVolume();
+    volumeShow = volume*2.35;
+
+    volumeBack.load(":/menuZ/menu/set_sound_"+res+"_1.png");
+    volumeCover.load(":/menuZ/menu/set_volume_"+res+"_2.png");
+    volumeSetting = new QLabel(this);
+    volumeSetting->setPixmap(volumeCover);
+    volumeSetting->setGeometry(25,150,60+volumeShow,50);
 }
 
 void set_menu::paintEvent(QPaintEvent *event){
     QPainter painter(this);
     painter.drawImage(0,-80,backGround);
+    painter.drawImage(25,150,volumeBack);
+
 }
 
 void set_menu::initTimer()
@@ -100,6 +113,32 @@ void set_menu::leaveEvent(QEvent *e)
         timerHide->stop();
     }
     timerHide->start();
+}
+
+void set_menu::mouseMoveEvent(QMouseEvent *event){
+    mouse = event->pos();
+}
+
+void set_menu::mousePressEvent(QMouseEvent *event){
+    if(mouse.x()>=85&&mouse.x()<=320)
+        press = true;
+    else press = false;
+}
+
+void set_menu::mouseReleaseEvent(QMouseEvent *event){
+    if(press)
+    {
+        if(mouse.x()<=85) volume = 0;
+        else
+        {
+            if(mouse.x()>=320) volume = 100;
+            else volume = (mouse.x()-85)/2.35;
+        }
+        GameWorld::getInstance()->setVolume(volume);
+        volume = GameWorld::getInstance()->getVolume();
+        volumeShow = volume*2.35;
+        volumeSetting->setGeometry(25,150,60+volumeShow,50);
+    }
 }
 void set_menu::onBackClicked(){
     this->close();

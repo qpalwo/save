@@ -8,6 +8,8 @@
 #include <QString>
 #include <QTimeLine>
 #include <QCloseEvent>
+#include "attr/gameworld.h"
+#include <QPoint>
 
 
 class menuwidget;
@@ -35,6 +37,18 @@ private:
     QImage backGround;
     OpenPageButton* back;
     menuwidget *newMenu;
+
+    QPoint mouse;
+    QImage volumeBack;
+    QPixmap volumeCover;
+    QLabel *volumeSetting;
+    bool press;
+    int volume;
+    int volumeShow;
+
+    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
     QTimeLine *timerShow;
     QTimeLine *timerHide;
