@@ -46,6 +46,9 @@ protected:
 private slots:
     void onBackClicked();
 
+signals:
+    sendVolume(int x);
+
 };
 
 #endif // SET_H

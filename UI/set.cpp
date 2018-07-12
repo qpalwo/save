@@ -57,6 +57,7 @@ void set::mouseReleaseEvent(QMouseEvent *event){
         volume = GameWorld::getInstance()->getVolume();
         volumeShow = volume*2.35;
         volumeSetting->setGeometry(530,300,60+volumeShow,50);
+        emit sendVolume(volume);
     }
 }
 

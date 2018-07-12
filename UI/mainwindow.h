@@ -44,7 +44,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 	void paintEvent(QPaintEvent * e);
-	void keyPressEvent(QKeyEvent *e);
+    void keyPressEvent(QKeyEvent *e);
 
 
 
@@ -63,6 +63,8 @@ private slots:
 	void onEasyClicked();
 	void onMidClicked();
     void onHardClicked();
+
+    void changeVolume(int x);
 
 private:
     Ui::MainWindow *ui;

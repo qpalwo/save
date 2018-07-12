@@ -78,7 +78,7 @@ void menuwidget::onBagClicked()
     timerHide->stop();
     timerShow->stop();
     bagwidget = new Bag(scene, this, parentWidget());
-    this->hide();
+    this->close();
     bagwidget->show();
 }
 
@@ -102,7 +102,7 @@ void menuwidget::onSetClicked()
     timerHide->stop();
     timerShow->stop();
     setting = new set_menu(scene,this,parentWidget());
-    this->hide();
+    this->close();
     setting->show();
 }
 
