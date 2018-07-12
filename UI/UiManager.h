@@ -53,7 +53,7 @@ public:
 	void openLoading();
 	void openAchieve();
 	void openSaveAndLoad();
-	void openGameMap();
+	void openGameMap(bool);
 	void openEnding(int);
 	void openSunSmellCollect(int);
 	void openAvoidStorm(int);

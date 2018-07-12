@@ -1,5 +1,6 @@
 #include "gamemap.h"
 #include "ui_gamemap.h"
+#include "UiManager.h"
 
 
 
@@ -12,13 +13,13 @@
 
 
 
-GameMap::GameMap(QWidget *parent) :
+GameMap::GameMap(bool is, QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::GameMap) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 	m_map = Player::getInstance()->getMapStaus();
-
+	m_is = is;
     loadImage();
     backButton = new OpenPageButton(this, "/menuZ/menu/", "set_back_desert");
     backButton->setGeometry(830, 570, 70, 70);
@@ -86,30 +87,36 @@ void GameMap::mouseMoveEvent(QMouseEvent *event){
 }
 
 void GameMap::mouseReleaseEvent(QMouseEvent *event){
-    if(posX>373&&posX<541&&posY>290&&posY<566) id = 3;
-    else{
-        if(posX>542&&posX<750&&posY>182&&posY<508) id = 4;
-        else{
-            if(posX>293&&posX<537&&posY>566&&posY<663) id = 1;
-            else{
-                if(posX>542&&posX<767&&posY>508&&posY<669) id = 2;
-                else id =0;
-            }
-        }
-    }
+	if (m_is) {
+		if (posX > 373 && posX < 541 && posY>290 && posY < 566) id = 3;
+		else {
+			if (posX > 542 && posX < 750 && posY>182 && posY < 508) id = 4;
+			else {
+				if (posX > 293 && posX < 537 && posY>566 && posY < 663) id = 1;
+				else {
+					if (posX > 542 && posX < 767 && posY>508 && posY < 669) id = 2;
+					else id = 0;
+				}
+			}
+		}
 
-    switch (id) {
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    default:
-        break;
-    }
+		switch (id) {
+		case 1:
+			UiManager::getInstance()->fromMapToDesert();
+			break;
+		case 2:
+			UiManager::getInstance()->fromMapToForest();
+			break;
+		case 3:
+			UiManager::getInstance()->fromMapToRuins();
+			break;
+		case 4:
+			UiManager::getInstance()->fromMapToSnow();
+			break;
+		default:
+			break;
+		}
+	}
 
 
 }

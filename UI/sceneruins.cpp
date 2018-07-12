@@ -29,6 +29,16 @@ SceneRuins::SceneRuins(QWidget *parent) :
     menuwidget *menu = new menuwidget("ruins",this);
     setFocus();
     menu->show();
+
+	v = GameWorld::getInstance()->getVolume();//get volume
+	bgm = new QMediaPlayer();//new
+	bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
+	bgm->setVolume(v);//set volume
+	bgm->play();//play music
+
+
+	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
+	this->setCursor(*myCursor);//set cursor
 }
 
 void SceneRuins::loadImage()

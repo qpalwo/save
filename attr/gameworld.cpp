@@ -64,7 +64,7 @@ void GameWorld::showAchieve() {
 }
 
 void GameWorld::showGameMap() {
-	UiManager::getInstance()->openGameMap();
+	UiManager::getInstance()->openGameMap(false);
 }
 
 void GameWorld::hideAchieve() {

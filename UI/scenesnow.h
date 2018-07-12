@@ -11,6 +11,8 @@
 #include <QTime>
 #include <QMovie>
 #include <QtGlobal>
+#include <QMediaPlayer>//add music
+#include <QCursor>//add cursor
 #include "gainachieve.h"
 #include"attr/player.h"
 #include "menuWidget.h"
@@ -66,6 +68,12 @@ private:
     void keyPressEvent(QKeyEvent *e);
 	void loadPlot();
 	struct plot4 q[100];
+
+	int v;//add volume
+
+	QMediaPlayer *bgm;//add bgm
+
+	QCursor *myCursor;//add cursor
 
     int backX;
     int backY;

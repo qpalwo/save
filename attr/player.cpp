@@ -41,8 +41,8 @@ void Player::newPlayer(QString path, int hard, int id) {
 	backBag.newBag();
 	m_id = id;
 	m_path = path;
-	m_mood = 100;
-	m_power = 100;
+	m_mood = 80;
+	m_power = 80;
 	m_hard = hard;
 	save();
 }
@@ -95,7 +95,7 @@ bool* Player::getMapStaus() {
 
 void Player::setMapStaus(int map) {
 	if(map <= 4)
-		m_map[map - 1] = true;
+		m_map[map - 1] = false;
 }
 
 void Player::addBagThing(int num) {

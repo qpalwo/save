@@ -17,6 +17,8 @@
 #include"attr/player.h"
 #include"gainachieve.h"
 #include "menuwidget.h"
+#include <QMediaPlayer>//add music
+#include <QCursor>//add cursor
 
 #define BDL -2880
 #define BDR 0
@@ -73,6 +75,12 @@ private:
     void keyPressEvent(QKeyEvent *e);
 	void mouseMoveEvent(QMouseEvent* event);
 	void loadPlot();
+
+	int v;//add volume
+
+	QMediaPlayer *bgm;//add bgm
+
+	QCursor *myCursor;//add cursor
 
 	int backX;
 	int backY;
