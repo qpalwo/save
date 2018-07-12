@@ -78,7 +78,7 @@ private:
 	bool m_map[4];
 	int m_id;
 	int m_hard;
-
+	int m_outScene;
 	int m_power;
 	int m_mood;
 

@@ -21,13 +21,15 @@ Player* Player::Instance = new Player();
 void Player::load(QString path) {
 	m_path = path;
 	QString loadPath = m_path + "_user.info";
-	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(m_path));
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(loadPath));
 	if (!document.isNull()) {
+		QString temp = document.toJson();
 		QJsonObject obj = document.object();
-		m_hard = obj.take("m_hard").toString().toInt();
-		m_power = obj.take("m_power").toString().toInt();
-		m_mood = obj.take("m_mood").toString().toInt();	
-		m_id = obj.take("m_id").toString().toInt();
+		m_hard = obj.take("m_hard").toInt();
+		m_power = obj.take("m_power").toInt();
+		m_mood = obj.take("m_mood").toInt();
+		m_id = obj.take("m_id").toInt();
+		m_outScene = obj.take("m_outScene").toInt();
 		QJsonArray mapArr = obj.take("m_map").toArray();
 		for (int i = 0; i < 4; i++) {
 			m_map[i] = mapArr.at(i).toBool();
@@ -35,6 +37,7 @@ void Player::load(QString path) {
 	}
 	checkStaus();
 	backBag.load(m_path);
+	UiManager::getInstance()->loadScene(m_outScene);
 }
 
 void Player::newPlayer(QString path, int hard, int id) {
@@ -44,6 +47,7 @@ void Player::newPlayer(QString path, int hard, int id) {
 	m_mood = 80;
 	m_power = 80;
 	m_hard = hard;
+	m_outScene = 3;
 	save();
 }
 
@@ -104,7 +108,7 @@ void Player::addBagThing(int num) {
 
 void Player::useBagThing(int num) {
 	backBag.useBagThing(num);
-	UiManager::getInstance()->useThing(num + 1);
+	UiManager::getInstance()->useThing(num);
 }
 
 bool* Player::nowStaus() {
@@ -120,6 +124,7 @@ void Player::save() {
 	saves.insert("m_power", m_power);
 	saves.insert("m_mood", m_mood);
 	saves.insert("m_id", m_id);
+	saves.insert("m_outScene", m_outScene);
 	QJsonArray mapArr;
 	for (bool i : m_map) {
 		mapArr.append(i);
@@ -129,6 +134,7 @@ void Player::save() {
 	document.setObject(saves);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytearr, savePath);
+	//saveToDisk(bytearr, savePath);
 
 }
 
@@ -177,6 +183,9 @@ void BackBag::save(QString userPath) {
 	document.setArray(arr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytearr, savePath);
+	//saveToDisk(bytearr, savePath);
+
+
 }
 
 void BackBag::load(QString userPath) {
@@ -215,8 +224,8 @@ void BackBag::addBagThing(int thing) {
 }
 
 void BackBag::useBagThing(int thing) {
-	if (m_bagThing[thing - 1].num > 0) {
-		m_bagThing[thing - 1].num--;
+	if (m_bagThing[thing].num > 0) {
+		m_bagThing[thing].num--;
 		BackBag::save(savePath);
 	}
 }
