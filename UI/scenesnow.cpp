@@ -7,8 +7,9 @@ SceneSnow::SceneSnow(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
-
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
+	Player::getInstance()->setMapStaus(4);
 
     backX = 0;
     backY = 0;

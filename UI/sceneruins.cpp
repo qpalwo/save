@@ -9,6 +9,8 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	setWindowFlag(Qt::FramelessWindowHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
+	Player::getInstance()->setMapStaus(3);
+
     backX = 0;
     backY = 0;
     playerX = 0;
