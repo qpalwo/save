@@ -19,8 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     v = GameWorld::getInstance()->getVolume();//get volume
     bgm = new QMediaPlayer();//new
     bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
-    bgm->setVolume(v);//set volume
+
     bgm->play();//play music
+    bgm->setVolume(v);//set volume
 
 
     myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
@@ -261,6 +262,7 @@ void MainWindow::onSetClicked() {
     set_main = new set(this);
     set_main->show();
     set_main->setGeometry(0,0,960,720);
+    connect(set_main,SIGNAL(sendVolume(int)),this,SLOT(changeVolume(int)));
 }
 
 void MainWindow::onBeginClicked() {
@@ -381,6 +383,10 @@ void MainWindow::initTimer() {
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(moveMou()));
 	timer->start(90);
+}
+
+void MainWindow::changeVolume(int x){
+    bgm->setVolume(x);
 }
 
 MainWindow::~MainWindow() {

@@ -83,7 +83,7 @@ private:
 	QString savesPath[6];
 	QString screenShoot[6];
 	int gameHard;
-    int volume = 20;
+    int volume = 70;
 	int savesNum;
 
 	void save();
