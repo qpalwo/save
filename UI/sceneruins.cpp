@@ -1,6 +1,6 @@
 #include "sceneruins.h"
 #include "ui_sceneruins.h"
-
+#include "UI/UiManager.h"
 SceneRuins::SceneRuins(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SceneRuins)
@@ -8,6 +8,8 @@ SceneRuins::SceneRuins(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
+	Player::getInstance()->setMapStaus(3);
 
     backX = 0;
     backY = 0;
@@ -29,6 +31,16 @@ SceneRuins::SceneRuins(QWidget *parent) :
     menuwidget *menu = new menuwidget("ruins",this);
     setFocus();
     menu->show();
+
+	v = GameWorld::getInstance()->getVolume();//get volume
+	bgm = new QMediaPlayer();//new
+	bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
+	bgm->setVolume(v);//set volume
+	bgm->play();//play music
+
+
+	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
+	this->setCursor(*myCursor);//set cursor
 }
 
 void SceneRuins::loadImage()
@@ -80,9 +92,11 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //»æÖÆ¾ØÐÎ 
 
 	if (waitTime > 28) {
-		if (waitTime == 29) 	ti = qrand() % 7;
+		if (waitTime == 29) {
+			ti = qrand() % 7; 
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) 	painter.drawText(180, 150, begin);
@@ -129,11 +143,15 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				painter.drawText(100, 565, Ending2);
 				painter.setPen(QColor(0, 250, 250));
 				painter.drawText(350, 610, get[9]);
-				Player::getInstance()->addBagThing(2);
+				if (!ifget) {
+					Player::getInstance()->addBagThing(2);
+					ifget = true;
+				}
 				if (!isSpace) {
 					GainAchieve *Joker = new  GainAchieve(3, this);
 					Joker->show();
 					isSpace = true;
+					tomap = true;
 				}
 			}
 		}
@@ -146,6 +164,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				else {
 					painter.drawText(280, 612, q[32].s);
 					painter.drawText(280, 666, q[33].s);
+					tomap = true;
 				}
 			}
 		}
@@ -156,6 +175,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 void SceneRuins::keyPressEvent(QKeyEvent* e)
 {
+	if (tomap) UiManager::getInstance()->fromRunisToMap();
     if (stop)
     {
         switch (e->key())
@@ -167,11 +187,7 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
         default: break;
         }
 
-        if (backX < BDL) {
-            backX += 10;
-            stop = false;
-            playerX += 10;
-        }
+        if (backX < BDL) {  backX += 10; playerX += 10;  stop = false;  }
         if (backX > BDR)  {
             backX -= 10;
             stop = false;

@@ -28,6 +28,10 @@ void Player::load(QString path) {
 		m_power = obj.take("m_power").toString().toInt();
 		m_mood = obj.take("m_mood").toString().toInt();	
 		m_id = obj.take("m_id").toString().toInt();
+		QJsonArray mapArr = obj.take("m_map").toArray();
+		for (int i = 0; i < 4; i++) {
+			m_map[i] = mapArr.at(i).toBool();
+		}
 	}
 	checkStaus();
 	backBag.load(m_path);
@@ -37,8 +41,8 @@ void Player::newPlayer(QString path, int hard, int id) {
 	backBag.newBag();
 	m_id = id;
 	m_path = path;
-	m_mood = 100;
-	m_power = 100;
+	m_mood = 80;
+	m_power = 80;
 	m_hard = hard;
 	save();
 }
@@ -91,7 +95,7 @@ bool* Player::getMapStaus() {
 
 void Player::setMapStaus(int map) {
 	if(map <= 4)
-		m_map[map - 1] = true;
+		m_map[map - 1] = false;
 }
 
 void Player::addBagThing(int num) {
@@ -116,6 +120,11 @@ void Player::save() {
 	saves.insert("m_power", m_power);
 	saves.insert("m_mood", m_mood);
 	saves.insert("m_id", m_id);
+	QJsonArray mapArr;
+	for (bool i : m_map) {
+		mapArr.append(i);
+	}
+	saves.insert("m_map", mapArr);
 	QJsonDocument document;
 	document.setObject(saves);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);

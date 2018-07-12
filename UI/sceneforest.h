@@ -14,6 +14,8 @@
 #include <qstring.h>
 #include <QtGlobal>
 #include<QMouseEvent>
+#include <QMediaPlayer>//add music
+#include <QCursor>//add cursor
 #include"attr/player.h"
 #include"gainachieve.h"
 #include "menuwidget.h"
@@ -76,6 +78,12 @@ private:
 	void mouseMoveEvent(QMouseEvent* event);
 	void loadPlot();
 
+	int v;//add volume
+
+	QMediaPlayer *bgm;//add bgm
+
+	QCursor *myCursor;//add cursor
+
 	int backX;
 	int backY;
 	int playerX;
@@ -93,6 +101,8 @@ private:
 	bool gameover;
 	bool rightThing;
 	bool statement[5];
+	bool ifget = false;
+	bool tomap = false;
 };
 
 #endif // SCENEDESERT_H

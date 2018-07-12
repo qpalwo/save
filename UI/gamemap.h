@@ -20,7 +20,7 @@ class GameMap : public QWidget
     Q_OBJECT
 
 public:
-    explicit GameMap(QWidget *parent = 0);
+    explicit GameMap(bool, QWidget *parent = 0);
     ~GameMap();
 
 protected:
@@ -42,6 +42,7 @@ private:
     int posX;
     int posY;
     int id = 0;
+	bool m_is;
 
     OpenPageButton *backButton;
 

@@ -1,5 +1,6 @@
 #include "scenedesert.h"
 #include "ui_scenedesert.h"
+#include "UI/UiManager.h"
 
 
 SceneDesert::SceneDesert(QWidget *parent) :
@@ -8,6 +9,8 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
+	Player::getInstance()->setMapStaus(1);
 
 	backX = 0;   backY = 0;
 	playerX = 0;
@@ -29,6 +32,16 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	menu->show();
 
 	setMouseTracking(true);     //牛逼    不用按下鼠标就能监控其位置
+
+	v = GameWorld::getInstance()->getVolume();//get volume
+	bgm = new QMediaPlayer();//new
+	bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
+	bgm->setVolume(v);//set volume
+	bgm->play();//play music
+
+
+	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
+	this->setCursor(*myCursor);//set cursor
 }
 
 void SceneDesert::loadImage() {
@@ -44,6 +57,9 @@ void SceneDesert::loadImage() {
 }
 
 void SceneDesert::paintEvent(QPaintEvent * e) {
+
+	if ((talk == 44) || (talk == 34)) tomap = true;
+
 	QPainter painter(this);
 	QPen pen; //画笔
 	pen.setColor(QColor(255, 255, 0));
@@ -76,10 +92,12 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawRect(playerX, 260, 10+waitTime*3, 20); //绘制矩形 
 
 	if (waitTime > 28) {
-		if (waitTime == 29) 	ti = qrand() % 7;
+		if (waitTime == 29) {
+			ti = qrand() % 7;
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti+6);
-	} 
+	}
 
 	if (first) { 
 		painter.drawText(180, 140, begin);
@@ -116,12 +134,17 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 	if (talk == 42) {
 		painter.setPen(QColor(0, 255, 250));
 		painter.drawText(360, 280, get[9]);
-		Player::getInstance()->addBagThing(5);
+		if (!ifget) {
+			Player::getInstance()->addBagThing(5);
+			ifget = true;
+		}
 	}
 	first = false;
 }
 
 void SceneDesert::keyPressEvent(QKeyEvent *e) {
+	if (tomap) UiManager::getInstance()->fromDesertToMap();
+
 	if (stop) {                         //main player stop
 		switch (e->key()) {
 		case Qt::Key_A: backX += 10;  left = true; break;

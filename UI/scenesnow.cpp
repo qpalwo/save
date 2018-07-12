@@ -1,5 +1,6 @@
 #include "scenesnow.h"
 #include "ui_scenesnow.h"
+#include "UI/UiManager.h"
 
 SceneSnow::SceneSnow(QWidget *parent) :
     QWidget(parent),
@@ -7,8 +8,9 @@ SceneSnow::SceneSnow(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
-
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
+	Player::getInstance()->setMapStaus(4);
 
     backX = 0;
     backY = 0;
@@ -29,6 +31,16 @@ SceneSnow::SceneSnow(QWidget *parent) :
     setFocus();
     menu->show();
 
+	v = GameWorld::getInstance()->getVolume();//get volume
+	bgm = new QMediaPlayer();//new
+	bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
+	bgm->setVolume(v);//set volume
+	bgm->play();//play music
+
+
+	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
+	this->setCursor(*myCursor);//set cursor
+
 }
 
 void SceneSnow::loadImage()
@@ -46,6 +58,8 @@ void SceneSnow::loadImage()
 void SceneSnow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
+	if ((talk == 37) || (talk == 39)) tomap = true;
 
 	QPen pen; //»­±Ê
 	pen.setColor(QColor(255, 255, 0));
@@ -83,9 +97,11 @@ void SceneSnow::paintEvent(QPaintEvent *event)
     painter.drawImage(backX, backY, earth);
 
 	if (waitTime > 30) {
-		if (waitTime == 31) 	ti = qrand() % 7;
+		if (waitTime == 31) {
+			ti = qrand() % 7;
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) painter.drawText(180, 550, begin);
@@ -117,7 +133,10 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 	painter.setPen(QColor(250, 10, 10));
 	if (talk == 35) {
 		painter.drawText(350, 280, get[9]);
-		Player::getInstance()->addBagThing(3);
+		if (!ifget) {
+			Player::getInstance()->addBagThing(3);
+			ifget = true;
+		}
 	}
 
 	if (talk == 33) {
@@ -129,6 +148,8 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 
 void SceneSnow::keyPressEvent(QKeyEvent* e)
 {
+	if (tomap) UiManager::getInstance()->fromSnowToMap();
+
     if (stop)
     {
         switch (e->key())

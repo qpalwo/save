@@ -124,6 +124,14 @@ void UiManager::closeGameMap() {
 	}
 }
 
+void UiManager::closeEnding() {
+	if (end != NULL) {
+		end->close();
+		end->deleteLater();
+		end = NULL;
+	}
+}
+
 void UiManager::closeAll() {
 	closeLoading();
 	closeMainPage();
@@ -233,10 +241,15 @@ void UiManager::openSaveAndLoad() {
 	openWordWIndow();
 }
 
-void UiManager::openGameMap() {
-	gameMap = new GameMap();
+void UiManager::openGameMap(bool is) {
+	gameMap = new GameMap(is);
 	gameMap->show();
 	openWordWIndow();
+}
+
+void UiManager::openEnding(int i) {
+	end = new ending(i);
+	end->show();
 }
 
 void UiManager::showMainWindow() {
@@ -318,6 +331,71 @@ void UiManager::informeRuins() {
 	if (sceneRuins != NULL) {
 		sceneRuins->gameOver();
 	}
+}
+
+void UiManager::fromForestToMap() {
+	openGameMap(true);
+	closeSceneForest();
+}
+
+void UiManager::fromDesertToMap() {
+	openGameMap(true);
+	closeSceneDesert();
+}
+
+void UiManager::fromSnowToMap() {
+	openGameMap(true);
+	closeSnow();
+}
+
+void UiManager::fromRunisToMap() {
+	openGameMap(true);
+	closeRuins();
+}
+
+void UiManager::fromMapToForest() {
+	openSceneForest();
+	closeGameMap();
+}
+
+void UiManager::fromMapToDesert() {
+	openSceneDesert();
+	closeGameMap();
+}
+
+void UiManager::fromMapToRuins() {
+	openRuins();
+	closeGameMap();	
+}
+
+void UiManager::fromMapToSnow() {
+	openSnow();
+	closeGameMap();
+}
+
+void UiManager::fromBeginingToEnding() {
+	openEnding(1);
+	closeBegining();
+}
+
+void UiManager::fromForestToEnding(int i) {
+	openEnding(i);
+	closeSceneForest();
+}
+
+void UiManager::fromDesertToEnding(int i) {
+	openEnding(i);
+	closeSceneDesert();
+}
+
+void UiManager::fromSnowToEnding(int i) {
+	openEnding(i);
+	closeSnow();
+}
+
+void UiManager::fromRuinsToEnding(int i) {
+	openEnding(i);
+	closeRuins();
 }
 
 void UiManager::useThing(int id) {

@@ -11,6 +11,8 @@
 #include <QTime>
 #include <QMovie>
 #include <QtGlobal>
+#include <QMediaPlayer>//add music
+#include <QCursor>//add cursor
 #include"attr/player.h"
 #include"gainachieve.h"
 #include "menuWidget.h"
@@ -70,6 +72,12 @@ private:
 	void loadPlot();
 	struct plot3 q[100];
 
+	int v;//add volume
+
+	QMediaPlayer *bgm;//add bgm
+
+	QCursor *myCursor;//add cursor
+
     int backX;
     int backY;
     int playerX;
@@ -88,6 +96,8 @@ private:
 	bool statement[5] = {false};
 	bool rightThing;
 	bool isSpace=false;
+	bool ifget=false;
+	bool tomap=false;
 };
 
 #endif // SCENERUINS_H
