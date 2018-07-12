@@ -1,6 +1,6 @@
 #include "sceneruins.h"
 #include "ui_sceneruins.h"
-
+#include "UI/UiManager.h"
 SceneRuins::SceneRuins(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SceneRuins)
@@ -151,6 +151,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 					GainAchieve *Joker = new  GainAchieve(3, this);
 					Joker->show();
 					isSpace = true;
+					tomap = true;
 				}
 			}
 		}
@@ -163,6 +164,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				else {
 					painter.drawText(280, 612, q[32].s);
 					painter.drawText(280, 666, q[33].s);
+					tomap = true;
 				}
 			}
 		}
@@ -173,6 +175,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 void SceneRuins::keyPressEvent(QKeyEvent* e)
 {
+	if (tomap) UiManager::getInstance()->fromRunisToMap();
     if (stop)
     {
         switch (e->key())
@@ -184,11 +187,7 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
         default: break;
         }
 
-        if (backX < BDL) {
-            backX += 10;
-            stop = false;
-            playerX += 10;
-        }
+        if (backX < BDL) {  backX += 10; playerX += 10;  stop = false;  }
         if (backX > BDR)  {
             backX -= 10;
             stop = false;

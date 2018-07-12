@@ -97,6 +97,7 @@ private:
 	bool rightThing;
 	bool isSpace=false;
 	bool ifget=false;
+	bool tomap=false;
 };
 
 #endif // SCENERUINS_H

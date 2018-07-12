@@ -1,5 +1,6 @@
 #include "scenesnow.h"
 #include "ui_scenesnow.h"
+#include "UI/UiManager.h"
 
 SceneSnow::SceneSnow(QWidget *parent) :
     QWidget(parent),
@@ -57,6 +58,8 @@ void SceneSnow::loadImage()
 void SceneSnow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
+	if ((talk == 37) || (talk == 39)) tomap = true;
 
 	QPen pen; //»­±Ê
 	pen.setColor(QColor(255, 255, 0));
@@ -145,6 +148,8 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 
 void SceneSnow::keyPressEvent(QKeyEvent* e)
 {
+	if (tomap) UiManager::getInstance()->fromSnowToMap();
+
     if (stop)
     {
         switch (e->key())
