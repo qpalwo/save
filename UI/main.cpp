@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	uiManager->init();
 	//ending *e = new ending(1);
 	//e->show();
-	GameMap *gm = new GameMap();
-	gm->show();
+	//GameMap *gm = new GameMap();
+	//gm->show();
     return a.exec();
 }

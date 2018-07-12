@@ -241,8 +241,8 @@ void UiManager::openSaveAndLoad() {
 	openWordWIndow();
 }
 
-void UiManager::openGameMap() {
-	gameMap = new GameMap();
+void UiManager::openGameMap(bool is) {
+	gameMap = new GameMap(is);
 	gameMap->show();
 	openWordWIndow();
 }
@@ -334,22 +334,22 @@ void UiManager::informeRuins() {
 }
 
 void UiManager::fromForestToMap() {
-	openGameMap();
+	openGameMap(true);
 	closeSceneForest();
 }
 
 void UiManager::fromDesertToMap() {
-	openGameMap();
+	openGameMap(true);
 	closeSceneDesert();
 }
 
 void UiManager::fromSnowToMap() {
-	openGameMap();
+	openGameMap(true);
 	closeSnow();
 }
 
 void UiManager::fromRunisToMap() {
-	openGameMap();
+	openGameMap(true);
 	closeRuins();
 }
 
