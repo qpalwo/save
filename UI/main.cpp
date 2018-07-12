@@ -12,12 +12,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 	GameWorld *gamaWord = GameWorld::getInstance();
 	//Player *player = Player::getInstance();
-
 	UiManager *uiManager = UiManager::getInstance();
 	uiManager->init();
-	//ending *e = new ending(1);
-	//e->show();
-	//GameMap *gm = new GameMap();
-	//gm->show();
     return a.exec();
 }

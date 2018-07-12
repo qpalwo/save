@@ -86,6 +86,7 @@ public:
 	QString screenShoot();
 	void useThing(int);
 	void changeStaus(bool, bool, bool, bool);
+	void loadScene(int);
 
 public slots:
 	void showMainWindow();

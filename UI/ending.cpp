@@ -1,5 +1,6 @@
 #include "ending.h"
 #include "ui_ending.h"
+#include "UI/UiManager.h"
 
 ending::ending(int flag,QWidget *parent) :
     QWidget(parent),
@@ -11,6 +12,9 @@ ending::ending(int flag,QWidget *parent) :
     grabKeyboard();
     initWord(flag);
     space = 0;
+	back = new OpenPageButton(this, "/menuZ/menu/", "set_back_snow");
+	back->setGeometry(830, 570, 70, 70);
+	connect(back, SIGNAL(clicked()), this, SLOT(onBackClicked()));
 }
 
 void ending::paintEvent(QPaintEvent *event){
@@ -28,6 +32,11 @@ void ending::paintEvent(QPaintEvent *event){
         painter.drawText(150,50+40*i,p[i]);
     }
 
+}
+
+void ending::onBackClicked() {
+	UiManager::getInstance()->openMainPage();
+	UiManager::getInstance()->closeEnding();
 }
 
 void ending::initWord(int flag){

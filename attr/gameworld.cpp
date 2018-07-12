@@ -88,6 +88,7 @@ void GameWorld::save() {
 	document.setObject(obj);
 	QByteArray bytarr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytarr, QString("userInfo/gameworld.info"));
+	//saveToDisk(bytarr, QString("userInfo/gameworld.info"));
 }
 
 void GameWorld::load() {
@@ -232,7 +233,8 @@ void AchieveData::save() {
 	QJsonDocument document;
 	document.setArray(achieveArr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
-	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
+	//QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
+	saveToDisk(bytearr, QString("userInfo/achieve.info"));
 }
 
 

@@ -158,7 +158,7 @@ void UiManager::changeStaus(bool a, bool b, bool c, bool d) {
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();
-	QTimer::singleShot(3000, this, SLOT(showMainWindow()));
+	QTimer::singleShot(2700, this, SLOT(showMainWindow()));
 }
 
 void UiManager::openMainPage() {
@@ -414,19 +414,111 @@ void UiManager::useThing(int id) {
 	}
 }
 
+void UiManager::loadScene(int targetScene) {
+	if (sceneDesert != NULL) {
+		switch (targetScene) {
+		case 2:
+			openSceneForest();
+			closeSceneDesert();
+			break;
+		case 3:
+			openRuins();
+			closeSceneDesert();
+			break;
+		case 4:
+			openSnow();
+			closeSceneDesert();
+			break;
+		}
+	}
+	else if (sceneForest != NULL) {
+		switch (targetScene) {
+		case 1:
+			openSceneDesert();
+			closeSceneForest();
+			break;
+		case 3:
+			openRuins();
+			closeSceneForest();
+			break;
+		case 4:
+			openSnow();
+			closeSceneForest();
+			break;
+		}
+	}
+	else if (sceneRuins != NULL) {
+		switch (targetScene) {
+		case 1:
+			openSceneDesert();
+			closeRuins();
+			break;
+		case 2:
+			openSceneForest();
+			closeRuins();
+			break;
+		case 4:
+			openSnow();
+			closeRuins();
+			break;
+		}
+	}
+	else if (sceneSnow != NULL) {
+		switch (targetScene) {
+		case 1:
+			openSceneDesert();
+			closeSnow();
+			break;
+		case 2:
+			openSceneForest();
+			closeSnow();
+			break;
+		case 3:
+			openRuins();
+			closeSnow();
+			break;
+		}
+	}
+	else if (mainWindow != NULL) {
+		switch (targetScene) {
+		case 1:
+			openSceneDesert();
+			closeMainPage();
+			break;
+		case 2:
+			openSceneForest();
+			closeMainPage();
+			break;
+		case 3:
+			openRuins();
+			closeMainPage();
+			break;
+		case 4:
+			openSnow();
+			closeMainPage();
+			break;
+		}
+	}
+}
+
 QString UiManager::screenShoot() {
 	QPixmap shoot;
+	int sceneId = 0;
 	if (sceneDesert != NULL) {
 		shoot = sceneDesert->grab(QRect(0, 0, 960, 720));
+		sceneId = 1;
 	}
 	else if (sceneForest != NULL) {
 		shoot = sceneForest->grab(QRect(0, 0, 960, 720));
+		sceneId = 2;
 	}
 	else if (sceneRuins != NULL) {
 		shoot = sceneRuins->grab(QRect(0, 0, 960, 720));
+		sceneId = 3;
 	}
 	else if (sceneSnow != NULL) {
 		shoot = sceneSnow->grab(QRect(0, 0, 960, 720));
+		sceneId = 4;
 	}
 
 	QString filePathName = "userInfo/shoot";
