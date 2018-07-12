@@ -3,5 +3,7 @@
         <file>scene/snow_1.png</file>
         <file>scene/snow_2.png</file>
         <file>people/yellow.png</file>
+        <file>people/snow_left.gif</file>
+        <file>people/snow_right.gif</file>
     </qresource>
 </RCC>

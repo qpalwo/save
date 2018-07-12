@@ -35,14 +35,17 @@ void BurnBook::loadRes() {
 	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_2.png"));
 	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_3.png"));
 	staus4 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_4.png"));
+	teaching = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/book_illustrate.png"));
 	staus1->moveBy(stausX, stausY);
 	staus2->moveBy(stausX, stausY + stausDY);
 	staus3->moveBy(stausX, stausY + 2 * stausDY);
 	staus4->moveBy(stausX, stausY + 3 * stausDY);
+	teaching->moveBy(stausX + 10, stausY + 6 * stausDY);
 	scene->addItem(staus1);
 	scene->addItem(staus2);
 	scene->addItem(staus3);
 	scene->addItem(staus4);
+	scene->addItem(teaching);
 
 	text1 = new QGraphicsSimpleTextItem(QString::number(nowNeed, 10), staus1);
 	text2 = new QGraphicsSimpleTextItem(QString::number(allBook - leftBook, 10), staus2);
@@ -74,7 +77,8 @@ void BurnBook::loadRes() {
 }
 
 void BurnBook::reFreshText() {
-	text1->setText(QString::number(nowNeed, 10));
+	if(nowNeed >= 0)
+		text1->setText(QString::number(nowNeed, 10));
 	text2->setText(QString::number(allBook - leftBook, 10));
 	text3->setText(QString::number(burnedBook, 10));
 	text4->setText(QString::number(leftBook, 10));
@@ -93,8 +97,22 @@ void BurnBook::addBook() {
 		connect(m_book, SIGNAL(unBurned()), this, SLOT(onUnBurned()));
 	}
 	else if (leftBook <= 0) {
-		finishGame();
+		if (nowNeed <= 0) {
+			GainAchieve *achieve = new GainAchieve(true, 10, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 3, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		emit finishGame();
 	}
+}
+
+void BurnBook::closeMe() {
+	GameWorld::getInstance()->closeBurnBook();
 }
 
 void BurnBook::determineHard() {
@@ -135,12 +153,17 @@ void BurnBook::reFreshBack() {
 	setBackgroundBrush(back->currentImage());
 }
 
-void BurnBook::finishGame() {
-
-}
-
 
 BurnBook::~BurnBook()
 {
     delete ui;
+	scene->deleteLater();
+	fireBurnBook->deleteLater();
+	m_book->deleteLater();
+	back->deleteLater();
+	reFreshBackTimer->deleteLater();
+	delete staus1;
+	delete staus2;
+	delete staus3;
+	delete staus4;
 }

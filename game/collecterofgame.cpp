@@ -5,7 +5,7 @@ CollecterOfGame::CollecterOfGame(int collecterSpeed) {
 	pixMap.load(":/game/SunSmellCollect/bottle.png");
 	setFlag(QGraphicsItem::ItemIsFocusable);
 	setFocus(Qt::OtherFocusReason);
-	moveBy(480, 500);
+	moveBy(460, 540);
 	speed = collecterSpeed;
 	height = 120;
 	width = 100;

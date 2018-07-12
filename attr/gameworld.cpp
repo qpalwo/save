@@ -1,5 +1,6 @@
 #include "gameworld.h"
 #include "UI/UiManager.h"
+#include "player.h"
 
 void saveToDisk(QByteArray content, QString path) {
 	QFile file(path);
@@ -38,14 +39,32 @@ QByteArray loadFromDisk(QString path) {
 
 void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
+	newPlayer(hard, savesNum);
+	savesNum++;
+	if (savesNum >= 6) {
+		savesNum = 0;
+	}
 }
 
 int GameWorld::getGameHard() {
 	return gameHard;
 }
 
+void GameWorld::newPlayer(int hard, int id) {
+	savesPath[id] = "userInfo/" + QTime::currentTime().toString("yyyy-MM-dd-hh-mm-ss-zzz");
+	Player::getInstance()->newPlayer(savesPath[id], hard, id);
+}
+
+void GameWorld::loadPlayer(int id) {
+	Player::getInstance()->load(savesPath[id]);
+}
+
 void GameWorld::showAchieve() {
 	UiManager::getInstance()->openAchieve();
+}
+
+void GameWorld::showGameMap() {
+	UiManager::getInstance()->openGameMap();
 }
 
 void GameWorld::hideAchieve() {
@@ -54,12 +73,40 @@ void GameWorld::hideAchieve() {
 
 void GameWorld::save() {
 	m_achieve.save();
+	QJsonArray arr;
+	QJsonArray screen;
+	for (int i = 0; i < 6; i++) {
+		arr.append(savesPath[i]);
+		screen.append(screenShoot[i]);
+	}
+	QJsonObject obj;
+	obj.insert("savePath", arr);
+	obj.insert("screenShoot", screen);
+	obj.insert("volume", volume);
+	obj.insert("savesNum", savesNum);
+	QJsonDocument document;
+	document.setObject(obj);
+	QByteArray bytarr = document.toJson(QJsonDocument::Compact);
+	QtConcurrent::run(saveToDisk, bytarr, QString("userInfo/gameworld.info"));
 }
 
 void GameWorld::load() {
-
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
+	if (!document.isNull()) {
+		QJsonObject obj = document.object();
+		QJsonArray arr = obj.take("savePath").toArray();
+		QJsonArray screen = obj.take("screenShoot").toArray();
+		volume = obj.take("volume").toInt();
+		savesNum = obj.take("savesNum").toInt();
+		int size = arr.size();
+		for (int i = 0; i < size; i++) {
+			savesPath[i] = arr.at(i).toString();
+			screenShoot[i] = screen.at(i).toString();
+		}
+	}
 }
 void GameWorld::quitGame() {
+	screenShoot[Player::getInstance()->getMyId()] = UiManager::getInstance()->screenShoot();
 	GameWorld::save();
 	qApp->quit();
 }
@@ -73,11 +120,16 @@ void GameWorld::addAchieve(int num) {
 }
 
 GameWorld::GameWorld(QObject *parent) : QObject(parent) {
+	savesNum = 0;
 	GameWorld::load();
 }
 
 GameWorld* GameWorld::Instance = new GameWorld();
 
+
+void GameWorld::changeStaus(bool a, bool b, bool c, bool d) {
+
+}
 
 void GameWorld::fromMainToBegining() {
 	UiManager::getInstance()->openBegining();
@@ -109,8 +161,32 @@ void GameWorld::beginBurnBook() {
 	UiManager::getInstance()->openBurnBook(gameHard);
 }
 
+void GameWorld::closeBurnBook() {
+	UiManager::getInstance()->closeBurnBook();
+	UiManager::getInstance()->informeSnow();
+}
+
+void GameWorld::closeAvoidStorm() {
+	UiManager::getInstance()->closeAvoidStorm();
+	UiManager::getInstance()->informeDesert();
+}
+
+void GameWorld::closeCollectSmell() {
+	UiManager::getInstance()->closeSunSmellCollect();
+	UiManager::getInstance()->informeForest();
+}
+
+void GameWorld::closeKeepMoving() {
+	UiManager::getInstance()->closeKeepMoving();
+	UiManager::getInstance()->informeRuins();
+}
+
 QString* GameWorld::getAllSaves() {
 	return savesPath;
+}
+
+QString* GameWorld::getAllShoot() {
+	return screenShoot;
 }
 
 void GameWorld::addSaves(QString path, int position) {
@@ -121,7 +197,13 @@ GameWorld* GameWorld::getInstance() {
 	return Instance;
 }
 
+void GameWorld::setVolume(int v){
+    volume = v;
+}
 
+int GameWorld::getVolume(){
+    return volume;
+}
 GameWorld::~GameWorld() {
 	GameWorld::save();
 }
@@ -137,7 +219,8 @@ AchieveData::AchieveData() {
 
 
 void AchieveData::addAchieve(int num) {
-	AchieveData::m_achieves[num] = true;
+	if(num - 1 >= 0 && num - 1 < 23)
+		AchieveData::m_achieves[num - 1] = true;
 	AchieveData::save();
 }
 
@@ -168,9 +251,6 @@ void AchieveData::load() {
 }
 
 bool * AchieveData::getAllAchieve() {
-	for (int i = 0; i < 7; i++) {
-		m_achieves[i] = true;
-	}
 	return m_achieves;
 }
 

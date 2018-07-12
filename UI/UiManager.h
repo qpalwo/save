@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QPixmap>
 #include "QTimer"
 #include "mainwindow.h"
 #include "scenedesert.h"
@@ -15,6 +16,7 @@
 #include "game/burnbook.h"
 #include "achieve.h"
 #include "saveandload.h"
+#include "gamemap.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -36,6 +38,7 @@ public:
 	void closeBurnBook();
 	void closeAchieve();
 	void closeSaveAndLoad();
+	void closeGameMap();
 	void closeAll();
 
 	void openSceneDesert();
@@ -48,12 +51,22 @@ public:
 	void openLoading();
 	void openAchieve();
 	void openSaveAndLoad();
+	void openGameMap();
 	void openSunSmellCollect(int);
 	void openAvoidStorm(int);
 	void openBurnBook(int);
 	void openKeepMoving(int);
 
 	void init();
+
+	void informeSnow();
+	void informeDesert();
+	void informeForest();
+	void informeRuins();
+
+	QString screenShoot();
+	void useThing(int);
+	void changeStaus(bool, bool, bool, bool);
 
 public slots:
 	void showMainWindow();
@@ -83,6 +96,7 @@ private:
 	AvoidStorm *avoidStorm = NULL;
 	KeepMoving *keepMoving = NULL;
 	BurnBook *burnBook = NULL;
+	GameMap *gameMap = NULL;
 
 	bool isWordWindowOpen = false;
 

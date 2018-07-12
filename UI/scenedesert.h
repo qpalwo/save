@@ -13,6 +13,9 @@
 #include <QKeyEvent>
 #include <qstring.h>
 #include<QMouseEvent>
+#include <QtGlobal>
+#include"attr/player.h"
+#include"gainachieve.h"
 #include "menuwidget.h"
 
 #define BDL -2880
@@ -38,6 +41,9 @@ public:
     explicit SceneDesert(QWidget *parent = 0);
     ~SceneDesert();
 	void paintEvent(QPaintEvent * e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a,bool b, bool c, bool d);
 
 private slots:
 	void on_bag_clicked();
@@ -49,13 +55,14 @@ private:
 	QImage earth;
 	QImage conver;
 	QImage uncle;
+	QImage boat;
 
 	QString record_1;
 	QString record_2;
 	QString mouse_out;
 	QString begin;
 	QString begin2;
-
+	QString get[10];
 	QPoint mouse;
 
 	QMovie *player; 
@@ -72,6 +79,7 @@ private:
 	int playerX;
 	int waitTime;
 	int talk;
+	int ti;
 	struct plot q[100];
 
 	bool stop;
@@ -79,6 +87,9 @@ private:
 	bool first;
 	bool zxFuck;
 	bool f[100];
+	bool zhu;
+	bool gameover;
+	bool statement[5];
 };
 
 #endif // SCENEDESERT_H

@@ -10,6 +10,9 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include <QtGlobal>
+#include"attr/player.h"
+#include"gainachieve.h"
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -35,17 +38,28 @@ public:
     explicit SceneRuins(QWidget *parent = 0);
     ~SceneRuins();
     void paintEvent(QPaintEvent *e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a, bool b, bool c, bool d);
 
 private:
     Ui::SceneRuins *ui;
 
     QImage backGround;
+	QImage backGround2;
     QImage earth;
+	QImage earth2;
+	QImage sky;
+	QImage sky2;
 	QImage conver;
 	QImage child;
+
 	QString record_1;
 	QString record_2;
 	QString begin;
+	QString Ending1;
+	QString Ending2;
+	QString get[15];
 
     QMovie* player;
     QMovie* player_left;
@@ -61,11 +75,19 @@ private:
     int playerX;
 	int waitTime;
 	int talk;
+	int ti;
 
     bool stop;
     bool left;
 	bool zxLock;
 	bool first;
+	bool f[100] = {false};
+	bool space1;
+	bool space2;
+	bool gameover;
+	bool statement[5] = {false};
+	bool rightThing;
+	bool isSpace=false;
 };
 
 #endif // SCENERUINS_H

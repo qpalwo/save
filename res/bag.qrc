@@ -12,5 +12,17 @@
         <file>prop/10_bag.png</file>
         <file>prop/11_bag.png</file>
         <file>prop/12_bag.png</file>
+        <file>prop/1_explain.png</file>
+        <file>prop/2_explain.png</file>
+        <file>prop/3_explain.png</file>
+        <file>prop/4_explain.png</file>
+        <file>prop/5_explain.png</file>
+        <file>prop/6_explain.png</file>
+        <file>prop/7_explain.png</file>
+        <file>prop/8_explain.png</file>
+        <file>prop/9_explain.png</file>
+        <file>prop/10_explain.png</file>
+        <file>prop/11_explain.png</file>
+        <file>prop/12_explain.png</file>
     </qresource>
 </RCC>

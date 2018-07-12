@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QImage>
+#include <QMovie>
 #include <QPainter>
 #include <qgraphicsview.h>
 #include "smellofgame.h"
@@ -10,6 +11,8 @@
 #include <QtGlobal>
 #include <QTime>
 #include <QTimer>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
 
 namespace Ui {
 class SunSmellCollect;
@@ -32,13 +35,27 @@ signals:
 public slots:
 	void addMark();
 	void sendSmell();
+	void reFreshBack();
+	void countDown();
+	void closeMe();
 
 private:
     Ui::SunSmellCollect *ui = NULL;
 	QGraphicsScene *scene = NULL;
+	QMovie *back = NULL;
 
 	CollecterOfGame *collecter = NULL;
 	QTimer *sendTimer = NULL;
+	QTimer *reFreshBackTimer = NULL;
+	QTimer *countDownTimer = NULL;
+	QGraphicsPixmapItem *staus1 = NULL;
+	QGraphicsPixmapItem *staus2 = NULL;
+	QGraphicsPixmapItem *staus3 = NULL;
+	QGraphicsPixmapItem *teaching = NULL;
+
+	QGraphicsSimpleTextItem *text1 = NULL;
+	QGraphicsSimpleTextItem *text2 = NULL;
+	QGraphicsSimpleTextItem *text3 = NULL;
 
 	void loadRes();
 	void determineHard();
@@ -46,6 +63,13 @@ private:
 	int gameHard;
 	int collecterSpeed;
 	int lunchSpeed;
+	int nowMark;
+	int nowNeed;
+	int leftTime;
+	int stausDX;
+	int stausX;
+	int stausY;
+	int stausDY;
 };
 
 #endif // SUNSMELLCOLLECT_H

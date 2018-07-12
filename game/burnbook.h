@@ -10,6 +10,8 @@
 #include <QGraphicsSimpleTextItem>
 #include "fireburnbook.h"
 #include "booktoburn.h"
+#include "UI/gainachieve.h"
+#include "attr/gameworld.h"
 
 namespace Ui {
 class BurnBook;
@@ -27,9 +29,10 @@ public slots:
 	void onBurned();
 	void onUnBurned();
 	void reFreshBack();
+	void closeMe();
 
 signals:
-
+	void finishGame();
 
 protected:
 
@@ -44,6 +47,7 @@ private:
 	QGraphicsPixmapItem *staus2 = NULL;
 	QGraphicsPixmapItem *staus3 = NULL;
 	QGraphicsPixmapItem *staus4 = NULL;
+	QGraphicsPixmapItem *teaching = NULL;
 
 	QGraphicsSimpleTextItem *text1 = NULL;
 	QGraphicsSimpleTextItem *text2 = NULL;
@@ -54,7 +58,6 @@ private:
 	void loadRes();
 	void determineHard();
 	void reFreshText();
-	void finishGame();
 
 	int gameHard;
 	int allBook;

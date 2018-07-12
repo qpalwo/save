@@ -8,8 +8,11 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <QTime>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
 #include "playerinwind.h"
 #include "tornado.h"
+#include "UI/gainachieve.h"
 
 namespace Ui {
 class KeepMoving;
@@ -31,6 +34,11 @@ public slots:
 	void minusMark();
 
 	void reFreshBack();
+	void countDown();
+	void closeMe();
+
+signals:
+	void finishGame();
 
 private:
     Ui::KeepMoving *ui;
@@ -40,6 +48,15 @@ private:
 	QTimer *machineSendTimer = NULL;
 	QTimer *lighteSendTimer = NULL;
 	QTimer *reFreshBackTimer = NULL;
+	QTimer *countDownTimer = NULL;
+	QGraphicsPixmapItem *staus1 = NULL;
+	QGraphicsPixmapItem *staus2 = NULL;
+	QGraphicsPixmapItem *staus3 = NULL;
+	QGraphicsPixmapItem *teaching = NULL;
+
+	QGraphicsSimpleTextItem *text1 = NULL;
+	QGraphicsSimpleTextItem *text2 = NULL;
+	QGraphicsSimpleTextItem *text3 = NULL;
 
 	void loadRes();
 	void determineHard();
@@ -50,6 +67,13 @@ private:
 	float machineSpeed;
 	int machineLunchSpeed;
 	int lightLunchSpeed;
+	int nowMark;
+	int nowNeed;
+	int leftTime;
+	int stausDX;
+	int stausX;
+	int stausY;
+	int stausDY;
 
 };
 

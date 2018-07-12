@@ -11,6 +11,8 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QPoint>
+#include "attr/player.h"
+#include <QLabel>
 
 class menuwidget;
 #include "menuWidget.h"
@@ -28,12 +30,16 @@ public:
     void closeEvent(QCloseEvent *e);
     ~Bag();
 
+protected:
+	void mousePressEvent(QMouseEvent *e);
+
 private:
     Ui::Bag *ui;
 
     QImage backGround;
     QString scene;
-
+    QLabel *explain;
+    QPixmap propExplain;
     QPixmap prop1;
     QPixmap prop2;
     QPixmap prop3;
@@ -48,19 +54,33 @@ private:
     QPixmap prop12;
 
     QPoint mouse;
+	QPoint mouseClick;
 
     QTimeLine *timerShow;
     QTimeLine *timerHide;
 
     menuwidget *newMenu;
 
+    Player *player;
+    int num[12];
+    QString s[12];
+
+    QString m;
     int backX;
+
+    int posX;
+    int posY;
+
+	int mouseClickX;
+	int mouseClickY;
 
     void paintEvent(QPaintEvent *e);
     void loadImage();
     void leaveEvent(QEvent *e);
     void enterEvent(QEvent *e);
     void initTimer();
+    void mouseMoveEvent(QMouseEvent *event);
+    void showExplain();
 
 private slots:
     void bagShow();

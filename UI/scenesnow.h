@@ -10,6 +10,9 @@
 #include <qtimer.h>
 #include <QTime>
 #include <QMovie>
+#include <QtGlobal>
+#include "gainachieve.h"
+#include"attr/player.h"
 #include "menuWidget.h"
 
 #define BDL -2880
@@ -35,6 +38,10 @@ public:
     explicit SceneSnow(QWidget *parent = 0);
     ~SceneSnow();
     void paintEvent(QPaintEvent *e);
+	void gameOver();
+	void bagThingClick(int n);
+	void changeState(bool a, bool b, bool c, bool d);
+
 
 private:
     Ui::SceneSnow *ui;
@@ -43,10 +50,13 @@ private:
     QImage earth;
 	QImage conver;
 	QImage girl;
+
+
 	QString record_1;
 	QString record_2;
 	QString begin;
 	QString begin2;
+	QString get[15];
 
     QMovie* player;
     QMovie* player_left;
@@ -62,12 +72,17 @@ private:
     int playerX;
 	int talk;
 	int waitTime;
+	int ti;
 
     bool stop;
     bool left;
 	bool zxLock;
 	bool first;
 	bool f[100];
+	bool statement[5];
+	bool isShow = false;
+	bool gameover;
+	bool rightThing;
 };
 
 #endif // SCENESNOW_H

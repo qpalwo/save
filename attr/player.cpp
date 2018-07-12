@@ -1,4 +1,6 @@
 #include "player.h"
+#include "gameworld.h"
+#include "UI/UiManager.h"
 
 extern void saveToDisk(QByteArray content, QString path);
 
@@ -6,13 +8,67 @@ extern QByteArray loadFromDisk(QString path);
 
 
 Player::Player(QObject *parent) : QObject(parent) {
-
+	m_hard = GameWorld::getInstance()->getGameHard();
 }
+
+Player* Player::getInstance() {
+	return Player::Instance;
+}
+
 
 Player* Player::Instance = new Player();
 
+void Player::load(QString path) {
+	m_path = path;
+	QString loadPath = m_path + "_user.info";
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(m_path));
+	if (!document.isNull()) {
+		QJsonObject obj = document.object();
+		m_hard = obj.take("m_hard").toString().toInt();
+		m_power = obj.take("m_power").toString().toInt();
+		m_mood = obj.take("m_mood").toString().toInt();	
+		m_id = obj.take("m_id").toString().toInt();
+	}
+	checkStaus();
+	backBag.load(m_path);
+}
+
+void Player::newPlayer(QString path, int hard, int id) {
+	backBag.newBag();
+	m_id = id;
+	m_path = path;
+	m_mood = 100;
+	m_power = 100;
+	m_hard = hard;
+	save();
+}
+
 void Player::checkStaus() {
-	// if staus change, emit stausChange
+	if (m_mood <= 60) {
+		m_staus[0] = true;
+	}
+	else {
+		m_staus[0] = false;
+	}
+	if (m_power <= 50) {
+		m_staus[1] = true;
+	}
+	else {
+		m_staus[1] = false;
+	}
+	if (m_mood <= 20) {
+		m_staus[2] = true;
+	}
+	else {
+		m_staus[2] = false;
+	}
+	if (m_mood <= 20 && m_power <= 30) {
+		m_staus[3] = true;
+	}
+	else {
+		m_staus[3] = false;
+	}
+	GameWorld::getInstance()->changeStaus(m_staus[0], m_staus[1], m_staus[2], m_staus[3]);
 }
 
 void Player::changePower(int num) {
@@ -29,25 +85,61 @@ BagThing *Player::getBagThing() {
 	return backBag.getBagThing();
 }
 
+bool* Player::getMapStaus() {
+	return m_map;
+}
+
+void Player::setMapStaus(int map) {
+	if(map <= 4)
+		m_map[map - 1] = true;
+}
+
 void Player::addBagThing(int num) {
 	backBag.addBagThing(num);
 }
 
-int Player::nowStaus() {
+void Player::useBagThing(int num) {
+	backBag.useBagThing(num);
+	UiManager::getInstance()->useThing(num);
+}
+
+bool* Player::nowStaus() {
 	return m_staus;
 }
 
 void Player::save() {
-	backBag.save();
+	backBag.save(m_path);
+	QString savePath = m_path + "_user.info";
+
+	QJsonObject saves;
+	saves.insert("m_hard", m_hard);
+	saves.insert("m_power", m_power);
+	saves.insert("m_mood", m_mood);
+	saves.insert("m_id", m_id);
+	QJsonDocument document;
+	document.setObject(saves);
+	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
+	QtConcurrent::run(saveToDisk, bytearr, savePath);
+
+}
+
+int Player::getMyId() {
+	return m_id;
 }
 
 void Player::load() {
-
-}
-
-
-Player* Player::getInstance() {
-	return Player::Instance;
+	if (m_path.length() > 1) {
+		QString loadPath = m_path + "_user.info";
+		QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(m_path));
+		if (!document.isNull()) {
+			QJsonObject obj = document.object();
+			m_hard = obj.take("m_hard").toString().toInt();
+			m_power = obj.take("m_power").toString().toInt();
+			m_mood = obj.take("m_mood").toString().toInt();
+		}
+		checkStaus();
+		backBag.load(m_path);
+	}
 }
 
 Player::~Player() {
@@ -59,13 +151,11 @@ Player::~Player() {
 
 
 BackBag::BackBag() {
-	for (int i = 0; i < 12; i++) {
-		m_bagThing[i].id = i;
-		m_bagThing[i].num = 2;
-	}
+
 }
 
-void BackBag::save() {
+void BackBag::save(QString userPath) {
+	QString savePath = userPath + "_bag.info";
 	QJsonArray arr;
 	for (BagThing t : m_bagThing) {
 		QJsonObject saves;
@@ -77,11 +167,13 @@ void BackBag::save() {
 	QJsonDocument document;
 	document.setArray(arr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
-	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/bag.info"));
+	QtConcurrent::run(saveToDisk, bytearr, savePath);
 }
 
-void BackBag::load() {
-	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/bag.info")));
+void BackBag::load(QString userPath) {
+	QString loadPath = userPath + "_bag.info";
+	savePath = loadPath;
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(loadPath));
 	if (!document.isNull()) {
 		QJsonArray jsonArr = document.array();
 		for (int i = 0; i < 12; i++) {
@@ -90,6 +182,13 @@ void BackBag::load() {
 			m_bagThing[i].num = job.take("num").toInt();
 			m_bagThing[i].name = job.take("name").toString();
 		}
+	}
+}
+
+void BackBag::newBag() {
+	for (int i = 0; i < 12; i++) {
+	m_bagThing[i].id = i;
+	m_bagThing[i].num = 0;
 	}
 }
 
@@ -102,12 +201,19 @@ BagThing* BackBag::getBagThing() {
 }
 
 void BackBag::addBagThing(int thing) {
-	m_bagThing[thing].num++;
-	BackBag::save();
+	m_bagThing[thing - 1].num++;
+	BackBag::save(savePath);
+}
+
+void BackBag::useBagThing(int thing) {
+	if (m_bagThing[thing - 1].num > 0) {
+		m_bagThing[thing - 1].num--;
+		BackBag::save(savePath);
+	}
 }
 
 BackBag::~BackBag() {
-	save();
+	save(savePath);
 }
 
 

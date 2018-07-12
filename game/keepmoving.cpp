@@ -38,6 +38,51 @@ void KeepMoving::loadRes() {
 	connect(lighteSendTimer, SIGNAL(timeout()), this, SLOT(sendLight()));
 	machineSendTimer->start(machineLunchSpeed);
 	lighteSendTimer->start(lightLunchSpeed);
+
+	countDownTimer = new QTimer(this);
+	connect(countDownTimer, SIGNAL(timeout()), this, SLOT(countDown()));
+	countDownTimer->start(1000);
+
+	stausDX = 30;
+	stausX = 700;
+	stausY = 60;
+	stausDY = 60;
+	staus1 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_1.png"));
+	staus2 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_2.png"));
+	staus3 = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_3.png"));
+	teaching = new QGraphicsPixmapItem(QPixmap(":/game/SunSmellCollect/machine_illustrate.png"));
+
+	staus1->moveBy(stausX, stausY);
+	staus2->moveBy(stausX, stausY + stausDY);
+	staus3->moveBy(stausX, stausY + 2 * stausDY);
+	teaching->moveBy(stausX + 10, stausY + 4 * stausDY);
+
+	scene->addItem(staus1);
+	scene->addItem(staus2);
+	scene->addItem(staus3);
+	scene->addItem(teaching);
+
+	text1 = new QGraphicsSimpleTextItem(QString::number(nowMark, 10), staus1);
+	text2 = new QGraphicsSimpleTextItem(QString::number(nowNeed, 10), staus2);
+	text3 = new QGraphicsSimpleTextItem(QString::number(leftTime, 10), staus3);
+
+	int x = 118;
+	int y = 10;
+	text1->moveBy(x, y);
+	text2->moveBy(x, y);
+	text3->moveBy(x, y);
+
+	QFont font;
+	font.setBold(true);
+	font.setPixelSize(20);
+
+	text1->setFont(font);
+	text2->setFont(font);
+	text3->setFont(font);
+
+	text1->setBrush(QBrush(QColor(255, 255, 255)));
+	text2->setBrush(QBrush(QColor(255, 255, 255)));
+	text3->setBrush(QBrush(QColor(255, 255, 255)));
 }
 
 void KeepMoving::sendMachine() {
@@ -70,6 +115,28 @@ void KeepMoving::sendLight() {
 	connect(tornado, SIGNAL(collided()), this, SLOT(addMark()));
 }
 
+void KeepMoving::countDown() {
+	if (leftTime > 0) {
+		leftTime--;
+		text1->setText(QString::number(nowMark, 10));
+		text2->setText(QString::number(nowNeed, 10));
+		text3->setText(QString::number(leftTime, 10));
+	}
+	else {
+		if (nowNeed <= 0) {
+			GainAchieve *achieve = new GainAchieve(true, 15, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		else {
+			GainAchieve *achieve = new GainAchieve(false, 3, this);
+			connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+			achieve->show();
+		}
+		emit finishGame();
+	}
+}
+
 void KeepMoving::determineHard() {
 	switch (gameHard) {
 	case 1:
@@ -78,7 +145,9 @@ void KeepMoving::determineHard() {
 		lightLunchSpeed = 300;
 		lightSpeed = 5;
 		machineSpeed = 5;
-
+		leftTime = 30;
+		nowMark = 0;
+		nowNeed = 100;
 		break;
 	case 2:
 		playerSpeed = 13;
@@ -86,6 +155,9 @@ void KeepMoving::determineHard() {
 		lightLunchSpeed = 500;
 		lightSpeed = 4;
 		machineSpeed = 6;
+		leftTime = 45;
+		nowMark = 0;
+		nowNeed = 150;
 		break;
 	case 3:
 	default:
@@ -94,6 +166,9 @@ void KeepMoving::determineHard() {
 		lightLunchSpeed = 800;
 		lightSpeed = 3;
 		machineSpeed = 7;
+		leftTime = 60;
+		nowMark = 0;
+		nowNeed = 250;
 		break;
 	}
 }
@@ -103,13 +178,32 @@ void KeepMoving::reFreshBack() {
 }
 
 void KeepMoving::addMark() {
-	playerInWind->moveBy(0, 10);
+	nowMark += 10;
+	nowNeed -= 10;
+	if (nowNeed <= 0) {
+		GainAchieve *achieve = new GainAchieve(true, 13, this);
+		connect(achieve, SIGNAL(achieveClosed()), this, SLOT(closeMe()));
+		achieve->show();
+		emit finishGame();
+	}
 }
 
 void KeepMoving::minusMark() {
-	playerInWind->moveBy(0, -10);
+	nowMark -= 10;
+	nowNeed += 10;
+}
+
+void KeepMoving::closeMe() {
+	GameWorld::getInstance()->closeKeepMoving();
 }
 
 KeepMoving::~KeepMoving() {
 	delete ui;
+	scene->deleteLater();
+	playerInWind->deleteLater();
+	backMovie->deleteLater();
+	machineSendTimer->deleteLater();
+	lighteSendTimer->deleteLater();
+	reFreshBackTimer->deleteLater();
+	countDownTimer->deleteLater();
 }

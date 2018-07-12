@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QString>
 
+
 class AchieveData {
 public:
 	AchieveData();
@@ -20,6 +21,7 @@ public:
 	void addAchieve(int);
 	bool *getAllAchieve();
 	void save();
+	
 	
 
 private:
@@ -38,27 +40,40 @@ public:
 	static GameWorld * getInstance();
 	void addAchieve(int);
 	void quitGame();
+	void newPlayer(int, int);
+	void loadPlayer(int);
 
 	void setGameHard(int);
 	int getGameHard();
 	bool* getAllAchieve();
 	QString* getAllSaves();
+	QString* getAllShoot();
 	void addSaves(QString, int);
+	void changeStaus(bool, bool, bool, bool);
 
 	void fromMainToBegining();
 	void fromBeginingToRuinsCity();
 	void showAchieve();
 	void showSaveAndLoad();
+	void showGameMap();
 	void hideAchieve();
+	void closeBurnBook();
+	void closeAvoidStorm();
+	void closeCollectSmell();
+	void closeKeepMoving();
 
 	void beginSmellCollect();
 	void beginAvoidStorm();
 	void beginKeepMoving();
 	void beginBurnBook();
 
+    void setVolume(int v);
+    int getVolume();
+
 signals:
 
 public slots:
+
 
 private:
 	GameWorld(QObject *parent = nullptr);
@@ -66,7 +81,10 @@ private:
 
 	AchieveData m_achieve;
 	QString savesPath[6];
+	QString screenShoot[6];
 	int gameHard;
+    int volume = 20;
+	int savesNum;
 
 	void save();
 	void load();

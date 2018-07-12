@@ -8,15 +8,19 @@ SceneSnow::SceneSnow(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
 
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
     backX = 0;
     backY = 0;
     playerX = 0;
 	talk = 0;
+	ti = 0;
 
     stop = false;
     left = false;
 	first = false;
 	zxLock = false;
+	rightThing = false;
 
     loadImage();
 	loadPlot();
@@ -24,14 +28,15 @@ SceneSnow::SceneSnow(QWidget *parent) :
     menuwidget *menu = new menuwidget("snow",this);
     setFocus();
     menu->show();
+
 }
 
 void SceneSnow::loadImage()
 {
     backGround.load(":/snow/scene/snow_2.png");
     earth.load(":/snow/scene/snow_1.png");
-    player = new QMovie(":/player/main.gif");
-    player_left = new QMovie(":/player/main_left.gif");
+    player = new QMovie(":/snow/people/snow_right.gif");
+    player_left = new QMovie(":/snow/people/snow_left.gif");
 	girl.load(":/snow/people/yellow.png");
 	conver.load(":/conver/convar/convar.png");
     player->start();
@@ -71,12 +76,18 @@ void SceneSnow::paintEvent(QPaintEvent *event)
     {
 		if ((waitTime>0) && (waitTime <= 30))
 			painter.drawPixmap(playerX, 235-waitTime * 6, 100, 200, player->currentPixmap());
-		else 
-        painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
+		else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
     //探索
 
     painter.drawImage(backX, backY, earth);
+
+	if (waitTime > 30) {
+		if (waitTime == 31) 	ti = qrand() % 7;
+		painter.drawText(380, 280, get[ti]);
+		Player::getInstance()->addBagThing(ti + 6);
+	}
+
 	if (first) painter.drawText(180, 550, begin);
 	if ((backX>=-2100)&&(backX<-1500))  painter.drawText(140, 550, begin2);
 
@@ -89,7 +100,7 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 			painter.drawText(280, 666, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);
+			painter.drawText(280, 612, q[talk].s);   f[talk] = true;
 			if (q[talk].hu) {
 				painter.drawText(280, 666, q[talk + 1].s);
 			}
@@ -101,6 +112,17 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 				zxLock = true;
 			}
 		}
+	}
+
+	painter.setPen(QColor(250, 10, 10));
+	if (talk == 35) {
+		painter.drawText(350, 280, get[9]);
+		Player::getInstance()->addBagThing(3);
+	}
+
+	if (talk == 33) {
+		if (rightThing) talk = 35;
+		else  talk = 39;
 	}
 	first = false;
 }
@@ -168,25 +190,31 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
         default:
             break;
         }
-        if (playerX < 0)
-        {
-            playerX += 10;
-        }
-        if (playerX > 860)
-        {
-            playerX -= 10;
-        }
+        if (playerX < 0)  playerX += 10;
+        if (playerX > 860)  playerX -= 10;
 		if (playerX < 430) first = true;
 
 		if ((e->key() == Qt::Key_W) || (e->key() == Qt::Key_Up)) {
 			if (underTheSunshine(1))  waitTime++;
 		} else waitTime = 0;
 
-		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 
+		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 		if (q[talk].diff) {
 			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxLock = false; }
 			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxLock = false; }
+		}
+
+		if (talk == 30) {
+			GameWorld::getInstance()->beginBurnBook();
+			if (f[4] && f[20]) {
+				GainAchieve *Joker = new  GainAchieve(9, this);
+				Joker->show();
+			}
+			else {
+				GainAchieve *Joker = new  GainAchieve(10, this);
+				Joker->show();
+			}
 		}
     }
     update();
@@ -202,9 +230,35 @@ bool SceneSnow::underTheSunshine(int n) {
 	return false;
 }
 
+void SceneSnow::gameOver() {
+	gameover = true;
+}
+
+void SceneSnow::bagThingClick(int n) {
+	if (n == 4) rightThing = true;
+}
+
+void SceneSnow::changeState(bool a, bool b, bool c, bool d) {
+	statement[1] = a;
+	statement[2] = b;
+	statement[3] = c;
+	statement[4] = d;
+}
+
 void SceneSnow::loadPlot() {
 	begin = QString::fromLocal8Bit("白茫茫的大地...真干净...只是好冷啊,冷到连我都有触觉");
 	begin2 = QString::fromLocal8Bit("唔，远处似乎有烟，应该有人吧...到那里去..到那里去就能活着");
+
+	get[0] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+	get[1] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[2] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[3] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
+
+	get[9]= QString::fromLocal8Bit("获得特殊物品 [红宝石]");
+
 
 	q[0].s = QString::fromLocal8Bit("（到达房子口，看见一个正在烧书的少女）"); q[0].diff = false; q[0].hu = false;
 	q[0].l = 1; q[1].s = QString::fromLocal8Bit("少女：看见了吗？这一定是冬天蚂蚁过冬的方式。"); q[1].diff = false; q[1].hu = false;
@@ -246,6 +300,8 @@ void SceneSnow::loadPlot() {
 	q[21].l = 23; q[23].s= QString::fromLocal8Bit("少女：。。。谢谢你，帮我解决了困惑很久的问题，火快要熄"); q[23].diff = false; q[23].hu = true;
 	q[24].s = QString::fromLocal8Bit("灭了，一起来点燃它吧"); q[24].diff = false; q[24].hu = false;
 
+	q[18].l = 30; q[23].l = 30; 
+
 
 	q[30].s= QString::fromLocal8Bit("少女：很温暖的火焰啊，像阳光一样。。。虽然我也没见过"); q[30].diff = false; q[30].hu = true;
 	q[31].s= QString::fromLocal8Bit("真正的阳光。"); q[31].diff = false; q[31].hu = false;
@@ -254,16 +310,18 @@ void SceneSnow::loadPlot() {
 
 	q[32].l = 33;  q[33].s = QString::fromLocal8Bit("少女：对，我们现在的阳光都已经驳杂了。听说之前的世界"); q[33].diff = false; q[33].hu = true;
 	q[34].s = QString::fromLocal8Bit("有着纯净的阳光，温暖的，干净的阳光，可惜没能感受。"); q[34].diff = false; q[34].hu = false;
+	q[33].l = 33;
 
 	q[35].s= QString::fromLocal8Bit("少女：这是。。。阳光的味道吗。。很柔软的触感，"); q[35].diff = false; q[35].hu = true;
 	q[36].s = QString::fromLocal8Bit("像书籍泛黄的内页。谢谢你，这个送给你吧"); q[36].diff = false; q[36].hu = false;
 
-	q[37].s = QString::fromLocal8Bit("明明没有温度，却像是跳动的火焰一般，灼烧这皮肤，骨骼，甚至心脏。"); q[37].diff = false; q[37].hu = true;
+	q[35].l = 37; q[37].s = QString::fromLocal8Bit("明明没有温度，却像是跳动的火焰一般，灼烧这皮肤，骨骼，甚至心脏。"); q[37].diff = false; q[37].hu = true;
 	q[38].s = QString::fromLocal8Bit("炽热的感觉解冻了尘封已久的触感，能感受到世界真好啊"); q[38].diff = false; q[38].hu = false;
+	q[37].l = 37;
 
 	q[39].s = QString::fromLocal8Bit("少女：谢谢你的好意。为了感谢你，请在这里多"); q[39].diff = false; q[39].hu = true;
 	q[40].s = QString::fromLocal8Bit("停留几日恢复体力吧。"); q[40].diff = false; q[40].hu = false;
-
+	q[39].l = 39;
 
 }
 

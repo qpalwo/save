@@ -47,5 +47,9 @@
         <file>achieve_22_2.png</file>
         <file>achieve_23.png</file>
         <file>achieve_23_2.png</file>
+        <file>acquire.png</file>
+        <file>confirm_1.png</file>
+        <file>confirm_2.png</file>
+        <file>confirm_3.png</file>
     </qresource>
 </RCC>
