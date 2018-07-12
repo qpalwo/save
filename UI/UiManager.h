@@ -17,6 +17,7 @@
 #include "achieve.h"
 #include "saveandload.h"
 #include "gamemap.h"
+#include "ending.h"
 
 class UiManager : QObject{
 	Q_OBJECT
@@ -39,6 +40,7 @@ public:
 	void closeAchieve();
 	void closeSaveAndLoad();
 	void closeGameMap();
+	void closeEnding();
 	void closeAll();
 
 	void openSceneDesert();
@@ -52,6 +54,7 @@ public:
 	void openAchieve();
 	void openSaveAndLoad();
 	void openGameMap();
+	void openEnding(int);
 	void openSunSmellCollect(int);
 	void openAvoidStorm(int);
 	void openBurnBook(int);
@@ -63,6 +66,22 @@ public:
 	void informeDesert();
 	void informeForest();
 	void informeRuins();
+
+	void fromForestToMap();
+	void fromDesertToMap();
+	void fromSnowToMap();
+	void fromRunisToMap();
+
+	void fromMapToForest();
+	void fromMapToDesert();
+	void fromMapToRuins();
+	void fromMapToSnow();
+
+	void fromBeginingToEnding();
+	void fromForestToEnding(int);
+	void fromDesertToEnding(int);
+	void fromSnowToEnding(int);
+	void fromRuinsToEnding(int);
 
 	QString screenShoot();
 	void useThing(int);
@@ -97,6 +116,7 @@ private:
 	KeepMoving *keepMoving = NULL;
 	BurnBook *burnBook = NULL;
 	GameMap *gameMap = NULL;
+	ending *end = NULL;
 
 	bool isWordWindowOpen = false;
 

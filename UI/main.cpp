@@ -5,6 +5,7 @@
 #include "attr/gameworld.h"
 #include "attr/player.h"
 #include "UI/ending.h"
+#include "UI/gamemap.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,5 +17,7 @@ int main(int argc, char *argv[])
 	uiManager->init();
 	//ending *e = new ending(1);
 	//e->show();
+	GameMap *gm = new GameMap();
+	gm->show();
     return a.exec();
 }
