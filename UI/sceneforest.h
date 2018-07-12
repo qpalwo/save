@@ -103,6 +103,7 @@ private:
 	bool statement[5];
 	bool ifget = false;
 	bool tomap = false;
+	bool bug = false;
 };
 
 #endif // SCENEDESERT_H

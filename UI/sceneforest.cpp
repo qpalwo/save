@@ -124,25 +124,28 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		}
 	}
 
-	if (talk == 48) {
+	if ((talk == 48)&&(bug)) {
 		if (rightThing) talk = 49;
 		else talk = 55;
 	}
+
 	if (talk == 53) {
 		painter.setPen(QColor(0, 0, 250));
 		painter.drawText(300, 280, get[9]);
 		if (!ifget) {
 			Player::getInstance()->addBagThing(4);
 			ifget = true;
-
 		}
 	}
 	first = false; 
 }
 
 void SceneForest::keyPressEvent(QKeyEvent *e) {
+	if (talk == 48) bug = true;
+
 	if (tomap) UiManager::getInstance()->fromForestToMap();
-	if (stop) {                         //main player stop
+
+	if (stop) {                         //main player stopxz
 		switch (e->key()) {
 		case Qt::Key_A: backX += 10;  left = true; break;
 		case Qt::Key_Left: backX += 10; left = true; break;
