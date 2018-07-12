@@ -108,7 +108,7 @@ void Player::addBagThing(int num) {
 
 void Player::useBagThing(int num) {
 	backBag.useBagThing(num);
-	UiManager::getInstance()->useThing(num + 1);
+	UiManager::getInstance()->useThing(num);
 }
 
 bool* Player::nowStaus() {
@@ -224,8 +224,8 @@ void BackBag::addBagThing(int thing) {
 }
 
 void BackBag::useBagThing(int thing) {
-	if (m_bagThing[thing - 1].num > 0) {
-		m_bagThing[thing - 1].num--;
+	if (m_bagThing[thing].num > 0) {
+		m_bagThing[thing].num--;
 		BackBag::save(savePath);
 	}
 }

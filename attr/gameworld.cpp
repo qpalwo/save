@@ -92,7 +92,7 @@ void GameWorld::save() {
 }
 
 void GameWorld::load() {
-	/*QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
+	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/gameworld.info")));
 	if (!document.isNull()) {
 		QJsonObject obj = document.object();
 		QJsonArray arr = obj.take("savePath").toArray();
@@ -104,7 +104,7 @@ void GameWorld::load() {
 			savesPath[i] = arr.at(i).toString();
 			screenShoot[i] = screen.at(i).toString();
 		}
-	}*/
+	}
 }
 void GameWorld::quitGame() {
 	screenShoot[Player::getInstance()->getMyId()] = UiManager::getInstance()->screenShoot();
@@ -222,7 +222,7 @@ AchieveData::AchieveData() {
 void AchieveData::addAchieve(int num) {
 	if(num - 1 >= 0 && num - 1 < 23)
 		AchieveData::m_achieves[num - 1] = true;
-	//AchieveData::save();
+	AchieveData::save();
 }
 
 void AchieveData::save() {
