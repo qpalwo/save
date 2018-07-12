@@ -125,9 +125,16 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
 				painter.drawImage(750, 25, child);
 				painter.drawImage(backX, backY, earth2);
-				painter.drawText(160, 500, Ending1);
-				painter.drawText(100, 545, Ending2);
-				painter.drawText(360, 590, Achieve1);
+				painter.drawText(160, 520, Ending1);
+				painter.drawText(100, 565, Ending2);
+				painter.setPen(QColor(0, 250, 250));
+				painter.drawText(350, 610, get[9]);
+				Player::getInstance()->addBagThing(2);
+				if (!isSpace) {
+					GainAchieve *Joker = new  GainAchieve(3, this);
+					Joker->show();
+					isSpace = true;
+				}
 			}
 		}
 		else {
@@ -139,7 +146,6 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				else {
 					painter.drawText(280, 612, q[32].s);
 					painter.drawText(280, 666, q[33].s);
-					painter.drawText(360, 280, Achieve2);
 				}
 			}
 		}
@@ -204,6 +210,10 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
 			if (underDoor(1))	waitTime++;
 		}	else waitTime = 0;
 
+		if ((space1) && (space2)) {
+			GainAchieve *Joker = new  GainAchieve(4, this);
+			Joker->show();
+		}
 	    if ((talk == 28) && space1) space2 = true;
 		if ((talk == 28) && (e->key() == Qt::Key_Space)) space1 = true;
 	
@@ -260,7 +270,7 @@ void SceneRuins::loadPlot() {
 	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
 	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
 	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
-
+	get[9] = QString::fromLocal8Bit("获得特殊物品 [钢珠]");
 
 
 	q[0].s= QString::fromLocal8Bit("恩？似乎有什么声音？(抬头)"); q[0].diff = false; q[0].hu = false;
@@ -328,9 +338,7 @@ void SceneRuins::loadPlot() {
 	q[41].s= QString::fromLocal8Bit("透明的，但这是妈妈辛苦收集到的玩具。"); q[41].diff = false; q[41].hu = false;
 
 	Ending1= QString::fromLocal8Bit("奇怪啊...冷黑色的钢珠...居然在太阳下映出最灿烂的色彩..."); 
-	Ending2 = QString::fromLocal8Bit("倒影着的世界都绚烂万分...（心情值++）就像是...最坚硬而又最温柔的心");
-	Achieve1= QString::fromLocal8Bit("[获得成就：众彩纷呈]");
-	Achieve2 = QString::fromLocal8Bit("[获得成就：过客而已]");
+	Ending2 = QString::fromLocal8Bit("让倒影着的世界都绚烂万分...（心情值++）就像是...最坚硬又最温柔的心");
 }
 
 SceneRuins::~SceneRuins()

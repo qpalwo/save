@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QPixmap>
 #include "QTimer"
 #include "mainwindow.h"
 #include "scenedesert.h"
@@ -63,6 +64,8 @@ public:
 	void informeForest();
 	void informeRuins();
 
+	QString screenShoot();
+	void useThing(int);
 	void changeStaus(bool, bool, bool, bool);
 
 public slots:

@@ -10,6 +10,7 @@ SaveAndLoad::SaveAndLoad(QWidget *parent) :
 	backButton = new OpenPageButton(this, "/menuZ/menu/", "set_back_forest");
 	backButton->setGeometry(830, 570, 70, 70);
 	connect(backButton, SIGNAL(clicked()), this, SLOT(onBackClicked()));
+	initGameWorldData();
 	initSaveAndButton();
 }
 
@@ -24,7 +25,12 @@ void SaveAndLoad::onBackClicked() {
 }
 
 void SaveAndLoad::initGameWorldData() {
-	
+	shoot = GameWorld::getInstance()->getAllShoot();
+	for (int i = 0; i < 6; i++) {
+		if ((shoot + i)->length() > 1) {
+			isSave[i] = true;
+		}
+	}
 }
 
 void SaveAndLoad::initSaveAndButton() {

@@ -1,6 +1,5 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
-#include "menuwidget.h"
 
 SceneForest::SceneForest(QWidget *parent) :
 	QWidget(parent),
@@ -16,6 +15,7 @@ SceneForest::SceneForest(QWidget *parent) :
 	stop = false;
 	left = false;
 	zxFuck = false;
+	rightThing = false;
 
 	loadImage();
 	loadPlot();
@@ -68,9 +68,10 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	if ((waitTime>0) && (waitTime <= 28))
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //绘制矩形 
 
-	if (waitTime > 30) {
-		if (waitTime == 31) 	ti = qrand() % 7;
+	if (waitTime > 28) {
+		if (waitTime == 29) 	ti = qrand() % 7;
 		painter.drawText(380, 280, get[ti]);
+		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) 	painter.drawText(180, 150, begin);
@@ -82,11 +83,9 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 
 	if (talk >= 16) { 
 		painter.drawImage(580, 240, uncle); 
-	}	else
-	if (talk>=12) painter.drawImage(400, 240, uncle);
+	}	else	if (talk>=12) painter.drawImage(400, 240, uncle);
 
 	if (playerX >= 440) {
-	//	painter.drawImage(850, 260, uncle);
 
 		painter.drawImage(BDL, -10, house_closed);
 
@@ -96,7 +95,7 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	    	painter.drawText(280, 666, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);
+			painter.drawText(280, 612, q[talk].s);        f[talk] = true;
 			if (q[talk].hu) {
 				painter.drawText(280, 666, q[talk + 1].s);
 			}
@@ -108,6 +107,16 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 				zxFuck = true;
 			}
 		}
+	}
+
+	if (talk == 48) {
+		if (rightThing) talk = 49;
+		else talk = 55;
+	}
+	if (talk == 53) {
+		painter.setPen(QColor(0, 0, 250));
+		painter.drawText(300, 280, get[9]);
+		Player::getInstance()->addBagThing(4);
 	}
 	first = false; 
 }
@@ -143,18 +152,35 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 
 		if (playerX < 430) first = true;
 
-		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))
-			talk = q[talk].l;
-
-		if (q[talk].diff) {
-			if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxFuck = false; }
-			if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxFuck = false; }
+		if (talk == 53) {
+			if (f[8] && f[20] && f[26] && f[44] && f[52]) {
+				GainAchieve *Joker = new  GainAchieve(7, this);
+				Joker->show();
+			}
+			else {
+				GainAchieve *Joker = new  GainAchieve(8, this);
+				Joker->show();
+			}
 		}
+		if (talk == 55) {
+			GainAchieve *Joker = new  GainAchieve(8, this);
+			Joker->show();
+		}
+
+		if (playerX >= 440) {
+			if ((e->key() == Qt::Key_Space) && (!q[talk].diff))	talk = q[talk].l;
+			if (q[talk].diff) {
+				if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxFuck = false; }
+				if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxFuck = false; }
+			}
+		}
+
+		if (talk==46) GameWorld::getInstance()->beginSmellCollect();
 
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
 	}
-
+	
 	update();
 }
 
@@ -171,17 +197,33 @@ bool SceneForest::underTheTree(int n) {
 	return false;
 }
 
+void SceneForest::gameOver() {
+	gameover = true;
+}
+
+void SceneForest::bagThingClick(int n) {
+	if (n == 5) rightThing = true;
+}
+
+void SceneForest::changeState(bool a, bool b, bool c, bool d) {
+	statement[1] = a;
+	statement[2] = b;
+	statement[3] = c;
+	statement[4] = d;
+}
 
 void SceneForest::loadPlot() {
 
 	begin = QString::fromLocal8Bit("这就是森林吗....为什么会有花....不是早就灭绝了吗");
-	get[0] = QString::fromLocal8Bit("获得物品 [病历单]");
-	get[1] = QString::fromLocal8Bit("获得物品  [假发]");
-	get[2] = QString::fromLocal8Bit("获得物品  [女装]");
-	get[3] = QString::fromLocal8Bit("获得物品 [程序之书]");
-	get[4] = QString::fromLocal8Bit("获得物品  [啤酒]");
-	get[5] = QString::fromLocal8Bit("获得物品 [巧克力]");
-	get[6] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+
+	get[0] = QString::fromLocal8Bit("获得物品 [过期罐头]");
+	get[1] = QString::fromLocal8Bit("获得物品  [啤酒]");
+	get[2] = QString::fromLocal8Bit("获得物品 [巧克力]");
+	get[3] = QString::fromLocal8Bit("获得物品 [病历单]");
+	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
+	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
+	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
+	get[9] = QString::fromLocal8Bit("获得特殊物品 [一罐阳光]");
 
 
 	q[0].s = QString::fromLocal8Bit("这里面是花园吗。。。。似乎有点小啊。。。"); q[0].diff = false; q[0].hu = true;
@@ -256,7 +298,7 @@ void SceneForest::loadPlot() {
 	q[41].l = 44; q[44].s= QString::fromLocal8Bit("青年：真是有趣的小朋友，我更喜欢你了。过段时间，我收集完"); q[44].diff = false;  q[44].hu = true;
 	q[45].s= QString::fromLocal8Bit("花死亡的气味，给你送一罐吧。现在一起收集其他的气味吗？"); q[45].diff = false;  q[45].hu = false;
 
-	q[42].l = 46; q[44].l = 46; q[46].s= QString::fromLocal8Bit("青年:终于忙完了。。。收集气味可真是甜蜜的劳累啊。。。可惜，"); q[46].diff = false;  q[46].hu = true;
+	q[42].l = 46; q[44].l = 46; q[46].s= QString::fromLocal8Bit("青年:终于忙完了。收集气味可真是甜蜜的劳累啊...可惜，"); q[46].diff = false;  q[46].hu = true;
 	q[47].s= QString::fromLocal8Bit("能收集到的都是内陆的气味，真想收集到海洋的味道啊"); q[47].diff = false;  q[47].hu = false;
 
 	q[46].l = 48; q[48].s= QString::fromLocal8Bit("我：从背包里找一下吧"); q[48].diff = false;  q[48].hu = false;
@@ -271,10 +313,12 @@ void SceneForest::loadPlot() {
 	q[50].l = 52;  q[52].s= QString::fromLocal8Bit("青年：作为感谢，这个送给你吧。我精心收集来的一罐阳光！"); q[52].diff = false;  q[52].hu = false;
 	q[52].l = 53; q[53].s = QString::fromLocal8Bit("阳光的味道。。。金黄色的。。。沙沙作响的。。。"); q[53].diff = false;  q[53].hu = true;
 	q[54].s= QString::fromLocal8Bit("很好闻的味道啊。。。是这个世界的味道吗"); q[54].diff = false;  q[54].hu = false;
+	q[53].l = 53;
 
 
 	q[55].s = QString::fromLocal8Bit("青年：谢谢你，虽然这不是我想要的，但还是谢谢你，"); q[55].diff = false;  q[55].hu = true;
-	q[56].s= QString::fromLocal8Bit("这些食物作为我的感谢吧"); q[55].diff = false;  q[55].hu = false;
+	q[56].s= QString::fromLocal8Bit("这些食物作为我的感谢吧"); q[56].diff = false;  q[56].hu = false;
+	q[55].l = 55;
 
 }
 

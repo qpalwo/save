@@ -33,6 +33,7 @@ public:
 	void useBagThing(int);
 	void save(QString);
 	void load(QString);
+	void newBag();
 
 private:
 	BagThing m_bagThing[12];
@@ -54,13 +55,14 @@ public:
 	void changeMood(int);
 	BagThing *getBagThing();
 	bool* getMapStaus();
+	int getMyId();
 	void setMapStaus(int);
 	void addBagThing(int);
 	void useBagThing(int);
 	bool* nowStaus();
 	void load();
 	void load(QString path);
-	void newPlayer(QString path, int hard);
+	void newPlayer(QString path, int hard, int id);
 
 signals:
 	void stausChange(bool, bool, bool, bool);
@@ -71,11 +73,10 @@ private:
 	static Player* Instance;
 	Player(QObject *parent = nullptr);
 
-	const int HUNGGRY = 1;
-
 	BackBag backBag;
 	QString m_path;
 	bool m_map[4];
+	int m_id;
 	int m_hard;
 
 	int m_power;

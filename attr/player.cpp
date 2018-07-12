@@ -1,5 +1,6 @@
 #include "player.h"
 #include "gameworld.h"
+#include "UI/UiManager.h"
 
 extern void saveToDisk(QByteArray content, QString path);
 
@@ -25,13 +26,16 @@ void Player::load(QString path) {
 		QJsonObject obj = document.object();
 		m_hard = obj.take("m_hard").toString().toInt();
 		m_power = obj.take("m_power").toString().toInt();
-		m_mood = obj.take("m_mood").toString().toInt();		
+		m_mood = obj.take("m_mood").toString().toInt();	
+		m_id = obj.take("m_id").toString().toInt();
 	}
 	checkStaus();
 	backBag.load(m_path);
 }
 
-void Player::newPlayer(QString path, int hard) {
+void Player::newPlayer(QString path, int hard, int id) {
+	backBag.newBag();
+	m_id = id;
 	m_path = path;
 	m_mood = 100;
 	m_power = 100;
@@ -96,6 +100,7 @@ void Player::addBagThing(int num) {
 
 void Player::useBagThing(int num) {
 	backBag.useBagThing(num);
+	UiManager::getInstance()->useThing(num);
 }
 
 bool* Player::nowStaus() {
@@ -110,7 +115,7 @@ void Player::save() {
 	saves.insert("m_hard", m_hard);
 	saves.insert("m_power", m_power);
 	saves.insert("m_mood", m_mood);
-
+	saves.insert("m_id", m_id);
 	QJsonDocument document;
 	document.setObject(saves);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
@@ -118,8 +123,23 @@ void Player::save() {
 
 }
 
-void Player::load() {
+int Player::getMyId() {
+	return m_id;
+}
 
+void Player::load() {
+	if (m_path.length() > 1) {
+		QString loadPath = m_path + "_user.info";
+		QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(m_path));
+		if (!document.isNull()) {
+			QJsonObject obj = document.object();
+			m_hard = obj.take("m_hard").toString().toInt();
+			m_power = obj.take("m_power").toString().toInt();
+			m_mood = obj.take("m_mood").toString().toInt();
+		}
+		checkStaus();
+		backBag.load(m_path);
+	}
 }
 
 Player::~Player() {
@@ -131,10 +151,7 @@ Player::~Player() {
 
 
 BackBag::BackBag() {
-	/*for (int i = 0; i < 12; i++) {
-		m_bagThing[i].id = i;
-		m_bagThing[i].num = 2;
-	}*/
+
 }
 
 void BackBag::save(QString userPath) {
@@ -168,6 +185,13 @@ void BackBag::load(QString userPath) {
 	}
 }
 
+void BackBag::newBag() {
+	for (int i = 0; i < 12; i++) {
+	m_bagThing[i].id = i;
+	m_bagThing[i].num = 0;
+	}
+}
+
 BagThing BackBag::getBagThing(int thing) {
 	return m_bagThing[thing];
 }
@@ -182,8 +206,10 @@ void BackBag::addBagThing(int thing) {
 }
 
 void BackBag::useBagThing(int thing) {
-	m_bagThing[thing - 1].num--;
-	BackBag::save(savePath);
+	if (m_bagThing[thing - 1].num > 0) {
+		m_bagThing[thing - 1].num--;
+		BackBag::save(savePath);
+	}
 }
 
 BackBag::~BackBag() {
