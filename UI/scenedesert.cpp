@@ -1,5 +1,6 @@
 #include "scenedesert.h"
 #include "ui_scenedesert.h"
+#include "UI/UiManager.h"
 
 
 SceneDesert::SceneDesert(QWidget *parent) :
@@ -56,6 +57,9 @@ void SceneDesert::loadImage() {
 }
 
 void SceneDesert::paintEvent(QPaintEvent * e) {
+
+	if ((talk == 44) || (talk == 34)) tomap = true;
+
 	QPainter painter(this);
 	QPen pen; //»­±Ê
 	pen.setColor(QColor(255, 255, 0));
@@ -139,6 +143,8 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 }
 
 void SceneDesert::keyPressEvent(QKeyEvent *e) {
+	if (tomap) UiManager::getInstance()->fromDesertToMap();
+
 	if (stop) {                         //main player stop
 		switch (e->key()) {
 		case Qt::Key_A: backX += 10;  left = true; break;

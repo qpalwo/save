@@ -92,6 +92,7 @@ private:
 	bool gameover;
 	bool rightThing;
 	bool ifget = false;
+	bool tomap = false;
 };
 
 #endif // SCENESNOW_H

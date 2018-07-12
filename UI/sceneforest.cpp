@@ -1,5 +1,6 @@
 #include "sceneforest.h"
 #include "ui_sceneforest.h"
+#include "UI/UiManager.h"
 
 SceneForest::SceneForest(QWidget *parent) :
 	QWidget(parent),
@@ -133,12 +134,14 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		if (!ifget) {
 			Player::getInstance()->addBagThing(4);
 			ifget = true;
+
 		}
 	}
 	first = false; 
 }
 
 void SceneForest::keyPressEvent(QKeyEvent *e) {
+	if (tomap) UiManager::getInstance()->fromForestToMap();
 	if (stop) {                         //main player stop
 		switch (e->key()) {
 		case Qt::Key_A: backX += 10;  left = true; break;
@@ -178,10 +181,12 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 				GainAchieve *Joker = new  GainAchieve(8, this);
 				Joker->show();
 			}
+			tomap = true;
 		}
 		if (talk == 55) {
 			GainAchieve *Joker = new  GainAchieve(8, this);
 			Joker->show();
+			tomap = true;
 		}
 
 		if (playerX >= 440) {
