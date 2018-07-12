@@ -26,18 +26,10 @@ public slots:
 
 protected:
     void paintEvent(QPaintEvent *event);
-    void initWord(int flag);
-    void keyPressEvent(QKeyEvent *e);
 
 private:
     Ui::ending *ui;
-
     QImage backGround;
-	OpenPageButton *back;
-
-    QString p[11];
-    int space;
-
-};
+	OpenPageButton *back;};
 
 #endif // ENDING_H

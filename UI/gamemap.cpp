@@ -29,6 +29,14 @@ GameMap::GameMap(bool is, QWidget *parent) :
     setMouseTracking(true);
 }
 
+void GameMap::checkMap() {
+	if (!*m_map) return;
+	if (!*(m_map + 1)) return;
+	if (!*(m_map + 2)) return;
+	if (!*(m_map + 3)) return;
+
+}
+
 void GameMap::loadImage(){
     initial.load(":/GameMap/map_initial.png");
     desert.load(":/GameMap/map_desert.png");
