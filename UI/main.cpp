@@ -4,6 +4,7 @@
 #include "UiManager.h"
 #include "attr/gameworld.h"
 #include "attr/player.h"
+#include "UI/ending.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,5 +14,7 @@ int main(int argc, char *argv[])
 
 	UiManager *uiManager = UiManager::getInstance();
 	uiManager->init();
+	//ending *e = new ending(1);
+	//e->show();
     return a.exec();
 }
