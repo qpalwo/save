@@ -102,22 +102,20 @@ void GameMap::mouseReleaseEvent(QMouseEvent *event){
 
 		switch (id) {
 		case 1:
-			if(!*m_map)
+			if(*m_map)
 				UiManager::getInstance()->fromMapToDesert();
 			break;
 		case 2:
-			if(!*(m_map + 1))
+			if(*(m_map + 1))
 				UiManager::getInstance()->fromMapToForest();
 			break;
 		case 3:
-			if (!*(m_map + 2))
+			if (*(m_map + 2))
 				UiManager::getInstance()->fromMapToRuins();
 			break;
 		case 4:
-			if (!*(m_map + 3))
+			if (*(m_map + 3))
 				UiManager::getInstance()->fromMapToSnow();
-			break;
-		default:
 			break;
 		}
 	}

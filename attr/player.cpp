@@ -134,8 +134,6 @@ void Player::save() {
 	document.setObject(saves);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytearr, savePath);
-	//saveToDisk(bytearr, savePath);
-
 }
 
 int Player::getMyId() {
@@ -145,12 +143,12 @@ int Player::getMyId() {
 void Player::load() {
 	if (m_path.length() > 1) {
 		QString loadPath = m_path + "_user.info";
-		QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(m_path));
+		QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(loadPath));
 		if (!document.isNull()) {
 			QJsonObject obj = document.object();
-			m_hard = obj.take("m_hard").toString().toInt();
-			m_power = obj.take("m_power").toString().toInt();
-			m_mood = obj.take("m_mood").toString().toInt();
+			m_hard = obj.take("m_hard").toInt();
+			m_power = obj.take("m_power").toInt();
+			m_mood = obj.take("m_mood").toInt();
 		}
 		checkStaus();
 		backBag.load(m_path);
@@ -183,14 +181,11 @@ void BackBag::save(QString userPath) {
 	document.setArray(arr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytearr, savePath);
-	//saveToDisk(bytearr, savePath);
-
-
 }
 
 void BackBag::load(QString userPath) {
 	QString loadPath = userPath + "_bag.info";
-	savePath = loadPath;
+	savePath = userPath;
 	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(loadPath));
 	if (!document.isNull()) {
 		QJsonArray jsonArr = document.array();
@@ -224,8 +219,8 @@ void BackBag::addBagThing(int thing) {
 }
 
 void BackBag::useBagThing(int thing) {
-	if (m_bagThing[thing].num > 0) {
-		m_bagThing[thing].num--;
+	if (m_bagThing[thing - 1].num > 0) {
+		m_bagThing[thing - 1].num--;
 		BackBag::save(savePath);
 	}
 }

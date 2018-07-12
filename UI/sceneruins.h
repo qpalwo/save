@@ -72,6 +72,7 @@ private:
 	QMovie* color;
 	QMovie *startMovie;
 	QLabel *startLabel;
+	QTimer *traffic = NULL;
 
 	bool underDoor(int n);
     void loadImage();

@@ -40,7 +40,6 @@ public:
 	static GameWorld * getInstance();
 	void addAchieve(int);
 	void quitGame();
-	void newPlayer(int, int);
 	void loadPlayer(int);
 
 	void setGameHard(int);

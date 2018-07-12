@@ -38,9 +38,6 @@ public:
 private:
 	BagThing m_bagThing[12];
 	QString savePath;
-
-	
-
 };
 
 class Player : public QObject
@@ -63,6 +60,7 @@ public:
 	void load();
 	void load(QString path);
 	void newPlayer(QString path, int hard, int id);
+	void save();
 
 signals:
 	void stausChange(bool, bool, bool, bool);
@@ -84,7 +82,7 @@ private:
 
 	bool m_staus[4] = {false};
 
-	void save();
+	
 };
 
 

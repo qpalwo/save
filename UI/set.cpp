@@ -1,6 +1,6 @@
 #include "set.h"
 #include "ui_set.h"
-
+#include "menuWidget.h"
 set::set(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::set)

@@ -120,11 +120,11 @@ void BurnBook::determineHard() {
 	burnedBook = 0;
 	switch (gameHard) {
 	case 1:
-		fireSize = 150;
+		fireSize = 110;
 		nowNeed = 5;
 		break;
 	case 2:
-		fireSize = 130;
+		fireSize = 110;
 		nowNeed = 6;
 		break;
 	case 3:

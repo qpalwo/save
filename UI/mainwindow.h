@@ -84,6 +84,7 @@ private:
     QMediaPlayer *bgm;//add bgm
 
     QCursor *myCursor;//add cursor
+	QTimer *mainTimer = NULL;
 
 	OpenPageButton *open = NULL;
 	OpenPageButton *b_continue = NULL;

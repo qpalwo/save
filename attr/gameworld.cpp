@@ -39,20 +39,13 @@ QByteArray loadFromDisk(QString path) {
 
 void GameWorld::setGameHard(int hard) {
 	this->gameHard = hard;
-	newPlayer(hard, savesNum);
-	savesNum++;
-	if (savesNum >= 6) {
-		savesNum = 0;
-	}
+	savesPath[savesNum] = "userInfo/" + QTime::currentTime().toString("yyyy-MM-dd-hh-mm-ss-zzz");
+	Player::getInstance()->newPlayer(savesPath[savesNum], gameHard, savesNum);
+	savesNum++;  
 }
 
 int GameWorld::getGameHard() {
 	return gameHard;
-}
-
-void GameWorld::newPlayer(int hard, int id) {
-	savesPath[id] = "userInfo/" + QTime::currentTime().toString("yyyy-MM-dd-hh-mm-ss-zzz");
-	Player::getInstance()->newPlayer(savesPath[id], hard, id);
 }
 
 void GameWorld::loadPlayer(int id) {
@@ -88,7 +81,7 @@ void GameWorld::save() {
 	document.setObject(obj);
 	QByteArray bytarr = document.toJson(QJsonDocument::Compact);
 	QtConcurrent::run(saveToDisk, bytarr, QString("userInfo/gameworld.info"));
-	//saveToDisk(bytarr, QString("userInfo/gameworld.info"));
+	Player::getInstance()->save();
 }
 
 void GameWorld::load() {
@@ -233,8 +226,7 @@ void AchieveData::save() {
 	QJsonDocument document;
 	document.setArray(achieveArr);
 	QByteArray bytearr = document.toJson(QJsonDocument::Compact);
-	//QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
-	saveToDisk(bytearr, QString("userInfo/achieve.info"));
+	QtConcurrent::run(saveToDisk, bytearr, QString("userInfo/achieve.info"));
 }
 
 

@@ -11,7 +11,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	startMovie = new QMovie(":/ruins/scene/tower.gif");
 	startLabel = new QLabel(this);
 	startLabel->setMovie(startMovie);
-	QTimer::singleShot(4000, this, SLOT(stopStratMovie()));
+	QTimer::singleShot(3700, this, SLOT(stopStratMovie()));
 	startMovie->start();
 	startLabel->setGeometry(0, 0, 960, 720);
 
@@ -52,6 +52,8 @@ SceneRuins::SceneRuins(QWidget *parent) :
 void SceneRuins::stopStratMovie() {
 	startMovie->stop();
 	startLabel->close();
+	startMovie->deleteLater();
+	startLabel->deleteLater();
 }
 
 void SceneRuins::loadImage()
@@ -78,9 +80,9 @@ void SceneRuins::reFresh() {
 
 void SceneRuins::initTimer() {
 	if (!isPlay) {
-		QTimer *timer = new QTimer(this);
-		connect(timer, SIGNAL(timeout()), this, SLOT(reFresh()));
-		timer->start(150);
+		traffic = new QTimer(this);
+		connect(traffic, SIGNAL(timeout()), this, SLOT(reFresh()));
+		traffic->start(150);
 		player->stop();
 	}
 }
@@ -392,4 +394,5 @@ void SceneRuins::loadPlot() {
 SceneRuins::~SceneRuins()
 {
     delete ui;
+	traffic->deleteLater();
 }

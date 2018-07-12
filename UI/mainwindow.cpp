@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow) {
 	ui->setupUi(this);
 	setWindowFlag(Qt::FramelessWindowHint);
-	//setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 	sceneType = qrand() % 4;
 	initTimer();
@@ -268,7 +267,7 @@ void MainWindow::onBeginClicked() {
 }
 
 void MainWindow::onEasyClicked() {
-	GameWorld::getInstance()->setGameHard(1);
+	GameWorld::getInstance()->setGameHard(1);   //by the way, new player
 	GameWorld::getInstance()->fromMainToBegining();
 }
 
@@ -292,9 +291,9 @@ void MainWindow::initWeather() {
 	QJsonDocument document = QJsonDocument::fromJson(loadFromDisk(QString("userInfo/weather.info")));
 	if (!document.isNull()) {
 		QJsonObject obj = document.object();
-		int time = obj.take("time").toString().toInt();
+		int time = obj.take("time").toInt();
 		if (_ABS(time - hour) <= 2) {
-			weather = obj.take("weather").toString().toInt();
+			weather = obj.take("weather").toInt();
 			loadWeatherImage();
 			qDebug() << "read weather cache successful  " << obj.take("string").toString();
 			return;
@@ -378,9 +377,9 @@ void MainWindow::initSun() {
 }
 
 void MainWindow::initTimer() {
-	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(moveMou()));
-	timer->start(90);
+	mainTimer = new QTimer(this);
+	connect(mainTimer, SIGNAL(timeout()), this, SLOT(moveMou()));
+	mainTimer->start(100);
 }
 
 MainWindow::~MainWindow() {
@@ -395,4 +394,8 @@ MainWindow::~MainWindow() {
 	delete easy;
 	delete mid;
 	delete hard;
+	mainTimer->stop();
+	verticalTimer->stop();
+	verticalTimer->deleteLater();
+	mainTimer->deleteLater();
 }
