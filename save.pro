@@ -135,7 +135,7 @@ RESOURCES += \
     res/map/gamemap.qrc \
     res/game/gameres2.qrc \
     res/mouse/mouse.qrc \
-    res/scene/ending.qrc
+    res/ending/ending.qrc
 
 DISTFILES += \
     res/people/uncle.png \

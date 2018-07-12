@@ -47,7 +47,7 @@ private slots:
     void onBackClicked();
 
 signals:
-    sendVolume(int x);
+    void sendVolume(int x);
 
 };
 
