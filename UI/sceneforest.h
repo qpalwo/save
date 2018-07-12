@@ -63,6 +63,7 @@ private:
 	QImage house_closed;
 	QImage house_open;
 	QImage illustrate;
+	QImage getI[10];
 
 	QPoint mouse;
 	QString record_1;

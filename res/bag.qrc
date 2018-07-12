@@ -24,5 +24,12 @@
         <file>prop/10_explain.png</file>
         <file>prop/11_explain.png</file>
         <file>prop/12_explain.png</file>
+        <file>prop/6_confirm.png</file>
+        <file>prop/7_confirm.png</file>
+        <file>prop/8_confirm.png</file>
+        <file>prop/9_confirm.png</file>
+        <file>prop/10_confirm.png</file>
+        <file>prop/11_confirm.png</file>
+        <file>prop/12_confirm.png</file>
     </qresource>
 </RCC>

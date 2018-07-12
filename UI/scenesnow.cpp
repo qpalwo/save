@@ -37,10 +37,8 @@ SceneSnow::SceneSnow(QWidget *parent) :
 	//bgm->setVolume(v);//set volume
 	//bgm->play();//play music
 
-
 	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
 	this->setCursor(*myCursor);//set cursor
-
 }
 
 void SceneSnow::loadImage()
@@ -48,10 +46,19 @@ void SceneSnow::loadImage()
     backGround.load(":/snow/scene/snow_2.png");
     earth.load(":/snow/scene/snow_1.png");
 	illustrate.load(":/ruins/scene/illustrate_snow.png");
+
+	getI[0].load(":/bag/prop/6_confirm.png");
+	getI[1].load(":/bag/prop/7_confirm.png");
+	getI[2].load(":/bag/prop/8_confirm.png");
+	getI[3].load(":/bag/prop/9_confirm.png");
+	getI[4].load(":/bag/prop/10_confirm.png");
+	getI[5].load(":/bag/prop/11_confirm.png");
+	getI[6].load(":/bag/prop/12_confirm.png");
+
     player = new QMovie(":/snow/people/snow_right.gif");
     player_left = new QMovie(":/snow/people/snow_left.gif");
 	girl.load(":/snow/people/yellow.png");
-	conver.load(":/conver/convar/convar.png");
+	conver.load(":/conver/convar/convar_snow.png");
     player->start();
     player_left->start();
 }
@@ -76,25 +83,19 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 
-    painter.drawImage(backX, backY, backGround);
-
     if (playerX == 430)   stop = true;
 
-    if (left)
-    {
+	painter.drawImage(backX, backY, backGround);
+    if (left)  {
         if ((waitTime>0) && (waitTime <= 30))
 			painter.drawPixmap(playerX, 235 - waitTime * 6, 100, 200, player_left->currentPixmap());
-		else 
-        painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
-    }
-    else
-    {
+		else   painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
+    } else  {
 		if ((waitTime>0) && (waitTime <= 30))
 			painter.drawPixmap(playerX, 235-waitTime * 6, 100, 200, player->currentPixmap());
 		else  painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
     }
-    //探索
-
+    //探索&player
     painter.drawImage(backX, backY, earth);
 
 	if (waitTime > 30) {
@@ -102,7 +103,8 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 			ti = qrand() % 7;
 			Player::getInstance()->addBagThing(ti + 6);
 		}
-		painter.drawText(380, 280, get[ti]);
+		//painter.drawText(380, 280, get[ti]);
+		painter.drawImage(290, 240, getI[ti]);
 	}
 
 	if (first) {
@@ -112,24 +114,29 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 
 	if ((backX>=-2100)&&(backX<-1500))  painter.drawText(140, 550, begin2);
 
+	if (talk == 34) {
+		if (rightThing) talk = 35;
+		else  talk = 39;
+	}
+
 	painter.setPen(QColor(250, 250, 250));
 	if (playerX >= 440) {		
 		painter.drawImage(800, 250, girl);
 		painter.drawImage(0, 0, conver);
 		if (zxLock) {
-			painter.drawText(280, 612, record_1);
-			painter.drawText(280, 666, record_2);
+			painter.drawText(185, 560, record_1);
+			painter.drawText(185, 610, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);   f[talk] = true;
+			painter.drawText(185, 560, q[talk].s);   f[talk] = true;
 			if (q[talk].hu) {
-				painter.drawText(280, 666, q[talk + 1].s);
+				painter.drawText(185, 610, q[talk + 1].s);
 			}
 			if (q[talk].diff) {
 				record_1 = q[talk].s;
 				record_2 = q[talk + 1].s;
 				talk++;
-				painter.drawText(280, 666, q[talk].s);
+				painter.drawText(185, 610, q[talk].s);
 				zxLock = true;
 			}
 		}
@@ -144,10 +151,6 @@ void SceneSnow::paintEvent(QPaintEvent *event)
 		}
 	}
 
-	if (talk == 33) {
-		if (rightThing) talk = 35;
-		else  talk = 39;
-	}
 	first = false;
 }
 
@@ -155,28 +158,13 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
 {
 	if (tomap) UiManager::getInstance()->fromSnowToMap();
 
-    if (stop)
-    {
-        switch (e->key())
-        {
-        case Qt::Key_A:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_Left:
-            backX += 10;
-            left = true;
-            break;
-        case Qt::Key_D:
-            backX -= 10;
-            left = false;
-            break;
-        case Qt::Key_Right:
-            backX -= 10;
-            left = false;
-            break;
-        default:
-            break;
+    if (stop)  {
+        switch (e->key())  {
+        case Qt::Key_A:  backX += 10;   left = true;    break;
+        case Qt::Key_Left:   backX += 10;   left = true;  break;
+        case Qt::Key_D:    backX -= 10;     left = false;   break;
+        case Qt::Key_Right:  backX -= 10;  left = false;  break;
+        default:    break;
         }
         if (backX < BDL)
         {
@@ -223,7 +211,6 @@ void SceneSnow::keyPressEvent(QKeyEvent* e)
 		if ((e->key() == Qt::Key_W) || (e->key() == Qt::Key_Up)) {
 			if (underTheSunshine(1))  waitTime++;
 		} else waitTime = 0;
-
 
 		if ((e->key() == Qt::Key_Space) && (!q[talk].diff))  talk = q[talk].l;
 		if (q[talk].diff) {
@@ -336,7 +323,7 @@ void SceneSnow::loadPlot() {
 
 	q[32].l = 33;  q[33].s = QString::fromLocal8Bit("少女：对，我们现在的阳光都已经驳杂了。听说之前的世界"); q[33].diff = false; q[33].hu = true;
 	q[34].s = QString::fromLocal8Bit("有着纯净的阳光，温暖的，干净的阳光，可惜没能感受。"); q[34].diff = false; q[34].hu = false;
-	q[33].l = 33;
+	q[33].l = 34;  q[34].l = 34;
 
 	q[35].s= QString::fromLocal8Bit("少女：这是。。。阳光的味道吗。。很柔软的触感，"); q[35].diff = false; q[35].hu = true;
 	q[36].s = QString::fromLocal8Bit("像书籍泛黄的内页。谢谢你，这个送给你吧"); q[36].diff = false; q[36].hu = false;

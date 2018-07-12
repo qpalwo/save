@@ -44,7 +44,6 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	//bgm->setVolume(v);//set volume
 	//bgm->play();//play music
 
-
 	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
 	this->setCursor(*myCursor);//set cursor
 }
@@ -63,12 +62,20 @@ void SceneRuins::loadImage()
 	illustrate.load(":/ruins/scene/illustrate_ruins.png");
 	sky.load(":/ruins/scene/ruins_back.png");
 	tower.load(":/ruins/scene/tower.png");
+	
+	getI[0].load(":/bag/prop/6_confirm.png");
+	getI[1].load(":/bag/prop/7_confirm.png");
+	getI[2].load(":/bag/prop/8_confirm.png");
+	getI[3].load(":/bag/prop/9_confirm.png");
+	getI[4].load(":/bag/prop/10_confirm.png");
+	getI[5].load(":/bag/prop/11_confirm.png");
+	getI[6].load(":/bag/prop/12_confirm.png");
 
     player = new QMovie(":/player/main.gif");
     player_left = new QMovie(":/player/main_left.gif");
 	color = new QMovie(":/ruins/scene/color.gif");
 	child.load(":/ruins/people/pink_left.png");
-	conver.load(":/conver/convar/convar.png");
+	conver.load(":/conver/convar/convar_ruins.png");
     player->start();
     player_left->start();
 	color->start();
@@ -105,12 +112,10 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 	
+   if (playerX == 430)   stop = true;
 
 	painter.drawImage(0, 0, sky);
 	painter.drawImage(backX, backY , backGround);
-	
-
-    if (playerX == 430)   stop = true;
 
     if (left)  {
         painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
@@ -124,7 +129,8 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 			ti = qrand() % 7; 
 			Player::getInstance()->addBagThing(ti + 6);
 		}
-		painter.drawText(380, 280, get[ti]);
+		//painter.drawText(380, 280, get[ti]);
+		painter.drawImage(290, 240, getI[ti]);
 	}
 
     painter.drawImage(backX, backY, earth);
@@ -134,25 +140,25 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	}
 
 	painter.setPen(QColor(250, 250, 250));
-	if (playerX >= 440) {
+	if (playerX >= 450) {
 		painter.drawImage(0, 0, tower);
 		painter.drawImage(750, 25, child);
 		painter.drawImage(0, 0, conver);
 		
 		if (zxLock) {
-			painter.drawText(280, 612, record_1);
-			painter.drawText(280, 666, record_2);
+			painter.drawText(185, 560, record_1);
+			painter.drawText(185, 610, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);    f[talk] = true;
+			painter.drawText(185, 560, q[talk].s);    f[talk] = true;
 			if (q[talk].hu) {
-				painter.drawText(280, 666, q[talk + 1].s);   
+				painter.drawText(185, 610, q[talk + 1].s);   
 			}
 			if (q[talk].diff) {
 				record_1 = q[talk].s;   
 				record_2 = q[talk + 1].s;
 				talk++;
-				painter.drawText(280, 666, q[talk].s);    
+				painter.drawText(185, 610, q[talk].s);    
 				zxLock = true;
 			}
 		}
@@ -161,8 +167,8 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 	if (talk == 28) {  
 		if (f[4] && f[14]) {
 			if (!space1){
-				painter.drawText(280, 612, q[40].s);
-				painter.drawText(280, 666, q[41].s);
+				painter.drawText(185, 560, q[40].s);
+				painter.drawText(185, 610, q[41].s);
 			}
 			else {
 			
@@ -175,7 +181,7 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 
 				painter.drawText(160, 520, Ending1);
 				painter.drawText(100, 565, Ending2);
-				painter.setPen(QColor(0, 250, 250));
+				painter.setPen(QColor(0, 200, 200));
 				painter.drawText(350, 610, get[9]);
 				if (!ifget) {
 					Player::getInstance()->addBagThing(2);
@@ -191,19 +197,18 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 		}
 		else {
 			if (!space1) 
-				painter.drawText(280, 612, q[30].s);
+				painter.drawText(185, 560, q[30].s);
 			else {
 				if (!space2) 
-					painter.drawText(280, 612, q[31].s);
+					painter.drawText(185, 560, q[31].s);
 				else {
-					painter.drawText(280, 612, q[32].s);
-					painter.drawText(280, 666, q[33].s);
+					painter.drawText(185, 560, q[32].s);
+					painter.drawText(185, 610, q[33].s);
 					tomap = true;
 				}
 			}
 		}
 	}
-
 	first = false;
 }
 
@@ -222,11 +227,7 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
         }
 
         if (backX < BDL) {  backX += 10; playerX += 10;  stop = false;  }
-        if (backX > BDR)  {
-            backX -= 10;
-            stop = false;
-            playerX -= 10;
-        }
+        if (backX > BDR)  {  backX -= 10;  playerX -= 10; stop = false;     }
 
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
 			if (underDoor(2))	waitTime++;
@@ -235,23 +236,11 @@ void SceneRuins::keyPressEvent(QKeyEvent* e)
     else {
         switch (e->key())
         {
-        case Qt::Key_A:
-            playerX -= 10;
-            left = true;
-            break;
-        case Qt::Key_Left:
-            playerX -= 10;
-            left = true;
-            break;
-        case Qt::Key_D:
-            playerX += 10;
-            left = false;
-            break;
-        case Qt::Key_Right:
-            playerX += 10;
-            left = false; break;
-        default:
-            break;
+        case Qt::Key_A:     playerX -= 10;    left = true;    break;
+        case Qt::Key_Left:   playerX -= 10;   left = true;   break;
+        case Qt::Key_D:    playerX += 10;    left = false;   break;
+        case Qt::Key_Right:   playerX += 10;  left = false; break;
+        default:   break;
         }
         if (playerX < 0)  playerX += 10;
         if (playerX > 860)   playerX -= 10;
@@ -286,6 +275,7 @@ bool SceneRuins::underDoor(int n) {
 		if ((playerX >= 390) && (playerX <= 420)) return true;
 	}
 	if (n == 2) {
+		if ((backX >= -30) && (backX <= -10))  return true;
 		if ((backX >= -500) && (backX <= -460))  return true;
 		if ((backX >= -1340) && (backX <= -1300))  return true;
 		if ((backX >= -2040) && (backX <= -2000))  return true;
@@ -327,7 +317,7 @@ void SceneRuins::loadPlot() {
 
 	q[0].l = 1; q[1].s = QString::fromLocal8Bit("（看见一个小孩爬在塔上，快要掉下来）"); q[1].diff = false; q[1].hu = false;
 
-	q[1].l = 2; q[2].s = QString::fromLocal8Bit("z.冲过去接住他（要求体力值大于**）"); q[2].diff = true; q[2].hu = false;
+	q[1].l = 2; q[2].s = QString::fromLocal8Bit("z.冲过去接住他（要求体力值大于80）"); q[2].diff = true; q[2].hu = false;
     q[3].s = QString::fromLocal8Bit("x.不冲过去"); q[3].diff = true; q[3].hu = false;
 
 	q[2].l = 4; q[4].s = QString::fromLocal8Bit("呼。。。好累啊"); q[4].diff = false; q[4].hu = false;

@@ -53,6 +53,7 @@ private:
 	QImage conver;
 	QImage girl;
 	QImage illustrate;
+	QImage getI[10];
 
 	QString record_1;
 	QString record_2;

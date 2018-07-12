@@ -34,11 +34,11 @@ SceneDesert::SceneDesert(QWidget *parent) :
 	setMouseTracking(true);     //牛逼    不用按下鼠标就能监控其位置
 
 	v = GameWorld::getInstance()->getVolume();//get volume
+
 	bgm = new QMediaPlayer();//new
 	//bgm->setMedia(QUrl("qrc://res/music/beginning_bgm.mp3"));//music set
 	//bgm->setVolume(v);//set volume
 	//bgm->play();//play music
-
 
 	myCursor = new QCursor(QPixmap(":/mouse/pointer_3.png"));//new cursor
 	this->setCursor(*myCursor);//set cursor
@@ -49,6 +49,15 @@ void SceneDesert::loadImage() {
 	earth.load(":/desertB/scene/desert_2.png");
 	boat.load(":/desertB/scene/desert_boat.png");
 	illustrate.load(":/ruins/scene/illustrate_desert.png");
+
+	getI[0].load(":/bag/prop/6_confirm.png");
+	getI[1].load(":/bag/prop/7_confirm.png");
+	getI[2].load(":/bag/prop/8_confirm.png");
+	getI[3].load(":/bag/prop/9_confirm.png");
+	getI[4].load(":/bag/prop/10_confirm.png");
+	getI[5].load(":/bag/prop/11_confirm.png");
+	getI[6].load(":/bag/prop/12_confirm.png");
+
 	player = new QMovie(":/player/main.gif");
 	player_left = new QMovie(":/player/main_left.gif");
 	uncle.load(":/uncle.png");
@@ -96,7 +105,8 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 			ti = qrand() % 7;
 			Player::getInstance()->addBagThing(ti + 6);
 		}
-		painter.drawText(380, 280, get[ti]);
+		//painter.drawText(380, 280, get[ti]);
+		painter.drawImage(290, 240, getI[ti]);
 	}
 
 	if (first) { 
@@ -105,26 +115,26 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 		painter.drawImage(0, 430, illustrate);
 	 }
 
-		if (talk == 28) 
-			if (zhu) talk = 40; else talk = 30;
+	if (talk == 28) 
+		if (zhu) talk = 40; else talk = 30;
 
 	if (playerX >= 440) {
 		painter.drawImage(850, 260, uncle);
 		painter.drawImage(0, 0, conver);
 		if (zxFuck) {
-			painter.drawText(280, 612, record_1);
-			painter.drawText(280, 666, record_2);
+			painter.drawText(185,560, record_1);
+			painter.drawText(185,610, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);  f[talk] = true;
+			painter.drawText(185, 560, q[talk].s);  f[talk] = true;
 			if (q[talk].hu) {
-				painter.drawText(280, 666, q[talk + 1].s);
+				painter.drawText(185, 610, q[talk + 1].s);
 			}
 			if (q[talk].diff) {
 				record_1 = q[talk].s;
 				record_2 = q[talk + 1].s;
 				talk++;
-				painter.drawText(280, 666, q[talk].s);
+				painter.drawText(185, 610, q[talk].s);
 				zxFuck = true;
 			}
 		}
@@ -132,7 +142,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 	if (talk == 42) {
 		painter.setPen(QColor(0, 255, 250));
-		painter.drawText(360, 280, get[9]);
+		painter.drawText(340, 200, get[9]);
 		if (!ifget) {
 			Player::getInstance()->addBagThing(5);
 			ifget = true;
@@ -191,7 +201,6 @@ void SceneDesert::keyPressEvent(QKeyEvent *e) {
 
 		if ((talk == 41)||(talk==32))  GameWorld::getInstance()->beginAvoidStorm();
 	
-
 		if (playerX < 0) { playerX += 10; }
 		if (playerX > 860) { playerX -= 10; }
 	}

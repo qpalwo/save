@@ -59,6 +59,7 @@ private:
 	QImage child;
 	QImage illustrate;
 	QImage tower;
+	QImage getI[10];
 
 	QString record_1;
 	QString record_2;

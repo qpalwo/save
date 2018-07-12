@@ -45,13 +45,21 @@ void SceneForest::loadImage() {
 	earth.load(":/scene/forest_2.png");
 	illustrate.load(":/ruins/scene/illustrate_forest.png");
 
+	getI[0].load(":/bag/prop/6_confirm.png");
+	getI[1].load(":/bag/prop/7_confirm.png");
+	getI[2].load(":/bag/prop/8_confirm.png");
+	getI[3].load(":/bag/prop/9_confirm.png");
+	getI[4].load(":/bag/prop/10_confirm.png");
+	getI[5].load(":/bag/prop/11_confirm.png");
+	getI[6].load(":/bag/prop/12_confirm.png");
+
 	player = new QMovie(":/people/forest_right.gif");
 	player_left = new QMovie(":/people/forest_left.gif");
 	uncle.load(":/people/young_right.png");
 	house_closed.load(":/scene/forest_house_close.png");
 	house_open.load(":/scene/forest_house_open.png");
 
-	conver.load(":/conver/convar/convar.png");
+	conver.load(":/conver/convar/convar_forest.png");
 	player->start();
 	player_left->start();
 }
@@ -72,10 +80,9 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 	font.setLetterSpacing(QFont::AbsoluteSpacing, 0);	// 设置字符间距
 	painter.setFont(font);	// 使用字体
 
-	painter.drawImage(backX, backY, backGround);
-
 	if (playerX == 430)  stop = true;
 
+    painter.drawImage(backX, backY, backGround);
 	if (left) painter.drawPixmap(playerX, 235, 100, 200, player_left->currentPixmap());
 	else painter.drawPixmap(playerX, 235, 100, 200, player->currentPixmap());
 	painter.drawImage(backX, backY, earth);
@@ -88,7 +95,8 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 			ti = qrand() % 7;
 			Player::getInstance()->addBagThing(ti + 6);
 		}
-		painter.drawText(380, 280, get[ti]);
+		//painter.drawText(380, 280, get[ti]);
+		painter.drawImage(290, 240, getI[ti]);
 	}
 
 	if (first) {
@@ -105,33 +113,33 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		painter.drawImage(580, 240, uncle); 
 	}	else	if (talk>=12) painter.drawImage(400, 240, uncle);
 
-	if (playerX >= 440) {
+	if (talk == 60) {
+		if (rightThing) talk = 49;
+		else talk = 55;
+	}
+
+	if (playerX >= 450) {
 
 		painter.drawImage(BDL, -10, house_closed);
 
 		painter.drawImage(0, 0, conver);
 		if (zxFuck) {
-			painter.drawText(280, 612, record_1); 
-	    	painter.drawText(280, 666, record_2);
+			painter.drawText(185, 560, record_1); 
+	    	painter.drawText(185, 610, record_2);
 		}
 		else {
-			painter.drawText(280, 612, q[talk].s);        f[talk] = true;
+			painter.drawText(185, 560, q[talk].s);        f[talk] = true;
 			if (q[talk].hu) {
-				painter.drawText(280, 666, q[talk + 1].s);
+				painter.drawText(185, 610, q[talk + 1].s);
 			}
 			if (q[talk].diff) {
 				record_1 = q[talk].s; 
 				record_2 = q[talk + 1].s;
 				talk++;
-				painter.drawText(280, 666, q[talk].s);
+				painter.drawText(185, 610, q[talk].s);
 				zxFuck = true;
 			}
 		}
-	}
-
-	if ((talk == 48)&&(bug)) {
-		if (rightThing) talk = 49;
-		else talk = 55;
 	}
 
 	if (talk == 53) {
@@ -146,7 +154,6 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 }
 
 void SceneForest::keyPressEvent(QKeyEvent *e) {
-	if (talk == 48) bug = true;
 
 	if (tomap) UiManager::getInstance()->fromForestToMap();
 
@@ -173,6 +180,8 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 		case Qt::Key_D: playerX += 10; left = false; break;
 		case Qt::Key_Right: playerX += 10; left = false; break;
 		}
+		if (playerX < 0) { playerX += 10; }
+		if (playerX > 860) { playerX -= 10; }
 
 		if ((e->key() == Qt::Key_S) || (e->key() == Qt::Key_Down)) {
 			if (underTheTree(1))	waitTime++;
@@ -201,16 +210,12 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 			if ((e->key() == Qt::Key_Space) && (!q[talk].diff))	talk = q[talk].l;
 			if (q[talk].diff) {
 				if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxFuck = false; }
-				if (e->key() == Qt::Key_X) { talk = q[talk].l;  zxFuck = false; }
+				if (e->key() == Qt::Key_X) { talk = q[talk].l;   zxFuck = false; }
 			}
 		}
 
 		if (talk==46) GameWorld::getInstance()->beginSmellCollect();
-
-		if (playerX < 0) { playerX += 10; }
-		if (playerX > 860) { playerX -= 10; }
 	}
-	
 	update();
 }
 
@@ -332,7 +337,7 @@ void SceneForest::loadPlot() {
 	q[47].s= QString::fromLocal8Bit("能收集到的都是内陆的气味，真想收集到海洋的味道啊"); q[47].diff = false;  q[47].hu = false;
 
 	q[46].l = 48; q[48].s= QString::fromLocal8Bit("我：从背包里找一下吧"); q[48].diff = false;  q[48].hu = false;
-	q[48].l = 48;
+	q[48].l = 60; q[60].l = 60;
 	//*********************
 	q[49].s= QString::fromLocal8Bit("青年：这是海里的东西吗？借我收集气味吧！"); q[49].diff = false;  q[49].hu = false;
 
