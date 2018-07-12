@@ -80,9 +80,11 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 		painter.drawRect(playerX, 260, 10 + waitTime * 3, 20); //»æÖÆ¾ØÐÎ 
 
 	if (waitTime > 28) {
-		if (waitTime == 29) 	ti = qrand() % 7;
+		if (waitTime == 29) {
+			ti = qrand() % 7; 
+			Player::getInstance()->addBagThing(ti + 6);
+		}
 		painter.drawText(380, 280, get[ti]);
-		Player::getInstance()->addBagThing(ti + 6);
 	}
 
 	if (first) 	painter.drawText(180, 150, begin);
@@ -129,7 +131,10 @@ void SceneRuins::paintEvent(QPaintEvent *event)
 				painter.drawText(100, 565, Ending2);
 				painter.setPen(QColor(0, 250, 250));
 				painter.drawText(350, 610, get[9]);
-				Player::getInstance()->addBagThing(2);
+				if (!ifget) {
+					Player::getInstance()->addBagThing(2);
+					ifget = true;
+				}
 				if (!isSpace) {
 					GainAchieve *Joker = new  GainAchieve(3, this);
 					Joker->show();
