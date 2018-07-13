@@ -341,4 +341,6 @@ void SceneSnow::loadPlot() {
 SceneSnow::~SceneSnow()
 {
     delete ui;
+	bgm->stop();
+	bgm->deleteLater();
 }

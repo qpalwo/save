@@ -48,7 +48,7 @@ private:
 
     void loadImage();
     void mouseMoveEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 	void checkMap();
 
 private slots:

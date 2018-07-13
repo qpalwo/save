@@ -116,7 +116,6 @@ FORMS += \
 
 RESOURCES += \
     res/op/openres.qrc \
-    res/people/player.qrc \
     res/desertb.qrc \
     res/op/opengif.qrc \
     res/conver.qrc \
@@ -135,7 +134,8 @@ RESOURCES += \
     res/map/gamemap.qrc \
     res/game/gameres2.qrc \
     res/mouse/mouse.qrc \
-    res/ending/ending.qrc
+    res/ending/ending.qrc \
+    res/people/player.qrc
 
 DISTFILES += \
     res/people/uncle.png \
