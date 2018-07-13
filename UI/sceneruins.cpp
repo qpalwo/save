@@ -11,7 +11,7 @@ SceneRuins::SceneRuins(QWidget *parent) :
 	startMovie = new QMovie(":/ruins/scene/tower.gif");
 	startLabel = new QLabel(this);
 	startLabel->setMovie(startMovie);
-	QTimer::singleShot(3700, this, SLOT(stopStratMovie()));
+	QTimer::singleShot(3300, this, SLOT(stopStratMovie()));
 	startMovie->start();
 	startLabel->setGeometry(0, 0, 960, 720);
 
