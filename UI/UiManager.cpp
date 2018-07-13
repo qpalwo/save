@@ -173,7 +173,7 @@ int UiManager::getNowScene() {
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();
-    //QTimer::singleShot(2700, this, SLOT(showMainWindow()));
+    QTimer::singleShot(2700, this, SLOT(showMainWindow()));
 }
 
 void UiManager::openMainPage() {

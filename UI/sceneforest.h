@@ -50,9 +50,6 @@ public:
 	void bagThingClick(int n);
 	void changeState(bool a, bool b, bool c, bool d);
 
-private slots:
-	void on_bag_clicked();
-
 private:
 	Ui::SceneForest *ui;
 
@@ -99,7 +96,7 @@ private:
 	bool stop;
 	bool left;
 	bool first;
-	bool zxFuck;
+	bool zxLock;
 	bool f[100] = { false };
 	bool gameover;
 	bool rightThing;

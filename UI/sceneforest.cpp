@@ -17,7 +17,7 @@ SceneForest::SceneForest(QWidget *parent) :
 	first = false;
 	stop = false;
 	left = false;
-	zxFuck = false;
+	zxLock = false;
 	rightThing = false;
 
 	loadImage();
@@ -123,7 +123,7 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 		painter.drawImage(BDL, -10, house_closed);
 
 		painter.drawImage(0, 0, conver);
-		if (zxFuck) {
+		if (zxLock) {
 			painter.drawText(185, 560, record_1); 
 	    	painter.drawText(185, 610, record_2);
 		}
@@ -137,13 +137,13 @@ void SceneForest::paintEvent(QPaintEvent * e) {
 				record_2 = q[talk + 1].s;
 				talk++;
 				painter.drawText(185, 610, q[talk].s);
-				zxFuck = true;
+				zxLock = true;
 			}
 		}
 	}
 
 	if (talk == 53) {
-		painter.setPen(QColor(0, 0, 250));
+		painter.setPen(QColor(250, 250, 0));
 		painter.drawText(300, 280, get[9]);
 		if (!ifget) {
 			Player::getInstance()->addBagThing(4);
@@ -209,8 +209,8 @@ void SceneForest::keyPressEvent(QKeyEvent *e) {
 		if (playerX >= 440) {
 			if ((e->key() == Qt::Key_Space) && (!q[talk].diff))	talk = q[talk].l;
 			if (q[talk].diff) {
-				if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxFuck = false; }
-				if (e->key() == Qt::Key_X) { talk = q[talk].l;   zxFuck = false; }
+				if (e->key() == Qt::Key_Z) { talk = q[talk - 1].l;  zxLock = false; }
+				if (e->key() == Qt::Key_X) { talk = q[talk].l;   zxLock = false; }
 			}
 		}
 
@@ -343,7 +343,7 @@ void SceneForest::loadPlot() {
 
 	q[49].l = 50; q[50].s = QString::fromLocal8Bit("z. 同意"); q[50].diff = true;  q[50].hu = false;
 
-	q[51].s= QString::fromLocal8Bit("x. 拒绝"); q[51].diff = false;  q[51].hu = false;
+	q[51].s= QString::fromLocal8Bit("x. 拒绝"); q[51].diff = true;  q[51].hu = false;
 
 	q[50].l = 52;  q[52].s= QString::fromLocal8Bit("青年：作为感谢，这个送给你吧。我精心收集来的一罐阳光！"); q[52].diff = false;  q[52].hu = false;
 	q[52].l = 53; q[53].s = QString::fromLocal8Bit("阳光的味道。。。金黄色的。。。沙沙作响的。。。"); q[53].diff = false;  q[53].hu = true;
@@ -358,16 +358,11 @@ void SceneForest::loadPlot() {
 }
 
 
-
 void SceneForest::mouseMoveEvent(QMouseEvent* event)
 {
 	mouse = event->pos();
 }
 
-void SceneForest::on_bag_clicked() {
-	//QDialog *dlg = new QDialog(this);
-	//dlg->show();
-}
 
 SceneForest::~SceneForest() {
 	delete ui;

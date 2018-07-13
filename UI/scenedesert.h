@@ -47,8 +47,8 @@ public:
 	void bagThingClick(int n);
 	void changeState(bool a,bool b, bool c, bool d);
 
-private slots:
-	void on_bag_clicked();
+//private slots:
+//	void on_bag_clicked();
 
 private:
     Ui::SceneDesert *ui;
@@ -66,7 +66,7 @@ private:
 	QString mouse_out;
 	QString begin;
 	QString begin2;
-	QString get[10];
+	QString get9;
 	QPoint mouse;
 
 	QMovie *player; 

@@ -2,7 +2,6 @@
 #include "ui_scenedesert.h"
 #include "UI/UiManager.h"
 
-
 SceneDesert::SceneDesert(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::SceneDesert) {
@@ -105,7 +104,6 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 			ti = qrand() % 7;
 			Player::getInstance()->addBagThing(ti + 6);
 		}
-		//painter.drawText(380, 280, get[ti]);
 		painter.drawImage(290, 240, getI[ti]);
 	}
 
@@ -142,7 +140,7 @@ void SceneDesert::paintEvent(QPaintEvent * e) {
 
 	if (talk == 42) {
 		painter.setPen(QColor(0, 255, 250));
-		painter.drawText(340, 200, get[9]);
+		painter.drawText(340, 200, get9);
 		if (!ifget) {
 			Player::getInstance()->addBagThing(5);
 			ifget = true;
@@ -240,14 +238,7 @@ void SceneDesert::loadPlot() {
 	begin = QString::fromLocal8Bit("炎热的感觉。。。透不过气。。。就像是溺在海里。。。");
 	begin2 = QString::fromLocal8Bit("得赶快找个地方休息一下");
 
-	get[0] = QString::fromLocal8Bit("获得物品 [过期罐头]");	
-	get[1] = QString::fromLocal8Bit("获得物品  [啤酒]");
-	get[2] = QString::fromLocal8Bit("获得物品 [巧克力]");
-	get[3] = QString::fromLocal8Bit("获得物品 [病历单]");
-	get[4] = QString::fromLocal8Bit("获得物品  [假发]");
-	get[5] = QString::fromLocal8Bit("获得物品  [女装]");
-	get[6] = QString::fromLocal8Bit("获得物品 [程序之书]");
-	get[9] = QString::fromLocal8Bit("获得特殊物品 [海螺]");
+	get9 = QString::fromLocal8Bit("获得特殊物品 [海螺]");
 
 
 	q[0].s = QString::fromLocal8Bit("大叔：小姑娘，来这荒凉地方干什么"); 	q[0].diff = false; q[0].hu = false;
@@ -308,9 +299,9 @@ void SceneDesert::loadPlot() {
 	q[34].l = 34;
 
 	q[40].s= QString::fromLocal8Bit("大叔：是它！就是它！哈哈哈，我就要成功了！！听见了吗，"); q[40].diff = false;  q[40].hu =true;
-	q[40].l = 41;  q[41].s = QString::fromLocal8Bit("大海的召唤!"); q[41].diff = false;  q[41].hu = false;
+    q[41].s = QString::fromLocal8Bit("大海的召唤!"); q[41].diff = false;  q[41].hu = false;
 
-	q[41].l = 42;  q[42].s = QString::fromLocal8Bit("大叔：谢谢你，小姑娘。这个送给你吧"); q[42].diff = false;  q[42].hu = false;
+	q[40].l = 42;  q[42].s = QString::fromLocal8Bit("大叔：谢谢你，小姑娘。这个送给你吧"); q[42].diff = false;  q[42].hu = false;
 
 	q[42].l = 43;  q[43].s = QString::fromLocal8Bit("大叔：听见了吗,这是海的心脏跳动的声音。。。经久不息。"); q[43].diff = false;  q[43].hu = false;
 	q[43].l = 44; q[44].l = 44;
@@ -326,10 +317,10 @@ void SceneDesert::mouseMoveEvent(QMouseEvent* event)
     //	mouse_out = QString::number(event->x()) + '  ' + QString::number(event->y());
 }
 
-void SceneDesert::on_bag_clicked() {
+//void SceneDesert::on_bag_clicked() {
 	//QDialog *dlg = new QDialog(this);
 	//dlg->show();
-}
+//}
 
 SceneDesert::~SceneDesert() {
 	delete ui;

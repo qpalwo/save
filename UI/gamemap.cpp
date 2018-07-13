@@ -35,7 +35,7 @@ void GameMap::checkMap() {
 	if (*(m_map + 1)) return;
 	if (*(m_map + 2)) return;
 	if (*(m_map + 3)) return;
-    UiManager::getInstance()->openEnding(2);
+    UiManager::getInstance()->openEnding(3);
 	close();
 	deleteLater();
 }
