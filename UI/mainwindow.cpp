@@ -400,6 +400,8 @@ MainWindow::~MainWindow() {
 	delete easy;
 	delete mid;
 	delete hard;
+    bgm->stop();
+	bgm->deleteLater();
 	mainTimer->stop();
 	verticalTimer->stop();
 	verticalTimer->deleteLater();

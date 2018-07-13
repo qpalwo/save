@@ -173,7 +173,7 @@ int UiManager::getNowScene() {
 void UiManager::openLoading() {
 	loading = new Loading();
 	loading->show();
-	QTimer::singleShot(2700, this, SLOT(showMainWindow()));
+    //QTimer::singleShot(2700, this, SLOT(showMainWindow()));
 }
 
 void UiManager::openMainPage() {
@@ -446,7 +446,7 @@ void UiManager::loadScene(int targetScene) {
 			break;
 		}
 	}
-	else if (sceneForest != NULL) {
+	if (sceneForest != NULL) {
 		switch (targetScene) {
 		case 1:
 			openSceneDesert();
@@ -462,7 +462,7 @@ void UiManager::loadScene(int targetScene) {
 			break;
 		}
 	}
-	else if (sceneRuins != NULL) {
+	if (sceneRuins != NULL) {
 		switch (targetScene) {
 		case 1:
 			openSceneDesert();
@@ -478,7 +478,7 @@ void UiManager::loadScene(int targetScene) {
 			break;
 		}
 	}
-	else if (sceneSnow != NULL) {
+	if (sceneSnow != NULL) {
 		switch (targetScene) {
 		case 1:
 			openSceneDesert();
@@ -494,26 +494,39 @@ void UiManager::loadScene(int targetScene) {
 			break;
 		}
 	}
-	else if (mainWindow != NULL) {
+	if (mainWindow != NULL) {
 		switch (targetScene) {
 		case 1:
 			openSceneDesert();
 			closeMainPage();
+			if (saveAndLoad != NULL) {
+				closeSaveAndLoad();
+			}
 			break;
 		case 2:
 			openSceneForest();
 			closeMainPage();
+			if (saveAndLoad != NULL) {
+				closeSaveAndLoad();
+			}
 			break;
 		case 3:
 			openRuins();
 			closeMainPage();
+			if (saveAndLoad != NULL) {
+				closeSaveAndLoad();
+			}
 			break;
 		case 4:
 			openSnow();
 			closeMainPage();
+			if (saveAndLoad != NULL) {
+				closeSaveAndLoad();
+			}
 			break;
 		}
 	}
+
 }
 
 QString UiManager::screenShoot() {

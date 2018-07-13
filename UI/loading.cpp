@@ -8,7 +8,7 @@ Loading::Loading(QWidget *parent) :
     ui->setupUi(this);
 	setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 	setWindowFlag(Qt::FramelessWindowHint);
-	hideButton();
+   // hideButton();
 	backGif = new QMovie(":/openGif/letter_2.gif");
 	ui->gifLabel->setMovie(backGif);
 	backGif->start();

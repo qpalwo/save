@@ -20,6 +20,7 @@ GameMap::GameMap(bool is, QWidget *parent) :
 	setWindowFlag(Qt::FramelessWindowHint);
 	m_map = Player::getInstance()->getMapStaus();
 	m_is = is;
+	checkMap();
     loadImage();
     backButton = new OpenPageButton(this, "/menuZ/menu/", "set_back_desert");
     backButton->setGeometry(830, 570, 70, 70);
@@ -30,11 +31,13 @@ GameMap::GameMap(bool is, QWidget *parent) :
 }
 
 void GameMap::checkMap() {
-	if (!*m_map) return;
-	if (!*(m_map + 1)) return;
-	if (!*(m_map + 2)) return;
-	if (!*(m_map + 3)) return;
-
+	if (*m_map) return;
+	if (*(m_map + 1)) return;
+	if (*(m_map + 2)) return;
+	if (*(m_map + 3)) return;
+    UiManager::getInstance()->openEnding(2);
+	close();
+	deleteLater();
 }
 
 void GameMap::loadImage(){
@@ -94,7 +97,7 @@ void GameMap::mouseMoveEvent(QMouseEvent *event){
     else myLabel->hide();
 }
 
-void GameMap::mouseReleaseEvent(QMouseEvent *event){
+void GameMap::mousePressEvent(QMouseEvent *event){
 	if (m_is) {
 		if (posX > 373 && posX < 541 && posY>290 && posY < 566) id = 3;
 		else {
@@ -110,20 +113,23 @@ void GameMap::mouseReleaseEvent(QMouseEvent *event){
 
 		switch (id) {
 		case 1:
-			if(*m_map)
+            //if(*m_map)
 				UiManager::getInstance()->fromMapToDesert();
 			break;
 		case 2:
-			if(*(m_map + 1))
+            //if(*(m_map + 1))
 				UiManager::getInstance()->fromMapToForest();
 			break;
 		case 3:
-			if (*(m_map + 2))
+            //if (*(m_map + 2))
 				UiManager::getInstance()->fromMapToRuins();
 			break;
 		case 4:
-			if (*(m_map + 3))
+            //if (*(m_map + 3)){
 				UiManager::getInstance()->fromMapToSnow();
+
+            //}
+            UiManager::getInstance()->screenShoot();
 			break;
 		}
 	}
